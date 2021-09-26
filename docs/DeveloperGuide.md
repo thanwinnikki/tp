@@ -257,11 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Year 2 Computer Science Student
+* Taking the mods CS2103T, CS2101 and ES2660
+* Has a need to manage and organise a significant number of contacts of group mates
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions to navigate applications
+* Is reasonably comfortable using CLI apps
+* Has other applications to message group mates
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app
 
