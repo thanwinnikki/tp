@@ -22,4 +22,3 @@ Given below are my contributions to the project.
         * Added documentation for the features `deleteG` and `addG`
     * Developer Guide:
         * Added the target user profile of this application.
-    
