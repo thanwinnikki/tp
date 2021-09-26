@@ -283,32 +283,63 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ThunderCat AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case1: UC01 - Input the detail of group mate**
 
 **MSS**
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-
-    Use case ends.
+1. User type adding command into the terminal
+2. ThunderCat announces that the contact is successfully added
+   Use case ends.
 
 **Extensions**
+* 1a. ThunderCat detects an error in the entered command.
+  * 1a1. ThunderCat requests for the correct command, and gives examples.
+  * 1a2. User enters a new command.
+    Steps 1a1-1a2 are repeated until the commands entered are correct.
+    Use case resumes from step 2.
+  
+**Use case: UC02 - Totally delete the contact**
 
-* 2a. The list is empty.
+**MSS**
+1. User enters the user's ID to be deleted.
+2. ThunderCat makes warning about the contact that will be deleted, and all groups that the contact is in.
+3. User confirms the deletion.
+4. ThunderCat announces that the address is successfully deleted.
+   Use case ends.
 
-  Use case ends.
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC01 - extension 1a).
+* 1b. ThunderCat cannot find the contact needed to be deleted.
+  * 1b1. ThunderCat announces that the contact cannot be found.
+  * 1b2. User start again from step 1.
+* 2a. User cancels the request.
+  * 2a1. User choose not to delete the contact.
+  * 2a2.  ThunderCat announces that the deleting process is canceled.
+    Use case ends.
 
-* 3a. The given index is invalid.
+**Use case: UC03 - View basic instructions**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. User types help command into the terminal or click “help” button.
+2. ThunderCat open the instruction page for user.
 
-      Use case resumes at step 2.
+**Use case: UC04 - Delete the contact from a group**
 
-*{More to be added}*
+**MSS**
+1. User enters the user's ID to be deleted and group's ID that the contact is in.
+2. ThunderCat announces that the address is successfully deleted from the group.
+   Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC01 - extension 1a).
+* 1b. ThunderCat cannot find the group with the given group's ID.
+    * 1b1. ThunderCat announces that the group cannot be found.
+    * 1b2. User start again from step 1.
+* 1c. ThunderCat cannot find the contact needed to be deleted in the group.
+    * 1c1. ThunderCat announces that the contact cannot be found.
+    * 1c2. User start again from step 1.
+
 
 ### Non-Functional Requirements
 
