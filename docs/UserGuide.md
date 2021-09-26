@@ -142,6 +142,36 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a group : `deleteG` [coming soon]
+
+Deletes a specified group from the address book.
+
+Format: `deleteG g/GROUP_INDEX`
+
+* Deletes the group at the specified `GROUP_INDEX`.
+* The group index refers to the group number shown in the displayed group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `groups` followed by `deleteG g/2` deletes the 2nd group in the address book.
+
+### Adding multiple people to a group : `addG` [coming soon]
+
+Adds multiple specified people to a specified group.
+
+Format: `addG PERSON_INDEX_1, PERSON_INDEX_2, …​ g/GROUP_INDEX`
+
+* Adds to a group specified at `GROUP_INDEX`, multiple people specified at `PERSON_INDEX_1, PERSON_INDEX_2, …​`
+* The group index refers to the group number shown in the displayed group list.
+* The person index refers to the person index number show in the displayed person list.
+* Group index **must be a positive integer** 1, 2, 3, …​
+* Person index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `groups` followed by `list` and finally `addG 1,2,3 g/2` adds the persons indexed 1, 2 and 
+  3 to the group indexed 2.
+  
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
