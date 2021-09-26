@@ -142,6 +142,25 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding a person to multiple groups: `join`
+
+Adds a person to a list of groups.
+
+Format: `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...`
+
+Examples:
+* `join 1 g/2`
+* `join 2 g/1,3,6,8`
+
+### Listing all group mates in a group: `mates`
+
+Lists out all the group mates in a group.
+
+Format: `mates GROUP_INDEX`
+
+Example:
+* `mates 7`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
