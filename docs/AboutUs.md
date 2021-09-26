@@ -16,4 +16,5 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/jayasting98)]
 [[portfolio](team/jayasting98.md)]
 
-* Role: Integration
+* Role: Developer
+* Responsibilities: Integration
