@@ -312,11 +312,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work if Java `11` or above is installed.
+1. Should be platform-independent, minimally working on any _mainstream OS_.
+1. Should be able to hold up to 1000 records (persons, groups, etc.) without a noticeable sluggishness in performance
+for typical usage.
+1. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
+able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should be intended for use by a single user.
+1. Data should be stored locally.
+1. Data should be stored in a human-editable format.
+1. Data should not be stored with a database management system.
+1. Should be portable; it should not require any installer.
+1. Should not depend on a remote server to function.
+1. Should have a GUI that works well for screen resolutions 1920x1080 and higher.
+1. Should have a GUI that works well for screen scales of 100% and 125%.
+1. Should have a GUI that is still usable for screen resolutions 1280x720 and higher.
+1. Should have a GUI that is still usable for screen scales of 150%.
+1. Should be packaged into a single file, ideally a JAR file.
+1. Should have a total app size of at most 100 MB.
 
 ### Glossary
 
