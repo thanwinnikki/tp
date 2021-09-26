@@ -52,7 +52,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/hungkhoaitay.png" width="200px">
 
-[Github](https://github.com/hungkhoaitay)
+[[Github](https://github.com/hungkhoaitay)][[portfolio](team/hungkhoaitay.md)]
 
 * Role: Developer
 * Responsibilities: Git expert
