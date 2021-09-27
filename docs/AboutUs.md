@@ -9,6 +9,17 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
+
+### Nikki Than Win
+
+<img src="images/thanwinnikki.png" width="200px">
+
+[[github](http://github.com/thanwinikki)]
+[[portfolio](team/thanwinnikki.md)]
+
+* Role: Developer
+* Responsibilities: Project Documentation
+
 ### Won Ye Ji
 
 ![Ye Ji's photo](images/wonyeji.png)
@@ -17,7 +28,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/wonyeji.md)]
 
 * Role: Developer
-* Responsibility: Code Quality
+* Responsibilities: Code Quality
 
 ### Nguyen Thuan Hung
 
