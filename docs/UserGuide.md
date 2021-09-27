@@ -144,9 +144,9 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `delete` [update coming soon]
 
-Deletes the specified person from the address book.
+Deletes the specified person from the address book (removes all groups related to this contact automatically).
 
 Format: `delete INDEX`
 
