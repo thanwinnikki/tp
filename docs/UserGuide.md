@@ -148,6 +148,12 @@ Adds a person to a list of groups.
 
 Format: `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...`
 
+* The person at the specified `PERSON_INDEX` is set to join all the group(s) at the specified `GROUP_INDEX_1`,
+`GROUP_INDEX_2`, etc.
+* The `PERSON_INDEX` refers to the index number shown in the last displayed person list.
+* `GROUP_INDEX_1`, `GROUP_INDEX_2`, etc. refer to the index numbers shown in the last displayed group list.
+* The indices **must all be positive integers** 1, 2, 3, …​
+
 Examples:
 * `join 1 g/2`
 * `join 2 g/1,3,6,8`
@@ -157,6 +163,10 @@ Examples:
 Lists out all the group mates in a group.
 
 Format: `mates GROUP_INDEX`
+
+* The group mates in the group at the specified `GROUP_INDEX` are listed out.
+* The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
 * `mates 7`
