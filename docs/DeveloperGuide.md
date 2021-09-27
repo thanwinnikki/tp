@@ -278,12 +278,41 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
 | `* * *`  | user  | have a fast and easy way to input multiple contact details of a group mate | save time when I’m doing work |
 | `* * *`  | user  | input the details of my group mates in a simple command |save time when I input the information|
-| `* * *`  | user  | delete a contact which will remove them from all groups within my address book in case there is a change of groupings |                                    |
-| `* * *`  | user  | only have a few basic commands to use my address book. |  |
-| `* * *`  | user  | delete contacts out of my address book | I can remove them when there is a change in group members|
-| `* * *`  | user  | create groups   | locate the bulk of people in groups easily  |
-| `* * *`  | user  | list all groups  |  have a overview of all the groups  |
-| `* * *`  | user  | delete a group   | I can remove them once they are not needed anymore |
+| `* * *`  | user  | delete a contact which will remove them from all groups within my address book in case there is a change of groupings | - |
+| `* * *`  | user  | only have a few basic commands to use my address book. | - |
+| `* * *`  | user  | delete contacts out of my address book | I can remove them when there is a change in group members |
+| `* * *`  | user  | create groups | locate the bulk of people in groups easily |
+| `* * *`  | user  | list all groups | have a overview of all the groups |
+| `* * *`  | user  | delete a group | I can remove them once they are not needed anymore |
+| `* * `  | user  | easily access the contacts of my group mates, for centralising all the contact details | I can access them when I need them on my laptop |
+| `* * `  | user  | input shared links of project groups (tele chat, msteams grp etc)| have all documents/information of my group on 1 place and don’t have to spend a long time to find these details/documents |
+| `* * `  | user  | access my group mates’ contacts with a hyperlink | single tap to copy to clipboard. |
+| `* * `  | user  | be able to archive contacts of old group mates once a project is over | - |
+| `* * `  | user  | categorise by different group projects | - |
+| `* * `  | user  |  find project members by categories| - |
+| `* * `  | user  | have a visually bright address book| lift my mood amidst the tiresome group projects.  |
+| `* * `  | user  | be able to update the contacts of my group mates  | update them if I have keyed them in wrongly or they have been changed |
+| `* * `  | student with many contacts  | be able to search for their contact by date/time created| - |
+| `* * `  | student with many groups  | be able to search for a module by date/time created | - |
+| `* * `  | user  |  be able to search through the bulk of contacts using their name | search with more efficiency |
+| `* * `  | user  |  be able to use my computer to search for contacts | use my computer instead of my phone which is more convenient for a heavy computer user |
+| `* * `  | student rushing deadlines  |have more than one way of contacting one person (emergency contact) | reach him in times of emergency |
+| `* * `  | user  | be able to see my overlapping groups with a person | - |
+| `* * `  | user  | be able to star/favourite a group as a way of categorising people | find them more easily |
+| `* * `  | user  | divide my contacts to many different types |see each type when it is needed|
+| `* * `  | user  | look for my contact by it’s type, group | I can find it when i cannot remember the name |
+| `* * `  | user  | automatically imports the contact from my current contacts | avoid typing it all over again|
+| `* * `  | user  | be able to set reminders | so that I will remember to perform a task for this contact|
+| `* * `  | user  | find what groups are associated with a module| find details of any of those groups|
+| `* * `  | student taking modules  | find a module by searching for its code | I can find its details |
+| `* * `  | student taking modules  | find a module by searching for its name | I can find its details |
+| `* * `  | student doing modules with group projects  | find what modules a group is associated with | - |
+| `* * `  | student doing modules  | update module details | - |
+| `*  `  | student doing group projects  | find out what tasks need to be done in the group project | - |
+| `*  `  | student doing group projects  | find out what tasks was assigned to each group member | - |
+| `*  `  | student doing group projects  | I can find out what tasks that were assigned are not yet done | - |
+| `*  `  | student doing group projects  | reassign tasks to indicate somebody else is doing them now| - |
+
 
 
 *{More to be added}*
