@@ -276,12 +276,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | user  | have a fast and easy way to input multiple contact details of a group mate | save time when I’m doing work |
+| `* * *`  | user  | input the details of my group mates in a simple command |save time when I input the information|
+| `* * *`  | user  | delete a contact which will remove them from all groups within my address book in case there is a change of groupings |                                    |
+| `* * *`  | user  | only have a few basic commands to use my address book. |  |
+| `* * *`  | user  | delete contacts out of my address book | I can remove them when there is a change in group members|
+| `* * *`  | user  | create groups   | locate the bulk of people in groups easily  |
+| `* * *`  | user  | list all groups  |  have a overview of all the groups  |
+| `* * *`  | user  | delete a group   | I can remove them once they are not needed anymore |
+
 
 *{More to be added}*
 
