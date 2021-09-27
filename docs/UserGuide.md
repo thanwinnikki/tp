@@ -87,6 +87,22 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+### Creating a group : `group`
+
+Creates a group in the address book.
+
+Format: `group g/GROUP_NAME`
+
+Examples:  
+* `group g/CS2103 Project Group`
+* `group g/Family`
+
+### Viewing all groups: `groups`
+
+List all groups in the address book.
+
+Format: `groups`
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
