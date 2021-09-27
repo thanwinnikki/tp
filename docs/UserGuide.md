@@ -150,7 +150,7 @@ Deletes the specified person from the address book (removes all groups related t
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
+* Deletes the person at the specified `INDEX` and removes it from all related groups automatically.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
