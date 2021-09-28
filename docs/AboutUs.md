@@ -9,7 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-
 ### Nikki Than Win
 
 <img src="images/thanwinnikki.png" width="200px">
@@ -48,3 +47,13 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Developer
 * Responsibilities: Deliverables and deadlines
+
+### Jay Aljelo Saez Ting
+
+<img alt="Jay's Photo" src="images/jayasting98.png" width="200px">
+
+[[github](https://github.com/jayasting98)]
+[[portfolio](team/jayasting98.md)]
+
+* Role: Developer
+* Responsibilities: Integration
