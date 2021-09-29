@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -52,6 +53,8 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    //=========== Person =============================================================
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -84,4 +87,21 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //=========== Group =============================================================
+
+    /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group target);
+
+    /** Returns an unmodifiable view of the filtered Group list */
+    ObservableList<Group> getFilteredGroupList();
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
 }
