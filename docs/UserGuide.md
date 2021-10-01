@@ -269,5 +269,4 @@ Action | Format | Examples
 **Adding people to Group** | `addG PERSON_INDEX_1, PERSON_INDEX_2.. g/GROUP_INDEX` |`addG 1, 2, 3 g/2`
 **Join Person to Groups** | `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...` | `join 2 g/1,3,6,8`
 **Show all people in Group** | `mates GROUP_INDEX` | `mates 7`
-**Destroy** | `destroy GROUP_INDEX` | `destroy 2`
 **Help** | `help`
