@@ -12,19 +12,19 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of listable entities, such as persons, or groups.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class ListPanel extends UiPart<Region> {
+    private static final String FXML = "ListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(ListPanel.class);
 
     @FXML
-    private ListView<Listable> personListView;
+    private ListView<Listable> listableListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel() {
+    public ListPanel() {
         super(FXML);
     }
 
@@ -32,14 +32,14 @@ public class PersonListPanel extends UiPart<Region> {
         ObservableList<Listable> listableList = list.stream()
                 .map(Listable::convertModelEntityToListable)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
-        personListView.setItems(listableList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        listableListView.setItems(listableList);
+        listableListView.setCellFactory(listView -> new ListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Listable} using a {@code Card}.
      */
-    class PersonListViewCell extends ListCell<Listable> {
+    class ListViewCell extends ListCell<Listable> {
         @Override
         protected void updateItem(Listable listable, boolean empty) {
             super.updateItem(listable, empty);
