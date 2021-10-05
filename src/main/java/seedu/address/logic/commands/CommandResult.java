@@ -9,13 +9,100 @@ import java.util.Objects;
  */
 public class CommandResult {
 
-    private final String feedbackToUser;
+    private String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private boolean showHelp;
 
     /** The application should exit. */
-    private final boolean exit;
+    private boolean exit;
+
+    private ListType nextListType;
+
+    /**
+     * A list type to be displayed in the UI due to the result of the command execution.
+     */
+    public static enum ListType {
+        PersonList,
+        GroupList;
+    }
+
+    /**
+     * Builder class to help with creating different types of {@code CommandResult} objects.
+     */
+    public static class Builder {
+
+        private CommandResult commandResultToBuild;
+
+        /**
+         * Creates a {@code CommandResult.Builder} to help with creating a {@code CommandResult} object.
+         *
+         * @param feedbackToUser The feedback to be shown to the user.
+         */
+        public Builder(String feedbackToUser) {
+            commandResultToBuild = new CommandResult(feedbackToUser);
+        }
+
+        /**
+         * Completes the creation of the {@code CommandResult} object.
+         *
+         * @return The {@code CommandResult} object that was created.
+         */
+        public CommandResult build() {
+            return commandResultToBuild;
+        }
+
+        /**
+         * Sets whether the {@code CommandResult} object will cause help information to be shown to the user.
+         *
+         * @param willShowHelp Whether help information will be shown.
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder setShowHelp(boolean willShowHelp) {
+            commandResultToBuild.showHelp = willShowHelp;
+            return this;
+        }
+
+        /**
+         * Sets the {@code CommandResult} object to cause help information to be shown to the user.
+         *
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder showHelp() {
+            return setShowHelp(true);
+        }
+
+        /**
+         * Sets whether the {@code CommandResult} object will cause the application to exit.
+         *
+         * @param willExit Whether the application will exit.
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder setExit(boolean willExit) {
+            commandResultToBuild.exit = willExit;
+            return this;
+        }
+
+        /**
+         * Sets the {@code CommandResult} object to cause the application to exit.
+         *
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder goExit() {
+            return setExit(true);
+        }
+
+        /**
+         * Sets the {@code CommandResult} object to cause the specified list type to be displayed in the UI to the user.
+         *
+         * @param nextListType The list type displayed as a result of the command execution.
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder setNextListType(ListType nextListType) {
+            commandResultToBuild.nextListType = nextListType;
+            return this;
+        }
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -24,6 +111,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        nextListType = ListType.PersonList;
     }
 
     /**
@@ -31,7 +119,10 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        showHelp = false;
+        exit = false;
+        nextListType = ListType.PersonList;
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +135,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public ListType getNextListType() {
+        return nextListType;
     }
 
     @Override

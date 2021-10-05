@@ -187,6 +187,18 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            CommandResult.ListType nextListType = commandResult.getNextListType();
+            switch (nextListType) {
+            case PersonList:
+                listPanel.setList(logic.getFilteredPersonList());
+                break;
+            case GroupList:
+                listPanel.setList(logic.getFilteredGroupList());
+                break;
+            default:
+                assert false : String.format("The %s list type is not implemented.", nextListType);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
