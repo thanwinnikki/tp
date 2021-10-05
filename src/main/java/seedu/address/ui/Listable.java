@@ -13,19 +13,22 @@ abstract class Listable {
      * @param modelEntity The model entity.
      * @param <T> The type of the model entity.
      * @return The listable model entity.
-     * @throws IllegalArgumentException If a non-listable model entity is passed.
      */
-    static <T> Listable convertModelEntityToListable(T modelEntity) throws IllegalArgumentException {
+    static <T> Listable convertModelEntityToListable(T modelEntity) {
         String className = modelEntity.getClass()
                 .getSimpleName();
+        Listable listable = null;
         switch (className) {
         case Person.class.getSimpleName():
-            return convertPersonToListable((Person) modelEntity);
+            listable = convertPersonToListable((Person) modelEntity);
+            break;
         case Group.class.getSimpleName():
-            return convertGroupToListable((Group) modelEntity);
+            listable = convertGroupToListable((Group) modelEntity);
+            break;
         default:
-            throw new IllegalArgumentException();
+            assert false : "A non-listable model entity was passed into Listable::convertModelEntityToListable.";
         }
+        return listable;
     }
 
     /**
