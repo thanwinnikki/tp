@@ -19,9 +19,9 @@ abstract class Listable {
         String className = modelEntity.getClass()
                 .getSimpleName();
         switch (className) {
-        case "Person":
+        case Person.class.getSimpleName():
             return convertPersonToListable((Person) modelEntity);
-        case "Group":
+        case Group.class.getSimpleName():
             return convertGroupToListable((Group) modelEntity);
         default:
             throw new IllegalArgumentException();
