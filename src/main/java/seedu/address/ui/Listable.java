@@ -10,6 +10,8 @@ abstract class Listable {
         switch (className) {
         case "Person":
             return convertPersonToListable((Person) modelEntity);
+        case "Group":
+            return convertGroupToListable((Group) modelEntity);
         default:
             throw new IllegalArgumentException();
         }
@@ -22,6 +24,15 @@ abstract class Listable {
             @Override
             Card getCard(int displayedIndex) {
                 return new PersonCard(person, displayedIndex);
+            }
+        };
+    }
+
+    private static Listable convertGroupToListable(Group group) {
+        return new Listable() {
+            @Override
+            Card getCard(int displayedIndex) {
+                return new GroupCard(group, displayedIndex);
             }
         };
     }
