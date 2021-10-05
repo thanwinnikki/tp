@@ -28,6 +28,14 @@ public class ListPanel extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Sets the list of listable model entities that are currently displayed on the UI.
+     * Listable model entities are model entities that are intended to be displayed on the list panel, like a Person or
+     * a Group.
+     *
+     * @param list The list of listable model entity instances.
+     * @param <T> The type of the listable model entity.
+     */
     public <T> void setList(ObservableList<T> list) {
         ObservableList<Listable> listableList = list.stream()
                 .map(Listable::convertModelEntityToListable)
