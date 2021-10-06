@@ -4,12 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.person.Name;
+import seedu.address.model.names.Name;
 import seedu.address.model.person.UniquePersonList;
 
 /**
  * Represents a Group in the address book.
- * Guarantees: todo
+ * Guarantees: Details are present and not null. persons is not validated todo
  */
 public class Group {
 
