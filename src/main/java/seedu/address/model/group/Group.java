@@ -39,7 +39,7 @@ public class Group {
     /**
      * Only checks if 2 groups have the same name or are the same group.
      * @param otherGroup Other group to compare.
-     * @return Returns true if both groups have the same name;
+     * @return Returns true if both groups have the same name or are the same group;
      */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {
