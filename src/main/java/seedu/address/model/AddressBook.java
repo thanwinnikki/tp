@@ -1,14 +1,14 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the address-book level
@@ -17,8 +17,6 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final UniqueGroupList groups;
-
     private final UniqueGroupList groups;
 
     /*
@@ -125,11 +123,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeGroup(Group key) {
         groups.remove(key);
-    }
-
-    @Override
-    public ObservableList<Group> getGroupList() {
-        return groups.asUnmodifiableObservableList();
     }
 
     @Override
