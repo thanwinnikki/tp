@@ -51,6 +51,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -58,6 +62,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setGroups(newData.getGroupList());
     }
 
     //// person-level operations
