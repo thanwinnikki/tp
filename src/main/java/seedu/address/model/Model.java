@@ -94,14 +94,22 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered group list */
-    ObservableList<Group> getFilteredGroupList();
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //=========== Group =============================================================
+
+    /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group target);
+
+    /** Returns an unmodifiable view of the filtered Group list */
+    ObservableList<Group> getFilteredGroupList();
 
     /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
