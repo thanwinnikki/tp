@@ -45,8 +45,8 @@ public class Group {
         if (otherGroup == this) {
             return true;
         }
-        boolean same = (otherGroup != null) &&
-            otherGroup.getName().equals(this.getName());
+        boolean same = (otherGroup != null)
+                && otherGroup.getName().equals(this.getName());
 
         return same;
     }
@@ -62,7 +62,7 @@ public class Group {
             return true;
         }
 
-        if(!(other instanceof Group)) {
+        if (!(other instanceof Group)) {
             return false;
         }
 

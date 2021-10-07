@@ -18,8 +18,8 @@ import seedu.address.model.group.exceptions.GroupNotFoundException;
 public class UniqueGroupList implements Iterable<Group> {
 
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Group> internalUnmodifiableList = FXCollections.
-            unmodifiableObservableList(internalList);
+    private final ObservableList<Group> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
      * Checks if the group list contains a specified group.
@@ -86,8 +86,8 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Replaces the current group list with {@code groups} which is a {@code List} of groups.
-     * List<Group> groups must not contain any duplicates.
+     * Replaces the current group list with {@code groups}. {@code List} of groups.
+     * List of groups must not contain any duplicates.
      * @param groups The {@code List} of groups to replace the current list.
      */
     public void setGroups(List<Group> groups) {
