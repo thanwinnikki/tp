@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.AddGCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 public class AddGCommandParser implements Parser<AddGCommand>{
 

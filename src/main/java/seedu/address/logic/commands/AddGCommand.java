@@ -22,6 +22,15 @@ public class AddGCommand extends Command {
 
     private final Group toAdd;
 
+
+    /**
+     * Creates an AddGCommand to add the specified {@code Group}
+     */
+    public AddGCommand(Group group) {
+        requireNonNull(group);
+        toAdd = group;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -37,7 +46,7 @@ public class AddGCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+                || (other instanceof AddGCommand // instanceof handles nulls
+                && toAdd.equals(((AddGCommand) other).toAdd));
     }
 }
