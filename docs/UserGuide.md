@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Thundercat (TC) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TC can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,9 +14,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `thundercat.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your thundercat.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,7 +26,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Thundercat.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -75,7 +75,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the Thundercat.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -89,7 +89,7 @@ Examples:
 
 ### Creating a group : `group`
 
-Creates a group in the address book.
+Creates a group in Thundercat.
 
 Format: `group g/GROUP_NAME`
 
@@ -99,19 +99,19 @@ Examples:
 
 ### Viewing all groups: `groups`
 
-List all groups in the address book.
+List all groups in Thundercat.
 
 Format: `groups`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the Thundercat.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the Thundercat.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -146,7 +146,7 @@ Examples:
 
 ### Deleting a person : `delete` [update coming soon]
 
-Deletes the specified person from the address book (removes all groups related to this contact automatically).
+Deletes the specified person from the Thundercat (removes all groups related to this contact automatically).
 
 Format: `delete INDEX`
 
@@ -155,12 +155,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the Thundercat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting a group : `deleteG` [coming soon]
 
-Deletes a specified group from the address book.
+Deletes a specified group from the Thundercat.
 
 Format: `deleteG g/GROUP_INDEX`
 
@@ -169,7 +169,7 @@ Format: `deleteG g/GROUP_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `groups` followed by `deleteG g/2` deletes the 2nd group in the address book.
+* `groups` followed by `deleteG g/2` deletes the 2nd group in the Thundercat.
 
 ### Adding multiple people to a group : `addG` [coming soon]
 
@@ -218,7 +218,7 @@ Example:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the Thundercat.
 
 Format: `clear`
 
@@ -230,14 +230,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Thundercat data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Thundercat data are saved as a JSON file `[JAR file location]/data/thundercat.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Thundercat will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -249,7 +249,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Thundercat home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -269,5 +269,4 @@ Action | Format | Examples
 **Adding people to Group** | `addG PERSON_INDEX_1, PERSON_INDEX_2.. g/GROUP_INDEX` |`addG 1, 2, 3 g/2`
 **Join Person to Groups** | `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...` | `join 2 g/1,3,6,8`
 **Show all people in Group** | `mates GROUP_INDEX` | `mates 7`
-**Destroy** | `destroy GROUP_INDEX` | `destroy 2`
 **Help** | `help`
