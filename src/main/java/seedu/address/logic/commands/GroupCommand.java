@@ -41,7 +41,9 @@ public class GroupCommand extends Command {
         }
 
         model.addGroup(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
+                .setNextListType(CommandResult.ListType.GroupList)
+                .build();
     }
 
     @Override
