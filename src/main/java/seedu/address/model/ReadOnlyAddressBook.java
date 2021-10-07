@@ -14,7 +14,6 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Person> getPersonList();
-    ObservableList<Group> getGroupList();
 
     /**
      * Returns an unmodifiable view of the groups list.

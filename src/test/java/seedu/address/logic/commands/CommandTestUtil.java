@@ -17,7 +17,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -26,11 +25,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
-
-    public static final String VALID_NAME_PROJECT = "Project";
-    public static final String VALID_NAME_FAMILY = "Family";
-    public static final String VALID_MEMBER_JAMIE = "Jamie";
-    public static final String VALID_MEMBER_MOM = "Mom";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -130,19 +124,4 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the group at the given {@code targetIndex} in the
-     * {@code model}'s address book.
-     */
-    public static void showGroupAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
-
-        Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
-        final String[] splitName = group.getName().fullName.split("\\s+");
-        model.updateFilteredGroupList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
-
-        assertEquals(1, model.getFilteredGroupList().size());
-    }
-
 }
