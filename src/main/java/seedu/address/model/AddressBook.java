@@ -131,6 +131,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    //// group-level operations
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeGroup(Group key) {
+        groups.remove(key);
+    }
+
     @Override
     public ObservableList<Group> getGroupList() {
         return groups.asUnmodifiableObservableList();

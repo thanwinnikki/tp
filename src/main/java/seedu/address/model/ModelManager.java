@@ -91,6 +91,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Person =====================================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -152,6 +154,15 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    //=========== Group =====================================================================================
+
+    @Override
+    public void deleteGroup(Group target) {
+        addressBook.removeGroup(target);
+    }
+
+    //=========== Filtered Group List Accessors =============================================================
 
     @Override
     public void updateFilteredGroupList(Predicate<Group> predicate) {
