@@ -193,7 +193,8 @@ public class MainWindow extends UiPart<Stage> {
                 listPanel.setList(logic.getFilteredPersonList());
                 break;
             case GroupList:
-                listPanel.setList(logic.getFilteredGroupList());
+                // TODO: Uncomment this to integrate Group UI.
+                // listPanel.setList(logic.getFilteredGroupList());
                 break;
             default:
                 assert false : String.format("The %s list type is not implemented.", nextListType);

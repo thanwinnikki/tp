@@ -1,11 +1,15 @@
 package seedu.address.ui;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
  * A model entity that is intended to be displayed on the list panel, like a {@code Group}, or a {@code Person}.
  */
 abstract class Listable {
+
+    private static final String PERSON_CLASS_NAME = "Person";
+    private static final String GROUP_CLASS_NAME = "Group";
 
     /**
      * Converts a model entity to a {@code Listable} object.
@@ -19,10 +23,10 @@ abstract class Listable {
                 .getSimpleName();
         Listable listable = null;
         switch (className) {
-        case Person.class.getSimpleName():
+        case PERSON_CLASS_NAME:
             listable = convertPersonToListable((Person) modelEntity);
             break;
-        case Group.class.getSimpleName():
+        case GROUP_CLASS_NAME:
             listable = convertGroupToListable((Group) modelEntity);
             break;
         default:
@@ -40,7 +44,7 @@ abstract class Listable {
     abstract Card getCard(int displayedIndex);
 
     private static Listable convertPersonToListable(Person person) {
-        return new Listable(){
+        return new Listable() {
             @Override
             Card getCard(int displayedIndex) {
                 return new PersonCard(person, displayedIndex);
