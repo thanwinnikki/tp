@@ -15,6 +15,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -52,8 +55,6 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
-
-    //=========== Person =============================================================
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

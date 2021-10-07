@@ -128,6 +128,15 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Group> getFilteredGroupList() {
+        return filteredGroups;
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
@@ -159,6 +168,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -174,7 +189,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredGroups.equals(other.filteredGroups);
     }
 
 }
