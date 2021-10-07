@@ -148,8 +148,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
-
-    // todo
-    public void addGroup(Group group) {
-    }
 }
