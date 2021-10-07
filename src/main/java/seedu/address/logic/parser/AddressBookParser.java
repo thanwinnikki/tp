@@ -49,7 +49,7 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
         case GroupCommand.COMMAND_WORD:
-            return new AddGCommandParser().parse(arguments);
+            return new GroupCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 

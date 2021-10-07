@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 
-public class AddGCommandParser implements Parser<GroupCommand> {
+public class GroupCommandParser implements Parser<GroupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddGCommand
