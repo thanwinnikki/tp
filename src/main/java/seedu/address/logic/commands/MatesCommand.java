@@ -21,8 +21,9 @@ public class MatesCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists members in group index indicated.";
 
-    private final Index index;
     public static final String MESSAGE_SUCCESS = "Listed all members in group.";
+
+    private final Index index;
 
     public MatesCommand(Index index) {
         this.index = index;
