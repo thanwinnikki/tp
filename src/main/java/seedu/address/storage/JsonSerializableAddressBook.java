@@ -1,15 +1,22 @@
 package seedu.address.storage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,16 +25,21 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Stored persons data contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Duplicate person(s) found in storage.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Duplicate group(s) found in storage.";
 
-    private final Map<String, JsonAdaptedPerson> persons;
+    private final Map<String, JsonAdaptedPerson> idToJsonAdaptedPersonMap;
+    private final Map<String, JsonAdaptedGroup> idToJsonAdaptedGroupMap;
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") Map<String, JsonAdaptedPerson> persons) {
-        this.persons = new HashMap<>(persons);
+    public JsonSerializableAddressBook(
+            @JsonProperty("persons") Map<String, JsonAdaptedPerson> idToJsonAdaptedPersonMap,
+            @JsonProperty("groups") Map<String, JsonAdaptedGroup> idToJsonAdaptedGroupMap) {
+        this.idToJsonAdaptedPersonMap = new HashMap<>(idToJsonAdaptedPersonMap);
+        this.idToJsonAdaptedGroupMap = new HashMap<>(idToJsonAdaptedGroupMap);
     }
 
     /**
@@ -36,14 +48,14 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        ObservableList<Person> sourcePersons = source.getPersonList();
-        persons = new HashMap<>();
-        for (Person person : sourcePersons) {
-            UUID uuid = UUID.randomUUID();
-            String uuidString = uuid.toString();
-            JsonAdaptedPerson jsonAdaptedPerson = new JsonAdaptedPerson(person);
-            persons.put(uuidString, jsonAdaptedPerson);
-        }
+        idToJsonAdaptedPersonMap = new HashMap<>();
+        Iterable<Person> sourcePersons = source.getPersonList();
+        Map<Person, String> personToIdMap = createModelEntityToIdMap(sourcePersons);
+        initialisePersonIdToJsonAdaptedPersonMap(sourcePersons, personToIdMap);
+        idToJsonAdaptedGroupMap = new HashMap<>();
+        Iterable<Group> sourceGroups = source.getGroupList();
+        Map<Group, String> groupToIdMap = createModelEntityToIdMap(sourceGroups);
+        initialiseGroupIdToJsonAdaptedGroupMap(sourceGroups, groupToIdMap, personToIdMap);
     }
 
     /**
@@ -53,14 +65,96 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons.values()) {
+        Map<String, Person> idToPersonMap = createPersonIdToPersonMap();
+        Iterable<Person> persons = idToPersonMap.values();
+        addPersons(addressBook, persons);
+        Iterable<JsonAdaptedGroup> jsonAdaptedGroups = idToJsonAdaptedGroupMap.values();
+        Iterable<Group> groups = createGroups(jsonAdaptedGroups, idToPersonMap);
+        addGroups(addressBook, groups);
+        return addressBook;
+    }
+
+    @JsonGetter("persons")
+    public Map<String, JsonAdaptedPerson> getIdToJsonAdaptedPersonMap() {
+        return idToJsonAdaptedPersonMap;
+    }
+
+    @JsonGetter("groups")
+    public Map<String, JsonAdaptedGroup> getIdToJsonAdaptedGroupMap() {
+        return idToJsonAdaptedGroupMap;
+    }
+
+    private <T> Map<T, String> createModelEntityToIdMap(Iterable<T> modelEntities) {
+        Set<String> idSet = new HashSet<>();
+        Map<T, String> modelEntityToIdMap = new HashMap<>();
+        for (T modelEntity : modelEntities) {
+            UUID uuid = UUID.randomUUID();
+            String id = uuid.toString();
+            while (idSet.contains(id)) {
+                uuid = UUID.randomUUID();
+                id = uuid.toString();
+            }
+            modelEntityToIdMap.put(modelEntity, id);
+            idSet.add(id);
+        }
+        return modelEntityToIdMap;
+    }
+
+    private void initialisePersonIdToJsonAdaptedPersonMap(Iterable<Person> persons, Map<Person, String> personToIdMap) {
+        for (Person person : persons) {
+            String personId = personToIdMap.get(person);
+            JsonAdaptedPerson jsonAdaptedPerson = new JsonAdaptedPerson(person);
+            idToJsonAdaptedPersonMap.put(personId, jsonAdaptedPerson);
+        }
+    }
+
+    private void initialiseGroupIdToJsonAdaptedGroupMap(
+            Iterable<Group> groups, Map<Group, String> groupToIdMap, Map<Person, String> personToIdMap) {
+        for (Group group : groups) {
+            String personId = groupToIdMap.get(group);
+            JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(group, personToIdMap)
+                    .build();
+            idToJsonAdaptedGroupMap.put(personId, jsonAdaptedGroup);
+        }
+    }
+
+    private Map<String, Person> createPersonIdToPersonMap() throws IllegalValueException {
+        Map<String, Person> jsonAdaptedPersonToPersonMap = new HashMap<>();
+        for (Map.Entry<String, JsonAdaptedPerson> idToJaPersonEntry : idToJsonAdaptedPersonMap.entrySet()) {
+            String personId = idToJaPersonEntry.getKey();
+            JsonAdaptedPerson jsonAdaptedPerson = idToJaPersonEntry.getValue();
             Person person = jsonAdaptedPerson.toModelType();
+            jsonAdaptedPersonToPersonMap.put(personId, person);
+        }
+        return jsonAdaptedPersonToPersonMap;
+    }
+
+    private void addPersons(AddressBook addressBook, Iterable<Person> persons) throws IllegalValueException {
+        for (Person person : persons) {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
         }
-        return addressBook;
     }
 
+    private List<Group> createGroups(
+            Iterable<JsonAdaptedGroup> jsonAdaptedGroups,
+            Map<String, Person> idToPersonMap) throws IllegalValueException {
+        List<Group> groups = new ArrayList<>();
+        for (JsonAdaptedGroup jsonAdaptedGroup : jsonAdaptedGroups) {
+            Group group = jsonAdaptedGroup.toModelType(idToPersonMap);
+            groups.add(group);
+        }
+        return groups;
+    }
+
+    private void addGroups(AddressBook addressBook, Iterable<Group> groups) throws IllegalValueException {
+        for (Group group : groups) {
+            if (addressBook.hasGroup(group)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
+            }
+            addressBook.addGroup(group);
+        }
+    }
 }
