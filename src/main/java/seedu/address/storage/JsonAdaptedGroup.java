@@ -23,6 +23,7 @@ public class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
     public static final String MESSAGE_DUPLICATE_GROUP_MATE = "Duplicate group mates(s) found in storage.";
+    public static final String MESSAGE_NO_SUCH_PERSON = "There is no such person that has the ID of this group mate.";
 
     private final String name;
     private final List<String> groupMateIds;
@@ -111,6 +112,9 @@ public class JsonAdaptedGroup {
         for (String personIdString : groupMateIds) {
             Id personId = Id.parse(personIdString);
             Person person = idToPersonMap.get(personId);
+            if (person == null) {
+                throw new IllegalValueException(MESSAGE_NO_SUCH_PERSON);
+            }
             try {
                 persons.add(person);
             } catch (DuplicatePersonException e) {
