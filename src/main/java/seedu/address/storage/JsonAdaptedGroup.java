@@ -89,7 +89,7 @@ public class JsonAdaptedGroup {
      * @return The {@code Group} object.
      * @throws IllegalValueException If there were any data constraints violated in the adapted group.
      */
-    public Group toModelType(Map<String, Person> idToPersonMap) throws IllegalValueException {
+    public Group toModelType(Map<Id, Person> idToPersonMap) throws IllegalValueException {
         final Name modelName = createName();
         Group group = new Group(modelName);
         addGroupMates(group, idToPersonMap);
@@ -106,9 +106,10 @@ public class JsonAdaptedGroup {
         return new Name(name);
     }
 
-    private void addGroupMates(Group group, Map<String, Person> idToPersonMap) throws IllegalValueException {
+    private void addGroupMates(Group group, Map<Id, Person> idToPersonMap) throws IllegalValueException {
         UniquePersonList persons = group.getPersons();
-        for (String personId : groupMateIds) {
+        for (String personIdString : groupMateIds) {
+            Id personId = Id.parse(personIdString);
             Person person = idToPersonMap.get(personId);
             try {
                 persons.add(person);

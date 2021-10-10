@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
+import java.util.TreeMap;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
@@ -65,7 +65,7 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        Map<String, Person> idToPersonMap = createPersonIdToPersonMap();
+        Map<Id, Person> idToPersonMap = createPersonIdToPersonMap();
         Iterable<Person> persons = idToPersonMap.values();
         addPersons(addressBook, persons);
         Iterable<JsonAdaptedGroup> jsonAdaptedGroups = idToJsonAdaptedGroupMap.values();
@@ -85,16 +85,11 @@ class JsonSerializableAddressBook {
     }
 
     private <T> Map<T, String> createModelEntityToIdMap(Iterable<T> modelEntities) {
-        Set<String> idSet = new HashSet<>();
+        Set<Id> idSet = new HashSet<>();
         Map<T, String> modelEntityToIdMap = new HashMap<>();
         for (T modelEntity : modelEntities) {
-            UUID uuid = UUID.randomUUID();
-            String id = uuid.toString();
-            while (idSet.contains(id)) {
-                uuid = UUID.randomUUID();
-                id = uuid.toString();
-            }
-            modelEntityToIdMap.put(modelEntity, id);
+            Id id = Id.generateUniqueId(idSet);
+            modelEntityToIdMap.put(modelEntity, id.toString());
             idSet.add(id);
         }
         return modelEntityToIdMap;
@@ -118,10 +113,11 @@ class JsonSerializableAddressBook {
         }
     }
 
-    private Map<String, Person> createPersonIdToPersonMap() throws IllegalValueException {
-        Map<String, Person> jsonAdaptedPersonToPersonMap = new HashMap<>();
+    private Map<Id, Person> createPersonIdToPersonMap() throws IllegalValueException {
+        Map<Id, Person> jsonAdaptedPersonToPersonMap = new TreeMap<>();
         for (Map.Entry<String, JsonAdaptedPerson> idToJaPersonEntry : idToJsonAdaptedPersonMap.entrySet()) {
-            String personId = idToJaPersonEntry.getKey();
+            String personIdString = idToJaPersonEntry.getKey();
+            Id personId = Id.parse(personIdString);
             JsonAdaptedPerson jsonAdaptedPerson = idToJaPersonEntry.getValue();
             Person person = jsonAdaptedPerson.toModelType();
             jsonAdaptedPersonToPersonMap.put(personId, person);
@@ -140,7 +136,7 @@ class JsonSerializableAddressBook {
 
     private List<Group> createGroups(
             Iterable<JsonAdaptedGroup> jsonAdaptedGroups,
-            Map<String, Person> idToPersonMap) throws IllegalValueException {
+            Map<Id, Person> idToPersonMap) throws IllegalValueException {
         List<Group> groups = new ArrayList<>();
         for (JsonAdaptedGroup jsonAdaptedGroup : jsonAdaptedGroups) {
             Group group = jsonAdaptedGroup.toModelType(idToPersonMap);
