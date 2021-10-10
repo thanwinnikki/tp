@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.person.Person;
 
 /**
  * A list of groups.
@@ -73,6 +74,16 @@ public class UniqueGroupList implements Iterable<Group> {
         if (!internalList.remove(toRemove)) {
             throw new GroupNotFoundException();
         }
+    }
+
+    /**
+     * Removes the equivalent person from all groups.
+     */
+    public void removePersonFromAllGroups(Person toRemove) {
+        requireNonNull(toRemove);
+        internalList.stream()
+                .filter(group -> group.getPersons().contains(toRemove))
+                .forEach(group -> group.getPersons().remove(toRemove));
     }
 
     /**

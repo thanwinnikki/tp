@@ -116,6 +116,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        groups.removePersonFromAllGroups(key);
     }
 
     //// util methods
