@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.IsGroupPredicate;
 import seedu.address.model.person.IsGroupMemberPredicate;
 
 /**
@@ -38,6 +39,7 @@ public class MatesCommand extends Command {
         }
         Group group = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
+        model.updateFilteredGroupList(new IsGroupPredicate(group));
         return new CommandResult.Builder(MESSAGE_SUCCESS)
                 .setNextListType(CommandResult.ListType.PersonList)
                 .build();
