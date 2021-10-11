@@ -25,7 +25,7 @@ public class GroupCommand extends Command {
 
 
     /**
-     * Creates an AddGCommand to add the specified {@code Group}
+     * Creates an GroupCommand to add the specified {@code Group}
      */
     public GroupCommand(Group group) {
         requireNonNull(group);
