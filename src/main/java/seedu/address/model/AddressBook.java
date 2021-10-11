@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
@@ -97,6 +98,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addGroup(Group g) {
         groups.add(g);
+    }
+
+    public void addToGroup(Group target, Set<Person> persons) {
+        persons.forEach(x -> target.add(x));
     }
 
     /**

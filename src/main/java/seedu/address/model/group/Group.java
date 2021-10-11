@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.model.names.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -34,6 +35,14 @@ public class Group {
 
     public UniquePersonList getPersons() {
         return persons;
+    }
+
+    /**
+     * Adds a person to the group.
+     * @param person Person to be added to the group.
+     */
+    public void add(Person person) {
+        this.persons.add(person);
     }
 
     /**
