@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -167,11 +168,16 @@ public class AddCommandTest {
 
         @Override
         public void deleteGroup(Group target) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToGroup(Group target, Set<Person> persons) {
             throw new AssertionError("This method should not be called.");
         }
     }

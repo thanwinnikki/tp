@@ -58,7 +58,7 @@ public class AddGCommand extends Command {
         for (int i = 0; i < personIndexes.size(); i++) {
             Object[] personArray = personIndexes.toArray();
             Index curr = (Index) personArray[i];
-            if ( curr.getZeroBased() >= lastShownPersonList.size()) {
+            if (curr.getZeroBased() >= lastShownPersonList.size()) {
                 throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
             }
         }
