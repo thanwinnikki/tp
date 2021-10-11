@@ -216,6 +216,19 @@ Format: `mates GROUP_INDEX`
 Example:
 * `mates 7`
 
+### Remove a person from the current group: `remove`
+
+Remove the person from the group that Thundercat is displaying.
+
+Format: `remove PERSON_INDEX`
+
+* The group mates with the specified `PERSON_INDEX` will be removed from the group.
+* The `PERSON_INDEX` refers to the index number shown in the last displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `mates 7`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the Thundercat.
@@ -269,4 +282,5 @@ Action | Format | Examples
 **Adding people to Group** | `addG PERSON_INDEX_1, PERSON_INDEX_2.. g/GROUP_INDEX` |`addG 1, 2, 3 g/2`
 **Join Person to Groups** | `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...` | `join 2 g/1,3,6,8`
 **Show all people in Group** | `mates GROUP_INDEX` | `mates 7`
+**Remove person from Group** | `remove PERSON_INDEX` | `remove 2`
 **Help** | `help`
