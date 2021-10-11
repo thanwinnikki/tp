@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -116,4 +117,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Adds the person objects in the set to the specified group.
+     * The group must exist in the address book.
+     * @param target
+     */
+    void addToGroup(Group target, Set<Person> persons);
 }

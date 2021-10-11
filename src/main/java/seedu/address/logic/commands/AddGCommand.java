@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,20 +29,20 @@ public class AddGCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Person(s) added to group : %1$s";
     public static final String MESSAGE_INVALID_GROUP_INDEX = "Please enter a valid group number";
-    public static final String MESSAGE_INVALID_PERSON_INDEX = "Please enter all valid person index";
+    public static final String MESSAGE_INVALID_PERSON_INDEX = "Please enter all valid person indexes";
 
     private final Index groupIndex;
-    private final Index personIndex;
+    private final Set<Index> personIndexes;
 
     /**
      * Creates an AddGCommand to add the specified {@code Person} objects to the specified {@code Group}.
      * @param groupIndex
-     * @param personIndex
+     * @param personIndexes
      */
-    public AddGCommand(Index groupIndex, Index personIndex) {
-        requireAllNonNull(groupIndex, personIndex);
+    public AddGCommand(Index groupIndex, Set<Index> personIndexes) {
+        requireAllNonNull(groupIndex, personIndexes);
         this.groupIndex = groupIndex;
-        this.personIndex = personIndex;
+        this.personIndexes = personIndexes;
     }
 
     @Override
@@ -53,14 +55,20 @@ public class AddGCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_GROUP_INDEX);
         }
 
-        if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
+        for (int i = 0; i < personIndexes.size(); i++) {
+            Object[] personArray = personIndexes.toArray();
+            Index curr = (Index) personArray[i];
+            if ( curr.getZeroBased() >= lastShownPersonList.size()) {
+                throw new CommandException(MESSAGE_INVALID_PERSON_INDEX);
+            }
         }
 
         Group groupToChange = lastShownGroupList.get(groupIndex.getZeroBased());
-        model.deleteGroup(groupToChange); //delete the old group
-        groupToChange.add(lastShownPersonList.get(personIndex.getZeroBased()));
-        model.addGroup(groupToChange);
+        Set<Person> personSet = personIndexes.stream()
+                .map(x -> lastShownPersonList.get(x.getZeroBased()))
+                .collect(Collectors.toSet());
+
+        model.addToGroup(groupToChange, personSet);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupToChange));
 

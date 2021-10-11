@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -29,9 +30,9 @@ public class AddGCommandParser implements Parser<AddGCommand> {
         }
 
         Index groupIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
-        Index personIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PERSON).get());
+        Set<Index> personIndexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_PERSON));
 
-        return new AddGCommand(groupIndex, personIndex);
+        return new AddGCommand(groupIndex, personIndexes);
     }
 
     /**

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -160,6 +161,16 @@ public class ModelManager implements Model {
     @Override
     public void deleteGroup(Group target) {
         addressBook.removeGroup(target);
+    }
+
+    /**
+     * Adds the set of person objects to a specified group in the address book.
+     * @param target
+     * @param persons
+     */
+    @Override
+    public void addToGroup(Group target, Set<Person> persons) {
+        addressBook.addToGroup(target, persons);
     }
 
     //=========== Filtered Group List Accessors =============================================================
