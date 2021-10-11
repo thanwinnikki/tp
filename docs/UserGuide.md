@@ -175,7 +175,7 @@ Examples:
 
 Adds multiple specified people to a specified group.
 
-Format: `addG PERSON_INDEX_1, PERSON_INDEX_2, …​ g/GROUP_INDEX`
+Format: `addG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
 
 * Adds to a group specified at `GROUP_INDEX`, multiple people specified at `PERSON_INDEX_1, PERSON_INDEX_2, …​`
 * The group index refers to the group number shown in the displayed group list.
@@ -266,7 +266,7 @@ Action | Format | Examples
 **Create Group** | `group GROUP_NAME` | `group CS2103 Project Group`
 **Show all Groups** | `groups`
 **Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2`
-**Adding people to Group** | `addG PERSON_INDEX_1, PERSON_INDEX_2.. g/GROUP_INDEX` |`addG 1, 2, 3 g/2`
+**Adding people to Group** | `addG p/PERSON_INDEX_1, p/PERSON_INDEX_2.. g/GROUP_INDEX` |`addG p/1, p/2, p/3 g/2`
 **Join Person to Groups** | `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...` | `join 2 g/1,3,6,8`
 **Show all people in Group** | `mates GROUP_INDEX` | `mates 7`
 **Help** | `help`
