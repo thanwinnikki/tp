@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -50,6 +51,7 @@ public class RemoveCommand extends Command {
         Group group = lastShownGroupList.get(firstIndex.getZeroBased());
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
+        model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToRemove));
     }
 }
