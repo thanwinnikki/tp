@@ -227,7 +227,7 @@ Format: `remove PERSON_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `mates 7`
+* `remove 2`
 
 ### Clearing all entries : `clear`
 
