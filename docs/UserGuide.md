@@ -16,7 +16,7 @@ Thundercat (TC) is a **desktop app for managing contacts, optimized for use via 
 
 1. Download the latest `thundercat.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your thundercat.
+1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -26,7 +26,7 @@ Thundercat (TC) is a **desktop app for managing contacts, optimized for use via 
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Thundercat.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the application's records.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -243,14 +243,14 @@ Format: `exit`
 
 ### Saving the data
 
-Thundercat data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+The data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-Thundercat data are saved as a JSON file `[JAR file location]/data/thundercat.json`. Advanced users are welcome to update data directly by editing that data file.
+The data is saved as a JSON file `[JAR file location]/data/records.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Thundercat will discard all data and start with an empty data file at the next run.
+If any of your changes to the data file makes its format invalid, the application will discard all the data and start with an empty data file on the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -262,7 +262,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Thundercat home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data from the home folder of the application in your original computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
