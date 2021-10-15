@@ -68,7 +68,10 @@ public class JsonAdaptedGroup {
 
     private JsonAdaptedGroup(String name, List<String> groupMateIds) {
         this.name = name;
-        this.groupMateIds = new ArrayList<>(groupMateIds);
+        this.groupMateIds = new ArrayList<>();
+        if (groupMateIds != null) {
+            this.groupMateIds.addAll(groupMateIds);
+        }
     }
 
     private JsonAdaptedGroup(Group source, Map<Person, String> personToIdMap) {
