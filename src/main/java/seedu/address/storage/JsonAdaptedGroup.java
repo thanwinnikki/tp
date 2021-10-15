@@ -108,7 +108,6 @@ public class JsonAdaptedGroup {
     }
 
     private void addGroupMates(Group group, Map<Id, Person> idToPersonMap) throws IllegalValueException {
-        UniquePersonList persons = group.getPersons();
         for (String personIdString : groupMateIds) {
             Id personId = Id.parse(personIdString);
             Person person = idToPersonMap.get(personId);
@@ -116,7 +115,7 @@ public class JsonAdaptedGroup {
                 throw new IllegalValueException(MESSAGE_NO_SUCH_PERSON);
             }
             try {
-                persons.add(person);
+                group.add(person);
             } catch (DuplicatePersonException e) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP_MATE);
             }
