@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedGroup.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
@@ -43,5 +45,25 @@ public class JsonAdaptedGroupTest {
         group.add(DANIEL);
 
         assertEquals(group, jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
+    public void toModelType_nullName_throwsIllegalValueException() {
+        String groupNameString = null;
+        List<String> groupMateIds = new ArrayList<>();
+        Map<Id, Person> idToPersonMap = new HashMap<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
+    public void toModelType_invalidName_throwsIllegalValueException() {
+        String groupNameString = "T3@m";
+        List<String> groupMateIds = new ArrayList<>();
+        Map<Id, Person> idToPersonMap = new HashMap<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
 }
