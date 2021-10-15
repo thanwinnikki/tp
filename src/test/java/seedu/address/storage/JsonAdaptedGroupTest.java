@@ -79,4 +79,17 @@ public class JsonAdaptedGroupTest {
 
         assertEquals(group, jsonAdaptedGroup.toModelType(idToPersonMap));
     }
+
+    @Test
+    public void toModelType_emptyGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
+        String groupNameString = "group";
+        List<String> groupMateIds = new ArrayList<>();
+        Map<Id, Person> idToPersonMap = new HashMap<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+
+        Name groupName = new Name("group");
+        Group group = new Group(groupName);
+
+        assertEquals(group, jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
 }
