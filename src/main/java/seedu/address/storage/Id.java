@@ -10,8 +10,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class Id implements Comparable<Id> {
 
+    public static final String MESSAGE_MALFORMED_ID = "This ID is malformed.";
+
     private static final String DELIMITER = "-";
-    private static final String MESSAGE_MALFORMED_ID = "This ID is malformed.";
     private static final int EPOCH_DAY_TOKEN_INDEX = 0;
     private static final int NANO_OF_DAY_TOKEN_INDEX = 1;
     private static final int HEX_RADIX = 16;
