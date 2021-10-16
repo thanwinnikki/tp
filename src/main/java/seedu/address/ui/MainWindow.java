@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.AppState;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,6 +23,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
+
+    public static final String MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED =
+            "The %s application state is not implemented.";
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -187,16 +191,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            CommandResult.ListType nextListType = commandResult.getNextListType();
-            switch (nextListType) {
-            case PersonList:
+            AppState nextAppState = commandResult.getNextAppState();
+            switch (nextAppState) {
+            case HOME:
                 listPanel.setList(logic.getFilteredPersonList());
                 break;
-            case GroupList:
+            case GROUP_INFORMATION:
                 listPanel.setList(logic.getFilteredGroupList());
                 break;
             default:
-                assert false : String.format("The %s list type is not implemented.", nextListType);
+                assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextAppState);
             }
 
             return commandResult;
