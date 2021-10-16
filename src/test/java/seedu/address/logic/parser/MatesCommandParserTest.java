@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.MatesCommand;
@@ -19,10 +18,10 @@ public class MatesCommandParserTest {
 
     private MatesCommandParser parser = new MatesCommandParser();
 
-//    @Test
-//    public void parse_validArgs_returnsMatesCommand() {
-//        assertParseSuccess(parser, "1", new MatesCommand(INDEX_FIRST));
-//    }
+    //    @Test
+    //    public void parse_validArgs_returnsMatesCommand() {
+    //        assertParseSuccess(parser, "1", new MatesCommand(INDEX_FIRST));
+    //    }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {

@@ -55,12 +55,12 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST), command);
     }
 
-//    @Test
-//    public void parseCommand_mates() throws Exception {
-//        MatesCommand command = (MatesCommand) parser.parseCommand(
-//                MatesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-//        assertEquals(new MatesCommand(INDEX_FIRST), command);
-//    }
+    //    @Test
+    //    public void parseCommand_mates() throws Exception {
+    //        MatesCommand command = (MatesCommand) parser.parseCommand(
+    //                MatesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+    //        assertEquals(new MatesCommand(INDEX_FIRST), command);
+    //    }
 
     @Test
     public void parseCommand_edit() throws Exception {
