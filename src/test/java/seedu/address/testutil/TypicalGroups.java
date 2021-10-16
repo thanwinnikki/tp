@@ -28,6 +28,8 @@ public class TypicalGroups {
             .withMembers(TypicalPersons.AMY, TypicalPersons.BOB)
             .build();
 
+    public static final Group CS2101 = new GroupBuilder().withName("CS2101").build();
+
     private TypicalGroups() {} //prevents instantiation
 
     /**
