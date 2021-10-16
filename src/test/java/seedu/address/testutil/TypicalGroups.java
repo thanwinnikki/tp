@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 
@@ -19,9 +18,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.Person;
 
 /**
  * A utility class containing a list of {@code Group} objects to be used in tests.
@@ -49,20 +46,6 @@ public class TypicalGroups {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalGroups() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical groups and persons.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Group group : getTypicalGroup()) {
-            ab.addGroup(group);
-        }
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
-        }
-        return ab;
-    }
 
     public static List<Group> getTypicalGroup() {
         return new ArrayList<>(Arrays.asList(CS2103T, CS2101));
