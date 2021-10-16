@@ -139,6 +139,6 @@ public class CommandTestUtil {
         model.updateFilteredGroupList(
                 new seedu.address.model.group.NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredGroupList().size());
     }
 }
