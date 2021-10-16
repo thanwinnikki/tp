@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import java.util.Arrays;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
@@ -48,12 +49,17 @@ public class GroupBuilder {
     public GroupBuilder withMembers(Person... personList) {
         UniquePersonList editedList = new UniquePersonList();
         Arrays.stream(personList).forEach(person -> editedList.add(person));
-        persons.setPersons(editedList);
+        this.persons = editedList;
         return this;
     }
 
     public Group build() {
-        return new Group(name);
+        Group buildGroup = new Group(name);
+        ObservableList<Person> personList = persons.asUnmodifiableObservableList();
+        for (int i = 0; i < personList.size() ; i++) {
+            buildGroup.add(personList.get(i));
+        }
+        return buildGroup;
     }
 
 }
