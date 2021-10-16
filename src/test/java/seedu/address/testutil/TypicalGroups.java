@@ -26,30 +26,30 @@ import seedu.address.model.group.Group;
  */
 public class TypicalGroups {
 
-    public static final Group CS2103 = new GroupBuilder().withName("CS2103 Project Group")
-            .withMember(ALICE, BENSON, CARL).build();
+    public static final Group CS2103T = new GroupBuilder().withName("CS2103T Project Group")
+            .withMembers(ALICE, BENSON, CARL).build();
 
     public static final Group CS2101 = new GroupBuilder().withName("CS2101 Project Group")
-            .withMember(ELLE, FIONA, GEORGE).build();
+            .withMembers(ELLE, FIONA, GEORGE).build();
 
     // Manually added
     public static final Group FAMILY = new GroupBuilder().withName("Family")
-            .withMember(DANIEL, ELLE, ALICE).build();
+            .withMembers(DANIEL, ELLE, ALICE).build();
     public static final Group FRIENDS = new GroupBuilder().withName("Friends")
-            .withMember(HOON, IDA).build();
+            .withMembers(HOON, IDA).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Group TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withMember(AMY, BOB).build();
+            .withMembers(AMY, BOB).build();
     public static final Group SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
-            .withMember(BOB, AMY).build();
+            .withMembers(BOB, AMY).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalGroups() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical groups.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -60,6 +60,6 @@ public class TypicalGroups {
     }
 
     public static List<Group> getTypicalGroup() {
-        return new ArrayList<>(Arrays.asList(CS2103, CS2101));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS2101));
     }
 }
