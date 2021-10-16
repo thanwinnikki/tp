@@ -22,14 +22,17 @@ public class GroupNameContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        GroupNameContainsKeywordsPredicate firstPredicate = new GroupNameContainsKeywordsPredicate(firstPredicateKeywordList);
-        GroupNameContainsKeywordsPredicate secondPredicate = new GroupNameContainsKeywordsPredicate(secondPredicateKeywordList);
+        GroupNameContainsKeywordsPredicate firstPredicate =
+                new GroupNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        GroupNameContainsKeywordsPredicate secondPredicate =
+                new GroupNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        GroupNameContainsKeywordsPredicate firstPredicateCopy = new GroupNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        GroupNameContainsKeywordsPredicate firstPredicateCopy =
+                new GroupNameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -45,7 +48,8 @@ public class GroupNameContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        GroupNameContainsKeywordsPredicate predicate = new GroupNameContainsKeywordsPredicate(Collections.singletonList("CS2103T"));
+        GroupNameContainsKeywordsPredicate predicate =
+                new GroupNameContainsKeywordsPredicate(Collections.singletonList("CS2103T"));
         assertTrue(predicate.test(new GroupBuilder().withName("CS2103T CS2101").build()));
 
         // Multiple keywords
