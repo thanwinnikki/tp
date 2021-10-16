@@ -52,7 +52,7 @@ public class JsonAdaptedGroup {
          * @param source The {@code Group} object to be converted.
          * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
          */
-        public Builder(Group source, Map<Person, String> personToIdMap) {
+        public Builder(Group source, Map<Person, Id> personToIdMap) {
             groupToBuild = new JsonAdaptedGroup(source, personToIdMap);
         }
 
@@ -74,13 +74,13 @@ public class JsonAdaptedGroup {
         }
     }
 
-    private JsonAdaptedGroup(Group source, Map<Person, String> personToIdMap) {
+    private JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
         name = source.getName().fullName;
         groupMateIds = new ArrayList<>();
         UniquePersonList persons = source.getPersons();
         for (Person person : persons) {
-            String personId = personToIdMap.get(person);
-            groupMateIds.add(personId);
+            Id personId = personToIdMap.get(person);
+            groupMateIds.add(personId.toString());
         }
     }
 
