@@ -53,10 +53,14 @@ public class GroupBuilder {
         return this;
     }
 
+    /**
+     * Builds the {@code Group} as intended for testing.
+     * @return
+     */
     public Group build() {
         Group buildGroup = new Group(name);
         ObservableList<Person> personList = persons.asUnmodifiableObservableList();
-        for (int i = 0; i < personList.size() ; i++) {
+        for (int i = 0; i < personList.size(); i++) {
             buildGroup.add(personList.get(i));
         }
         return buildGroup;
