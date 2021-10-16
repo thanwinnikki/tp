@@ -20,11 +20,13 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MatesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -51,6 +53,13 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_mates() throws Exception {
+        MatesCommand command = (MatesCommand) parser.parseCommand(
+                MatesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new MatesCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -86,6 +95,12 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_groups() throws Exception {
+        assertTrue(parser.parseCommand(GroupsCommand.COMMAND_WORD) instanceof GroupsCommand);
+        assertTrue(parser.parseCommand(GroupsCommand.COMMAND_WORD + " 3") instanceof GroupsCommand);
     }
 
     @Test
