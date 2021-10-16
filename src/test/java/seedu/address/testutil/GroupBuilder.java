@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
@@ -28,8 +30,7 @@ public class GroupBuilder {
      */
     public GroupBuilder(Group groupToCopy) {
         name = groupToCopy.getName();
-        persons = new UniquePersonList();
-        persons.setPersons(groupToCopy.getPersons());
+        persons = groupToCopy.getPersons();
     }
 
     /**
@@ -44,11 +45,10 @@ public class GroupBuilder {
      * Sets the {@code UniquePersonList} of the {@code Group} to contain specified {@code Person}.
      * @return
      */
-    public GroupBuilder withMembers(Person... persons) {
-        this.persons.setPersons(new UniquePersonList());
-        for (Person person : persons) {
-            this.persons.add(person);
-        }
+    public GroupBuilder withMembers(Person... personList) {
+        UniquePersonList editedList = new UniquePersonList();
+        Arrays.stream(personList).forEach(person -> editedList.add(person));
+        persons.setPersons(editedList);
         return this;
     }
 
