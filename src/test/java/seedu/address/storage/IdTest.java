@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -102,5 +105,18 @@ public class IdTest {
         Id id1 = Id.parse("1-2");
         Id id2 = Id.parse("1-2");
         assertEquals(id1, id2);
+    }
+
+    @Test
+    public void generateUniqueId_multipleIds_generatesUniqueId() {
+        Set<Id> idSet = new HashSet<>();
+        Id id1 = Id.generateUniqueId(idSet);
+        idSet.add(id1);
+        for (int i = 0; i < 20; i++) {
+            Id id2 = Id.generateUniqueId(idSet);
+            idSet.add(id2);
+            assertNotEquals(id1, id2);
+            id1 = id2;
+        }
     }
 }
