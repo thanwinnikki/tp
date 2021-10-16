@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -23,7 +24,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.MatesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
@@ -55,12 +55,12 @@ public class AddressBookParserTest {
         assertEquals(new DeleteCommand(INDEX_FIRST), command);
     }
 
-    @Test
-    public void parseCommand_mates() throws Exception {
-        MatesCommand command = (MatesCommand) parser.parseCommand(
-                MatesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new MatesCommand(INDEX_FIRST), command);
-    }
+//    @Test
+//    public void parseCommand_mates() throws Exception {
+//        MatesCommand command = (MatesCommand) parser.parseCommand(
+//                MatesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+//        assertEquals(new MatesCommand(INDEX_FIRST), command);
+//    }
 
     @Test
     public void parseCommand_edit() throws Exception {

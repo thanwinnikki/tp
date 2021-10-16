@@ -12,7 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 
 import java.util.Arrays;
 
@@ -33,8 +33,8 @@ import seedu.address.model.person.IsGroupMemberPredicate;
  */
 public class MatesCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
