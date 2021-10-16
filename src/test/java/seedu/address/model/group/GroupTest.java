@@ -3,8 +3,13 @@ package seedu.address.model.group;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS2101;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.CS2103T;
+import static seedu.address.testutil.TypicalGroups.ES2660;
+import static seedu.address.testutil.TypicalPersons.CARL;
+
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +32,52 @@ public class GroupTest {
         // null -> returns false
         assertFalse(CS2103T.isSameGroup(null));
 
-        // same name, group members different -> returns true
-        Group editedGroupCS2103T = new GroupBuilder(CS2103T).withMembers().build();
+        // same group name, group members different -> returns true
+        Group editedGroupCS2103T = new GroupBuilder(ES2660).withName("CS2103T").build();
+        assertTrue(CS2103T.isSameGroup(editedGroupCS2103T));
+
+        // different group name, all other attributes same -> returns false
+        editedGroupCS2103T = new GroupBuilder(CS2103T).withName("CS2101").build();
+        assertFalse(CS2103T.isSameGroup(editedGroupCS2103T));
+
+        // group name differs in case, all other attributes same -> returns false
+        Group editedCS2101 = new GroupBuilder(ES2660).withName(VALID_GROUP_NAME_CS2101.toLowerCase(Locale.ROOT))
+                .build();
+        assertFalse(ES2660.isSameGroup(editedCS2101));
+
+        // group name has trailing spaces, all other attributes same -> returns false
+        String groupNameWithTrailingSpaces = VALID_GROUP_NAME_CS2101 + " ";
+        editedCS2101 = new GroupBuilder(ES2660).withName(groupNameWithTrailingSpaces).build();
+        assertFalse(ES2660.isSameGroup(editedCS2101));
+    }
+
+    @Test
+    public void equals() {
+
+        Group test = CS2103T;
+
+        //same object
+        assertTrue(CS2103T.equals(CS2103T));
+
+        // same values -> returns true
+        Group copyCS2103T = new GroupBuilder(CS2103T).build();
+        assertTrue(CS2103T.equals(copyCS2103T));
+
+        // null -> returns false
+        assertFalse(CS2103T.equals(null));
+
+        // different type -> returns false
+        assertFalse(CS2103T.equals(6));
+
+        // different group -> returns false
+        assertFalse(CS2103T.equals(ES2660));
+
+        // different name -> returns false
+        Group editedCS2103T = new GroupBuilder(CS2103T).withName("ES2660").build();
+        assertFalse(CS2103T.equals(editedCS2103T));
+
+        // different group members -> returns false
+        editedCS2103T = new GroupBuilder(CS2103T).withMembers(CARL).build();
+        assertFalse(CS2103T.equals(editedCS2103T));
     }
 }
