@@ -54,9 +54,9 @@ public class MatesCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MatesCommand MatesCommand = new MatesCommand(outOfBoundIndex);
+        MatesCommand command = new MatesCommand(outOfBoundIndex);
 
-        assertCommandFailure(MatesCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
 
     @Test
@@ -84,31 +84,31 @@ public class MatesCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        MatesCommand MatesCommand = new MatesCommand(outOfBoundIndex);
+        MatesCommand command = new MatesCommand(outOfBoundIndex);
 
-        assertCommandFailure(MatesCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        assertCommandFailure(command, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        MatesCommand MatesFirstCommand = new MatesCommand(INDEX_FIRST);
-        MatesCommand MatesSecondCommand = new MatesCommand(INDEX_SECOND);
+        MatesCommand matesFirstCommand = new MatesCommand(INDEX_FIRST);
+        MatesCommand matesSecondCommand = new MatesCommand(INDEX_SECOND);
 
         // same object -> returns true
-        assertTrue(MatesFirstCommand.equals(MatesFirstCommand));
+        assertTrue(matesFirstCommand.equals(matesFirstCommand));
 
         // same values -> returns true
         //MatesCommand MatesFirstCommandCopy = new MatesCommand(INDEX_FIRST);
         //assertTrue(MatesFirstCommand.equals(MatesFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(MatesFirstCommand.equals(1));
+        assertFalse(matesFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(MatesFirstCommand.equals(null));
+        assertFalse(matesFirstCommand.equals(null));
 
         // different group -> returns false
-        assertFalse(MatesFirstCommand.equals(MatesSecondCommand));
+        assertFalse(matesFirstCommand.equals(matesSecondCommand));
     }
 
     /**
