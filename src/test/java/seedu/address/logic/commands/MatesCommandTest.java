@@ -16,7 +16,6 @@ import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Arrays;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;

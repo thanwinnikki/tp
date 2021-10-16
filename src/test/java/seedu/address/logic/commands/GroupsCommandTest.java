@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
