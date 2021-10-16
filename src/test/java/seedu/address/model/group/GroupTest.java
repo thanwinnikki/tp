@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS2101;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGroups.ES2660;
 import static seedu.address.testutil.TypicalGroups.CS2103T;
+import static seedu.address.testutil.TypicalGroups.ES2660;
 import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Locale;
@@ -60,8 +60,8 @@ public class GroupTest {
         assertTrue(CS2103T.equals(CS2103T));
 
         // same values -> returns true
-        Group CS2103TCopy = new GroupBuilder(CS2103T).build();
-        assertTrue(CS2103T.equals(CS2103TCopy));
+        Group copyCS2103T = new GroupBuilder(CS2103T).build();
+        assertTrue(CS2103T.equals(copyCS2103T));
 
         // null -> returns false
         assertFalse(CS2103T.equals(null));
