@@ -45,6 +45,7 @@ public class GroupBuilder {
      * @return
      */
     public GroupBuilder withMembers(Person... persons) {
+        this.persons.setPersons(new UniquePersonList());
         for (Person person : persons) {
             this.persons.add(person);
         }
