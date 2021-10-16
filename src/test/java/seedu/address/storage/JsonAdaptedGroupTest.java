@@ -270,13 +270,13 @@ public class JsonAdaptedGroupTest {
     }
 
     @Test
-    public void JsonAdaptedGroupBuilder_sameGroupDifferentConstructors_returnsSameJsonAdaptedGroup()
+    public void jsonAdaptedGroupBuilder_sameGroupDifferentConstructors_returnsSameJsonAdaptedGroup()
             throws IllegalValueException {
-        Map<Id, Person> idToPersonMap = new HashMap<>();
-        idToPersonMap.put(Id.parse("0-1"), ALICE);
-        idToPersonMap.put(Id.parse("1-2"), BENSON);
-        idToPersonMap.put(Id.parse("3-5"), CARL);
-        idToPersonMap.put(Id.parse("8-d"), DANIEL);
+        Map<Person, Id> personToIdMap = new HashMap<>();
+        personToIdMap.put(ALICE, Id.parse("0-1"));
+        personToIdMap.put(BENSON, Id.parse("1-2"));
+        personToIdMap.put(CARL, Id.parse("3-5"));
+        personToIdMap.put(DANIEL, Id.parse("8-d"));
 
         String groupNameString = "group";
         List<String> groupMateIds = new ArrayList<>();
@@ -292,9 +292,26 @@ public class JsonAdaptedGroupTest {
         group.add(BENSON);
         group.add(CARL);
         group.add(DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroupFromModel = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds)
+        JsonAdaptedGroup jsonAdaptedGroupFromModel = new JsonAdaptedGroup.Builder(group, personToIdMap)
                 .build();
 
         assertEquals(jsonAdaptedGroupFromJson, jsonAdaptedGroupFromModel);
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        String groupNameString = "group";
+        List<String> groupMateIds = new ArrayList<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        assertNotEquals(null, jsonAdaptedGroup);
+        assertNotEquals(new JsonAdaptedGroupTest(), jsonAdaptedGroup);
+    }
+
+    @Test
+    public void equals_sameReference_returnsTrue() {
+        String groupNameString = "group";
+        List<String> groupMateIds = new ArrayList<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        assertEquals(jsonAdaptedGroup, jsonAdaptedGroup);
     }
 }
