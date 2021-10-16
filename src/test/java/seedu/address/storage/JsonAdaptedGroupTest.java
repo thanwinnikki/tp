@@ -268,4 +268,33 @@ public class JsonAdaptedGroupTest {
         assertEquals(group2, jsonAdaptedGroup2.toModelType(idToPersonMap));
         assertEquals(group3, jsonAdaptedGroup3.toModelType(idToPersonMap));
     }
+
+    @Test
+    public void JsonAdaptedGroupBuilder_sameGroupDifferentConstructors_returnsSameJsonAdaptedGroup()
+            throws IllegalValueException {
+        Map<Id, Person> idToPersonMap = new HashMap<>();
+        idToPersonMap.put(Id.parse("0-1"), ALICE);
+        idToPersonMap.put(Id.parse("1-2"), BENSON);
+        idToPersonMap.put(Id.parse("3-5"), CARL);
+        idToPersonMap.put(Id.parse("8-d"), DANIEL);
+
+        String groupNameString = "group";
+        List<String> groupMateIds = new ArrayList<>();
+        groupMateIds.add("0-1");
+        groupMateIds.add("1-2");
+        groupMateIds.add("3-5");
+        groupMateIds.add("8-d");
+        JsonAdaptedGroup jsonAdaptedGroupFromJson = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+
+        Name groupName = new Name("group");
+        Group group = new Group(groupName);
+        group.add(ALICE);
+        group.add(BENSON);
+        group.add(CARL);
+        group.add(DANIEL);
+        JsonAdaptedGroup jsonAdaptedGroupFromModel = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds)
+                .build();
+
+        assertEquals(jsonAdaptedGroupFromJson, jsonAdaptedGroupFromModel);
+    }
 }

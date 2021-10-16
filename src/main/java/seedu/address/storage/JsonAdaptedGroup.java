@@ -124,4 +124,16 @@ public class JsonAdaptedGroup {
             }
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof JsonAdaptedGroup)) {
+            return false;
+        }
+        if (this == other) {
+            return true;
+        }
+        JsonAdaptedGroup o = (JsonAdaptedGroup) other;
+        return name.equals(o.name) && groupMateIds.equals(o.groupMateIds);
+    }
 }
