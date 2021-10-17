@@ -98,8 +98,8 @@ public class MatesCommandTest {
         assertTrue(matesFirstCommand.equals(matesFirstCommand));
 
         // same values -> returns true
-        //MatesCommand MatesFirstCommandCopy = new MatesCommand(INDEX_FIRST);
-        //assertTrue(MatesFirstCommand.equals(MatesFirstCommandCopy));
+        MatesCommand MatesFirstCommandCopy = new MatesCommand(INDEX_FIRST);
+        assertTrue(matesFirstCommand.equals(MatesFirstCommandCopy));
 
         // different types -> returns false
         assertFalse(matesFirstCommand.equals(1));

@@ -44,4 +44,11 @@ public class MatesCommand extends Command {
                 .setNextListType(CommandResult.ListType.PersonList)
                 .build();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MatesCommand // instanceof handles nulls
+                && index.equals(((MatesCommand) other).index)); // state check
+    }
 }
