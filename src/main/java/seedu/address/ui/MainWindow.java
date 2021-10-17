@@ -192,16 +192,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             AppState nextAppState = commandResult.getNextAppState();
-            switch (nextAppState) {
-            case HOME:
-                listPanel.setList(logic.getFilteredPersonList());
-                break;
-            case GROUP_INFORMATION:
-                listPanel.setList(logic.getFilteredGroupList());
-                break;
-            default:
-                assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextAppState);
-            }
+            changeDisplayForNextAppState(nextAppState);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -209,5 +200,26 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void changeDisplayForNextAppState(AppState nextAppState) {
+        switch (nextAppState) {
+        case HOME:
+            changeDisplayForHomeAppState();
+            break;
+        case GROUP_INFORMATION:
+            changeDisplayForGroupInformationAppState();
+            break;
+        default:
+            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextAppState);
+        }
+    }
+
+    private void changeDisplayForHomeAppState() {
+        listPanel.setList(logic.getFilteredPersonList());
+    }
+
+    private void changeDisplayForGroupInformationAppState() {
+        listPanel.setList(logic.getFilteredGroupList());
     }
 }
