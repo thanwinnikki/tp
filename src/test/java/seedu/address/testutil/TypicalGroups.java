@@ -24,7 +24,7 @@ public class TypicalGroups {
             .build();
 
     // Manually added - Group and person's details found in {@code CommandTestUtil}
-    public static final Group CS2101 = new GroupBuilder().withName(VALID_GROUP_NAME_CS2101)
+    public static final Group ES2660 = new GroupBuilder().withName(VALID_GROUP_NAME_CS2101)
             .withMembers(TypicalPersons.AMY, TypicalPersons.BOB)
             .build();
 
@@ -42,6 +42,6 @@ public class TypicalGroups {
     }
 
     public static List<Group> getTypicalGroups() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2101));
+        return new ArrayList<>(Arrays.asList(CS2103T, ES2660));
     }
 }

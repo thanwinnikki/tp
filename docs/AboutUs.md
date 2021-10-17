@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Won Ye Ji
 
-![Ye Ji's photo](images/wonyeji.png)
+<img alt="Ye Ji's photo" src="images/wonyeji.png" width="200px">
 
 [[github](https://github.com/wonyeji)]
 [[portfolio](team/wonyeji.md)]
