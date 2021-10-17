@@ -50,7 +50,7 @@ public class DeleteCommandTest {
         showGroupAtIndex(modelWithGroups, INDEX_FIRST_GROUP);
 
         Group firstGroup = modelWithGroups.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
-        assertEquals(firstGroup, 1);
+        assertEquals(firstGroup.getPersons().asUnmodifiableObservableList().size(), 1);
         Person personToDelete = firstGroup.getPersons().asUnmodifiableObservableList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         //.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
