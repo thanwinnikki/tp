@@ -36,7 +36,7 @@ public class DeleteGroupCommand extends Command {
         List<Group> lastShownList = model.getFilteredGroupList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Group groupToDelete = lastShownList.get(targetIndex.getZeroBased());
