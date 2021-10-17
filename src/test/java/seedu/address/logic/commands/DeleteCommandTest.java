@@ -45,12 +45,13 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredListWithGroups_success() {
+    public void execute_validIndexUnfilteredListOfFirstGroups_success() {
         Group firstGroup = modelWithGroups.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
-        assertEquals(firstGroup.getPersons().asUnmodifiableObservableList().size(), 1);
-        Person personToDelete = firstGroup.getPersons().asUnmodifiableObservableList().get(INDEX_FIRST_PERSON.getZeroBased());
+        int initialSizeOfFirstGroup = firstGroup.getPersons().asUnmodifiableObservableList().size();
 
-        //.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = firstGroup.getPersons()
+                .asUnmodifiableObservableList().get(INDEX_FIRST_PERSON.getZeroBased());
+
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
@@ -59,6 +60,10 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, modelWithGroups, expectedMessage, expectedModel);
+
+        int currentSizeOfFirstGroup = firstGroup.getPersons().asUnmodifiableObservableList().size();
+        // ensures that the first group also delete the person
+        assertEquals(initialSizeOfFirstGroup - 1, currentSizeOfFirstGroup);
     }
 
     @Test
