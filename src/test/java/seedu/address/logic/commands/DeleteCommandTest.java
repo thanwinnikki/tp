@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -43,13 +45,13 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredListOfFirstGroups_success() {
-        Group firstGroup = modelWithGroups.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
+        Group firstGroup = modelWithGroups.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
         int initialSizeOfFirstGroup = firstGroup.getPersons().asUnmodifiableObservableList().size();
 
         Person personToDelete = firstGroup.getPersons()
-                .asUnmodifiableObservableList().get(INDEX_FIRST_PERSON.getZeroBased());
+                .asUnmodifiableObservableList().get(INDEX_FIRST.getZeroBased());
 
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
