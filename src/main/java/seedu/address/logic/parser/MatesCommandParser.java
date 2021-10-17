@@ -12,8 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MatesCommandParser implements Parser<MatesCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the MatesCommand
+     * and returns a MatesCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MatesCommand parse(String args) throws ParseException {
