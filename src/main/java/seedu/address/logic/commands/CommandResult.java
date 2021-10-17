@@ -150,7 +150,7 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && nextAppState == otherCommandResult.nextAppState;
+                && nextAppState.equals(otherCommandResult.nextAppState);
     }
 
     @Override
