@@ -44,13 +44,7 @@ class JsonAdaptedTask {
     // public Task toModelType() throws IllegalValueException {
     public Group toModelType() throws IllegalValueException {
         // TODO: change Name to Description
-//        if (description == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
-//        }
-//        if (!Description.isValidDescription(description)) {
-//            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
-//        }
-//        final Description modelDescription = new Description(description);
+        // final Description modelDescription = createDescription();
 
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -65,4 +59,14 @@ class JsonAdaptedTask {
         return new Group(modelName);
     }
 
+    // private Description createDescription() throws IllegalValueException {
+    //     if (description == null) {
+    //         String exceptionMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
+    //         throw new IllegalValueException(exceptionMessage);
+    //     }
+    //     if (!Description.isValidDescription(description)) {
+    //         throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+    //     }
+    //     return new Description(description);
+    // }
 }
