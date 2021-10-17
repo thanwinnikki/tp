@@ -7,8 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.logic.commands.DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GROUP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,8 +33,8 @@ public class DeleteGroupCommandTest {
         // ensures that the filtered group list has at least one element
         assertTrue(model.getFilteredGroupList().size() > 0);
 
-        Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
-        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(INDEX_FIRST_GROUP);
+        Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
+        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete);
 
@@ -54,10 +54,10 @@ public class DeleteGroupCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showGroupAtIndex(model, INDEX_FIRST_GROUP);
+        showGroupAtIndex(model, INDEX_FIRST);
 
-        Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
-        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(INDEX_FIRST_GROUP);
+        Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
+        DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete);
 
@@ -70,9 +70,9 @@ public class DeleteGroupCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showGroupAtIndex(model, INDEX_FIRST_GROUP);
+        showGroupAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_GROUP;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getGroupList().size());
 
@@ -83,14 +83,14 @@ public class DeleteGroupCommandTest {
 
     @Test
     public void equals() {
-        DeleteGroupCommand deleteFirstGroupCommand = new DeleteGroupCommand(INDEX_FIRST_GROUP);
-        DeleteGroupCommand deleteSecondGroupCommand = new DeleteGroupCommand(INDEX_SECOND_GROUP);
+        DeleteGroupCommand deleteFirstGroupCommand = new DeleteGroupCommand(INDEX_FIRST);
+        DeleteGroupCommand deleteSecondGroupCommand = new DeleteGroupCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstGroupCommand.equals(deleteFirstGroupCommand));
 
         // same values -> returns true
-        DeleteGroupCommand deleteFirstGroupCommandCopy = new DeleteGroupCommand(INDEX_FIRST_GROUP);
+        DeleteGroupCommand deleteFirstGroupCommandCopy = new DeleteGroupCommand(INDEX_FIRST);
         assertTrue(deleteFirstGroupCommand.equals(deleteFirstGroupCommandCopy));
 
         // different types -> returns false
