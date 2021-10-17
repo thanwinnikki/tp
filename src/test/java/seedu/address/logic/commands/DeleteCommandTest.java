@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
@@ -47,8 +46,6 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredListWithGroups_success() {
-        showGroupAtIndex(modelWithGroups, INDEX_FIRST_GROUP);
-
         Group firstGroup = modelWithGroups.getFilteredGroupList().get(INDEX_FIRST_GROUP.getZeroBased());
         assertEquals(firstGroup.getPersons().asUnmodifiableObservableList().size(), 1);
         Person personToDelete = firstGroup.getPersons().asUnmodifiableObservableList().get(INDEX_FIRST_PERSON.getZeroBased());
