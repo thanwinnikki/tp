@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.group.NameContainsKeywordsPredicate;
+import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all groups in address book whose name contains any of the argument keywords.
@@ -19,9 +19,9 @@ public class FindGroupCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " CS2100 ES2660";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final GroupNameContainsKeywordsPredicate predicate;
 
-    public FindGroupCommand(NameContainsKeywordsPredicate predicate) {
+    public FindGroupCommand(GroupNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

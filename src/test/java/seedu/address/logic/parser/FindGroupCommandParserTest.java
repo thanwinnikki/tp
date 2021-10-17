@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindGroupCommand;
-import seedu.address.model.group.NameContainsKeywordsPredicate;
+import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
 public class FindGroupCommandParserTest {
 
@@ -17,14 +17,15 @@ public class FindGroupCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindGroupCommand expectedFindCommand =
-                new FindGroupCommand(new NameContainsKeywordsPredicate(Arrays.asList("CS2100", "ES2660")));
+                new FindGroupCommand(new GroupNameContainsKeywordsPredicate(Arrays.asList("CS2100", "ES2660")));
         assertParseSuccess(parser, "CS2100 ES2660", expectedFindCommand);
 
         // multiple whitespaces between keywords

@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_GROUPS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalGroups.CS2103T;
+import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,22 +16,21 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.group.NameContainsKeywordsPredicate;
+import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindGroupCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model modelWithGroup = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        GroupNameContainsKeywordsPredicate firstPredicate =
+                new GroupNameContainsKeywordsPredicate(Collections.singletonList("first"));
+        GroupNameContainsKeywordsPredicate secondPredicate =
+                new GroupNameContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindGroupCommand findFirstCommand = new FindGroupCommand(firstPredicate);
         FindGroupCommand findSecondCommand = new FindGroupCommand(secondPredicate);
@@ -58,27 +55,27 @@ public class FindGroupCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        GroupNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredGroupList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("CS1101 CS1231 ES2660");
+        String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW, 1);
+        GroupNameContainsKeywordsPredicate predicate = preparePredicate("CS1101 CS2103T ES2660");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredGroupList());
+        assertEquals(Arrays.asList(CS2103T), model.getFilteredGroupList());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code GroupNameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private GroupNameContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new GroupNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
