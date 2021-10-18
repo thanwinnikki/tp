@@ -22,7 +22,11 @@ public class AddGCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(INDEX_FIRST);
-        assertParseSuccess(parser, INDEX_DESC_PERSON1 + INDEX_DESC_GROUP1, new AddGCommand(INDEX_FIRST, personIndexesSet));
+        assertParseSuccess(
+                parser,
+                INDEX_DESC_PERSON1 + INDEX_DESC_GROUP1,
+                new AddGCommand(INDEX_FIRST, personIndexesSet)
+        );
     }
 
     @Test

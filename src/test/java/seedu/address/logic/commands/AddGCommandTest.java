@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_INVALID;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import java.nio.file.Path;
@@ -30,7 +31,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 public class AddGCommandTest {
-    Set<Index> emptySet = Collections.emptySet();
+    private Set<Index> emptySet = Collections.emptySet();
     private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
@@ -65,9 +66,9 @@ public class AddGCommandTest {
     }
 
     @Test
-    public void execute_InvalidPersonIndex_throwsCommandException() {
+    public void execute_invalidPersonIndex_throwsCommandException() {
         Set<Index> personIndexesSet = new HashSet<>();
-        personIndexesSet.add(Index.fromZeroBased(30));  // out of range
+        personIndexesSet.add(INDEX_INVALID);
 
         AddGCommand addGCommand = new AddGCommand(INDEX_SECOND, personIndexesSet);
         String expectedMessage = AddGCommand.MESSAGE_INVALID_PERSON_INDEX;
@@ -76,7 +77,7 @@ public class AddGCommandTest {
     }
 
     @Test
-    public void execute_InvalidGroupIndex_throwsCommandException() {
+    public void execute_invalidGroupIndex_throwsCommandException() {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(Index.fromZeroBased(1));
 
