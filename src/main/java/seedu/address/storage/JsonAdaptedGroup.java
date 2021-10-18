@@ -52,7 +52,7 @@ public class JsonAdaptedGroup {
          * @param source The {@code Group} object to be converted.
          * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
          */
-        public Builder(Group source, Map<Person, String> personToIdMap) {
+        public Builder(Group source, Map<Person, Id> personToIdMap) {
             groupToBuild = new JsonAdaptedGroup(source, personToIdMap);
         }
 
@@ -68,16 +68,19 @@ public class JsonAdaptedGroup {
 
     private JsonAdaptedGroup(String name, List<String> groupMateIds) {
         this.name = name;
-        this.groupMateIds = new ArrayList<>(groupMateIds);
+        this.groupMateIds = new ArrayList<>();
+        if (groupMateIds != null) {
+            this.groupMateIds.addAll(groupMateIds);
+        }
     }
 
-    private JsonAdaptedGroup(Group source, Map<Person, String> personToIdMap) {
+    private JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
         name = source.getName().fullName;
         groupMateIds = new ArrayList<>();
         UniquePersonList persons = source.getPersons();
         for (Person person : persons) {
-            String personId = personToIdMap.get(person);
-            groupMateIds.add(personId);
+            Id personId = personToIdMap.get(person);
+            groupMateIds.add(personId.toString());
         }
     }
 
@@ -108,7 +111,6 @@ public class JsonAdaptedGroup {
     }
 
     private void addGroupMates(Group group, Map<Id, Person> idToPersonMap) throws IllegalValueException {
-        UniquePersonList persons = group.getPersons();
         for (String personIdString : groupMateIds) {
             Id personId = Id.parse(personIdString);
             Person person = idToPersonMap.get(personId);
@@ -116,10 +118,22 @@ public class JsonAdaptedGroup {
                 throw new IllegalValueException(MESSAGE_NO_SUCH_PERSON);
             }
             try {
-                persons.add(person);
+                group.add(person);
             } catch (DuplicatePersonException e) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP_MATE);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof JsonAdaptedGroup)) {
+            return false;
+        }
+        if (this == other) {
+            return true;
+        }
+        JsonAdaptedGroup o = (JsonAdaptedGroup) other;
+        return name.equals(o.name) && groupMateIds.equals(o.groupMateIds);
     }
 }

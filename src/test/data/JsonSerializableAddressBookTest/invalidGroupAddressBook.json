@@ -1,0 +1,24 @@
+{
+  "persons": {
+    "0-0" : {
+      "name" : "Alice Pauline",
+      "phone" : "94351253",
+      "email" : "alice@example.com",
+      "address" : "123, Jurong West Ave 6, #08-111",
+      "tagged" : [ "friends" ]
+    },
+    "0-1" : {
+      "name" : "Benson Meier",
+      "phone" : "98765432",
+      "email" : "johnd@example.com",
+      "address" : "311, Clementi Ave 2, #02-25",
+      "tagged" : [ "owesMoney", "friends" ]
+    }
+  },
+  "groups" : {
+    "1-0" : {
+      "name" : "CS2103@",
+      "groupMateIds" : [ "0-0", "0-1" ]
+    }
+  }
+}
