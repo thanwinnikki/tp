@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -10,8 +11,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class Id implements Comparable<Id> {
 
+    public static final String MESSAGE_MALFORMED_ID = "This ID is malformed.";
+
     private static final String DELIMITER = "-";
-    private static final String MESSAGE_MALFORMED_ID = "This ID is malformed.";
     private static final int EPOCH_DAY_TOKEN_INDEX = 0;
     private static final int NANO_OF_DAY_TOKEN_INDEX = 1;
     private static final int HEX_RADIX = 16;
@@ -68,6 +70,9 @@ public class Id implements Comparable<Id> {
     }
 
     private static String[] getTokens(String idString) throws IllegalValueException {
+        if (idString.startsWith(DELIMITER) || idString.endsWith(DELIMITER)) {
+            throw new IllegalValueException(MESSAGE_MALFORMED_ID);
+        }
         String[] tokens = idString.split(DELIMITER);
         if (tokens.length != 2) {
             throw new IllegalValueException(MESSAGE_MALFORMED_ID);
@@ -77,23 +82,33 @@ public class Id implements Comparable<Id> {
 
     private static LocalDate parseLocalDate(String epochDayHex) throws IllegalValueException {
         long epochDay;
+        LocalDate localDate;
         try {
             epochDay = Long.parseLong(epochDayHex, HEX_RADIX);
         } catch (NumberFormatException e) {
             throw new IllegalValueException(MESSAGE_MALFORMED_ID);
         }
-        LocalDate localDate = LocalDate.ofEpochDay(epochDay);
+        try {
+            localDate = LocalDate.ofEpochDay(epochDay);
+        } catch (DateTimeException e) {
+            throw new IllegalValueException(MESSAGE_MALFORMED_ID);
+        }
         return localDate;
     }
 
     private static LocalTime parseLocalTime(String nanoOfDayHex) throws IllegalValueException {
         long nanoOfDay;
+        LocalTime localTime;
         try {
             nanoOfDay = Long.parseLong(nanoOfDayHex, HEX_RADIX);
         } catch (NumberFormatException e) {
             throw new IllegalValueException(MESSAGE_MALFORMED_ID);
         }
-        LocalTime localTime = LocalTime.ofNanoOfDay(nanoOfDay);
+        try {
+            localTime = LocalTime.ofNanoOfDay(nanoOfDay);
+        } catch (DateTimeException e) {
+            throw new IllegalValueException(MESSAGE_MALFORMED_ID);
+        }
         return localTime;
     }
 

@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -11,8 +12,9 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -47,7 +49,8 @@ public class GroupCommandTest {
         GroupCommand groupCommand = new GroupCommand(validGroup);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, GroupCommand.MESSAGE_DUPLICATE_GROUP, () -> groupCommand.execute(modelStub));
+        assertThrows(CommandException.class, GroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
+                groupCommand.execute(modelStub));
     }
 
     @Test
