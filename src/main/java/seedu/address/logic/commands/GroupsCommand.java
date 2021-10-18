@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
+import seedu.address.logic.AppState;
 import seedu.address.model.Model;
 
 /**
@@ -19,7 +20,7 @@ public class GroupsCommand extends Command {
         requireNonNull(model);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .setNextListType(CommandResult.ListType.GroupList)
+                .setNextAppState(AppState.GROUP_INFORMATION)
                 .build();
     }
 }

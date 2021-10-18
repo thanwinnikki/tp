@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.AppState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
@@ -17,4 +18,13 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    /**
+     * Checks if the command can run while the application is currently in the given application state.
+     *
+     * @param appState The given application state.
+     * @return True if the command can run while the application is currently in the given state, false otherwise.
+     */
+    public boolean isAbleToRunInAppState(AppState appState) {
+        return true;
+    }
 }
