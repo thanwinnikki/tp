@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
-import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.TypicalGroups;
 
 
@@ -23,7 +22,7 @@ public class GroupCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Group expectedGroup = new GroupBuilder(TypicalGroups.VOLLEYBALL).build();
+        Group expectedGroup = TypicalGroups.VOLLEYBALL.build();
 
         // whitespace only preamble
         assertParseSuccess(parser, NAME_DESC_VOLLEYBALL, new GroupCommand(expectedGroup));

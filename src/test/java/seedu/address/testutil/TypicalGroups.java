@@ -42,12 +42,11 @@ public class TypicalGroups {
             .withMembers(HOON, IDA).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Group TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withMembers(AMY, BOB).build();
-    public static final Group SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
-            .withMembers(BOB, AMY).build();
-    public static final Group VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
-            .build();
+    public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
+            .withMembers(AMY, BOB);
+    public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
+            .withMembers(BOB, AMY);
+    public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL);
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
