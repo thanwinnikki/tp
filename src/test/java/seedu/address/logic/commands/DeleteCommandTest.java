@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -16,6 +18,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +28,7 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithGroups = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -37,6 +41,28 @@ public class DeleteCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListOfFirstGroups_success() {
+        Group firstGroup = modelWithGroups.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
+        int initialSizeOfFirstGroup = firstGroup.getPersons().asUnmodifiableObservableList().size();
+
+        Person personToDelete = firstGroup.getPersons()
+                .asUnmodifiableObservableList().get(INDEX_FIRST.getZeroBased());
+
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+
+        ModelManager expectedModel = new ModelManager(modelWithGroups.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, modelWithGroups, expectedMessage, expectedModel);
+
+        int currentSizeOfFirstGroup = firstGroup.getPersons().asUnmodifiableObservableList().size();
+        // ensures that the first group also delete the person
+        assertEquals(initialSizeOfFirstGroup - 1, currentSizeOfFirstGroup);
     }
 
     @Test
