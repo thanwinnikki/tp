@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
@@ -8,8 +12,12 @@ import seedu.address.model.person.Person;
  */
 abstract class Listable {
 
-    private static final String PERSON_CLASS_NAME = "Person";
-    private static final String GROUP_CLASS_NAME = "Group";
+    private static final Map<Class<?>, Function<Object, Listable>> modelEntityToListableMap = new HashMap<>();
+
+    static {
+        modelEntityToListableMap.put(Person.class, person -> convertPersonToListable((Person) person));
+        modelEntityToListableMap.put(Group.class, group -> convertGroupToListable((Group) group));
+    }
 
     /**
      * Converts a model entity to a {@code Listable} object.
@@ -19,20 +27,9 @@ abstract class Listable {
      * @return The listable model entity.
      */
     static <T> Listable convertModelEntityToListable(T modelEntity) {
-        String className = modelEntity.getClass()
-                .getSimpleName();
-        Listable listable = null;
-        switch (className) {
-        case PERSON_CLASS_NAME:
-            listable = convertPersonToListable((Person) modelEntity);
-            break;
-        case GROUP_CLASS_NAME:
-            listable = convertGroupToListable((Group) modelEntity);
-            break;
-        default:
-            assert false : "A non-listable model entity was passed into Listable::convertModelEntityToListable.";
-        }
-        return listable;
+        Class<?> modelEntityClass = modelEntity.getClass();
+        assert modelEntityToListableMap.containsKey(modelEntityClass);
+        return modelEntityToListableMap.get(modelEntityClass).apply(modelEntity);
     }
 
     /**
