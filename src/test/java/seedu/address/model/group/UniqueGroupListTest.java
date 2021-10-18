@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGroups.CS2101;
-import static seedu.address.testutil.TypicalGroups.CS2103T;
+import static seedu.address.testutil.TypicalGroups.CS2101_GROUP_BUILDER;
+import static seedu.address.testutil.TypicalGroups.CS2103T_GROUP_BUILDER;
 import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Arrays;
@@ -21,6 +21,8 @@ import seedu.address.testutil.GroupBuilder;
 public class UniqueGroupListTest {
 
     private final UniqueGroupList uniqueGroupList = new UniqueGroupList();
+    private final Group CS2103T = CS2103T_GROUP_BUILDER.build();
+    private final Group CS2101 = CS2101_GROUP_BUILDER.build();
 
     @Test
     public void contains_nullGroup_throwsNullPointerException() {
@@ -29,13 +31,14 @@ public class UniqueGroupListTest {
 
     @Test
     public void contains_groupNotInList_returnsFalse() {
-        assertFalse(uniqueGroupList.contains(CS2103T));
+        assertFalse(uniqueGroupList.contains(CS2103T_GROUP_BUILDER.build()));
     }
 
     @Test
     public void contains_groupInList_returnsTrue() {
-        uniqueGroupList.add(CS2103T);
-        assertTrue(uniqueGroupList.contains(CS2103T));
+
+        uniqueGroupList.add(CS2103T_GROUP_BUILDER.build());
+        assertTrue(uniqueGroupList.contains(CS2103T_GROUP_BUILDER.build()));
     }
 
     @Test
