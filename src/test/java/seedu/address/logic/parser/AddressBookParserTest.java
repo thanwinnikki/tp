@@ -24,6 +24,7 @@ import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatesCommand;
+import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
@@ -101,6 +102,13 @@ public class AddressBookParserTest {
     public void parseCommand_groups() throws Exception {
         assertTrue(parser.parseCommand(GroupsCommand.COMMAND_WORD) instanceof GroupsCommand);
         assertTrue(parser.parseCommand(GroupsCommand.COMMAND_WORD + " 3") instanceof GroupsCommand);
+    }
+
+    @Test
+    public void parseCommand_remove() throws Exception {
+        RemoveCommand command = (RemoveCommand) parser.parseCommand(
+                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new RemoveCommand(INDEX_FIRST), command);
     }
 
     @Test
