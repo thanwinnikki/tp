@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.task.Task;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
@@ -91,7 +90,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void setTasks(List<Task> Tasks) {
         requireAllNonNull(Tasks);
-        if (!TasksAreUnique(Tasks)) {
+        if (!tasksAreUnique(Tasks)) {
             throw new DuplicateTaskException();
         }
 
@@ -125,7 +124,7 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Returns true if {@code Tasks} contains only unique Tasks.
      */
-    private boolean TasksAreUnique(List<Task> Tasks) {
+    private boolean tasksAreUnique(List<Task> Tasks) {
         for (int i = 0; i < Tasks.size() - 1; i++) {
             for (int j = i + 1; j < Tasks.size(); j++) {
                 if (Tasks.get(i).isSameTask(Tasks.get(j))) {
