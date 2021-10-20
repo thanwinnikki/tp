@@ -96,6 +96,16 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String description} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseTaskDescription(String description) {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        return trimmedDescription;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
