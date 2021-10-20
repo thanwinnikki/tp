@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_GROUPS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalGroups.CS2103T;
+import static seedu.address.testutil.TypicalGroups.CS2103T_GROUP_BUILDER;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 
 import java.util.Arrays;
@@ -69,7 +69,7 @@ public class FindGroupCommandTest {
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T), model.getFilteredGroupList());
+        assertEquals(Arrays.asList(CS2103T_GROUP_BUILDER.build()), model.getFilteredGroupList());
     }
 
     /**
