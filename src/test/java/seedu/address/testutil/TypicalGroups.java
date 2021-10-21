@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
@@ -42,11 +43,11 @@ public class TypicalGroups {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withDescription("sports group").withMembers(AMY, BOB);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB);
     public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
-            .withDescription("sports group").withMembers(BOB, AMY);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
     public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
-            .withDescription("sports group");
+            .withDescription(VALID_DESCRIPTION_SPORTS);
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

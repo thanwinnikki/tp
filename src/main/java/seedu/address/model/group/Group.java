@@ -31,10 +31,14 @@ public class Group {
         this.persons = new UniquePersonList();
     }
 
+    /**
+     * Name must be present and not null.
+     * This is just a temporary fix
+     */
     public Group(Name name) {
         requireAllNonNull(name);
         this.name = name;
-        this.description = new Description(" ");
+        this.description = new Description("test");
         this.persons = new UniquePersonList();
     }
 

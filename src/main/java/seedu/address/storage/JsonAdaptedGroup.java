@@ -96,7 +96,7 @@ public class JsonAdaptedGroup {
      */
     public Group toModelType(Map<Id, Person> idToPersonMap) throws IllegalValueException {
         final Name modelName = createName();
-        Group group = new Group(modelName, new Description(" "));
+        Group group = new Group(modelName, new Description("test"));
         addGroupMates(group, idToPersonMap);
         return group;
     }
