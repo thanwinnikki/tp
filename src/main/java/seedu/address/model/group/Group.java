@@ -33,6 +33,7 @@ public class Group {
         this.name = name;
         this.description = description;
         this.persons = new UniquePersonList();
+        this.tasks = new UniqueTaskList();
     }
 
     /**
@@ -42,7 +43,7 @@ public class Group {
     public Group(Name name) {
         requireAllNonNull(name);
         this.name = name;
-        this.description = new Description("test");
+        this.description = null;
         this.persons = new UniquePersonList();
         this.tasks = new UniqueTaskList();
     }
@@ -130,10 +131,14 @@ public class Group {
         }
 
         Group otherGroup = (Group) other;
-        return otherGroup.getName().equals(this.getName())
-                && otherGroup.getDescription().equals((this.getDescription()))
-                && otherGroup.getPersons().equals(this.getPersons())
-                && otherGroup.tasks.equals(tasks);
+        boolean haveEqualNames = name.equals(otherGroup.name);
+        boolean haveNullDescriptions = description == null && otherGroup.description == null;
+        boolean haveEqualDescriptions = haveNullDescriptions
+                || (description != null && description.equals(otherGroup.description))
+                || (otherGroup.description != null && otherGroup.description.equals(description));
+        boolean haveEqualGroupMateLists = persons.equals(otherGroup.persons);
+        boolean haveEqualTaskLists = tasks.equals(otherGroup.tasks);
+        return haveEqualNames && haveEqualDescriptions && haveEqualGroupMateLists && haveEqualTaskLists;
     }
 
     @Override

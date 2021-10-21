@@ -13,7 +13,6 @@ import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
@@ -29,6 +28,8 @@ public class JsonAdaptedGroup {
     private final String name;
     private final List<String> groupMateIds;
 
+    private String description;
+
     /**
      * Builder class for {@code JsonAdaptedGroup}.
      */
@@ -40,21 +41,35 @@ public class JsonAdaptedGroup {
          * Constructs a {@code JsonAdaptedGroup.Builder} for a {@code JsonAdaptedPerson} with the given group details.
          *
          * @param name The group's name.
-         * @param groupMateIds The list of the person IDs of all the group mates that belong to the group.
          */
         @JsonCreator
-        public Builder(@JsonProperty("name") String name, @JsonProperty("groupMateIds") List<String> groupMateIds) {
-            groupToBuild = new JsonAdaptedGroup(name, groupMateIds);
+        public Builder(@JsonProperty("name") String name) {
+            groupToBuild = new JsonAdaptedGroup(name);
         }
 
         /**
-         * Converts the given {@code Group} to a {@code JsonAdaptedGroup} using a {@code JsonAdaptedGroup.Builder}.
+         * Includes the given group description.
          *
-         * @param source The {@code Group} object to be converted.
-         * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
+         * @param description The description of the group.
+         * @return This {@code JsonAdaptedGroup.Builder} instance.
          */
-        public Builder(Group source, Map<Person, Id> personToIdMap) {
-            groupToBuild = new JsonAdaptedGroup(source, personToIdMap);
+        @JsonProperty
+        public Builder withDescription(String description) {
+            groupToBuild.description = description;
+            return this;
+        }
+
+        /**
+         * Includes the group mates with the given person IDs.
+         *
+         * @param groupMateIds The person IDs of the group mates.
+         * @return This {@code JsonAdaptedGroup.Builder} instance.
+         */
+        @JsonProperty
+        public Builder withGroupMateIds(List<String> groupMateIds) {
+            assert groupMateIds != null : "The list of group mate person IDs should not be null.";
+            groupToBuild.groupMateIds.addAll(groupMateIds);
+            return this;
         }
 
         /**
@@ -67,22 +82,28 @@ public class JsonAdaptedGroup {
         }
     }
 
-    private JsonAdaptedGroup(String name, List<String> groupMateIds) {
+    private JsonAdaptedGroup(String name) {
         this.name = name;
         this.groupMateIds = new ArrayList<>();
-        if (groupMateIds != null) {
-            this.groupMateIds.addAll(groupMateIds);
-        }
     }
 
-    private JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
-        name = source.getName().fullName;
-        groupMateIds = new ArrayList<>();
-        UniquePersonList persons = source.getPersons();
-        for (Person person : persons) {
-            Id personId = personToIdMap.get(person);
-            groupMateIds.add(personId.toString());
+    /**
+     * Converts the given {@code Group} to a {@code JsonAdaptedGroup}.
+     *
+     * @param source The {@code Group} object to be converted.
+     * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
+     */
+    public JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
+        this(source.getName().fullName);
+        Description description = source.getDescription();
+        if (description != null) {
+            this.description = description.toString();
         }
+        source.doForEachGroupMate(groupMate -> {
+            assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
+            Id personId = personToIdMap.get(groupMate);
+            groupMateIds.add(personId.toString());
+        });
     }
 
     /**
@@ -95,10 +116,18 @@ public class JsonAdaptedGroup {
      * @throws IllegalValueException If there were any data constraints violated in the adapted group.
      */
     public Group toModelType(Map<Id, Person> idToPersonMap) throws IllegalValueException {
-        final Name modelName = createName();
-        Group group = new Group(modelName, new Description("test"));
+        Group group = createGroup();
         addGroupMates(group, idToPersonMap);
         return group;
+    }
+
+    private Group createGroup() throws IllegalValueException {
+        final Name modelName = createName();
+        if (description == null) {
+            return new Group(modelName);
+        }
+        final Description modelDescription = createDescription();
+        return new Group(modelName, modelDescription);
     }
 
     private Name createName() throws IllegalValueException {
@@ -109,6 +138,14 @@ public class JsonAdaptedGroup {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(name);
+    }
+
+    private Description createDescription() throws IllegalValueException {
+        assert description != null : "There is no description.";
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(description);
     }
 
     private void addGroupMates(Group group, Map<Id, Person> idToPersonMap) throws IllegalValueException {
