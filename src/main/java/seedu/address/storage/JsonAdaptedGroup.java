@@ -13,7 +13,6 @@ import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
@@ -28,6 +27,8 @@ public class JsonAdaptedGroup {
 
     private final String name;
     private final List<String> groupMateIds;
+
+    private String description;
 
     /**
      * Builder class for {@code JsonAdaptedGroup}.
@@ -44,6 +45,18 @@ public class JsonAdaptedGroup {
         @JsonCreator
         public Builder(@JsonProperty("name") String name) {
             groupToBuild = new JsonAdaptedGroup(name);
+        }
+
+        /**
+         * Includes the given group description.
+         *
+         * @param description The description of the group.
+         * @return This {@code JsonAdaptedGroup.Builder} instance.
+         */
+        @JsonProperty
+        public Builder withDescription(String description) {
+            groupToBuild.description = description;
+            return this;
         }
 
         /**
@@ -99,10 +112,18 @@ public class JsonAdaptedGroup {
      * @throws IllegalValueException If there were any data constraints violated in the adapted group.
      */
     public Group toModelType(Map<Id, Person> idToPersonMap) throws IllegalValueException {
-        final Name modelName = createName();
-        Group group = new Group(modelName, new Description("test"));
+        Group group = createGroup();
         addGroupMates(group, idToPersonMap);
         return group;
+    }
+
+    private Group createGroup() throws IllegalValueException {
+        final Name modelName = createName();
+        if (description == null) {
+            return new Group(modelName);
+        }
+        final Description modelDescription = createDescription();
+        return new Group(modelName, modelDescription);
     }
 
     private Name createName() throws IllegalValueException {
@@ -113,6 +134,14 @@ public class JsonAdaptedGroup {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(name);
+    }
+
+    private Description createDescription() throws IllegalValueException {
+        assert description != null : "There is no description.";
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(description);
     }
 
     private void addGroupMates(Group group, Map<Id, Person> idToPersonMap) throws IllegalValueException {
