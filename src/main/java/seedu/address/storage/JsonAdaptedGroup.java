@@ -47,16 +47,6 @@ public class JsonAdaptedGroup {
         }
 
         /**
-         * Converts the given {@code Group} to a {@code JsonAdaptedGroup} using a {@code JsonAdaptedGroup.Builder}.
-         *
-         * @param source The {@code Group} object to be converted.
-         * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
-         */
-        public Builder(Group source, Map<Person, Id> personToIdMap) {
-            groupToBuild = new JsonAdaptedGroup(source, personToIdMap);
-        }
-
-        /**
          * Includes the group mates with the given person IDs.
          *
          * @param groupMateIds The person IDs of the group mates.
@@ -84,14 +74,19 @@ public class JsonAdaptedGroup {
         this.groupMateIds = new ArrayList<>();
     }
 
-    private JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
-        name = source.getName().fullName;
-        groupMateIds = new ArrayList<>();
-        UniquePersonList persons = source.getPersons();
-        for (Person person : persons) {
-            Id personId = personToIdMap.get(person);
+    /**
+     * Converts the given {@code Group} to a {@code JsonAdaptedGroup}.
+     *
+     * @param source The {@code Group} object to be converted.
+     * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
+     */
+    public JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
+        this(source.getName().fullName);
+        source.doForEachGroupMate(groupMate -> {
+            assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
+            Id personId = personToIdMap.get(groupMate);
             groupMateIds.add(personId.toString());
-        }
+        });
     }
 
     /**

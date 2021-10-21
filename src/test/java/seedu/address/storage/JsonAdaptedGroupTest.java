@@ -318,8 +318,7 @@ public class JsonAdaptedGroupTest {
         group.add(BENSON);
         group.add(CARL);
         group.add(DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroupFromModel = new JsonAdaptedGroup.Builder(group, personToIdMap)
-                .build();
+        JsonAdaptedGroup jsonAdaptedGroupFromModel = new JsonAdaptedGroup(group, personToIdMap);
 
         assertEquals(jsonAdaptedGroupFromJson, jsonAdaptedGroupFromModel);
     }
