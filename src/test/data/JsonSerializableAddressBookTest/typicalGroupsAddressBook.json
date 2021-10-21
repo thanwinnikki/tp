@@ -54,10 +54,12 @@
   "groups" : {
     "1-0" : {
       "name" : "CS2103T Project Group",
+      "description" : "This is a CS module group",
       "groupMateIds" : [ "0-0", "0-1", "0-2" ]
     },
     "1-1" : {
       "name" : "CS2101 Project Group",
+      "description" : "This is a CS module group",
       "groupMateIds" : [ "0-4", "0-5", "0-6" ]
     }
   }
