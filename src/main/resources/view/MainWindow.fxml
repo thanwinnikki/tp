@@ -12,7 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Thunder Cats" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="Thunder Cats" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -34,30 +35,27 @@
           </Menu>
         </MenuBar>
 
-              <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="stack-pane">
-               <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="pane-with-border" />
-               </children>
-            </HBox>
-
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
         </StackPane>
 
-        <VBox fx:id="listPanel" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
+                   styleClass="pane-with-border" VBox.vgrow="NEVER">
+          <padding>
+            <Insets bottom="5" left="10" right="10" top="5" />
+          </padding>
+        </StackPane>
+
+        <HBox fx:id="listPanel" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
-          <StackPane fx:id="listPanelPlaceholder" VBox.vgrow="ALWAYS" />
-        </VBox>
+          <StackPane fx:id="listPanelPlaceholderLeft" HBox.hgrow="ALWAYS" />
+          <StackPane minWidth="10" HBox.hgrow="NEVER" />
+          <StackPane fx:id="listPanelPlaceholderRight" HBox.hgrow="ALWAYS" />
+        </HBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
