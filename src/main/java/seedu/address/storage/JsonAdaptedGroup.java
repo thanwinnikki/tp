@@ -95,6 +95,10 @@ public class JsonAdaptedGroup {
      */
     public JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
         this(source.getName().fullName);
+        Description description = source.getDescription();
+        if (description != null) {
+            this.description = description.toString();
+        }
         source.doForEachGroupMate(groupMate -> {
             assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
             Id personId = personToIdMap.get(groupMate);
