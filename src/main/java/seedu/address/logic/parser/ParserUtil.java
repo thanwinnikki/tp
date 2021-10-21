@@ -96,12 +96,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String description} into a {@code String}.
+     * Parses a {@code String description} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static String parseTaskDescription(String description) {
+    public static Description parseTaskDescription(String description) {
         requireNonNull(description);
         String trimmedDescription = description.trim();
+        if (!Email.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
         return trimmedDescription;
     }
 

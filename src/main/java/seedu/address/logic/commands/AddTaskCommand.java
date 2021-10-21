@@ -45,6 +45,7 @@ public class AddTaskCommand extends Command {
         requireNonNull(model);
         List<Group> lastShownGroupList = model.getFilteredGroupList();
         if (lastShownGroupList.size() != 1) {
+            //todo
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
         Group group = lastShownGroupList.get(firstIndex.getZeroBased());
