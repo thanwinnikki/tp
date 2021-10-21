@@ -180,6 +180,10 @@ public class MainWindow extends UiPart<Stage> {
         return listPanelLeft;
     }
 
+    public ListPanel getListPanelRight() {
+        return listPanelRight;
+    }
+
     /**
      * Executes the command and returns the result.
      *
