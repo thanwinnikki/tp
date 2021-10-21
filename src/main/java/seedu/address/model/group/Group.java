@@ -1,6 +1,6 @@
 package seedu.address.model.group;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
@@ -18,19 +18,25 @@ public class Group {
     private final Name name;
 
     // Data fields
+    private final Description description;
     private final UniquePersonList persons;
 
     /**
-     * Name must be present and not null.
+     * Name and Description must be present and not null.
      */
-    public Group(Name name) {
-        requireNonNull(name);
+    public Group(Name name, Description description) {
+        requireAllNonNull(name, description);
         this.name = name;
+        this.description = description;
         this.persons = new UniquePersonList();
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     public UniquePersonList getPersons() {
@@ -61,7 +67,7 @@ public class Group {
     }
 
     /**
-     * This checks if both names and person lists are the same.
+     * This checks if both names, description and person lists are the same.
      * @param other Other object to compare.
      * @return Return true if both groups have the same name and person list.
      */
@@ -77,12 +83,13 @@ public class Group {
 
         Group otherGroup = (Group) other;
         return otherGroup.getName().equals(this.getName())
+                && otherGroup.getDescription().equals((this.getDescription()))
                 && otherGroup.getPersons().equals(this.getPersons());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, persons);
+        return Objects.hash(name, description, persons);
     }
 
     @Override
