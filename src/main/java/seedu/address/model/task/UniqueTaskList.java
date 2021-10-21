@@ -37,6 +37,20 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
+     * Returns the number of tasks in the list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
+    /**
+     * Fetches a specified {@code Task} according to its index in the list.
+     */
+    public Task getTask(int i) {
+        return internalList.get(i);
+    }
+
+    /**
      * Adds a Task to the list.
      * The Task must not already exist in the list.
      */

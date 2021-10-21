@@ -81,6 +81,13 @@ public class Group {
     }
 
     /**
+     * Deletes a {@code Task} from the group.
+     */
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+    }
+
+    /**
      * Carries out the given actions on each group mate in this group.
      *
      * @param groupMateConsumer The {@code Consumer} that performs actions on each group mate.
