@@ -102,10 +102,10 @@ public class ParserUtil {
     public static Description parseTaskDescription(String description) {
         requireNonNull(description);
         String trimmedDescription = description.trim();
-        if (!Email.isValidDescription(trimmedDescription)) {
+        if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
-        return trimmedDescription;
+        return new Description(trimmedDescription);
     }
 
     /**
