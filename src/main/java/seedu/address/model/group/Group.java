@@ -1,6 +1,6 @@
 package seedu.address.model.group;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -21,21 +21,38 @@ public class Group {
     private final Name name;
 
     // Data fields
+    private final Description description;
     private final UniquePersonList persons;
     private final UniqueTaskList tasks;
 
     /**
+     * Name and Description must be present and not null.
+     */
+    public Group(Name name, Description description) {
+        requireAllNonNull(name, description);
+        this.name = name;
+        this.description = description;
+        this.persons = new UniquePersonList();
+    }
+
+    /**
      * Name must be present and not null.
+     * This is just a temporary fix
      */
     public Group(Name name) {
-        requireNonNull(name);
+        requireAllNonNull(name);
         this.name = name;
+        this.description = new Description("test");
         this.persons = new UniquePersonList();
         this.tasks = new UniqueTaskList();
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     public UniquePersonList getPersons() {
@@ -114,13 +131,14 @@ public class Group {
 
         Group otherGroup = (Group) other;
         return otherGroup.getName().equals(this.getName())
+                && otherGroup.getDescription().equals((this.getDescription()))
                 && otherGroup.getPersons().equals(this.getPersons())
                 && otherGroup.tasks.equals(tasks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, persons, tasks);
+        return Objects.hash(name, description, persons, tasks);
     }
 
     @Override

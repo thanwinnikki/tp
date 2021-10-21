@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.GroupCommand;
@@ -19,6 +20,7 @@ public class GroupUtil {
     public static String getGroupDetails(Group group) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + group.getName().fullName + " ");
+        sb.append(PREFIX_DESCRIPTION + group.getDescription().value + " ");
         return sb.toString();
     }
 }
