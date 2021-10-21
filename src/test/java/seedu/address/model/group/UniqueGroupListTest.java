@@ -21,8 +21,8 @@ import seedu.address.testutil.GroupBuilder;
 public class UniqueGroupListTest {
 
     private final UniqueGroupList uniqueGroupList = new UniqueGroupList();
-    private final Group CS2103T = CS2103T_GROUP_BUILDER.build();
-    private final Group CS2101 = CS2101_GROUP_BUILDER.build();
+    private final Group cs2103t = CS2103T_GROUP_BUILDER.build();
+    private final Group cs2101 = CS2101_GROUP_BUILDER.build();
 
     @Test
     public void contains_nullGroup_throwsNullPointerException() {
@@ -43,8 +43,8 @@ public class UniqueGroupListTest {
 
     @Test
     public void contains_groupWithSameNameField_returnsTrue() {
-        uniqueGroupList.add(CS2103T);
-        Group editedCS2103T = new GroupBuilder(CS2103T).withMembers(CARL).build();
+        uniqueGroupList.add(cs2103t);
+        Group editedCS2103T = new GroupBuilder(cs2103t).withMembers(CARL).build();
         assertTrue(uniqueGroupList.contains(editedCS2103T));
     }
 
@@ -55,39 +55,39 @@ public class UniqueGroupListTest {
 
     @Test
     public void add_duplicateGroup_throwsDuplicateGroupException() {
-        uniqueGroupList.add(CS2103T);
-        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.add(CS2103T));
+        uniqueGroupList.add(cs2103t);
+        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.add(cs2103t));
     }
 
     @Test
     public void setGroup_nullTargetGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(null, CS2103T));
+        assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(null, cs2103t));
     }
 
     @Test
     public void setPerson_nullEditedGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(CS2103T, null));
+        assertThrows(NullPointerException.class, () -> uniqueGroupList.setGroup(cs2103t, null));
     }
 
     @Test
     public void setPerson_targetGroupNotInList_throwsGroupNotFoundException() {
-        assertThrows(GroupNotFoundException.class, () -> uniqueGroupList.setGroup(CS2103T, CS2103T));
+        assertThrows(GroupNotFoundException.class, () -> uniqueGroupList.setGroup(cs2103t, cs2103t));
     }
 
     @Test
     public void setGroup_editedGroupIsSameGroup_success() {
-        uniqueGroupList.add(CS2103T);
-        uniqueGroupList.setGroup(CS2103T, CS2103T);
+        uniqueGroupList.add(cs2103t);
+        uniqueGroupList.setGroup(cs2103t, cs2103t);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.add(CS2103T);
+        expectedUniqueGroupList.add(cs2103t);
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test
     public void setGroup_editedGroupHasSameIdentity_success() {
-        uniqueGroupList.add(CS2103T);
-        Group editedGroup = new GroupBuilder(CS2103T).withMembers(CARL).build();
-        uniqueGroupList.setGroup(CS2103T, editedGroup);
+        uniqueGroupList.add(cs2103t);
+        Group editedGroup = new GroupBuilder(cs2103t).withMembers(CARL).build();
+        uniqueGroupList.setGroup(cs2103t, editedGroup);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
         expectedUniqueGroupList.add(editedGroup);
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
@@ -95,18 +95,18 @@ public class UniqueGroupListTest {
 
     @Test
     public void setGroup_editedGroupHasDifferentIdentity_success() { //todo changes after Yeji merge
-        uniqueGroupList.add(CS2103T);
-        uniqueGroupList.setGroup(CS2103T, CS2101);
+        uniqueGroupList.add(cs2103t);
+        uniqueGroupList.setGroup(cs2103t, cs2101);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.add(CS2101);
+        expectedUniqueGroupList.add(cs2101);
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test
     public void setGroup_editedGroupHasNonUniqueIdentity_throwsDuplicatePersonException() { //todo changes after Yeji
-        uniqueGroupList.add(CS2103T);
-        uniqueGroupList.add(CS2101);
-        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.setGroup(CS2103T, CS2101));
+        uniqueGroupList.add(cs2103t);
+        uniqueGroupList.add(cs2101);
+        assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.setGroup(cs2103t, cs2101));
     }
 
     @Test
@@ -116,13 +116,13 @@ public class UniqueGroupListTest {
 
     @Test
     public void remove_groupDoesNotExist_throwsGroupNotFoundException() {
-        assertThrows(GroupNotFoundException.class, () -> uniqueGroupList.remove(CS2103T));
+        assertThrows(GroupNotFoundException.class, () -> uniqueGroupList.remove(cs2103t));
     }
 
     @Test
     public void remove_existingGroup_removesGroup() {
-        uniqueGroupList.add(CS2103T);
-        uniqueGroupList.remove(CS2103T);
+        uniqueGroupList.add(cs2103t);
+        uniqueGroupList.remove(cs2103t);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
@@ -134,9 +134,9 @@ public class UniqueGroupListTest {
 
     @Test
     public void setGroups_uniqueGroupList_replacesOwnListWithProvidedUniqueGroupList() { //todo change
-        uniqueGroupList.add(CS2103T);
+        uniqueGroupList.add(cs2103t);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.add(CS2101);
+        expectedUniqueGroupList.add(cs2101);
         uniqueGroupList.setGroups(expectedUniqueGroupList);
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
@@ -148,17 +148,17 @@ public class UniqueGroupListTest {
 
     @Test
     public void setGroups_list_replacesOwnListWithProvidedList() { // todo change
-        uniqueGroupList.add(CS2103T);
-        List<Group> groupList = Collections.singletonList(CS2101);
+        uniqueGroupList.add(cs2103t);
+        List<Group> groupList = Collections.singletonList(cs2101);
         uniqueGroupList.setGroups(groupList);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.add(CS2101);
+        expectedUniqueGroupList.add(cs2101);
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test
     public void setGroups_listWithDuplicateGroups_throwsDuplicateGroupException() {
-        List<Group> listWithDuplicateGroups = Arrays.asList(CS2103T, CS2103T);
+        List<Group> listWithDuplicateGroups = Arrays.asList(cs2103t, cs2103t);
         assertThrows(DuplicateGroupException.class, () -> uniqueGroupList.setGroups(listWithDuplicateGroups));
     }
 
