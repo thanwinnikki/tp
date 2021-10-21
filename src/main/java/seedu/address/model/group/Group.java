@@ -31,6 +31,13 @@ public class Group {
         this.persons = new UniquePersonList();
     }
 
+    public Group(Name name) {
+        requireAllNonNull(name);
+        this.name = name;
+        this.description = new Description(" ");
+        this.persons = new UniquePersonList();
+    }
+
     public Name getName() {
         return name;
     }

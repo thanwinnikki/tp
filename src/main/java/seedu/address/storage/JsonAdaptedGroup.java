@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
@@ -95,7 +96,7 @@ public class JsonAdaptedGroup {
      */
     public Group toModelType(Map<Id, Person> idToPersonMap) throws IllegalValueException {
         final Name modelName = createName();
-        Group group = new Group(modelName);
+        Group group = new Group(modelName, new Description(" "));
         addGroupMates(group, idToPersonMap);
         return group;
     }
