@@ -20,14 +20,19 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatesCommand;
+import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.GroupBuilder;
+import seedu.address.testutil.GroupUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -86,6 +91,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_group() throws Exception {
+        Group group = new GroupBuilder().build();
+        GroupCommand command = (GroupCommand) parser.parseCommand(GroupUtil.getGroupCommand(group));
+        assertEquals(new GroupCommand(group), command);
+    }
+
+
+    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
@@ -101,6 +114,13 @@ public class AddressBookParserTest {
     public void parseCommand_groups() throws Exception {
         assertTrue(parser.parseCommand(GroupsCommand.COMMAND_WORD) instanceof GroupsCommand);
         assertTrue(parser.parseCommand(GroupsCommand.COMMAND_WORD + " 3") instanceof GroupsCommand);
+    }
+
+    @Test
+    public void parseCommand_remove() throws Exception {
+        RemoveCommand command = (RemoveCommand) parser.parseCommand(
+                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new RemoveCommand(INDEX_FIRST), command);
     }
 
     @Test

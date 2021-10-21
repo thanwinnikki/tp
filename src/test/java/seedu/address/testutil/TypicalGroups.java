@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -20,7 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -28,23 +28,25 @@ import seedu.address.model.person.Person;
  */
 public class TypicalGroups {
 
-    public static final Group CS2103T = new GroupBuilder().withName("CS2103T Project Group")
-            .withMembers(ALICE, BENSON, CARL).build();
+    public static final GroupBuilder CS2103T_GROUP_BUILDER = new GroupBuilder().withName("CS2103T Project Group")
+            .withMembers(ALICE, BENSON, CARL);
 
-    public static final Group CS2101 = new GroupBuilder().withName("CS2101 Project Group")
-            .withMembers(ELLE, FIONA, GEORGE).build();
+    public static final GroupBuilder CS2101_GROUP_BUILDER = new GroupBuilder().withName("CS2101 Project Group")
+            .withMembers(ELLE, FIONA, GEORGE);
 
     // Manually added
-    public static final Group FAMILY = new GroupBuilder().withName("Family")
-            .withMembers(DANIEL, ELLE, ALICE).build();
-    public static final Group FRIENDS = new GroupBuilder().withName("Friends")
-            .withMembers(HOON, IDA).build();
+    public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family")
+            .withMembers(DANIEL, ELLE, ALICE);
+    public static final GroupBuilder FRIENDS = new GroupBuilder().withName("Friends")
+            .withMembers(HOON, IDA);
 
     // Manually added - Person's details found in {@code CommandTestUtil}
-    public static final Group TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withMembers(AMY, BOB).build();
-    public static final Group SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
-            .withMembers(BOB, AMY).build();
+    public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
+            .withMembers(AMY, BOB);
+    public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
+            .withMembers(BOB, AMY);
+    public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL);
+
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -58,13 +60,13 @@ public class TypicalGroups {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
-        for (Group group : getTypicalGroup()) {
-            ab.addGroup(group);
+        for (GroupBuilder groupBuilder : getTypicalGroupBuilder()) {
+            ab.addGroup(groupBuilder.build());
         }
         return ab;
     }
 
-    public static List<Group> getTypicalGroup() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2101));
+    public static List<GroupBuilder> getTypicalGroupBuilder() {
+        return new ArrayList<>(Arrays.asList(CS2103T_GROUP_BUILDER, CS2101_GROUP_BUILDER));
     }
 }

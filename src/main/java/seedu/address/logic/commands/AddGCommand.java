@@ -71,6 +71,12 @@ public class AddGCommand extends Command {
         model.addToGroup(groupToChange, personSet);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupToChange));
+    }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddGCommand // instanceof handles nulls
+                && groupIndex.equals(((AddGCommand) other).groupIndex));
     }
 }

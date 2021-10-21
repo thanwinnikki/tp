@@ -22,12 +22,14 @@ import seedu.address.storage.Storage;
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
+    public static final String MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE = "This command cannot be run here.";
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private AppState currentAppState;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -36,6 +38,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        currentAppState = AppState.HOME;
     }
 
     @Override
@@ -44,7 +47,11 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        if (!command.isAbleToRunInAppState(currentAppState)) {
+            throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
+        }
         commandResult = command.execute(model);
+        currentAppState = commandResult.getNextAppState();
 
         try {
             storage.saveAddressBook(model.getAddressBook());
