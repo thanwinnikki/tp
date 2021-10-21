@@ -33,6 +33,7 @@ public class Group {
         this.name = name;
         this.description = description;
         this.persons = new UniquePersonList();
+        this.tasks = new UniqueTaskList();
     }
 
     /**
