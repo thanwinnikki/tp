@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
@@ -35,17 +36,18 @@ public class TypicalGroups {
             .withMembers(ELLE, FIONA, GEORGE);
 
     // Manually added
-    public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family")
+    public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family").withDescription("casual group")
             .withMembers(DANIEL, ELLE, ALICE);
-    public static final GroupBuilder FRIENDS = new GroupBuilder().withName("Friends")
+    public static final GroupBuilder FRIENDS = new GroupBuilder().withName("Friends").withDescription("casual group")
             .withMembers(HOON, IDA);
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withMembers(AMY, BOB);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB);
     public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
-            .withMembers(BOB, AMY);
-    public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
+    public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
+            .withDescription(VALID_DESCRIPTION_SPORTS);
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
