@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_SPORTS;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_TENNIS;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_VOLLEYBALL;
@@ -25,7 +26,7 @@ public class GroupCommandParserTest {
         Group expectedGroup = TypicalGroups.VOLLEYBALL.build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, NAME_DESC_VOLLEYBALL, new GroupCommand(expectedGroup));
+        assertParseSuccess(parser, NAME_DESC_VOLLEYBALL + DESCRIPTION_DESC_SPORTS, new GroupCommand(expectedGroup));
     }
 
     @Test
@@ -33,16 +34,16 @@ public class GroupCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE);
 
         // missing name prefix
-        assertParseFailure(parser, VALID_NAME_TENNIS, expectedMessage);
+        assertParseFailure(parser, VALID_NAME_TENNIS + DESCRIPTION_DESC_SPORTS, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + DESCRIPTION_DESC_SPORTS, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_TENNIS,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_TENNIS + DESCRIPTION_DESC_SPORTS,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
     }
 }

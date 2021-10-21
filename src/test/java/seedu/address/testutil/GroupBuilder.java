@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.Arrays;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
@@ -14,8 +15,10 @@ import seedu.address.model.person.UniquePersonList;
 public class GroupBuilder {
 
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
+    public static final String DEFAULT_GROUP_DESCRIPTION = "This is a CS module group";
 
     private Name name;
+    private Description description;
     private UniquePersonList persons;
 
     /**
@@ -23,6 +26,7 @@ public class GroupBuilder {
      */
     public GroupBuilder() {
         name = new Name(DEFAULT_GROUP_NAME);
+        description = new Description(DEFAULT_GROUP_DESCRIPTION);
         persons = new UniquePersonList();
     }
 
@@ -31,6 +35,7 @@ public class GroupBuilder {
      */
     public GroupBuilder(Group groupToCopy) {
         name = groupToCopy.getName();
+        description = groupToCopy.getDescription();
         persons = groupToCopy.getPersons();
     }
 
@@ -39,6 +44,14 @@ public class GroupBuilder {
      */
     public GroupBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Description} of the {@code Group} that we are building.
+     */
+    public GroupBuilder withDescription(String description) {
+        this.description = new Description(description);
         return this;
     }
 
@@ -58,7 +71,7 @@ public class GroupBuilder {
      * @return
      */
     public Group build() {
-        Group buildGroup = new Group(name);
+        Group buildGroup = new Group(name, description);
         ObservableList<Person> personList = persons.asUnmodifiableObservableList();
         for (int i = 0; i < personList.size(); i++) {
             buildGroup.add(personList.get(i));
