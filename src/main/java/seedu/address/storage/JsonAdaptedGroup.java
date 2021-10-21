@@ -40,11 +40,10 @@ public class JsonAdaptedGroup {
          * Constructs a {@code JsonAdaptedGroup.Builder} for a {@code JsonAdaptedPerson} with the given group details.
          *
          * @param name The group's name.
-         * @param groupMateIds The list of the person IDs of all the group mates that belong to the group.
          */
         @JsonCreator
-        public Builder(@JsonProperty("name") String name, @JsonProperty("groupMateIds") List<String> groupMateIds) {
-            groupToBuild = new JsonAdaptedGroup(name, groupMateIds);
+        public Builder(@JsonProperty("name") String name) {
+            groupToBuild = new JsonAdaptedGroup(name);
         }
 
         /**
@@ -58,6 +57,19 @@ public class JsonAdaptedGroup {
         }
 
         /**
+         * Includes the group mates with the given person IDs.
+         *
+         * @param groupMateIds The person IDs of the group mates.
+         * @return This {@code JsonAdaptedGroup.Builder} instance.
+         */
+        @JsonProperty
+        public Builder withGroupMateIds(List<String> groupMateIds) {
+            assert groupMateIds != null : "The list of group mate person IDs should not be null.";
+            groupToBuild.groupMateIds.addAll(groupMateIds);
+            return this;
+        }
+
+        /**
          * Completes the {@code JsonAdaptedGroup} being built by this {@code JsonAdaptedGroup.Builder}.
          *
          * @return The completed {@code JsonAdaptedGroup} object.
@@ -67,12 +79,9 @@ public class JsonAdaptedGroup {
         }
     }
 
-    private JsonAdaptedGroup(String name, List<String> groupMateIds) {
+    private JsonAdaptedGroup(String name) {
         this.name = name;
         this.groupMateIds = new ArrayList<>();
-        if (groupMateIds != null) {
-            this.groupMateIds.addAll(groupMateIds);
-        }
     }
 
     private JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {

@@ -41,7 +41,9 @@ public class JsonAdaptedGroupTest {
         idToPersonMap.put(Id.parse("1-2"), BENSON);
         idToPersonMap.put(Id.parse("3-5"), CARL);
         idToPersonMap.put(Id.parse("8-d"), DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
 
         Name groupName = new Name("group");
         Group group = new Group(groupName);
@@ -58,7 +60,9 @@ public class JsonAdaptedGroupTest {
         String groupNameString = null;
         List<String> groupMateIds = new ArrayList<>();
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
@@ -68,7 +72,9 @@ public class JsonAdaptedGroupTest {
         String groupNameString = "T3@m";
         List<String> groupMateIds = new ArrayList<>();
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
@@ -76,9 +82,9 @@ public class JsonAdaptedGroupTest {
     @Test
     public void toModelType_nullGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
         String groupNameString = "group";
-        List<String> groupMateIds = null;
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .build();
 
         Name groupName = new Name("group");
         Group group = new Group(groupName);
@@ -91,7 +97,9 @@ public class JsonAdaptedGroupTest {
         String groupNameString = "group";
         List<String> groupMateIds = new ArrayList<>();
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
 
         Name groupName = new Name("group");
         Group group = new Group(groupName);
@@ -112,7 +120,9 @@ public class JsonAdaptedGroupTest {
         idToPersonMap.put(Id.parse("1-2"), BENSON);
         idToPersonMap.put(Id.parse("3-5"), CARL);
         idToPersonMap.put(Id.parse("8-d"), DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         String expectedMessage = Id.MESSAGE_MALFORMED_ID;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
@@ -129,7 +139,9 @@ public class JsonAdaptedGroupTest {
         idToPersonMap.put(Id.parse("0-1"), ALICE);
         idToPersonMap.put(Id.parse("1-2"), BENSON);
         idToPersonMap.put(Id.parse("8-d"), DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         String expectedMessage = JsonAdaptedGroup.MESSAGE_NO_SUCH_PERSON;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
@@ -147,7 +159,9 @@ public class JsonAdaptedGroupTest {
         idToPersonMap.put(Id.parse("1-2"), BENSON);
         idToPersonMap.put(Id.parse("3-5"), CARL);
         idToPersonMap.put(Id.parse("8-d"), DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         String expectedMessage = JsonAdaptedGroup.MESSAGE_DUPLICATE_GROUP_MATE;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
@@ -166,7 +180,9 @@ public class JsonAdaptedGroupTest {
         idToPersonMap.put(Id.parse("1-2"), BENSON);
         idToPersonMap.put(Id.parse("3-5"), BENSON);
         idToPersonMap.put(Id.parse("8-d"), DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         String expectedMessage = JsonAdaptedGroup.MESSAGE_DUPLICATE_GROUP_MATE;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
@@ -184,7 +200,9 @@ public class JsonAdaptedGroupTest {
         idToPersonMap.put(Id.parse("1-2"), BENSON);
         idToPersonMap.put(Id.parse("3-5"), CARL);
         idToPersonMap.put(Id.parse("8-d"), DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
 
         Name groupName = new Name("group");
         Group group = new Group(groupName);
@@ -225,7 +243,9 @@ public class JsonAdaptedGroupTest {
         group1MateIds.add("3-5");
         group1MateIds.add("8-d");
         group1MateIds.add("37-59");
-        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(group1NameString, group1MateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(group1NameString)
+                .withGroupMateIds(group1MateIds)
+                .build();
 
         Name group1Name = new Name("group1");
         Group group1 = new Group(group1Name);
@@ -241,7 +261,9 @@ public class JsonAdaptedGroupTest {
         group2MateIds.add("3-5");
         group2MateIds.add("37-59");
         group2MateIds.add("15-22");
-        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(group2NameString, group2MateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(group2NameString)
+                .withGroupMateIds(group2MateIds)
+                .build();
 
         Name group2Name = new Name("group2");
         Group group2 = new Group(group2Name);
@@ -256,7 +278,9 @@ public class JsonAdaptedGroupTest {
         group3MateIds.add("3db-63d");
         group3MateIds.add("179-262");
         group3MateIds.add("0-1");
-        JsonAdaptedGroup jsonAdaptedGroup3 = new JsonAdaptedGroup.Builder(group3NameString, group3MateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup3 = new JsonAdaptedGroup.Builder(group3NameString)
+                .withGroupMateIds(group3MateIds)
+                .build();
 
         Name group3Name = new Name("group3");
         Group group3 = new Group(group3Name);
@@ -284,7 +308,9 @@ public class JsonAdaptedGroupTest {
         groupMateIds.add("1-2");
         groupMateIds.add("3-5");
         groupMateIds.add("8-d");
-        JsonAdaptedGroup jsonAdaptedGroupFromJson = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroupFromJson = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
 
         Name groupName = new Name("group");
         Group group = new Group(groupName);
@@ -302,7 +328,9 @@ public class JsonAdaptedGroupTest {
     public void equals_differentType_returnsFalse() {
         String groupNameString = "group";
         List<String> groupMateIds = new ArrayList<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         assertNotEquals(null, jsonAdaptedGroup);
         assertNotEquals(new JsonAdaptedGroupTest(), jsonAdaptedGroup);
     }
@@ -311,7 +339,9 @@ public class JsonAdaptedGroupTest {
     public void equals_sameReference_returnsTrue() {
         String groupNameString = "group";
         List<String> groupMateIds = new ArrayList<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString, groupMateIds).build();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+                .withGroupMateIds(groupMateIds)
+                .build();
         assertEquals(jsonAdaptedGroup, jsonAdaptedGroup);
     }
 }
