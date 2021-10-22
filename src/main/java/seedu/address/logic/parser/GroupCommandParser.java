@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Description;
+import seedu.address.model.common.Description;
+import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
-import seedu.address.model.names.Name;
 
 public class GroupCommandParser implements Parser<GroupCommand> {
 
@@ -20,16 +20,22 @@ public class GroupCommandParser implements Parser<GroupCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GroupCommand parse(String args) throws ParseException {
+        Description description;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        } else {
+            description = new Description("Enter description here!");
+        }
 
         Group group = new Group(name, description);
 

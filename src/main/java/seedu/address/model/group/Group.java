@@ -5,7 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import seedu.address.model.names.Name;
+import seedu.address.model.common.Description;
+import seedu.address.model.common.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;

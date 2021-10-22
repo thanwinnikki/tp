@@ -30,18 +30,18 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
-public class AddGCommandTest {
+public class AddGroupCommandTest {
     private Set<Index> emptySet = Collections.emptySet();
     private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
     public void constructor_nullGroupIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddGCommand(null, emptySet));
+        assertThrows(NullPointerException.class, () -> new AddGroupCommand(null, emptySet));
     }
 
     @Test
     public void constructor_nullPersonIndexSet_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddGCommand(Index.fromZeroBased(0), null));
+        assertThrows(NullPointerException.class, () -> new AddGroupCommand(Index.fromZeroBased(0), null));
     }
 
     @Test
@@ -55,14 +55,14 @@ public class AddGCommandTest {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(INDEX_FIRST);
 
-        AddGCommand addGCommand = new AddGCommand(INDEX_SECOND, personIndexesSet);
+        AddGroupCommand addGroupCommand = new AddGroupCommand(INDEX_SECOND, personIndexesSet);
 
-        String expectedMessage = String.format(AddGCommand.MESSAGE_SUCCESS, validGroup);
+        String expectedMessage = String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addToGroup(validGroup, personSet);
 
-        assertCommandSuccess(addGCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(addGroupCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -70,10 +70,10 @@ public class AddGCommandTest {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(INDEX_INVALID);
 
-        AddGCommand addGCommand = new AddGCommand(INDEX_SECOND, personIndexesSet);
-        String expectedMessage = AddGCommand.MESSAGE_INVALID_PERSON_INDEX;
+        AddGroupCommand addGroupCommand = new AddGroupCommand(INDEX_SECOND, personIndexesSet);
+        String expectedMessage = AddGroupCommand.MESSAGE_INVALID_PERSON_INDEX;
 
-        assertCommandFailure(addGCommand, model, expectedMessage);
+        assertCommandFailure(addGroupCommand, model, expectedMessage);
     }
 
     @Test
@@ -81,10 +81,10 @@ public class AddGCommandTest {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(Index.fromZeroBased(1));
 
-        AddGCommand addGCommand = new AddGCommand(Index.fromOneBased(30), personIndexesSet);
-        String expectedMessage = AddGCommand.MESSAGE_INVALID_GROUP_INDEX;
+        AddGroupCommand addGroupCommand = new AddGroupCommand(Index.fromOneBased(30), personIndexesSet);
+        String expectedMessage = AddGroupCommand.MESSAGE_INVALID_GROUP_INDEX;
 
-        assertCommandFailure(addGCommand, model, expectedMessage);
+        assertCommandFailure(addGroupCommand, model, expectedMessage);
     }
 
     /**
@@ -196,7 +196,7 @@ public class AddGCommandTest {
     /**
      * A Model stub that always accept the group being added.
      */
-    private class ModelStubAcceptingGroupAdded extends AddGCommandTest.ModelStub {
+    private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override

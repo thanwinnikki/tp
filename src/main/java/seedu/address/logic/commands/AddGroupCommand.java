@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
 /** Adds a person to a group in the address book.
  *
  */
-public class AddGCommand extends Command {
+public class AddGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "addG";
 
@@ -35,11 +35,11 @@ public class AddGCommand extends Command {
     private final Set<Index> personIndexes;
 
     /**
-     * Creates an AddGCommand to add the specified {@code Person} objects to the specified {@code Group}.
+     * Creates an AddGroupCommand to add the specified {@code Person} objects to the specified {@code Group}.
      * @param groupIndex
      * @param personIndexes
      */
-    public AddGCommand(Index groupIndex, Set<Index> personIndexes) {
+    public AddGroupCommand(Index groupIndex, Set<Index> personIndexes) {
         requireAllNonNull(groupIndex, personIndexes);
         this.groupIndex = groupIndex;
         this.personIndexes = personIndexes;
@@ -76,7 +76,7 @@ public class AddGCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddGCommand // instanceof handles nulls
-                && groupIndex.equals(((AddGCommand) other).groupIndex));
+                || (other instanceof AddGroupCommand // instanceof handles nulls
+                && groupIndex.equals(((AddGroupCommand) other).groupIndex));
     }
 }

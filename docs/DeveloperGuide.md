@@ -96,9 +96,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. The `AddressBookParser` class may then call other `Parser` classes to parse specific commands.
+3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`).
+4. The `Command` object is checked if it can be executed in the current `AppState`.
+5. If it cannot be executed, then a `CommandException` is thrown and the `Command` object is not executed. Otherwise, if it can run in the current `AppState`, then the `Command` object is executed by the `LogicManager`.
+6. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+7. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+8. The current `AppState` is updated using the details from the `CommandResult`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -123,8 +127,11 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data
+* i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* all `Group` objects (which are contained in a `UniquePersonList` object). 
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Works similarly for the `Group` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -362,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User types help command into the terminal or click “help” button.
 2. ThunderCat open the instruction page for user.
 
-**Use case: UC04 - Delete the contact from a group**
+**Use case: UC04 - Remove a contact from a group**
 
 **MSS**
 1. User enters the user's ID to be deleted and group's ID that the contact is in.
@@ -377,7 +384,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. ThunderCat cannot find the contact needed to be deleted in the group.
     * 1c1. ThunderCat announces that the contact cannot be found.
     * 1c2. User start again from step 1.
+    
+**Use case: UC05 - Add a task to the group**
 
+**MSS**
+1. User navigates to the group which the user want to add tasks to.
+2. User enters the task description to be added to the group.
+3. ThunderCat announces that the task is successfully added to the group.
+    Use case ends.
+   
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC01 -extension 1a).
+* 1b. ThunderCat cannot find the group with the given group's ID. (UC04 - extension 1b).
+* 2a. ThunderCat detects an error in the entered command.
+    * 2a1. ThunderCat announces that the command format is wrong and shows an example of the correct format.
+    * 2a2. User starts again from step 2.
+* 2b. ThunderCat detects that the task already exists in the group.
+    * 2b1. ThunderCat announces that the task already exists.
+    * 2b2. User starts again from step 2.
+
+**Use case: UC06 - Add a new Group**
+
+**MSS**
+1  User enters the group name and description to be added.
+2. ThunderCat announces that the group is successfully created.
+   Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command.
+    * 1a1. ThunderCat announces that the command format is wrong and shows an example of the correct format.
+    * 1a2. User starts again from step 1.
+* 1b. ThunderCat detects that the group already exists in the application.
+    * 1b1. ThunderCat announces that the group already exists.
+    * 1b2. User starts again from step 1.
 
 ### Non-Functional Requirements
 
