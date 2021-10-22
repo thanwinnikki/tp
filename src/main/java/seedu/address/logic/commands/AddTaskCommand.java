@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import java.util.List;
 
@@ -22,9 +22,9 @@ public class AddTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the group. "
             + "Parameters: "
-            + PREFIX_TASK + "TASK "
+            + PREFIX_DESCRIPTION + "TASK_DESCRIPTION"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK + "Read book";
+            + PREFIX_DESCRIPTION + "Read book";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the group";
