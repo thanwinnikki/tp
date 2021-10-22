@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.model.group.Group;
 
 /**
  * Represents the result of a command execution.
@@ -95,6 +96,7 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder setNextAppState(ApplicationState nextApplicationState) {
+            assert nextApplicationState != null : "The value of nextApplicationState cannot be null.";
             commandResultToBuild.nextApplicationState = nextApplicationState;
             return this;
         }
@@ -102,6 +104,17 @@ public class CommandResult {
         public <T> Builder setNextDataToStore(T nextDataToStore) {
             commandResultToBuild.nextDataToStore = nextDataToStore;
             return this;
+        }
+
+        public Builder goToHomeState() {
+            return setNextAppState(ApplicationState.HOME)
+                    .setNextDataToStore(null);
+        }
+
+        public Builder goToGroupInformationState(Group group) {
+            assert group != null : "The value of group cannot be null.";
+            return setNextAppState(ApplicationState.GROUP_INFORMATION)
+                    .setNextDataToStore(group);
         }
     }
 
