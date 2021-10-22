@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import seedu.address.model.common.Description;
 import seedu.address.model.group.Group;
 
 /**
@@ -39,7 +40,10 @@ public class GroupCard extends Card {
         this.group = group;
         id.setText(displayedIndex + ". ");
         name.setText(group.getName().fullName);
-        description.setText(group.getDescription().value);
+        Description description = group.getDescription();
+        if (description != null) {
+            this.description.setText(description.toString());
+        }
     }
 
     @Override
