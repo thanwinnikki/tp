@@ -57,9 +57,9 @@ public class Task {
     @Override
     public String toString() {
         if (done) {
-            return DONE_TASK + description;
+            return DONE_TASK + description.toString();
         } else {
-            return UNDONE_TASK + description;
+            return UNDONE_TASK + description.toString();
         }
     }
 
