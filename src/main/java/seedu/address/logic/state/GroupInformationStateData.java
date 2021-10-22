@@ -24,7 +24,7 @@ public class GroupInformationStateData extends ApplicationStateData<Group> {
 
     @Override
     public Group getData() {
-        assert group != null : "There is no group stored." ;
+        assert group != null : "There is no group stored.";
         return group;
     }
 

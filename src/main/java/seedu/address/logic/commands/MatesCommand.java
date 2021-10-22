@@ -6,8 +6,8 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.IsGroupPredicate;
@@ -43,8 +43,9 @@ public class MatesCommand extends Command {
         Group group = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         model.updateFilteredGroupList(new IsGroupPredicate(group));
+        ApplicationState.GROUP_INFORMATION.setData(group);
         return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .setNextAppState(ApplicationState.HOME)
+                .setNextAppState(ApplicationState.GROUP_INFORMATION)
                 .build();
     }
 
