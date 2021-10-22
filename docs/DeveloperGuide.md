@@ -96,11 +96,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`).
-3. The `Command` object is first checked if it can run in the current `AppState`. If it cannot, then a `CommandException` is thrown and the `Command` object is not executed. Otherwise, if it can run in the current `AppState`, then the `Command` object is executed by the `LogicManager`.
-4. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-6. The current `AppState` is updated using the details from the `CommandResult`.
+2. The `AddressBookParser` class may then call other `Parser` classes to parse specific commands.
+3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`).
+4. The `Command` object is checked if it can be executed in the current `AppState`.
+5. If it cannot be executed, then a `CommandException` is thrown and the `Command` object is not executed. Otherwise, if it can run in the current `AppState`, then the `Command` object is executed by the `LogicManager`.
+6. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+7. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+8. The current `AppState` is updated using the details from the `CommandResult`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
