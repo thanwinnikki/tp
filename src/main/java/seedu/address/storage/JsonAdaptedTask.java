@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
-import seedu.address.model.names.Name;
+import seedu.address.model.task.Task;
 
 /**
  * Jackson-friendly version of {@link Group}. // TODO: change Tag to Task
@@ -17,7 +18,7 @@ class JsonAdaptedTask {
     private final String description;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description) {
@@ -27,46 +28,28 @@ class JsonAdaptedTask {
     /**
      * Converts a given {@code Task} into this class for Jackson use.
      */
-    // TODO: change Group to Task
-    // public JsonAdaptedTask(Task source) {
-    public JsonAdaptedTask(Group source) {
-        // TODO: Task description
-        // description = source.getDescription().value;
-        description = source.getName().fullName;
+    public JsonAdaptedTask(Task source) {
+        description = source.getDescription();
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Task} object.
+     * Converts this Jackson-friendly adapted task object into the model's {@code Task} object.
      *
      * @throws IllegalValueException If there were any data constraints violated in the adapted task.
      */
-    // TODO: change Group to Task
-    // public Task toModelType() throws IllegalValueException {
-    public Group toModelType() throws IllegalValueException {
-        // TODO: change Name to Description
-        // final Description modelDescription = createDescription();
-
-        if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(description)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(description);
-
-        // TODO: change Group to Task
-        // return new Task(modelDescription);
-        return new Group(modelName);
+    public Task toModelType() throws IllegalValueException {
+        final Description modelDescription = createDescription();
+        return new Task(modelDescription);
     }
 
-    // private Description createDescription() throws IllegalValueException {
-    //     if (description == null) {
-    //         String exceptionMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
-    //         throw new IllegalValueException(exceptionMessage);
-    //     }
-    //     if (!Description.isValidDescription(description)) {
-    //         throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
-    //     }
-    //     return new Description(description);
-    // }
+    private Description createDescription() throws IllegalValueException {
+        if (description == null) {
+            String exceptionMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName());
+            throw new IllegalValueException(exceptionMessage);
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(description);
+    }
 }
