@@ -23,7 +23,7 @@ public class RemoveCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Removed Person: %1$s";
+    public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed Person: %1$s";
 
     private final Index targetIndex;
 
@@ -52,6 +52,13 @@ public class RemoveCommand extends Command {
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToRemove));
+        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RemoveCommand // instanceof handles nulls
+                && targetIndex.equals(((RemoveCommand) other).targetIndex)); // state check
     }
 }

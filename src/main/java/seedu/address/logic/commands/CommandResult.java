@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.logic.AppState;
+
 /**
  * Represents the result of a command execution.
  */
@@ -17,15 +19,7 @@ public class CommandResult {
     /** The application should exit. */
     private boolean exit;
 
-    private ListType nextListType;
-
-    /**
-     * A list type to be displayed in the UI due to the result of the command execution.
-     */
-    public static enum ListType {
-        PersonList,
-        GroupList;
-    }
+    private AppState nextAppState;
 
     /**
      * Builder class to help with creating different types of {@code CommandResult} objects.
@@ -93,13 +87,13 @@ public class CommandResult {
         }
 
         /**
-         * Sets the {@code CommandResult} object to cause the specified list type to be displayed in the UI to the user.
+         * Sets the {@code CommandResult} object to cause the application to change to the given state.
          *
-         * @param nextListType The list type displayed as a result of the command execution.
+         * @param nextAppState The application state to change to as a result of the command execution.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setNextListType(ListType nextListType) {
-            commandResultToBuild.nextListType = nextListType;
+        public Builder setNextAppState(AppState nextAppState) {
+            commandResultToBuild.nextAppState = nextAppState;
             return this;
         }
     }
@@ -111,7 +105,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        nextListType = ListType.PersonList;
+        nextAppState = AppState.HOME;
     }
 
     /**
@@ -122,7 +116,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         showHelp = false;
         exit = false;
-        nextListType = ListType.PersonList;
+        nextAppState = AppState.HOME;
     }
 
     public String getFeedbackToUser() {
@@ -137,8 +131,8 @@ public class CommandResult {
         return exit;
     }
 
-    public ListType getNextListType() {
-        return nextListType;
+    public AppState getNextAppState() {
+        return nextAppState;
     }
 
     @Override
@@ -155,12 +149,13 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && nextAppState.equals(otherCommandResult.nextAppState);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, nextAppState);
     }
 
 }

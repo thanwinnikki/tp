@@ -12,6 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.AppState;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -23,6 +24,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    public static final String MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED =
+            "The %s application state is not implemented.";
+
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -31,7 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private ListPanel listPanel;
+    private ListPanel listPanelLeft;
+    private ListPanel listPanelRight;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +47,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane listPanelPlaceholder;
+    private StackPane listPanelPlaceholderLeft;
+
+    @FXML
+    private StackPane listPanelPlaceholderRight;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,9 +118,13 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        listPanel = new ListPanel();
-        listPanel.setList(logic.getFilteredPersonList());
-        listPanelPlaceholder.getChildren().add(listPanel.getRoot());
+        listPanelLeft = new ListPanel();
+        listPanelRight = new ListPanel();
+
+        changeDisplayForHomeAppState();
+
+        listPanelPlaceholderLeft.getChildren().add(listPanelLeft.getRoot());
+        listPanelPlaceholderRight.getChildren().add(listPanelRight.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -164,8 +176,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ListPanel getListPanel() {
-        return listPanel;
+    public ListPanel getListPanelLeft() {
+        return listPanelLeft;
+    }
+
+    public ListPanel getListPanelRight() {
+        return listPanelRight;
     }
 
     /**
@@ -187,17 +203,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            CommandResult.ListType nextListType = commandResult.getNextListType();
-            switch (nextListType) {
-            case PersonList:
-                listPanel.setList(logic.getFilteredPersonList());
-                break;
-            case GroupList:
-                listPanel.setList(logic.getFilteredGroupList());
-                break;
-            default:
-                assert false : String.format("The %s list type is not implemented.", nextListType);
-            }
+            AppState nextAppState = commandResult.getNextAppState();
+            changeDisplayForNextAppState(nextAppState);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -205,5 +212,29 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    private void changeDisplayForNextAppState(AppState nextAppState) {
+        switch (nextAppState) {
+        case HOME:
+            changeDisplayForHomeAppState();
+            break;
+        case GROUP_INFORMATION:
+            changeDisplayForGroupInformationAppState();
+            break;
+        default:
+            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextAppState);
+        }
+    }
+
+    private void changeDisplayForHomeAppState() {
+        listPanelLeft.setList(logic.getFilteredPersonList());
+        listPanelRight.setList(logic.getFilteredGroupList());
+    }
+
+    private void changeDisplayForGroupInformationAppState() {
+        listPanelLeft.setList(logic.getFilteredGroupList());
+        // Temp, can change it to getTodoList later
+        listPanelRight.setList(logic.getFilteredPersonList());
     }
 }

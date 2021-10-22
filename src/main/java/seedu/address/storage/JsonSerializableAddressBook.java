@@ -50,11 +50,11 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         idToJsonAdaptedPersonMap = new HashMap<>();
         Iterable<Person> sourcePersons = source.getPersonList();
-        Map<Person, String> personToIdMap = createModelEntityToIdMap(sourcePersons);
+        Map<Person, Id> personToIdMap = createModelEntityToIdMap(sourcePersons);
         initialisePersonIdToJsonAdaptedPersonMap(sourcePersons, personToIdMap);
         idToJsonAdaptedGroupMap = new HashMap<>();
         Iterable<Group> sourceGroups = source.getGroupList();
-        Map<Group, String> groupToIdMap = createModelEntityToIdMap(sourceGroups);
+        Map<Group, Id> groupToIdMap = createModelEntityToIdMap(sourceGroups);
         initialiseGroupIdToJsonAdaptedGroupMap(sourceGroups, groupToIdMap, personToIdMap);
     }
 
@@ -84,32 +84,31 @@ class JsonSerializableAddressBook {
         return idToJsonAdaptedGroupMap;
     }
 
-    private <T> Map<T, String> createModelEntityToIdMap(Iterable<T> modelEntities) {
+    private <T> Map<T, Id> createModelEntityToIdMap(Iterable<T> modelEntities) {
         Set<Id> idSet = new HashSet<>();
-        Map<T, String> modelEntityToIdMap = new HashMap<>();
+        Map<T, Id> modelEntityToIdMap = new HashMap<>();
         for (T modelEntity : modelEntities) {
             Id id = Id.generateUniqueId(idSet);
-            modelEntityToIdMap.put(modelEntity, id.toString());
+            modelEntityToIdMap.put(modelEntity, id);
             idSet.add(id);
         }
         return modelEntityToIdMap;
     }
 
-    private void initialisePersonIdToJsonAdaptedPersonMap(Iterable<Person> persons, Map<Person, String> personToIdMap) {
+    private void initialisePersonIdToJsonAdaptedPersonMap(Iterable<Person> persons, Map<Person, Id> personToIdMap) {
         for (Person person : persons) {
-            String personId = personToIdMap.get(person);
+            Id personId = personToIdMap.get(person);
             JsonAdaptedPerson jsonAdaptedPerson = new JsonAdaptedPerson(person);
-            idToJsonAdaptedPersonMap.put(personId, jsonAdaptedPerson);
+            idToJsonAdaptedPersonMap.put(personId.toString(), jsonAdaptedPerson);
         }
     }
 
     private void initialiseGroupIdToJsonAdaptedGroupMap(
-            Iterable<Group> groups, Map<Group, String> groupToIdMap, Map<Person, String> personToIdMap) {
+            Iterable<Group> groups, Map<Group, Id> groupToIdMap, Map<Person, Id> personToIdMap) {
         for (Group group : groups) {
-            String personId = groupToIdMap.get(group);
-            JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(group, personToIdMap)
-                    .build();
-            idToJsonAdaptedGroupMap.put(personId, jsonAdaptedGroup);
+            Id personId = groupToIdMap.get(group);
+            JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup(group, personToIdMap);
+            idToJsonAdaptedGroupMap.put(personId.toString(), jsonAdaptedGroup);
         }
     }
 

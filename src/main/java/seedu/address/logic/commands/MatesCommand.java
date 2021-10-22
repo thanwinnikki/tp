@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.AppState;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
@@ -41,7 +42,14 @@ public class MatesCommand extends Command {
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         model.updateFilteredGroupList(new IsGroupPredicate(group));
         return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .setNextListType(CommandResult.ListType.PersonList)
+                .setNextAppState(AppState.HOME)
                 .build();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MatesCommand // instanceof handles nulls
+                && index.equals(((MatesCommand) other).index)); // state check
     }
 }

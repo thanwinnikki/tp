@@ -1,13 +1,27 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS2101;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
+import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalPersons.IDA;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,33 +29,46 @@ import seedu.address.model.person.Person;
  */
 public class TypicalGroups {
 
-    public static final Person ALICE = TypicalPersons.ALICE;
-    public static final Person BENSON = TypicalPersons.BENSON;
+    public static final GroupBuilder CS2103T_GROUP_BUILDER = new GroupBuilder().withName("CS2103T Project Group")
+            .withMembers(ALICE, BENSON, CARL);
+
+    public static final GroupBuilder CS2101_GROUP_BUILDER = new GroupBuilder().withName("CS2101 Project Group")
+            .withMembers(ELLE, FIONA, GEORGE);
 
     // Manually added
-    public static final Group CS2103T = new GroupBuilder().withName("CS2103T")
-            .withMembers(ALICE, BENSON)
-            .build();
+    public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family").withDescription("casual group")
+            .withMembers(DANIEL, ELLE, ALICE);
+    public static final GroupBuilder FRIENDS = new GroupBuilder().withName("Friends").withDescription("casual group")
+            .withMembers(HOON, IDA);
 
-    // Manually added - Group and person's details found in {@code CommandTestUtil}
-    public static final Group CS2101 = new GroupBuilder().withName(VALID_GROUP_NAME_CS2101)
-            .withMembers(TypicalPersons.AMY, TypicalPersons.BOB)
-            .build();
+    // Manually added - Person's details found in {@code CommandTestUtil}
+    public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB);
+    public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
+    public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
+            .withDescription(VALID_DESCRIPTION_SPORTS);
 
-    private TypicalGroups() {} //prevents instantiation
+
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+
+    private TypicalGroups() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with typical persons and typical groups.
+     * Returns an {@code AddressBook} with all the typical persons.
      */
     public static AddressBook getTypicalAddressBookWithGroups() {
-        AddressBook ab = TypicalPersons.getTypicalAddressBook();
-        for (Group group : getTypicalGroups()) {
-            ab.addGroup(group);
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(person);
+        }
+        for (GroupBuilder groupBuilder : getTypicalGroupBuilder()) {
+            ab.addGroup(groupBuilder.build());
         }
         return ab;
     }
 
-    public static List<Group> getTypicalGroups() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2101));
+    public static List<GroupBuilder> getTypicalGroupBuilder() {
+        return new ArrayList<>(Arrays.asList(CS2103T_GROUP_BUILDER, CS2101_GROUP_BUILDER));
     }
 }
