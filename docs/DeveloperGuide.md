@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC06 - Add a new Group**
 
 **MSS**
-1.  User enters the group name and description to be added.
+1. User enters the group name and description to be added.
 2. ThunderCat announces that the group is successfully created.
    Use case ends.
 
