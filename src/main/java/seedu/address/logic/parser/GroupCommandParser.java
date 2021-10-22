@@ -34,7 +34,7 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
             description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         } else {
-            description = new Description("NIL");
+            description = new Description("Enter description here!");
         }
 
         Group group = new Group(name, description);

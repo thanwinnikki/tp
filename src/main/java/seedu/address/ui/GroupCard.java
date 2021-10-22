@@ -28,6 +28,8 @@ public class GroupCard extends Card {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label description;
 
     /**
      * Creates a {@code GroupCard} with the given {@code Group} and index to display.
@@ -37,6 +39,7 @@ public class GroupCard extends Card {
         this.group = group;
         id.setText(displayedIndex + ". ");
         name.setText(group.getName().fullName);
+        description.setText(group.getDescription().value);
     }
 
     @Override
