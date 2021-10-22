@@ -12,6 +12,11 @@ public class TaskCard extends Card {
 
     private static final String FXML = "TaskCard.fxml";
 
+    private static final String IS_DONE_INDICATOR_DONE_TEXT = "Done";
+    private static final String IS_DONE_INDICATOR_NOT_DONE_TEXT = "Not done";
+    private static final String IS_DONE_INDICATOR_DONE_BACKGROUND_STYLE = "-fx-background-color: #33691e;";
+    private static final String IS_DONE_INDICATOR_NOT_DONE_BACKGROUND_STYLE = "-fx-background-color: #b00020;";
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -28,6 +33,8 @@ public class TaskCard extends Card {
     private Label id;
     @FXML
     private Label description;
+    @FXML
+    private Label isDoneIndicator;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -37,6 +44,21 @@ public class TaskCard extends Card {
         this.task = task;
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription());
+        if (task.getDoneTask()) {
+            isDoneIndicator.setText(IS_DONE_INDICATOR_DONE_TEXT);
+            isDoneIndicator.setStyle(getIsDoneIndicatorDoneStyle());
+        } else {
+            isDoneIndicator.setText(IS_DONE_INDICATOR_NOT_DONE_TEXT);
+            isDoneIndicator.setStyle(getIsDoneIndicatorNotDoneStyle());
+        }
+    }
+
+    private String getIsDoneIndicatorDoneStyle() {
+        return isDoneIndicator.getStyle() + IS_DONE_INDICATOR_DONE_BACKGROUND_STYLE;
+    }
+
+    private String getIsDoneIndicatorNotDoneStyle() {
+        return isDoneIndicator.getStyle() + IS_DONE_INDICATOR_NOT_DONE_BACKGROUND_STYLE;
     }
 
     @Override
