@@ -101,16 +101,34 @@ public class CommandResult {
             return this;
         }
 
+        /**
+         * Sets the {@code CommandResult} object to cause the application to store the given data.
+         *
+         * @param nextDataToStore The data to store.
+         * @param <T> The type of the data to be stored.
+         * @return This {@code CommandResult.Builder} instance.
+         */
         public <T> Builder setNextDataToStore(T nextDataToStore) {
             commandResultToBuild.nextDataToStore = nextDataToStore;
             return this;
         }
 
+        /**
+         * Sets the {@code CommandResult} object to cause the application to go to the home state.
+         *
+         * @return This {@code CommandResult.Builder} instance.
+         */
         public Builder goToHomeState() {
             return setNextAppState(ApplicationState.HOME)
                     .setNextDataToStore(null);
         }
 
+        /**
+         * Sets the {@code CommandResult} object to cause the application to go to the group information state.
+         *
+         * @param group The group to display information about.
+         * @return This {@code CommandResult.Builder} instance.
+         */
         public Builder goToGroupInformationState(Group group) {
             assert group != null : "The value of group cannot be null.";
             return setNextAppState(ApplicationState.GROUP_INFORMATION)
