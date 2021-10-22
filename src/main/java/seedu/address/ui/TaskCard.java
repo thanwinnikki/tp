@@ -3,7 +3,6 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
 /**
