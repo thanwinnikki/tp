@@ -13,8 +13,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.GroupCommand;
+import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
-import seedu.address.model.names.Name;
 import seedu.address.testutil.TypicalGroups;
 
 

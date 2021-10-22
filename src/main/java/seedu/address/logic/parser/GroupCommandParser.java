@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Description;
+import seedu.address.model.common.Description;
+import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
-import seedu.address.model.names.Name;
 
 public class GroupCommandParser implements Parser<GroupCommand> {
 
