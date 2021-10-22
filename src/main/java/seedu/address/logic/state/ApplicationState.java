@@ -7,24 +7,24 @@ import seedu.address.model.group.Group;
  */
 public enum ApplicationState {
 
-    GROUP_INFORMATION(GroupInformationStateData.getInstance()),
-    HOME(HomeStateData.getInstance());
+    GROUP_INFORMATION(GroupInformationStateDataStore.getInstance()),
+    HOME(HomeStateDataStore.getInstance());
 
-    private final ApplicationStateData applicationStateData;
+    private final ApplicationStateDataStore applicationStateDataStore;
 
-    ApplicationState(ApplicationStateData applicationStateData) {
-        this.applicationStateData = applicationStateData;
+    ApplicationState(ApplicationStateDataStore applicationStateDataStore) {
+        this.applicationStateDataStore = applicationStateDataStore;
     }
 
     public <T> T getData() {
-        assert applicationStateData.isAbleToStoreData() : "This state does not store data.";
-        Object data = applicationStateData.getData();
+        assert applicationStateDataStore.isAbleToStoreData() : "This state does not store data.";
+        Object data = applicationStateDataStore.getData();
         return (T) data;
     }
 
     public <T> void setData(T data) {
         checkData(data);
-        applicationStateData.setData(data);
+        applicationStateDataStore.setData(data);
     }
 
     private <T> void checkData(T data) {

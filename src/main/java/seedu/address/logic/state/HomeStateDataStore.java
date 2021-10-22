@@ -3,15 +3,15 @@ package seedu.address.logic.state;
 /**
  * Represents the data store for {@code ApplicationState.HOME}.
  */
-public class HomeStateData extends ApplicationStateData<Void> {
+public class HomeStateDataStore extends ApplicationStateDataStore<Void> {
 
-    private static HomeStateData instance;
+    private static HomeStateDataStore instance;
 
-    private HomeStateData() {}
+    private HomeStateDataStore() {}
 
-    static HomeStateData getInstance() {
+    static HomeStateDataStore getInstance() {
         if (instance == null) {
-            instance = new HomeStateData();
+            instance = new HomeStateDataStore();
         }
         return instance;
     }
