@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
-public class DeleteTCommand extends Command {
+public class DeleteTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteT";
 
@@ -28,7 +28,7 @@ public class DeleteTCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteTCommand(Index targetIndex) {
+    public DeleteTaskCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -55,8 +55,8 @@ public class DeleteTCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteTCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteTCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteTaskCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteTaskCommand) other).targetIndex)); // state check
     }
 
 }
