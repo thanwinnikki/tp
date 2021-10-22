@@ -22,8 +22,8 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
-import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
 
 public class JsonAdaptedGroupTest {

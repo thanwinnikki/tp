@@ -21,7 +21,9 @@ public class MatesCommand extends Command {
     public static final String COMMAND_WORD = "mates";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists members in group index indicated.";
+            + ": Lists members in group index indicated."
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Listed all members in group.";
 

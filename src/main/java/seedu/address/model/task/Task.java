@@ -2,7 +2,7 @@ package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.group.Description;
+import seedu.address.model.common.Description;
 
 /**
  * Represents a Task in the address book.

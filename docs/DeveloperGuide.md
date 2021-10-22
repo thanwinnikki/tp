@@ -96,9 +96,13 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. The `AddressBookParser` class may then call other `Parser` classes to parse specific commands.
+3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`).
+4. The `Command` object is checked if it can be executed in the current `AppState`.
+5. If it cannot be executed, then a `CommandException` is thrown and the `Command` object is not executed. Otherwise, if it can run in the current `AppState`, then the `Command` object is executed by the `LogicManager`.
+6. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+7. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+8. The current `AppState` is updated using the details from the `CommandResult`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -365,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User types help command into the terminal or click “help” button.
 2. ThunderCat open the instruction page for user.
 
-**Use case: UC04 - Delete the contact from a group**
+**Use case: UC04 - Remove a contact from a group**
 
 **MSS**
 1. User enters the user's ID to be deleted and group's ID that the contact is in.
@@ -399,6 +403,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. ThunderCat announces that the task already exists.
     * 2b2. User starts again from step 2.
 
+**Use case: UC06 - Add a new Group**
+
+**MSS**
+1  User enters the group name and description to be added.
+2. ThunderCat announces that the group is successfully created.
+   Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command.
+    * 1a1. ThunderCat announces that the command format is wrong and shows an example of the correct format.
+    * 1a2. User starts again from step 1.
+* 1b. ThunderCat detects that the group already exists in the application.
+    * 1b1. ThunderCat announces that the group already exists.
+    * 1b2. User starts again from step 1.
 
 ### Non-Functional Requirements
 

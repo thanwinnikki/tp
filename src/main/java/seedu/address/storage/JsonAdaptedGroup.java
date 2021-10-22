@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Description;
+import seedu.address.model.common.Description;
+import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
-import seedu.address.model.names.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
