@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.model.group.Group;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -203,8 +204,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            ApplicationState nextApplicationState = commandResult.getNextAppState();
-            changeDisplayForNextAppState(nextApplicationState);
+            changeDisplayForNextAppState(commandResult);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -214,13 +214,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void changeDisplayForNextAppState(ApplicationState nextApplicationState) {
+    private void changeDisplayForNextAppState(CommandResult commandResult) {
+        ApplicationState nextApplicationState = commandResult.getNextAppState();
         switch (nextApplicationState) {
         case HOME:
             changeDisplayForHomeAppState();
             break;
         case GROUP_INFORMATION:
-            changeDisplayForGroupInformationAppState();
+            Group group = commandResult.getNextDataToStore();
+            changeDisplayForGroupInformationAppState(group);
             break;
         default:
             assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationState);
@@ -232,9 +234,8 @@ public class MainWindow extends UiPart<Stage> {
         listPanelRight.setList(logic.getFilteredGroupList());
     }
 
-    private void changeDisplayForGroupInformationAppState() {
-        listPanelLeft.setList(logic.getFilteredGroupList());
-        // TODO: replace with tasks list
-        listPanelRight.setList(logic.getFilteredPersonList());
+    private void changeDisplayForGroupInformationAppState(Group group) {
+        listPanelLeft.setList(logic.getFilteredPersonList());
+        listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
     }
 }
