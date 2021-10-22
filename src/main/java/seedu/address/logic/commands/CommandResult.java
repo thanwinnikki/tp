@@ -118,7 +118,7 @@ public class CommandResult {
          *
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder goToHomeState() {
+        public Builder goToHome() {
             return setNextAppState(ApplicationState.HOME)
                     .setNextDataToStore(null);
         }
@@ -129,7 +129,7 @@ public class CommandResult {
          * @param group The group to display information about.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder goToGroupInformationState(Group group) {
+        public Builder displayGroupInformation(Group group) {
             assert group != null : "The value of group cannot be null.";
             return setNextAppState(ApplicationState.GROUP_INFORMATION)
                     .setNextDataToStore(group);
