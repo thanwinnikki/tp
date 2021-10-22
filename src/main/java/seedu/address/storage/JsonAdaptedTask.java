@@ -43,7 +43,7 @@ class JsonAdaptedTask {
     public Task toModelType() throws IllegalValueException {
         final Description modelDescription = createDescription();
         Task task = new Task(modelDescription);
-        if (task.getDoneTask()) {
+        if (isDone) {
             task.setDoneTask();
         }
         return task;
