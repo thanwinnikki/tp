@@ -16,13 +16,15 @@ class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
     private final String description;
+    private final boolean isDone;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
-    public JsonAdaptedTask(@JsonProperty("description") String description) {
+    public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("isDone") boolean isDone) {
         this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -30,6 +32,7 @@ class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         description = source.getDescription();
+        isDone = source.getDoneTask();
     }
 
     /**
@@ -39,7 +42,11 @@ class JsonAdaptedTask {
      */
     public Task toModelType() throws IllegalValueException {
         final Description modelDescription = createDescription();
-        return new Task(modelDescription);
+        Task task = new Task(modelDescription);
+        if (task.getDoneTask()) {
+            task.setDoneTask();
+        }
+        return task;
     }
 
     private Description createDescription() throws IllegalValueException {
@@ -63,6 +70,7 @@ class JsonAdaptedTask {
         }
         JsonAdaptedTask o = (JsonAdaptedTask) other;
         boolean haveSameDescriptions = description.equals(o.description);
-        return haveSameDescriptions;
+        boolean areBothMarkedAsDone = isDone == o.isDone;
+        return haveSameDescriptions && areBothMarkedAsDone;
     }
 }
