@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -21,6 +22,7 @@ import seedu.address.model.task.exceptions.DuplicateTaskException;
  * Jackson-friendly version of {@link Group}.
  */
 @JsonDeserialize(builder = JsonAdaptedGroup.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
