@@ -21,6 +21,8 @@ public class CommandResult {
 
     private ApplicationState nextApplicationState;
 
+    private Object nextDataToStore;
+
     /**
      * Builder class to help with creating different types of {@code CommandResult} objects.
      */
@@ -96,6 +98,11 @@ public class CommandResult {
             commandResultToBuild.nextApplicationState = nextApplicationState;
             return this;
         }
+
+        public <T> Builder setNextDataToStore(T nextDataToStore) {
+            commandResultToBuild.nextDataToStore = nextDataToStore;
+            return this;
+        }
     }
 
     /**
@@ -106,6 +113,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         nextApplicationState = ApplicationState.HOME;
+        nextDataToStore = null;
     }
 
     /**
@@ -117,6 +125,7 @@ public class CommandResult {
         showHelp = false;
         exit = false;
         nextApplicationState = ApplicationState.HOME;
+        nextDataToStore = null;
     }
 
     public String getFeedbackToUser() {
@@ -147,15 +156,19 @@ public class CommandResult {
         }
 
         CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && nextApplicationState.equals(otherCommandResult.nextApplicationState);
+        boolean haveSameFeedbacksToUser = feedbackToUser.equals(otherCommandResult.feedbackToUser);
+        boolean willBothShowHelp = showHelp == otherCommandResult.showHelp;
+        boolean willBothExit = exit == otherCommandResult.exit;
+        boolean haveSameNextApplicationStates = nextApplicationState.equals(otherCommandResult.nextApplicationState);
+        boolean haveNullNextDataToStore = nextDataToStore == null && otherCommandResult.nextDataToStore == null;
+        boolean haveSameNextDataToStore = haveNullNextDataToStore
+                || (nextDataToStore != null && nextDataToStore.equals(otherCommandResult.nextDataToStore));
+        return haveSameFeedbacksToUser && willBothShowHelp && willBothExit && haveSameNextApplicationStates
+                && haveSameNextDataToStore;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationState);
+        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationState, nextDataToStore);
     }
-
 }
