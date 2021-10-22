@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.logic.AppState;
+import seedu.address.logic.state.ApplicationState;
 
 /**
  * Represents the result of a command execution.
@@ -19,7 +19,7 @@ public class CommandResult {
     /** The application should exit. */
     private boolean exit;
 
-    private AppState nextAppState;
+    private ApplicationState nextApplicationState;
 
     /**
      * Builder class to help with creating different types of {@code CommandResult} objects.
@@ -89,11 +89,11 @@ public class CommandResult {
         /**
          * Sets the {@code CommandResult} object to cause the application to change to the given state.
          *
-         * @param nextAppState The application state to change to as a result of the command execution.
+         * @param nextApplicationState The application state to change to as a result of the command execution.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setNextAppState(AppState nextAppState) {
-            commandResultToBuild.nextAppState = nextAppState;
+        public Builder setNextAppState(ApplicationState nextApplicationState) {
+            commandResultToBuild.nextApplicationState = nextApplicationState;
             return this;
         }
     }
@@ -105,7 +105,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        nextAppState = AppState.HOME;
+        nextApplicationState = ApplicationState.HOME;
     }
 
     /**
@@ -116,7 +116,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         showHelp = false;
         exit = false;
-        nextAppState = AppState.HOME;
+        nextApplicationState = ApplicationState.HOME;
     }
 
     public String getFeedbackToUser() {
@@ -131,8 +131,8 @@ public class CommandResult {
         return exit;
     }
 
-    public AppState getNextAppState() {
-        return nextAppState;
+    public ApplicationState getNextAppState() {
+        return nextApplicationState;
     }
 
     @Override
@@ -150,12 +150,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && nextAppState.equals(otherCommandResult.nextAppState);
+                && nextApplicationState.equals(otherCommandResult.nextApplicationState);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, nextAppState);
+        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationState);
     }
 
 }

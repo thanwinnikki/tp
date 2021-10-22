@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.AppState;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -203,8 +203,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            AppState nextAppState = commandResult.getNextAppState();
-            changeDisplayForNextAppState(nextAppState);
+            ApplicationState nextApplicationState = commandResult.getNextAppState();
+            changeDisplayForNextAppState(nextApplicationState);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -214,8 +214,8 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void changeDisplayForNextAppState(AppState nextAppState) {
-        switch (nextAppState) {
+    private void changeDisplayForNextAppState(ApplicationState nextApplicationState) {
+        switch (nextApplicationState) {
         case HOME:
             changeDisplayForHomeAppState();
             break;
@@ -223,7 +223,7 @@ public class MainWindow extends UiPart<Stage> {
             changeDisplayForGroupInformationAppState();
             break;
         default:
-            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextAppState);
+            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationState);
         }
     }
 

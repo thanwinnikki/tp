@@ -1,9 +1,9 @@
-package seedu.address.logic;
+package seedu.address.logic.state;
 
 /**
  * An enum representing an application state.
  */
-public enum AppState {
+public enum ApplicationState {
     HOME,
     GROUP_INFORMATION
 }
