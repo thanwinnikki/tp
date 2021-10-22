@@ -365,7 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User types help command into the terminal or click “help” button.
 2. ThunderCat open the instruction page for user.
 
-**Use case: UC04 - Delete the contact from a group**
+**Use case: UC04 - Remove a contact from a group**
 
 **MSS**
 1. User enters the user's ID to be deleted and group's ID that the contact is in.
@@ -399,6 +399,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. ThunderCat announces that the task already exists.
     * 2b2. User starts again from step 2.
 
+**Use case: UC06 - Add a new Group**
+
+**MSS**
+1  User enters the group name and description to be added.
+2. ThunderCat announces that the group is successfully created.
+   Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command.
+    * 1a1. ThunderCat announces that the command format is wrong and shows an example of the correct format.
+    * 1a2. User starts again from step 1.
+* 1b. ThunderCat detects that the group already exists in the application.
+    * 1b1. ThunderCat announces that the group already exists.
+    * 1b2. User starts again from step 1.
 
 ### Non-Functional Requirements
 
