@@ -1,5 +1,8 @@
 package seedu.address.logic.state;
 
+/**
+ * Represents the data store for {@code ApplicationState.HOME}.
+ */
 public class HomeStateData extends ApplicationStateData<Void> {
 
     private static HomeStateData instance;

@@ -6,11 +6,26 @@ package seedu.address.logic.state;
  */
 public abstract class ApplicationStateData<T> {
 
+    /**
+     * Returns true if the application state associated with this data store can store data.
+     *
+     * @return Whether the application state associated with this data store can store data.
+     */
     public boolean isAbleToStoreData() {
         return false;
     }
 
+    /**
+     * Obtains the data stored in this data store.
+     *
+     * @return The data stored.
+     */
     public abstract T getData();
 
+    /**
+     * Sets the data stored in this data store.
+     *
+     * @param data The data to be stored.
+     */
     public abstract void setData(T data);
 }

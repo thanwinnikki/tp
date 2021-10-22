@@ -2,6 +2,9 @@ package seedu.address.logic.state;
 
 import seedu.address.model.group.Group;
 
+/**
+ * Represents the data store for {@code ApplicationState.GROUP_INFORMATION}.
+ */
 public class GroupInformationStateData extends ApplicationStateData<Group> {
 
     private static GroupInformationStateData instance;
