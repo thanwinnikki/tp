@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Description;
+import seedu.address.model.common.Description;
 import seedu.address.model.task.Task;
 
 /**
