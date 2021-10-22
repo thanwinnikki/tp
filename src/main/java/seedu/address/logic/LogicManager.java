@@ -49,7 +49,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = addressBookParser.parseCommand(commandText, currentDataStored);
         if (!command.isAbleToRunInAppState(currentApplicationState)) {
             throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
         }
