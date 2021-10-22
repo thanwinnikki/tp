@@ -43,9 +43,8 @@ public class MatesCommand extends Command {
         Group group = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         model.updateFilteredGroupList(new IsGroupPredicate(group));
-        ApplicationState.GROUP_INFORMATION.setData(group);
         return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .setNextAppState(ApplicationState.GROUP_INFORMATION)
+                .setNextAppState(ApplicationState.HOME)
                 .build();
     }
 
