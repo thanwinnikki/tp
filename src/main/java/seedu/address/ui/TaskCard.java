@@ -31,7 +31,7 @@ public class TaskCard extends Card {
     private Label description;
 
     /**
-     * Creates a {@code GroupCard} with the given {@code Group} and index to display.
+     * Creates a {@code TaskCard} with the given {@code Task} and index to display.
      */
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
