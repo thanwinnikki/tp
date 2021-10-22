@@ -402,14 +402,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC06 - Add a new Group**
 
 **MSS**
-1  User enters the group name and description to be added.
+1.  User enters the group name and description to be added.
 2. ThunderCat announces that the group is successfully created.
    Use case ends.
 
 **Extensions**
-* 1a. ThunderCat detects an error in the entered command.
-    * 1a1. ThunderCat announces that the command format is wrong and shows an example of the correct format.
-    * 1a2. User starts again from step 1.
+* 1a. ThunderCat detects an error in the entered command (UC01 -extension 1a).
 * 1b. ThunderCat detects that the group already exists in the application.
     * 1b1. ThunderCat announces that the group already exists.
     * 1b2. User starts again from step 1.
