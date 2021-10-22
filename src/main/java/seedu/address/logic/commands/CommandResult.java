@@ -157,6 +157,10 @@ public class CommandResult {
         return nextApplicationState;
     }
 
+    public <T> T getNextDataToStore() {
+        return (T) nextDataToStore;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

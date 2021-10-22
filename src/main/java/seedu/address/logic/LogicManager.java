@@ -31,6 +31,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
     private ApplicationState currentApplicationState;
+    private Object currentDataStored;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -40,6 +41,7 @@ public class LogicManager implements Logic {
         this.storage = storage;
         addressBookParser = new AddressBookParser();
         currentApplicationState = ApplicationState.HOME;
+        currentDataStored = null;
     }
 
     @Override
@@ -53,6 +55,7 @@ public class LogicManager implements Logic {
         }
         commandResult = command.execute(model);
         currentApplicationState = commandResult.getNextAppState();
+        currentDataStored = commandResult.getNextDataToStore();
 
         try {
             storage.saveAddressBook(model.getAddressBook());
