@@ -1,11 +1,14 @@
 package seedu.address.logic.state;
 
+import seedu.address.model.group.Group;
+
 /**
  * An enum representing an application state.
  */
 public enum ApplicationState {
-    HOME(HomeStateData.getInstance()),
-    GROUP_INFORMATION(GroupInformationStateData.getInstance());
+
+    GROUP_INFORMATION(GroupInformationStateData.getInstance()),
+    HOME(HomeStateData.getInstance());
 
     private final ApplicationStateData applicationStateData;
 
@@ -13,7 +16,25 @@ public enum ApplicationState {
         this.applicationStateData = applicationStateData;
     }
 
-    public <T> ApplicationStateData<T> getApplicationStateData() {
-        return applicationStateData;
+    public <T> T getData() {
+        Object data = applicationStateData.getData();
+        return (T) data;
+    }
+
+    public <T> void setData(T data) {
+        checkData(data);
+        applicationStateData.setData(data);
+    }
+
+    private <T> void checkData(T data) {
+        switch (this) {
+        case GROUP_INFORMATION:
+            assert data instanceof Group : String.format("Data should be of %s type.", Group.class.getSimpleName());
+            break;
+        case HOME:
+            // explicit fall-through
+        default:
+            assert false : "This state does not store data.";
+        }
     }
 }
