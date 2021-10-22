@@ -9,7 +9,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
 /**
- * Jackson-friendly version of {@link Group}. // TODO: change Tag to Task
+ * Jackson-friendly version of {@link Group}.
  */
 class JsonAdaptedTask {
 
