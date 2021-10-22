@@ -206,6 +206,12 @@ public class JsonAdaptedGroup {
             return true;
         }
         JsonAdaptedGroup o = (JsonAdaptedGroup) other;
-        return name.equals(o.name) && groupMateIds.equals(o.groupMateIds);
+        boolean haveSameNames = name.equals(o.name);
+        boolean haveSameGroupMateIdLists = groupMateIds.equals(o.groupMateIds);
+        boolean haveSameTaskLists = tasks.equals(o.tasks);
+        boolean haveNullDescriptions = description == null && o.description == null;
+        boolean haveSameDescriptions = haveNullDescriptions
+                || description != null && description.equals(o.description);
+        return haveSameNames && haveSameGroupMateIdLists && haveSameTaskLists && haveSameDescriptions;
     }
 }
