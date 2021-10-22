@@ -2,6 +2,8 @@ package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.model.group.Description;
+
 /**
  * Represents a Task in the address book.
  * Guarantees: Details are present and not null. There are no restrictions to what is allowed as a description.
@@ -11,18 +13,18 @@ public class Task {
     private static final String DONE_TASK = "[DONE] ";
     private static final String UNDONE_TASK = "[    ] ";
 
-    private final String description;
+    private final Description description;
     private boolean done = false;
 
     /**
      * description must be present and not null.
      */
-    public Task(String description) {
+    public Task(Description description) {
         requireNonNull(description);
         this.description = description;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
