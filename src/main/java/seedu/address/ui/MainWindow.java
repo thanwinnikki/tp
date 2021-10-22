@@ -17,7 +17,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.state.ApplicationState;
-import seedu.address.model.group.Group;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -221,8 +220,7 @@ public class MainWindow extends UiPart<Stage> {
             changeDisplayForHomeAppState();
             break;
         case GROUP_INFORMATION:
-            Group group = nextApplicationState.getData();
-            changeDisplayForGroupInformationAppState(group);
+            changeDisplayForGroupInformationAppState();
             break;
         default:
             assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationState);
@@ -234,8 +232,9 @@ public class MainWindow extends UiPart<Stage> {
         listPanelRight.setList(logic.getFilteredGroupList());
     }
 
-    private void changeDisplayForGroupInformationAppState(Group group) {
+    private void changeDisplayForGroupInformationAppState() {
         listPanelLeft.setList(logic.getFilteredGroupList());
-        listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
+        // TODO: replace with tasks list
+        listPanelRight.setList(logic.getFilteredPersonList());
     }
 }
