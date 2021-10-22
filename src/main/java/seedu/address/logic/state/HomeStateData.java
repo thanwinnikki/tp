@@ -1,6 +1,6 @@
 package seedu.address.logic.state;
 
-public class HomeStateData implements ApplicationStateData<Void> {
+public class HomeStateData extends ApplicationStateData<Void> {
 
     private static HomeStateData instance;
 

@@ -4,9 +4,13 @@ package seedu.address.logic.state;
  * Represents a piece of data stored when the application is in a certain state.
  * Any implementing class should be a singleton.
  */
-public interface ApplicationStateData<T> {
+public abstract class ApplicationStateData<T> {
 
-    T getData();
+    public boolean isAbleToStoreData() {
+        return false;
+    }
 
-    void setData(T data);
+    public abstract T getData();
+
+    public abstract void setData(T data);
 }

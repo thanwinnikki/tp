@@ -2,7 +2,7 @@ package seedu.address.logic.state;
 
 import seedu.address.model.group.Group;
 
-public class GroupInformationStateData implements ApplicationStateData<Group> {
+public class GroupInformationStateData extends ApplicationStateData<Group> {
 
     private static GroupInformationStateData instance;
 
@@ -15,6 +15,11 @@ public class GroupInformationStateData implements ApplicationStateData<Group> {
             instance = new GroupInformationStateData();
         }
         return instance;
+    }
+
+    @Override
+    public boolean isAbleToStoreData() {
+        return true;
     }
 
     @Override

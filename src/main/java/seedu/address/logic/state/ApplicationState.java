@@ -17,6 +17,7 @@ public enum ApplicationState {
     }
 
     public <T> T getData() {
+        assert applicationStateData.isAbleToStoreData() : "This state does not store data.";
         Object data = applicationStateData.getData();
         return (T) data;
     }
