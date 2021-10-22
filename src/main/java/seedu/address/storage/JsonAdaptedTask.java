@@ -52,4 +52,17 @@ class JsonAdaptedTask {
         }
         return new Description(description);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof JsonAdaptedTask)) {
+            return false;
+        }
+        if (this == other) {
+            return true;
+        }
+        JsonAdaptedTask o = (JsonAdaptedTask) other;
+        boolean haveSameDescriptions = description.equals(o.description);
+        return haveSameDescriptions;
+    }
 }
