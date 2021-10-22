@@ -123,8 +123,11 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the address book data
+* i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* all `Group` objects (which are contained in a `UniquePersonList` object). 
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Works similarly for the `Group` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -377,6 +380,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1c. ThunderCat cannot find the contact needed to be deleted in the group.
     * 1c1. ThunderCat announces that the contact cannot be found.
     * 1c2. User start again from step 1.
+    
+**Use case: UC05 - Add a task to the group**
+
+**MSS**
+1. User navigates to the group which the user want to add tasks to.
+2. User enters the task description to be added to the group.
+3. ThunderCat announces that the task is successfully added to the group.
+    Use case ends.
+   
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC01 -extension 1a).
+* 1b. ThunderCat cannot find the group with the given group's ID. (UC04 - extension 1b).
+* 2a. ThunderCat detects an error in the entered command.
+    * 2a1. ThunderCat announces that the command format is wrong and shows an example of the correct format.
+    * 2a2. User starts again from step 2.
+* 2b. ThunderCat detects that the task already exists in the group.
+    * 2b1. ThunderCat announces that the task already exists.
+    * 2b2. User starts again from step 2.
 
 
 ### Non-Functional Requirements
