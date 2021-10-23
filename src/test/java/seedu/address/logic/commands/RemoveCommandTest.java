@@ -38,6 +38,9 @@ public class RemoveCommandTest {
         // set person to remove as the first person
         Person personToRemove = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
         String expectedMessage = String.format(RemoveCommand.MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove);
+        CommandResult expectedCommandResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(group)
+                .build();
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
         setFilteredList(expectedModel, getFirstGroup(expectedModel));
@@ -45,7 +48,7 @@ public class RemoveCommandTest {
         getFirstGroup(expectedModel).getPersons().remove(personToRemove);
         setFilteredList(expectedModel, getFirstGroup(expectedModel));
 
-        assertCommandSuccess(removeCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(removeCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

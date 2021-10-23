@@ -49,7 +49,9 @@ public class DeleteTaskCommand extends Command {
         Task targetTask = targetTaskList.getTask(targetIndex.getZeroBased());
 
         targetGroup.deleteTask(targetTask);
-        return new CommandResult(String.format(MESSAGE_REMOVE_TASK_SUCCESS, targetTask));
+        return new CommandResult.Builder(String.format(MESSAGE_REMOVE_TASK_SUCCESS, targetTask))
+                .displayGroupInformation(targetGroup)
+                .build();
     }
 
     @Override

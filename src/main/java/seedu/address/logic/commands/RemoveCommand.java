@@ -52,7 +52,9 @@ public class RemoveCommand extends Command {
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
-        return new CommandResult(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove));
+        return new CommandResult.Builder(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove))
+                .displayGroupInformation(group)
+                .build();
     }
 
     @Override

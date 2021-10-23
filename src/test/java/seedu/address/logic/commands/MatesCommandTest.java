@@ -44,10 +44,13 @@ public class MatesCommandTest {
         MatesCommand command = new MatesCommand(INDEX_FIRST);
 
         String expectedMessage = MatesCommand.MESSAGE_SUCCESS;
+        CommandResult expectedCommandResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(groupToDisplay)
+                .build();
         expectedModel.updateFilteredPersonList(personPredicate);
         expectedModel.updateFilteredGroupList(groupPredicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
     }
 
@@ -69,10 +72,13 @@ public class MatesCommandTest {
         MatesCommand command = new MatesCommand(INDEX_FIRST);
 
         String expectedMessage = MatesCommand.MESSAGE_SUCCESS;
+        CommandResult expectedCommandResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(groupToDisplay)
+                .build();
         expectedModel.updateFilteredPersonList(personPredicate);
         expectedModel.updateFilteredGroupList(groupPredicate);
 
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL), model.getFilteredPersonList());
     }
 
