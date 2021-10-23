@@ -13,7 +13,7 @@ import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
-public class RemoveCommand extends AlwaysRunnableCommand {
+public class RemoveCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "remove";
 
@@ -24,10 +24,15 @@ public class RemoveCommand extends AlwaysRunnableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_REMOVE_PERSON_SUCCESS = "Removed Person: %1$s";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of removal of group mate: %1$s";
 
     private final Index targetIndex;
 
     private final Index firstIndex = Index.fromZeroBased(0);
+
+    private Person personRemoved;
+    private Group groupWithRemoval;
+    private Group groupWithoutRemoval;
 
     public RemoveCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -48,12 +53,24 @@ public class RemoveCommand extends AlwaysRunnableCommand {
         }
 
         Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());
+        personRemoved = personToRemove;
         Group group = lastShownGroupList.get(firstIndex.getZeroBased());
+        groupWithoutRemoval = new Group(group);
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
+        groupWithRemoval = group;
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         return new CommandResult.Builder(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove))
                 .displayGroupInformation(group)
+                .build();
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        model.setGroup(groupWithRemoval, groupWithoutRemoval);
+        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupWithoutRemoval));
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personRemoved))
+                .displayGroupInformation(groupWithoutRemoval)
                 .build();
     }
 
