@@ -11,7 +11,6 @@ import seedu.address.model.group.Group;
 
 public class AddGroupCommand extends AlwaysRunnableCommand {
     public static final String COMMAND_WORD = "addG";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
 
