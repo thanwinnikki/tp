@@ -4,9 +4,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Represents a {@code StateDependentCommand} that can be undone.
+ * Represents a {@code Command} that can be undone.
  */
-public interface UndoableStateDependentCommand extends StateDependentCommand {
+public interface UndoableCommand extends Command {
 
     /**
      * Undoes the command and returns the result message.

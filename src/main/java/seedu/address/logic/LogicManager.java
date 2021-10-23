@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.StateDependentCommand;
-import seedu.address.logic.commands.UndoableStateDependentCommand;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -35,7 +35,7 @@ public class LogicManager implements Logic {
     private final AddressBookParser addressBookParser;
     private ApplicationState currentApplicationState;
     private Object currentDataStored;
-    private Stack<UndoableStateDependentCommand> undoableCommandStack;
+    private Stack<UndoableCommand> undoableCommandStack;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -119,15 +119,15 @@ public class LogicManager implements Logic {
         if (!(mustUndo && canUndo)) {
             return commandResult;
         }
-        UndoableStateDependentCommand undoableStateDependentCommand = undoableCommandStack.pop();
-        CommandResult undoResult = undoableStateDependentCommand.undo(model);
+        UndoableCommand undoableCommand = undoableCommandStack.pop();
+        CommandResult undoResult = undoableCommand.undo(model);
         processCommandResult(undoResult);
         return undoResult;
     }
 
     private void addToUndoableCommandStackIfUndoable(Command command) {
-        if (command instanceof UndoableStateDependentCommand) {
-            undoableCommandStack.push((UndoableStateDependentCommand) command);
+        if (command instanceof UndoableCommand) {
+            undoableCommandStack.push((UndoableCommand) command);
         }
     }
 }
