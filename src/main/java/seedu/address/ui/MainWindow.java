@@ -12,11 +12,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.AppState;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.state.ApplicationState;
+import seedu.address.model.group.Group;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -203,8 +204,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            AppState nextAppState = commandResult.getNextAppState();
-            changeDisplayForNextAppState(nextAppState);
+            changeDisplayForNextAppState(commandResult);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
@@ -214,16 +214,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void changeDisplayForNextAppState(AppState nextAppState) {
-        switch (nextAppState) {
+    private void changeDisplayForNextAppState(CommandResult commandResult) {
+        ApplicationState nextApplicationState = commandResult.getNextAppState();
+        switch (nextApplicationState) {
         case HOME:
             changeDisplayForHomeAppState();
             break;
         case GROUP_INFORMATION:
-            changeDisplayForGroupInformationAppState();
+            Group group = commandResult.getNextDataToStore();
+            changeDisplayForGroupInformationAppState(group);
             break;
         default:
-            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextAppState);
+            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationState);
         }
     }
 
@@ -232,9 +234,8 @@ public class MainWindow extends UiPart<Stage> {
         listPanelRight.setList(logic.getFilteredGroupList());
     }
 
-    private void changeDisplayForGroupInformationAppState() {
-        listPanelLeft.setList(logic.getFilteredGroupList());
-        // Temp, can change it to getTodoList later
-        listPanelRight.setList(logic.getFilteredPersonList());
+    private void changeDisplayForGroupInformationAppState(Group group) {
+        listPanelLeft.setList(logic.getFilteredPersonList());
+        listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
     }
 }
