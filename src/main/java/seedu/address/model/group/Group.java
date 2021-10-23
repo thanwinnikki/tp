@@ -108,6 +108,16 @@ public class Group {
     }
 
     /**
+     * Checks whether the group has the given task.
+     *
+     * @param task The task.
+     * @return Whether the group has the given task.
+     */
+    public boolean hasTask(Task task) {
+        return tasks.contains(task);
+    }
+
+    /**
      * Carries out the given actions on each group mate in this group.
      *
      * @param groupMateConsumer The {@code Consumer} that performs actions on each group mate.

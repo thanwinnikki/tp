@@ -16,7 +16,7 @@ import seedu.address.model.task.UniqueTaskList;
 /**
  * Adds a person to the address book.
  */
-public class AddTaskCommand extends AlwaysRunnableCommand {
+public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "addT";
 
@@ -28,9 +28,12 @@ public class AddTaskCommand extends AlwaysRunnableCommand {
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the group";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of addition of task: %1$s";
 
     private final Task toAdd;
     private final Index firstIndex = Index.fromZeroBased(0);
+
+    private Group groupToChange;
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
@@ -48,14 +51,22 @@ public class AddTaskCommand extends AlwaysRunnableCommand {
             //todo
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
-        Group group = lastShownGroupList.get(firstIndex.getZeroBased());
-        UniqueTaskList tasks = group.getTasks();
+        groupToChange = lastShownGroupList.get(firstIndex.getZeroBased());
+        UniqueTaskList tasks = groupToChange.getTasks();
         if (tasks.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         tasks.add(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        groupToChange.deleteTask(toAdd);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
+                .displayGroupInformation(groupToChange)
+                .build();
     }
 
     @Override
