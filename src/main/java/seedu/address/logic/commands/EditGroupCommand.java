@@ -25,9 +25,9 @@ public class EditGroupCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] + \n"
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "CS2100"
+            + PREFIX_NAME + "CS2100 "
             + PREFIX_DESCRIPTION + "This is a group for CS";
 
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
