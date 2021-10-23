@@ -1,18 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
-import static seedu.address.testutil.TypicalIndexes.INDEX_INVALID;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -20,72 +16,68 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.GroupBuilder;
 
 public class AddGroupCommandTest {
-    private Set<Index> emptySet = Collections.emptySet();
-    private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
-    public void constructor_nullGroupIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddGroupCommand(null, emptySet));
-    }
-
-    @Test
-    public void constructor_nullPersonIndexSet_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddGroupCommand(Index.fromZeroBased(0), null));
+    public void constructor_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddGroupCommand(null));
     }
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        Group validGroup = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
-        Person validPerson = model.getFilteredPersonList().get(INDEX_FIRST.getOneBased());
+        ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
+        Group validGroup = new GroupBuilder().build();
 
-        Set<Person> personSet = new HashSet<>();
-        personSet.add(validPerson);
+        CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
-        Set<Index> personIndexesSet = new HashSet<>();
-        personIndexesSet.add(INDEX_FIRST);
-
-        AddGroupCommand addGroupCommand = new AddGroupCommand(INDEX_SECOND, personIndexesSet);
-
-        String expectedMessage = String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addToGroup(validGroup, personSet);
-
-        assertCommandSuccess(addGroupCommand, model, expectedMessage, expectedModel);
+        assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
     @Test
-    public void execute_invalidPersonIndex_throwsCommandException() {
-        Set<Index> personIndexesSet = new HashSet<>();
-        personIndexesSet.add(INDEX_INVALID);
+    public void execute_duplicateGroup_throwsCommandException() {
+        Group validGroup = new GroupBuilder().build();
+        AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
+        ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
-        AddGroupCommand addGroupCommand = new AddGroupCommand(INDEX_SECOND, personIndexesSet);
-        String expectedMessage = AddGroupCommand.MESSAGE_INVALID_PERSON_INDEX;
-
-        assertCommandFailure(addGroupCommand, model, expectedMessage);
+        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
+                addGroupCommand.execute(modelStub));
     }
 
     @Test
-    public void execute_invalidGroupIndex_throwsCommandException() {
-        Set<Index> personIndexesSet = new HashSet<>();
-        personIndexesSet.add(Index.fromZeroBased(1));
+    public void equals() {
+        Group tennis = new GroupBuilder().withName("Tennis").build();
+        Group swimming = new GroupBuilder().withName("Swimming").build();
+        AddGroupCommand tennisAddGroupCommand = new AddGroupCommand(tennis);
+        AddGroupCommand swimmingAddGroupCommand = new AddGroupCommand(swimming);
 
-        AddGroupCommand addGroupCommand = new AddGroupCommand(Index.fromOneBased(30), personIndexesSet);
-        String expectedMessage = AddGroupCommand.MESSAGE_INVALID_GROUP_INDEX;
+        // same object -> returns true
+        assertTrue(tennisAddGroupCommand.equals(tennisAddGroupCommand));
 
-        assertCommandFailure(addGroupCommand, model, expectedMessage);
+        // same values -> returns true
+        AddGroupCommand tennisAddGroupCommandCopy = new AddGroupCommand(tennis);
+        assertTrue(tennisAddGroupCommand.equals(tennisAddGroupCommandCopy));
+
+        // different types -> returns false
+        assertFalse(tennisAddGroupCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(tennisAddGroupCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(tennisAddGroupCommand.equals(swimmingAddGroupCommand));
+
     }
+
 
     /**
      * A default model stub that have all of the methods failing.
@@ -199,7 +191,25 @@ public class AddGroupCommandTest {
     }
 
     /**
-     * A Model stub that always accept the group being added.
+     * A Model stub that contains a single person.
+     */
+    private class ModelStubWithGroup extends AddGroupCommandTest.ModelStub {
+        private final Group group;
+
+        ModelStubWithGroup(Group group) {
+            requireNonNull(group);
+            this.group = group;
+        }
+
+        @Override
+        public boolean hasGroup(Group group) {
+            requireNonNull(group);
+            return this.group.isSameGroup(group);
+        }
+    }
+
+    /**
+     * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();

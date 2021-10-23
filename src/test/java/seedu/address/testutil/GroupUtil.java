@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import seedu.address.logic.commands.GroupCommand;
+import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.model.group.Group;
 
 public class GroupUtil {
@@ -11,7 +11,7 @@ public class GroupUtil {
      * Returns an group command string for adding the {@code group}.
      */
     public static String getGroupCommand(Group group) {
-        return GroupCommand.COMMAND_WORD + " " + getGroupDetails(group);
+        return AddGroupCommand.COMMAND_WORD + " " + getGroupDetails(group);
     }
 
     /**
