@@ -46,7 +46,7 @@ public class GroupCommand extends Command {
 
         model.addGroup(toAdd);
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
-                .setNextAppState(ApplicationState.GROUP_INFORMATION)
+                .setNextAppState(ApplicationState.HOME)
                 .build();
     }
 

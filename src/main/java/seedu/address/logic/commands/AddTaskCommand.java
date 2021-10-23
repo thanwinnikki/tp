@@ -55,7 +55,8 @@ public class AddTaskCommand extends Command {
         }
 
         tasks.add(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd)).displayGroupInformation(group)
+                .build();
     }
 
     @Override
