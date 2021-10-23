@@ -60,17 +60,17 @@ public class AddCommand extends AlwaysRunnableCommand implements UndoableCommand
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
-    }
-
-    @Override
     public CommandResult undo(Model model) throws CommandException {
         assert model.hasPerson(toAdd) : "The model must contain the person to undo its addition.";
         model.deletePerson(toAdd);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
                 .build();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddCommand // instanceof handles nulls
+                && toAdd.equals(((AddCommand) other).toAdd));
     }
 }
