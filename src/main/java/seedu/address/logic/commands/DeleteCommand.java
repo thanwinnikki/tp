@@ -57,6 +57,7 @@ public class DeleteCommand extends AlwaysRunnableCommand implements UndoableComm
         // Probably not the best to save the whole address book but this is the easiest way to undo
         model.setAddressBook(oldReadOnlyAddressBook);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personToDelete))
                 .goToHome()
                 .build();

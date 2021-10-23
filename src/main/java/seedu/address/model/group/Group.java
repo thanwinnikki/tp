@@ -49,6 +49,22 @@ public class Group {
         this.tasks = new UniqueTaskList();
     }
 
+    /**
+     * Copies the given group.
+     *
+     * @param groupToCopy The group to be copied.
+     */
+    public Group(Group groupToCopy) {
+        name = groupToCopy.name;
+        description = groupToCopy.description;
+        persons = new UniquePersonList();
+        UniquePersonList oldUniquePersonList = groupToCopy.persons;
+        oldUniquePersonList.forEach(persons::add);
+        tasks = new UniqueTaskList();
+        UniqueTaskList oldUniqueTaskList = groupToCopy.tasks;
+        oldUniqueTaskList.forEach(tasks::add);
+    }
+
     public Name getName() {
         return name;
     }
