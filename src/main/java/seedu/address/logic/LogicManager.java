@@ -46,6 +46,7 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
         currentApplicationState = ApplicationState.HOME;
         currentDataStored = null;
+        undoableCommandStack = new Stack<>();
     }
 
     @Override
