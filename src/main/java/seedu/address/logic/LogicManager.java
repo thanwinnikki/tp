@@ -58,6 +58,7 @@ public class LogicManager implements Logic {
         checkIfCommandCanRunInApplicationState(command);
         commandResult = command.execute(model);
         processCommandResult(commandResult);
+        commandResult = undoIfMustUndo(commandResult);
         addToUndoableCommandStackIfUndoable(command);
 
         try {
@@ -110,15 +111,18 @@ public class LogicManager implements Logic {
     private void processCommandResult(CommandResult commandResult) throws CommandException {
         currentApplicationState = commandResult.getNextAppState();
         currentDataStored = commandResult.getNextDataToStore();
-        undoIfMustUndo(commandResult);
     }
 
-    private void undoIfMustUndo(CommandResult commandResult) throws CommandException {
-        if (commandResult.isGoingToCauseUndo()) {
-            UndoableStateDependentCommand undoableStateDependentCommand = undoableCommandStack.pop();
-            CommandResult undoResult = undoableStateDependentCommand.undo(model);
-            processCommandResult(undoResult);
+    private CommandResult undoIfMustUndo(CommandResult commandResult) throws CommandException {
+        boolean mustUndo = commandResult.isGoingToCauseUndo();
+        boolean canUndo = !undoableCommandStack.empty();
+        if (!(mustUndo && canUndo)) {
+            return commandResult;
         }
+        UndoableStateDependentCommand undoableStateDependentCommand = undoableCommandStack.pop();
+        CommandResult undoResult = undoableStateDependentCommand.undo(model);
+        processCommandResult(undoResult);
+        return undoResult;
     }
 
     private void addToUndoableCommandStackIfUndoable(Command command) {

@@ -10,11 +10,13 @@ public class UndoCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_SUCCESS = "Command undone.";
+    public static final String MESSAGE_NOTHING_UNDONE = "Nothing remaining can be undone.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return new CommandResult.Builder(MESSAGE_SUCCESS)
+        // This message will not appear if something was undone and the CommandResult from its undo replaces this.
+        // This means this message will only appear if nothing was undone.
+        return new CommandResult.Builder(MESSAGE_NOTHING_UNDONE)
                 .goCauseUndo()
                 .build();
     }
