@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -93,8 +93,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_group() throws Exception {
         Group group = new GroupBuilder().build();
-        GroupCommand command = (GroupCommand) parser.parseCommand(GroupUtil.getGroupCommand(group), null);
-        assertEquals(new GroupCommand(group), command);
+        AddGroupCommand command = (AddGroupCommand) parser.parseCommand(GroupUtil.getGroupCommand(group), null);
+        assertEquals(new AddGroupCommand(group), command);
     }
 
 

@@ -25,11 +25,11 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
 
-public class GroupCommandTest {
+public class AddGroupCommandTest {
 
     @Test
     public void constructor_nullGroup_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new GroupCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddGroupCommand(null));
     }
 
     @Test
@@ -37,44 +37,44 @@ public class GroupCommandTest {
         ModelStubAcceptingGroupAdded modelStub = new ModelStubAcceptingGroupAdded();
         Group validGroup = new GroupBuilder().build();
 
-        CommandResult commandResult = new GroupCommand(validGroup).execute(modelStub);
+        CommandResult commandResult = new AddGroupCommand(validGroup).execute(modelStub);
 
-        assertEquals(String.format(GroupCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddGroupCommand.MESSAGE_SUCCESS, validGroup), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGroup), modelStub.groupsAdded);
     }
 
     @Test
     public void execute_duplicateGroup_throwsCommandException() {
         Group validGroup = new GroupBuilder().build();
-        GroupCommand groupCommand = new GroupCommand(validGroup);
+        AddGroupCommand addGroupCommand = new AddGroupCommand(validGroup);
         ModelStub modelStub = new ModelStubWithGroup(validGroup);
 
-        assertThrows(CommandException.class, GroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
-                groupCommand.execute(modelStub));
+        assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
+                addGroupCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Group tennis = new GroupBuilder().withName("Tennis").build();
         Group swimming = new GroupBuilder().withName("Swimming").build();
-        GroupCommand tennisGroupCommand = new GroupCommand(tennis);
-        GroupCommand swimmingGroupCommand = new GroupCommand(swimming);
+        AddGroupCommand tennisAddGroupCommand = new AddGroupCommand(tennis);
+        AddGroupCommand swimmingAddGroupCommand = new AddGroupCommand(swimming);
 
         // same object -> returns true
-        assertTrue(tennisGroupCommand.equals(tennisGroupCommand));
+        assertTrue(tennisAddGroupCommand.equals(tennisAddGroupCommand));
 
         // same values -> returns true
-        GroupCommand tennisGroupCommandCopy = new GroupCommand(tennis);
-        assertTrue(tennisGroupCommand.equals(tennisGroupCommandCopy));
+        AddGroupCommand tennisAddGroupCommandCopy = new AddGroupCommand(tennis);
+        assertTrue(tennisAddGroupCommand.equals(tennisAddGroupCommandCopy));
 
         // different types -> returns false
-        assertFalse(tennisGroupCommand.equals(1));
+        assertFalse(tennisAddGroupCommand.equals(1));
 
         // null -> returns false
-        assertFalse(tennisGroupCommand.equals(null));
+        assertFalse(tennisAddGroupCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(tennisGroupCommand.equals(swimmingGroupCommand));
+        assertFalse(tennisAddGroupCommand.equals(swimmingAddGroupCommand));
 
     }
 
@@ -193,7 +193,7 @@ public class GroupCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithGroup extends GroupCommandTest.ModelStub {
+    private class ModelStubWithGroup extends AddGroupCommandTest.ModelStub {
         private final Group group;
 
         ModelStubWithGroup(Group group) {
@@ -211,7 +211,7 @@ public class GroupCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingGroupAdded extends GroupCommandTest.ModelStub {
+    private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override

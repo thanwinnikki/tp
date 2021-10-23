@@ -9,8 +9,8 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
-public class GroupCommand extends Command {
-    public static final String COMMAND_WORD = "group";
+public class AddGroupCommand extends Command {
+    public static final String COMMAND_WORD = "addG";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
 
@@ -31,7 +31,7 @@ public class GroupCommand extends Command {
     /**
      * Creates an GroupCommand to add the specified {@code Group}
      */
-    public GroupCommand(Group group) {
+    public AddGroupCommand(Group group) {
         requireNonNull(group);
         toAdd = group;
     }
@@ -53,7 +53,7 @@ public class GroupCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof GroupCommand // instanceof handles nulls
-                && toAdd.equals(((GroupCommand) other).toAdd));
+                || (other instanceof AddGroupCommand // instanceof handles nulls
+                && toAdd.equals(((AddGroupCommand) other).toAdd));
     }
 }
