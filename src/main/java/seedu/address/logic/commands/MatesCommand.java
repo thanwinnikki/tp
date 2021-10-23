@@ -16,7 +16,7 @@ import seedu.address.model.person.IsGroupMemberPredicate;
 /**
  * Lists all persons in the given group.
  */
-public class MatesCommand extends Command {
+public class MatesCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "mates";
 

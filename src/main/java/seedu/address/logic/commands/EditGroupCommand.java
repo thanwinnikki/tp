@@ -17,7 +17,7 @@ import seedu.address.model.common.Description;
 import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
 
-public class EditGroupCommand extends Command {
+public class EditGroupCommand extends AlwaysRunnableCommand {
     public static final String COMMAND_WORD = "editG";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the group identified "

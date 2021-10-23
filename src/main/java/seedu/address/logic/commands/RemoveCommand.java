@@ -13,7 +13,7 @@ import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
-public class RemoveCommand extends Command {
+public class RemoveCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "remove";
 

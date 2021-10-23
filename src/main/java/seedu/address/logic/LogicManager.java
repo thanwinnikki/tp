@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.StateDependentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -50,12 +51,9 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText, currentDataStored);
-        if (!command.isAbleToRunInAppState(currentApplicationState)) {
-            throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
-        }
+        checkIfCommandCanRunInApplicationState(command);
         commandResult = command.execute(model);
-        currentApplicationState = commandResult.getNextAppState();
-        currentDataStored = commandResult.getNextDataToStore();
+        processCommandResult(commandResult);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -94,5 +92,18 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    private void checkIfCommandCanRunInApplicationState(Command command) throws CommandException {
+        boolean isAbleToRunInApplicationState = command instanceof StateDependentCommand
+                && !((StateDependentCommand) command).isAbleToRunInApplicationState(currentApplicationState);
+        if (isAbleToRunInApplicationState) {
+            throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
+        }
+    }
+
+    private void processCommandResult(CommandResult commandResult) {
+        currentApplicationState = commandResult.getNextAppState();
+        currentDataStored = commandResult.getNextDataToStore();
     }
 }

@@ -13,7 +13,7 @@ import seedu.address.model.group.Group;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteGroupCommand extends Command {
+public class DeleteGroupCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "deleteG";
 

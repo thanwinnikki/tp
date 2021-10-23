@@ -16,7 +16,7 @@ import seedu.address.model.task.UniqueTaskList;
 /**
  * Adds a person to the address book.
  */
-public class AddTaskCommand extends Command {
+public class AddTaskCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "addT";
 

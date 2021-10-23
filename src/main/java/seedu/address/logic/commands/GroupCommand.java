@@ -9,7 +9,7 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
-public class GroupCommand extends Command {
+public class GroupCommand extends AlwaysRunnableCommand {
     public static final String COMMAND_WORD = "group";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";

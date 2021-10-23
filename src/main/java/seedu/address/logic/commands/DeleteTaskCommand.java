@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
-public class DeleteTaskCommand extends Command {
+public class DeleteTaskCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "deleteT";
 

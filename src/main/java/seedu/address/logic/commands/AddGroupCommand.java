@@ -16,7 +16,7 @@ import seedu.address.model.person.Person;
 /** Adds a person to a group in the address book.
  *
  */
-public class AddGroupCommand extends Command {
+public class AddGroupCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "addG";
 
