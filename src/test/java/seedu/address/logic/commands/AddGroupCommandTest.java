@@ -57,24 +57,24 @@ public class AddGroupCommandTest {
     public void equals() {
         Group tennis = new GroupBuilder().withName("Tennis").build();
         Group swimming = new GroupBuilder().withName("Swimming").build();
-        AddGroupCommand tennisGroupCommand = new AddGroupCommand(tennis);
-        AddGroupCommand swimmingGroupCommand = new AddGroupCommand(swimming);
+        AddGroupCommand tennisAddGroupCommand = new AddGroupCommand(tennis);
+        AddGroupCommand swimmingAddGroupCommand = new AddGroupCommand(swimming);
 
         // same object -> returns true
-        assertTrue(tennisGroupCommand.equals(tennisGroupCommand));
+        assertTrue(tennisAddGroupCommand.equals(tennisAddGroupCommand));
 
         // same values -> returns true
-        AddGroupCommand tennisGroupCommandCopy = new AddGroupCommand(tennis);
-        assertTrue(tennisGroupCommand.equals(tennisGroupCommandCopy));
+        AddGroupCommand tennisAddGroupCommandCopy = new AddGroupCommand(tennis);
+        assertTrue(tennisAddGroupCommand.equals(tennisAddGroupCommandCopy));
 
         // different types -> returns false
-        assertFalse(tennisGroupCommand.equals(1));
+        assertFalse(tennisAddGroupCommand.equals(1));
 
         // null -> returns false
-        assertFalse(tennisGroupCommand.equals(null));
+        assertFalse(tennisAddGroupCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(tennisGroupCommand.equals(swimmingGroupCommand));
+        assertFalse(tennisAddGroupCommand.equals(swimmingAddGroupCommand));
 
     }
 

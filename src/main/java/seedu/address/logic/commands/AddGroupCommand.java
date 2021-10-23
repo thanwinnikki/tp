@@ -10,7 +10,8 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
 public class AddGroupCommand extends AlwaysRunnableCommand {
-    public static final String COMMAND_WORD = "group";
+    public static final String COMMAND_WORD = "addG";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
 
@@ -29,7 +30,7 @@ public class AddGroupCommand extends AlwaysRunnableCommand {
 
 
     /**
-     * Creates an GroupCommand to add the specified {@code Group}
+     * Creates an AddGroupCommand to add the specified {@code Group}
      */
     public AddGroupCommand(Group group) {
         requireNonNull(group);
@@ -46,7 +47,7 @@ public class AddGroupCommand extends AlwaysRunnableCommand {
 
         model.addGroup(toAdd);
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
-                .setNextAppState(ApplicationState.GROUP_INFORMATION)
+                .setNextAppState(ApplicationState.HOME)
                 .build();
     }
 

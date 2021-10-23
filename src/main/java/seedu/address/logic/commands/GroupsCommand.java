@@ -20,7 +20,7 @@ public class GroupsCommand extends AlwaysRunnableCommand {
         requireNonNull(model);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .setNextAppState(ApplicationState.GROUP_INFORMATION)
+                .setNextAppState(ApplicationState.HOME)
                 .build();
     }
 }

@@ -31,7 +31,7 @@ public class GroupsCommandTest {
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new GroupsCommand(), model,
                 new CommandResult.Builder(GroupsCommand.MESSAGE_SUCCESS)
-                        .setNextAppState(ApplicationState.GROUP_INFORMATION)
+                        .setNextAppState(ApplicationState.HOME)
                         .build(),
                 expectedModel);
     }
@@ -41,7 +41,7 @@ public class GroupsCommandTest {
         showGroupAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new GroupsCommand(), model,
                 new CommandResult.Builder(GroupsCommand.MESSAGE_SUCCESS)
-                        .setNextAppState(ApplicationState.GROUP_INFORMATION)
+                        .setNextAppState(ApplicationState.HOME)
                         .build(),
                 expectedModel);
     }

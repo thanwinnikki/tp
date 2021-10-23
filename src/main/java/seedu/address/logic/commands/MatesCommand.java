@@ -7,7 +7,6 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.IsGroupPredicate;
@@ -25,7 +24,7 @@ public class MatesCommand extends AlwaysRunnableCommand {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SUCCESS = "Listed all members in group.";
+    public static final String MESSAGE_SUCCESS = "Listed all members and tasks in group.";
 
     private final Index index;
 
@@ -43,8 +42,7 @@ public class MatesCommand extends AlwaysRunnableCommand {
         Group group = lastShownList.get(index.getZeroBased());
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         model.updateFilteredGroupList(new IsGroupPredicate(group));
-        return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .setNextAppState(ApplicationState.HOME)
+        return new CommandResult.Builder(MESSAGE_SUCCESS).displayGroupInformation(group)
                 .build();
     }
 
