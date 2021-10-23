@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -14,19 +15,24 @@ import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.exceptions.DuplicateTaskException;
 
 /**
  * Jackson-friendly version of {@link Group}.
  */
 @JsonDeserialize(builder = JsonAdaptedGroup.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JsonAdaptedGroup {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Group's %s field is missing!";
     public static final String MESSAGE_DUPLICATE_GROUP_MATE = "Duplicate group mates(s) found in storage.";
     public static final String MESSAGE_NO_SUCH_PERSON = "There is no such person that has the ID of this group mate.";
+    public static final String MESSAGE_DUPLICATE_TASK = "Duplicate task(s) found in storage.";
 
     private final String name;
     private final List<String> groupMateIds;
+    private final List<JsonAdaptedTask> tasks;
 
     private String description;
 
@@ -73,6 +79,19 @@ public class JsonAdaptedGroup {
         }
 
         /**
+         * Includes the given tasks.
+         *
+         * @param tasks The tasks.
+         * @return This {@code JsonAdaptedGroup.Builder} instance.
+         */
+        @JsonProperty
+        public Builder withTasks(List<JsonAdaptedTask> tasks) {
+            assert tasks != null : "The list of group mate person IDs should not be null.";
+            groupToBuild.tasks.addAll(tasks);
+            return this;
+        }
+
+        /**
          * Completes the {@code JsonAdaptedGroup} being built by this {@code JsonAdaptedGroup.Builder}.
          *
          * @return The completed {@code JsonAdaptedGroup} object.
@@ -84,7 +103,8 @@ public class JsonAdaptedGroup {
 
     private JsonAdaptedGroup(String name) {
         this.name = name;
-        this.groupMateIds = new ArrayList<>();
+        groupMateIds = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -104,6 +124,10 @@ public class JsonAdaptedGroup {
             Id personId = personToIdMap.get(groupMate);
             groupMateIds.add(personId.toString());
         });
+        source.doForEachTask(task -> {
+            JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(task);
+            tasks.add(jsonAdaptedTask);
+        });
     }
 
     /**
@@ -118,6 +142,7 @@ public class JsonAdaptedGroup {
     public Group toModelType(Map<Id, Person> idToPersonMap) throws IllegalValueException {
         Group group = createGroup();
         addGroupMates(group, idToPersonMap);
+        addTasks(group);
         return group;
     }
 
@@ -163,6 +188,17 @@ public class JsonAdaptedGroup {
         }
     }
 
+    private void addTasks(Group group) throws IllegalValueException {
+        for (JsonAdaptedTask jsonAdaptedTask : tasks) {
+            Task task = jsonAdaptedTask.toModelType();
+            try {
+                group.addTask(task);
+            } catch (DuplicateTaskException e) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
+            }
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof JsonAdaptedGroup)) {
@@ -172,6 +208,12 @@ public class JsonAdaptedGroup {
             return true;
         }
         JsonAdaptedGroup o = (JsonAdaptedGroup) other;
-        return name.equals(o.name) && groupMateIds.equals(o.groupMateIds);
+        boolean haveSameNames = name.equals(o.name);
+        boolean haveSameGroupMateIdLists = groupMateIds.equals(o.groupMateIds);
+        boolean haveSameTaskLists = tasks.equals(o.tasks);
+        boolean haveNullDescriptions = description == null && o.description == null;
+        boolean haveSameDescriptions = haveNullDescriptions
+                || description != null && description.equals(o.description);
+        return haveSameNames && haveSameGroupMateIdLists && haveSameTaskLists && haveSameDescriptions;
     }
 }
