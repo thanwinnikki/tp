@@ -7,12 +7,14 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
-public class DeleteTaskCommand extends AlwaysRunnableCommand {
+public class DeleteTaskCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "deleteT";
 
@@ -23,10 +25,15 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_REMOVE_TASK_SUCCESS = "Successfully Removed Task: %1$s";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of deletion of task: %1$s";
 
     private static final Index firstIndex = Index.fromZeroBased(0);
 
     private final Index targetIndex;
+
+    private ReadOnlyAddressBook oldReadOnlyAddressBook;
+    private Group targetGroup;
+    private Task targetTask;
 
     public DeleteTaskCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -35,21 +42,37 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        oldReadOnlyAddressBook = new AddressBook(model.getAddressBook());
+
         List<Group> lastShownGroupList = model.getFilteredGroupList();
         if (lastShownGroupList.size() != 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Group targetGroup = lastShownGroupList.get(firstIndex.getZeroBased());
+        oldReadOnlyAddressBook.getGroupList().forEach(group -> {
+            if (group.equals(targetGroup)) {
+                this.targetGroup = group;
+            }
+        });
         UniqueTaskList targetTaskList = targetGroup.getTasks();
         if (targetTaskList.size() < targetIndex.getOneBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task targetTask = targetTaskList.getTask(targetIndex.getZeroBased());
+        targetTask = targetTaskList.getTask(targetIndex.getZeroBased());
 
         targetGroup.deleteTask(targetTask);
         return new CommandResult.Builder(String.format(MESSAGE_REMOVE_TASK_SUCCESS, targetTask))
+                .displayGroupInformation(targetGroup)
+                .build();
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        // Probably not the best to save the whole address book but this is the easiest way to undo
+        model.setAddressBook(oldReadOnlyAddressBook);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, targetTask))
                 .displayGroupInformation(targetGroup)
                 .build();
     }
