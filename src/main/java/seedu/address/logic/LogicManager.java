@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
@@ -29,7 +30,8 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private AppState currentAppState;
+    private ApplicationState currentApplicationState;
+    private Object currentDataStored;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -38,7 +40,8 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-        currentAppState = AppState.HOME;
+        currentApplicationState = ApplicationState.HOME;
+        currentDataStored = null;
     }
 
     @Override
@@ -46,12 +49,13 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        if (!command.isAbleToRunInAppState(currentAppState)) {
+        Command command = addressBookParser.parseCommand(commandText, currentDataStored);
+        if (!command.isAbleToRunInAppState(currentApplicationState)) {
             throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
         }
         commandResult = command.execute(model);
-        currentAppState = commandResult.getNextAppState();
+        currentApplicationState = commandResult.getNextAppState();
+        currentDataStored = commandResult.getNextDataToStore();
 
         try {
             storage.saveAddressBook(model.getAddressBook());

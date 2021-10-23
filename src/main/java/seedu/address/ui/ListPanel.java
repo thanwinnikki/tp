@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -20,8 +18,6 @@ public class ListPanel extends UiPart<Region> {
     private static final String FXML = "ListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ListPanel.class);
 
-    private List<?> lastModelList;
-
     @FXML
     private ListView<Listable> listableListView;
 
@@ -30,7 +26,6 @@ public class ListPanel extends UiPart<Region> {
      */
     public ListPanel() {
         super(FXML);
-        lastModelList = new ArrayList<>();
     }
 
     /**
@@ -42,10 +37,6 @@ public class ListPanel extends UiPart<Region> {
      * @param <T> The type of the listable model entity.
      */
     public <T> void setList(ObservableList<T> list) {
-        if (list.equals(lastModelList)) {
-            return;
-        }
-        lastModelList = new ArrayList<>(list);
         ObservableList<Listable> listableList = list.stream()
                 .map(Listable::convertModelEntityToListable)
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));

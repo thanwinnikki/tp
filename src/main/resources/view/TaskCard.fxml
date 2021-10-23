@@ -23,9 +23,9 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="description" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <Label fx:id="description" styleClass="cell_small_label" />
+      <Label fx:id="isDoneIndicator" styleClass="cell_small_label" />
     </VBox>
   </GridPane>
 </HBox>

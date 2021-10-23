@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * A model entity that is intended to be displayed on the list panel, like a {@code Group}, or a {@code Person}.
@@ -17,6 +18,7 @@ abstract class Listable {
     static {
         modelEntityToListableMap.put(Person.class, person -> convertPersonToListable((Person) person));
         modelEntityToListableMap.put(Group.class, group -> convertGroupToListable((Group) group));
+        modelEntityToListableMap.put(Task.class, task -> convertTaskToListable((Task) task));
     }
 
     /**
@@ -28,7 +30,7 @@ abstract class Listable {
      */
     static <T> Listable convertModelEntityToListable(T modelEntity) {
         Class<?> modelEntityClass = modelEntity.getClass();
-        assert modelEntityToListableMap.containsKey(modelEntityClass);
+        assert modelEntityToListableMap.containsKey(modelEntityClass) : "This model entity cannot be a Listable.";
         return modelEntityToListableMap.get(modelEntityClass).apply(modelEntity);
     }
 
@@ -54,6 +56,15 @@ abstract class Listable {
             @Override
             Card getCard(int displayedIndex) {
                 return new GroupCard(group, displayedIndex);
+            }
+        };
+    }
+
+    private static Listable convertTaskToListable(Task task) {
+        return new Listable() {
+            @Override
+            Card getCard(int displayedIndex) {
+                return new TaskCard(task, displayedIndex);
             }
         };
     }

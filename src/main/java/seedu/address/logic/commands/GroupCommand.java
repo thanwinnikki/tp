@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import seedu.address.logic.AppState;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
@@ -46,7 +46,7 @@ public class GroupCommand extends Command {
 
         model.addGroup(toAdd);
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
-                .setNextAppState(AppState.GROUP_INFORMATION)
+                .setNextAppState(ApplicationState.GROUP_INFORMATION)
                 .build();
     }
 

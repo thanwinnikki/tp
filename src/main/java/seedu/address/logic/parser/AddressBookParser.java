@@ -15,6 +15,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindGroupCommand;
@@ -41,10 +42,11 @@ public class AddressBookParser {
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
+     * @param currentDataStored The current data being stored.
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, Object currentDataStored) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -105,6 +107,9 @@ public class AddressBookParser {
 
         case MarkAsDoneCommand.COMMAND_WORD:
             return new MarkAsDoneCommandParser().parse(arguments);
+
+        case EditGroupCommand.COMMAND_WORD:
+            return new EditGroupCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
