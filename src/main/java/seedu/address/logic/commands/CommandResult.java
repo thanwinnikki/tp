@@ -135,6 +135,11 @@ public class CommandResult {
                     .setNextDataToStore(group);
         }
 
+        /**
+         * Sets the {@code CommandResult} object to cause the application to undo.
+         *
+         * @return This {@code CommandResult.Builder} instance.
+         */
         public Builder goCauseUndo() {
             commandResultToBuild.isGoingToCauseUndo = true;
             return this;
