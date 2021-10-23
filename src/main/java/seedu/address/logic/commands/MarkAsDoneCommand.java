@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
-public class MarkAsDoneCommand extends AlwaysRunnableCommand {
+public class MarkAsDoneCommand extends AlwaysRunnableCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as done "
@@ -21,10 +21,14 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand {
 
     public static final String MESSAGE_SUCCESS = "Task marked as done: %1$s";
     public static final String MESSAGE_TASK_ALREADY_DONE = "This task has already been marked as done!";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of marking as done for task: %1$s";
 
     private final Index targetIndex;
 
     private final Index firstIndex = Index.fromZeroBased(0);
+
+    private Group group;
+    private Task taskToMarkAsDone;
 
     public MarkAsDoneCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -38,20 +42,28 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand {
             //todo
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
-        Group group = lastShownGroupList.get(firstIndex.getZeroBased());
+        group = lastShownGroupList.get(firstIndex.getZeroBased());
         UniqueTaskList tasks = group.getTasks();
 
         if (targetIndex.getZeroBased() >= tasks.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Task taskToMarkAsDone = tasks.getTask(targetIndex.getZeroBased());
+        taskToMarkAsDone = tasks.getTask(targetIndex.getZeroBased());
         if (taskToMarkAsDone.getDoneTask()) {
             throw new CommandException(MESSAGE_TASK_ALREADY_DONE);
         } else {
             taskToMarkAsDone.setDoneTask();
         }
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, taskToMarkAsDone))
+                .displayGroupInformation(group)
+                .build();
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        taskToMarkAsDone.setUndoneTask();
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, taskToMarkAsDone))
                 .displayGroupInformation(group)
                 .build();
     }
