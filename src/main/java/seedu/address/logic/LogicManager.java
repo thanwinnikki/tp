@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -10,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.StateDependentCommand;
+import seedu.address.logic.commands.UndoableStateDependentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -33,6 +35,7 @@ public class LogicManager implements Logic {
     private final AddressBookParser addressBookParser;
     private ApplicationState currentApplicationState;
     private Object currentDataStored;
+    private Stack<UndoableStateDependentCommand> undoableCommandStack;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -54,6 +57,7 @@ public class LogicManager implements Logic {
         checkIfCommandCanRunInApplicationState(command);
         commandResult = command.execute(model);
         processCommandResult(commandResult);
+        addToUndoableCommandStackIfUndoable(command);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -102,8 +106,23 @@ public class LogicManager implements Logic {
         }
     }
 
-    private void processCommandResult(CommandResult commandResult) {
+    private void processCommandResult(CommandResult commandResult) throws CommandException {
         currentApplicationState = commandResult.getNextAppState();
         currentDataStored = commandResult.getNextDataToStore();
+        undoIfMustUndo(commandResult);
+    }
+
+    private void undoIfMustUndo(CommandResult commandResult) throws CommandException {
+        if (commandResult.isGoingToCauseUndo()) {
+            UndoableStateDependentCommand undoableStateDependentCommand = undoableCommandStack.pop();
+            CommandResult undoResult = undoableStateDependentCommand.undo(model);
+            processCommandResult(undoResult);
+        }
+    }
+
+    private void addToUndoableCommandStackIfUndoable(Command command) {
+        if (command instanceof UndoableStateDependentCommand) {
+            undoableCommandStack.push((UndoableStateDependentCommand) command);
+        }
     }
 }

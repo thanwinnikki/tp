@@ -21,8 +21,8 @@ public class CommandResult {
     private boolean exit;
 
     private ApplicationState nextApplicationState;
-
     private Object nextDataToStore;
+    private boolean isGoingToCauseUndo;
 
     /**
      * Builder class to help with creating different types of {@code CommandResult} objects.
@@ -134,6 +134,11 @@ public class CommandResult {
             return setNextAppState(ApplicationState.GROUP_INFORMATION)
                     .setNextDataToStore(group);
         }
+
+        public Builder goCauseUndo() {
+            commandResultToBuild.isGoingToCauseUndo = true;
+            return this;
+        }
     }
 
     /**
@@ -145,6 +150,7 @@ public class CommandResult {
         this.exit = exit;
         nextApplicationState = ApplicationState.HOME;
         nextDataToStore = null;
+        isGoingToCauseUndo = false;
     }
 
     /**
@@ -157,6 +163,7 @@ public class CommandResult {
         exit = false;
         nextApplicationState = ApplicationState.HOME;
         nextDataToStore = null;
+        isGoingToCauseUndo = false;
     }
 
     public String getFeedbackToUser() {
@@ -179,6 +186,10 @@ public class CommandResult {
         return (T) nextDataToStore;
     }
 
+    public boolean isGoingToCauseUndo() {
+        return isGoingToCauseUndo;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -198,12 +209,13 @@ public class CommandResult {
         boolean haveNullNextDataToStore = nextDataToStore == null && otherCommandResult.nextDataToStore == null;
         boolean haveSameNextDataToStore = haveNullNextDataToStore
                 || (nextDataToStore != null && nextDataToStore.equals(otherCommandResult.nextDataToStore));
+        boolean areBothGoingToCauseUndo = isGoingToCauseUndo == otherCommandResult.isGoingToCauseUndo;
         return haveSameFeedbacksToUser && willBothShowHelp && willBothExit && haveSameNextApplicationStates
-                && haveSameNextDataToStore;
+                && haveSameNextDataToStore && areBothGoingToCauseUndo;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationState, nextDataToStore);
+        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationState, nextDataToStore, isGoingToCauseUndo);
     }
 }
