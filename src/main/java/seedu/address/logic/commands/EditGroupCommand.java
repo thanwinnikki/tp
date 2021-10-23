@@ -38,8 +38,8 @@ public class EditGroupCommand extends AlwaysRunnableCommand implements UndoableC
     private final Index index;
     private final EditGroupCommand.EditGroupDescriptor editGroupDescriptor;
 
-    private Group groupToEdit;
-    private Group editedGroup;
+    private Group groupBeforeEdit;
+    private Group groupAfterEdit;
 
     /**
      * @param index of the group in the filtered group list to edit
@@ -62,23 +62,28 @@ public class EditGroupCommand extends AlwaysRunnableCommand implements UndoableC
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
-        groupToEdit = lastShownList.get(index.getZeroBased());
-        editedGroup = createEditedGroup(groupToEdit, editGroupDescriptor);
+        Group groupToEdit = lastShownList.get(index.getZeroBased());
+        Group editedGroup = createEditedGroup(groupToEdit, editGroupDescriptor);
 
         if (!groupToEdit.isSameGroup(editedGroup) && model.hasGroup(editedGroup)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 
         model.setGroup(groupToEdit, editedGroup);
+
+        groupBeforeEdit = groupToEdit;
+        groupAfterEdit = editedGroup;
+
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
     }
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
-        model.setGroup(editedGroup, groupToEdit);
+        assert model.hasGroup(groupAfterEdit) : "The edited group must be in the records to undo its edit.";
+        model.setGroup(groupAfterEdit, groupBeforeEdit);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupToEdit))
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupBeforeEdit))
                 .goToHome()
                 .build();
     }

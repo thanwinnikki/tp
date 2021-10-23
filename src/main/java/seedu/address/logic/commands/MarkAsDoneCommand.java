@@ -27,8 +27,8 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand implements Undoable
 
     private final Index firstIndex = Index.fromZeroBased(0);
 
-    private Group group;
-    private Task taskToMarkAsDone;
+    private Group groupOfTask;
+    private Task taskMarkedDone;
 
     public MarkAsDoneCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -42,18 +42,20 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand implements Undoable
             //todo
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
-        group = lastShownGroupList.get(firstIndex.getZeroBased());
+        Group group = lastShownGroupList.get(firstIndex.getZeroBased());
         UniqueTaskList tasks = group.getTasks();
 
         if (targetIndex.getZeroBased() >= tasks.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        taskToMarkAsDone = tasks.getTask(targetIndex.getZeroBased());
+        Task taskToMarkAsDone = tasks.getTask(targetIndex.getZeroBased());
         if (taskToMarkAsDone.getDoneTask()) {
             throw new CommandException(MESSAGE_TASK_ALREADY_DONE);
         } else {
             taskToMarkAsDone.setDoneTask();
+            groupOfTask = group;
+            taskMarkedDone = taskToMarkAsDone;
         }
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, taskToMarkAsDone))
                 .displayGroupInformation(group)
@@ -62,9 +64,12 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand implements Undoable
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
-        taskToMarkAsDone.setUndoneTask();
-        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, taskToMarkAsDone))
-                .displayGroupInformation(group)
+        assert model.hasGroup(groupOfTask) : "The group of the task marked done must still exist to undo the mark.";
+        assert groupOfTask.hasTask(taskMarkedDone) : "The group must still have the task marked done to undo the mark.";
+        assert taskMarkedDone.getDoneTask() : "The task marked done must still be marked done to undo the mark.";
+        taskMarkedDone.setUndoneTask();
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, taskMarkedDone))
+                .displayGroupInformation(groupOfTask)
                 .build();
     }
 

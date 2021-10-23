@@ -37,8 +37,8 @@ public class AddToGroupCommand extends AlwaysRunnableCommand implements Undoable
     private final Index groupIndex;
     private final Set<Index> personIndexes;
 
-    private Group groupToChange;
-    private Set<Person> groupMatesAdded;
+    private Group groupAddedTo;
+    private Iterable<Person> addedGroupMates;
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Person} objects to the specified {@code Group}.
@@ -69,10 +69,13 @@ public class AddToGroupCommand extends AlwaysRunnableCommand implements Undoable
             }
         }
 
-        groupToChange = lastShownGroupList.get(groupIndex.getZeroBased());
-        groupMatesAdded = personIndexes.stream()
+        Group groupToChange = lastShownGroupList.get(groupIndex.getZeroBased());
+        Set<Person> groupMatesAdded = personIndexes.stream()
                 .map(x -> lastShownPersonList.get(x.getZeroBased()))
                 .collect(Collectors.toSet());
+
+        groupAddedTo = groupToChange;
+        addedGroupMates = groupMatesAdded;
 
         model.addToGroup(groupToChange, groupMatesAdded);
 
@@ -81,13 +84,13 @@ public class AddToGroupCommand extends AlwaysRunnableCommand implements Undoable
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
-        groupMatesAdded.forEach(groupMate -> {
-            assert groupToChange.hasGroupMate(groupMate) : "The group mate must be in the group to undo the addition.";
-            groupToChange.removeGroupMate(groupMate);
+        addedGroupMates.forEach(groupMate -> {
+            assert groupAddedTo.hasGroupMate(groupMate) : "The group mate must be in the group to undo the addition.";
+            groupAddedTo.removeGroupMate(groupMate);
         });
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupToChange));
-        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupToChange))
-                .displayGroupInformation(groupToChange)
+        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupAddedTo));
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupAddedTo))
+                .displayGroupInformation(groupAddedTo)
                 .build();
     }
 

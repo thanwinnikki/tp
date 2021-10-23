@@ -67,6 +67,7 @@ public class RemoveCommand extends AlwaysRunnableCommand implements UndoableComm
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
+        assert model.hasGroup(groupWithRemoval) : "The group removed from must still exist to undo the removal.";
         model.setGroup(groupWithRemoval, groupWithoutRemoval);
         model.updateFilteredPersonList(new IsGroupMemberPredicate(groupWithoutRemoval));
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personRemoved))

@@ -54,8 +54,8 @@ public class EditCommand extends AlwaysRunnableCommand implements UndoableComman
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
-    private Person personToEdit;
-    private Person editedPerson;
+    private Person personBeforeEdit;
+    private Person personAfterEdit;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -78,23 +78,28 @@ public class EditCommand extends AlwaysRunnableCommand implements UndoableComman
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        personToEdit = lastShownList.get(index.getZeroBased());
-        editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        personBeforeEdit = personToEdit;
+        personAfterEdit = editedPerson;
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
-        model.setPerson(editedPerson, personToEdit);
+        assert model.hasPerson(personAfterEdit) : "The edited person must be in the records to undo its edit.";
+        model.setPerson(personAfterEdit, personBeforeEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personToEdit))
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personBeforeEdit))
                 .goToHome()
                 .build();
     }

@@ -32,7 +32,7 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand implements Undoable
     private final Index targetIndex;
 
     private ReadOnlyAddressBook oldReadOnlyAddressBook;
-    private Group targetGroup;
+    private Group groupDeletedFrom;
     private Task targetTask;
 
     public DeleteTaskCommand(Index targetIndex) {
@@ -52,7 +52,7 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand implements Undoable
         Group targetGroup = lastShownGroupList.get(firstIndex.getZeroBased());
         oldReadOnlyAddressBook.getGroupList().forEach(group -> {
             if (group.equals(targetGroup)) {
-                this.targetGroup = group;
+                groupDeletedFrom = group;
             }
         });
         UniqueTaskList targetTaskList = targetGroup.getTasks();
@@ -73,7 +73,7 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand implements Undoable
         // Probably not the best to save the whole address book but this is the easiest way to undo
         model.setAddressBook(oldReadOnlyAddressBook);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, targetTask))
-                .displayGroupInformation(targetGroup)
+                .displayGroupInformation(groupDeletedFrom)
                 .build();
     }
 

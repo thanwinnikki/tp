@@ -33,7 +33,7 @@ public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCom
     private final Task toAdd;
     private final Index firstIndex = Index.fromZeroBased(0);
 
-    private Group groupToChange;
+    private Group groupAddedTo;
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
@@ -51,13 +51,14 @@ public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCom
             //todo
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
-        groupToChange = lastShownGroupList.get(firstIndex.getZeroBased());
+        Group groupToChange = lastShownGroupList.get(firstIndex.getZeroBased());
         UniqueTaskList tasks = groupToChange.getTasks();
         if (tasks.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         tasks.add(toAdd);
+        groupAddedTo = groupToChange;
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
                 .displayGroupInformation(groupToChange)
                 .build();
@@ -65,9 +66,11 @@ public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCom
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
-        groupToChange.deleteTask(toAdd);
+        assert model.hasGroup(groupAddedTo) : "The group of the added task must still exist to undo its addition.";
+        assert groupAddedTo.hasTask(toAdd) : "The group must have the added task to undo its addition.";
+        groupAddedTo.deleteTask(toAdd);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
-                .displayGroupInformation(groupToChange)
+                .displayGroupInformation(groupAddedTo)
                 .build();
     }
 
