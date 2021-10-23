@@ -70,14 +70,14 @@ public class AddToGroupCommand extends AlwaysRunnableCommand implements Undoable
         }
 
         Group groupToChange = lastShownGroupList.get(groupIndex.getZeroBased());
-        Set<Person> groupMatesAdded = personIndexes.stream()
+        Set<Person> personSet = personIndexes.stream()
                 .map(x -> lastShownPersonList.get(x.getZeroBased()))
                 .collect(Collectors.toSet());
 
         groupAddedTo = groupToChange;
-        addedGroupMates = groupMatesAdded;
+        addedGroupMates = personSet;
 
-        model.addToGroup(groupToChange, groupMatesAdded);
+        model.addToGroup(groupToChange, personSet);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupToChange));
     }

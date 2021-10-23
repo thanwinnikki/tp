@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,7 +31,7 @@ public class DeleteGroupCommand extends AlwaysRunnableCommand implements Undoabl
     private final Index targetIndex;
 
     private ReadOnlyAddressBook oldReadOnlyAddressBook;
-    private Group groupToDelete;
+    private Group deletedGroup;
 
     public DeleteGroupCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -47,8 +48,9 @@ public class DeleteGroupCommand extends AlwaysRunnableCommand implements Undoabl
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
-        groupToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Group groupToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteGroup(groupToDelete);
+        deletedGroup = groupToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete));
     }
 
@@ -57,7 +59,7 @@ public class DeleteGroupCommand extends AlwaysRunnableCommand implements Undoabl
         // Probably not the best to save the whole address book but this is the easiest way to undo
         model.setAddressBook(oldReadOnlyAddressBook);
         model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupToDelete))
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, deletedGroup))
                 .goToHome()
                 .build();
     }

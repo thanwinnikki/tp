@@ -51,16 +51,16 @@ public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCom
             //todo
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
-        Group groupToChange = lastShownGroupList.get(firstIndex.getZeroBased());
-        UniqueTaskList tasks = groupToChange.getTasks();
+        Group group = lastShownGroupList.get(firstIndex.getZeroBased());
+        UniqueTaskList tasks = group.getTasks();
         if (tasks.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
         tasks.add(toAdd);
-        groupAddedTo = groupToChange;
+        groupAddedTo = group;
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
-                .displayGroupInformation(groupToChange)
+                .displayGroupInformation(group)
                 .build();
     }
 

@@ -30,7 +30,7 @@ public class DeleteCommand extends AlwaysRunnableCommand implements UndoableComm
     private final Index targetIndex;
 
     private ReadOnlyAddressBook oldReadOnlyAddressBook;
-    private Person personToDelete;
+    private Person deletedPerson;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -47,8 +47,9 @@ public class DeleteCommand extends AlwaysRunnableCommand implements UndoableComm
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        deletedPerson = personToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
@@ -58,7 +59,7 @@ public class DeleteCommand extends AlwaysRunnableCommand implements UndoableComm
         model.setAddressBook(oldReadOnlyAddressBook);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
-        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personToDelete))
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, deletedPerson))
                 .goToHome()
                 .build();
     }
