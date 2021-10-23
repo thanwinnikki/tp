@@ -11,12 +11,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 
 /** Adds a person to a group in the address book.
  *
  */
-public class AddGroupCommand extends AlwaysRunnableCommand {
+public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "addG";
 
@@ -30,9 +31,14 @@ public class AddGroupCommand extends AlwaysRunnableCommand {
     public static final String MESSAGE_SUCCESS = "Person(s) added to group : %1$s";
     public static final String MESSAGE_INVALID_GROUP_INDEX = "Please enter a valid group number";
     public static final String MESSAGE_INVALID_PERSON_INDEX = "Please enter all valid person indexes";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS =
+            "Successful undo of addition of group mates to group: %1$s";
 
     private final Index groupIndex;
     private final Set<Index> personIndexes;
+
+    private Group groupToChange;
+    private Set<Person> groupMatesAdded;
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Person} objects to the specified {@code Group}.
@@ -63,14 +69,26 @@ public class AddGroupCommand extends AlwaysRunnableCommand {
             }
         }
 
-        Group groupToChange = lastShownGroupList.get(groupIndex.getZeroBased());
-        Set<Person> personSet = personIndexes.stream()
+        groupToChange = lastShownGroupList.get(groupIndex.getZeroBased());
+        groupMatesAdded = personIndexes.stream()
                 .map(x -> lastShownPersonList.get(x.getZeroBased()))
                 .collect(Collectors.toSet());
 
-        model.addToGroup(groupToChange, personSet);
+        model.addToGroup(groupToChange, groupMatesAdded);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupToChange));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        groupMatesAdded.forEach(groupMate -> {
+            assert groupToChange.hasGroupMate(groupMate) : "The group mate must be in the group to undo the addition.";
+            groupToChange.removeGroupMate(groupMate);
+        });
+        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupToChange));
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupToChange))
+                .displayGroupInformation(groupToChange)
+                .build();
     }
 
     @Override

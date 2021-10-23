@@ -74,6 +74,19 @@ public class Group {
     }
 
     /**
+     * Removes a group mate from the group.
+     *
+     * @param groupMate The group mate which is to be removed from the group.
+     */
+    public void removeGroupMate(Person groupMate) {
+        persons.remove(groupMate);
+    }
+
+    public boolean hasGroupMate(Person groupMate) {
+        return persons.contains(groupMate);
+    }
+
+    /**
      * Adds a task to the group.
      * @param task Task to be added to the group.
      */
