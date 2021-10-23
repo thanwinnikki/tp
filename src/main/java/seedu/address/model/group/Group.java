@@ -82,6 +82,12 @@ public class Group {
         persons.remove(groupMate);
     }
 
+    /**
+     * Checks whether the group has the given group mate.
+     *
+     * @param groupMate The group mate.
+     * @return Whether the group mate is in the group.
+     */
     public boolean hasGroupMate(Person groupMate) {
         return persons.contains(groupMate);
     }
