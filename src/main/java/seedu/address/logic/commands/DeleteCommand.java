@@ -7,13 +7,15 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends AlwaysRunnableCommand {
+public class DeleteCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -23,8 +25,12 @@ public class DeleteCommand extends AlwaysRunnableCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of deletion of person: %1$s";
 
     private final Index targetIndex;
+
+    private ReadOnlyAddressBook oldReadOnlyAddressBook;
+    private Person personToDelete;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -33,15 +39,27 @@ public class DeleteCommand extends AlwaysRunnableCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        oldReadOnlyAddressBook = new AddressBook(model.getAddressBook());
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        // Probably not the best to save the whole address book but this is the easiest way to undo
+        model.setAddressBook(oldReadOnlyAddressBook);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personToDelete))
+                .goToHome()
+                .build();
     }
 
     @Override
