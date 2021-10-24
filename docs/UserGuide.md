@@ -90,7 +90,7 @@ This is a warning.
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -99,7 +99,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the Thundercat.
+Adds a person to Thundercat.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -108,7 +108,7 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Creating a group : `addG`
@@ -123,13 +123,13 @@ Examples:
 
 ### Viewing all groups: `groups`
 
-List all groups in Thundercat.
+Shows a list of all groups in Thundercat.
 
 Format: `groups`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the Thundercat.
+Shows a list of all persons in Thundercat.
 
 Format: `list`
 
@@ -181,6 +181,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  <br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
@@ -261,18 +262,18 @@ Examples:
 * `join 1 g/2`
 * `join 2 g/1,3,6,8`
 
-### Listing all group mates in a group: `mates`
+### Listing all group mates and tasks in a group: `group`
 
-Lists out all the group mates in a group.
+Lists out all the group mates and tasks in a group.
 
-Format: `mates GROUP_INDEX`
+Format: `group GROUP_INDEX`
 
-* The group mates in the group at the specified `GROUP_INDEX` are listed out.
+* The group mates and tasks in the group at the specified `GROUP_INDEX` are listed out.
 * The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `mates 7`
+* `group 7`
 
 ### Remove a person from the current group: `remove`
 
@@ -290,15 +291,37 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2`
 
+### Adding a task to the current group: `addT`
+
+Adds a task to the group that Thundercat is displaying.
+
+Format: `addT d/TASK_DESCRIPTION`
+
+Example:
+* `addT d/Prepare pitch`
+
+### Marking a task as done: `done`
+
+Marks the specified task in the group as done.
+
+Format: `done TASK_INDEX`
+
+* The task with the specified `TASK_INDEX` will be marked as done.
+* The `TASK_INDEX` refers to the index number shown in the task list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `done 2`
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the Thundercat.
+Clears all entries from Thundercat.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits Thundercat.
 
 Format: `exit`
 
