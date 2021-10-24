@@ -128,7 +128,7 @@ Creates a group in ThunderCat with an optional description. If no description is
 Format: `addG g/GROUP_NAME [d/DESCRIPTION]`
 
 Examples:  
-* `addG g/CS2103 d/Project group Y2S1` adds group with name "CS2103" with a description "Project group Y2S1".
+* `addG g/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
 * `addG g/Family` adds group with name "Family" with the default description.
 
 ### Viewing all groups: `groups`
