@@ -74,15 +74,18 @@ public class JsonAdaptedPerson {
             phone = source.getPhone().value;
             email = source.getEmail().value;
             address = source.getAddress().value;
+            initialiseTagged(source);
+        }
+
+        private void initialiseTagged(Person source) {
             Set<Tag> tags = source.getTags();
-            if (!tags.isEmpty()) {
-                tagged = new ArrayList<>();
-                tagged.addAll(tags.stream()
-                        .map(JsonAdaptedTag::new)
-                        .collect(Collectors.toList()));
-            } else {
-                tagged = null;
+            if (tags.isEmpty()) {
+                return;
             }
+            tagged = new ArrayList<>();
+            tagged.addAll(tags.stream()
+                    .map(JsonAdaptedTag::new)
+                    .collect(Collectors.toList()));
         }
 
         /**
