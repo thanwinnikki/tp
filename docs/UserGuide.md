@@ -236,7 +236,7 @@ Examples:
 
 ### Locating groups by name: `findG`
 
-Find groups whose names contain any of the given keywords.
+Finds groups whose names contain any of the given keywords.
 
 :bulb: Panel where this can be called :
 * Home Panel
