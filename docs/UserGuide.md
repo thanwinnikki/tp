@@ -362,29 +362,28 @@ If any of the changes you make to the data file makes it have an invalid format,
 
 ## Command summary
 
-Action | Format | Examples
---------|---------|---------
-**Add contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear all** | `clear`
-**Delete contact** | `delete INDEX` | `delete 3`
-**Edit contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com`
-**Find contact** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake`
-**List all contacts** | `list`
-**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group`
-**Show all Groups** | `groups`
-**Show Group information** | `group GROUP_INDEX` | `group 2`
-**Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1`
-**Find Group** | `findG KEYWORD [MORE_KEYWORDS]`
-**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2`
-**Adding person to Group** | `addToG p/PERSON_INDEX_1, p/PERSON_INDEX_2.. g/GROUP_INDEX` |`addToG p/1, p/2, p/3 g/2`
-**Join Person to Groups** | `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...` | `join 2 g/1,3,6,8`
-**Show all people in Group** | `mates GROUP_INDEX` | `mates 7`
-**Remove person from Group** | `remove PERSON_INDEX` | `remove 2`
-**Add task to group** | `addT d/DESCRIPTION` | `addT d/read book`
-**Mark task as done** | `done TASK_INDEX` | `done 3`
-**Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`
-**Exit application** | `exit`
-**Help** | `help`
+Action | Format | Examples | Home Panel | Groups Information Panel
+--------|---------|---------|---------|---------
+**Add contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark: | :white_check_mark:
+**Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
+**Delete contact** | `delete INDEX` | `delete 3` | :white_check_mark: 
+**Edit contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: | 
+**Find contact** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
+**List all contacts** | `list` | | :white_check_mark: | :white_check_mark:
+**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
+**Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
+**Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
+**Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark: 
+**Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
+**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark:
+**Adding person to Group** | `addToG p/PERSON_INDEX_1, p/PERSON_INDEX_2.. g/GROUP_INDEX` |`addToG p/1, p/2, p/3 g/2` | :white_check_mark: | 
+**Join Person to Groups** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: | 
+**Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
+**Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
+**Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
+**Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
+**Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
+**Help** | `help`| | :white_check_mark: | :white_check_mark:
 
 --------------------------------------------------------------------------------------------------------------------
 
