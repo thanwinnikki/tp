@@ -96,12 +96,18 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+:bulb: Panel(s) where this command can be called :
+* Home Panel
+* Group Information Panel
 
+Format: `help`
 
 ### Adding a person: `add`
 
 Adds a person to ThunderCat.
+
+:bulb: Panel where this can be called :
+* Home Panel
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -111,21 +117,27 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
 ### Creating a group : `addG`
 
-Creates a group in ThunderCat.
+Creates a group in ThunderCat with an optional description. If no description is given in the command, the default description of "Enter description here!" is given instead.
+
+:bulb: Panel where this can be called :
+* Home Panel
 
 Format: `addG g/GROUP_NAME [d/DESCRIPTION]`
 
 Examples:  
-* `addG g/CS2103 d/Project group Y2S1`
-* `addG g/Family`
+* `addG g/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
+* `addG g/Family` adds a group with the name "Family" with the default description.
 
 ### Viewing all groups: `groups`
 
 Shows a list of all groups in ThunderCat.
+
+:bulb: Panel where this can be called :
+* Home Panel
+* Group Information Panel
 
 Format: `groups`
 
@@ -133,11 +145,19 @@ Format: `groups`
 
 Shows a list of all persons in ThunderCat.
 
+:bulb: Panel where this can be called :
+* Home Panel
+* Group Information Panel
+
 Format: `list`
 
 ### Editing a person : `edit`
 
 Edits an existing person in ThunderCat.
+
+:bulb: Panel where this can be called :
+* Home Panel
+* Group Information Panel
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -156,8 +176,12 @@ Examples:
 
 Edits an existing group in ThunderCat.
 
+:bulb: Panel where this can be called :
+* Home Panel
+* Group Information Panel
+
 Panel where this command can be called :
-* Group Information panel
+* Home panel
 
 Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
@@ -166,11 +190,15 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `editG 1 n/ES2660 d/Communications Mod`
+* `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
 
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
+
+:bulb: Panel where this can be called :
+* Home Panel
+* Group Information Panel
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -189,7 +217,11 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the ThunderCat (removes all groups related to this person automatically).
+Deletes the specified person from ThunderCat (removes all groups related to this person automatically).
+
+:bulb: Panel where this can be called :
+* Home Panel
+* Group Information Panel
 
 Format: `delete INDEX`
 
@@ -198,13 +230,16 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the ThunderCat.
+* `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `mates 2` followed by `delete 1` deletes the 1st person in the 2nd group.
+* `group 2` followed by `delete 1` deletes the 1st person in the 2nd group.
 
 ### Locating groups by name: `findG`
 
-Find groups whose names contain any of the given keywords.
+Finds groups whose names contain any of the given keywords.
+
+:bulb: Panel where this can be called :
+* Home Panel
 
 Format: `findG KEYWORD [MORE_KEYWORDS]`
 
@@ -224,7 +259,10 @@ Examples:
 
 ### Deleting a group : `deleteG`
 
-Deletes a specified group from ThunderCat.
+Deletes the specified group from the displayed group list.
+
+:bulb: Panel where this can be called :
+* Home Panel
 
 Format: `deleteG g/GROUP_INDEX`
 
@@ -245,55 +283,66 @@ Adds multiple specified people to a specified group.
 Format: `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
 
 * Adds to a group specified at `GROUP_INDEX`, multiple people specified at `PERSON_INDEX_1, PERSON_INDEX_2, …​`.
-* The group index refers to the group number shown in the **displayed group list**.
-* The person index refers to the person index number show in the **displayed person list**.
+* The group index refers to the group number shown in the displayed group list.
+* The person index refers to the person index number show in the displayed person list.
 * Group index **must be a positive integer** 1, 2, 3, …​
 * Person index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 to group 2.
+* `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
 
 ### Listing all group mates and tasks in a group: `group`
 
-Lists out all the group mates and tasks in a group.
+Lists out all the group mates and tasks in the specified group.
+
+:bulb: Panel where this can be called :
+* Home Panel
 
 Format: `group GROUP_INDEX`
 
 * The group mates and tasks in the group at the specified `GROUP_INDEX` are listed out.
-* The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
+* The `GROUP_INDEX` refers to the index number shown in the displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `group 1`
+* `group 1` shows the information of the group at index 1 of the displayed group list.
 
 ### Remove a person from the current group: `remove`
 
-Remove the person from the group that ThunderCat is displaying.
+Removes the specified person from the group that ThunderCat is displaying.
 
-Panel where this command can be called :
-* Group Information panel
+:bulb: Panel where this can be called :
+* Group Information Panel
+
+:bulb: Not to be confused with the delete command.
 
 Format: `remove PERSON_INDEX`
 
-* The group mates with the specified `PERSON_INDEX` will be removed from the group.
-* The `PERSON_INDEX` refers to the index number shown in the last displayed person list.
+* The groupmate with the specified `PERSON_INDEX` will be removed from the group.
+* The `PERSON_INDEX` refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `remove 2`
+* `remove 2` removes the 2nd person in the displayed person list from the group.
 
 ### Adding a task to the current group: `addT`
 
-Adds a task to the group that ThunderCat is displaying.
+Adds a task to the group that ThunderCat is displaying. By default, the task is marked `undone`.
+
+:bulb: Panel where this can be called :
+* Group Information Panel
 
 Format: `addT d/TASK_DESCRIPTION`
 
 Example:
-* `addT d/Prepare pitch`
+* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `undone` by default.
 
-### Delete a task from the current group: `deleteT`
+### Deleting a task from the current group: `deleteT`
 
-Delete the task from the group that ThunderCat is displaying.
+Deletes the specified task from the group that ThunderCat is displaying.
+
+:bulb: Panel where this can be called :
+* Group Information Panel
 
 Format: `deleteT TASK_INDEX`
 
@@ -301,9 +350,15 @@ Format: `deleteT TASK_INDEX`
 * The `TASK_INDEX` refers to the index number shown in the displayed task list.
 * The index **must be a positive integer** 1, 2 ,3, …​
 
+Example:
+* `deleteT 1` deletes the 1st task in the displayed task list.
+
 ### Marking a task as done: `done`
 
 Marks the specified task in the group as done.
+
+:bulb: Panel where this can be called :
+* Group Information Panel
 
 Format: `done TASK_INDEX`
 
@@ -312,7 +367,7 @@ Format: `done TASK_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `done 2`
+* `done 2` marks the 2nd task in the displayed task list as done.
 
 ### Clearing all entries : `clear`
 
