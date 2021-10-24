@@ -3,10 +3,18 @@ layout: page
 title: User Guide
 ---
 
-Thundercat (TC) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TC can get your contact management tasks done faster than traditional GUI apps.
+Thundercat (TC) is a **desktop app designed for Year 2 Computer Science Students in NUS.** The application acts as a address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TC can get your project groups' management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-{:toc}
+  
+  Section | Description 
+  --------|---------|
+  **Introduction** | Brief introduction to application and its purpose.
+  **Quick Start** | Getting you started on using the application.
+  **Features** | All you need to know about how to use the application.
+  **FAQ** | Frequently asked questions that you might have.
+  **Command Summary** | Summary lists of commands you can use for the application.
+  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -171,21 +179,21 @@ Format: `deleteG g/GROUP_INDEX`
 Examples:
 * `groups` followed by `deleteG g/2` deletes the 2nd group in the Thundercat.
 
-### Adding multiple people to a group : `addG` [coming soon]
+### Adding multiple people to a group : `joinG`
 
 Adds multiple specified people to a specified group.
 
-Format: `addG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
+Format: `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
 
-* Adds to a group specified at `GROUP_INDEX`, multiple people specified at `PERSON_INDEX_1, PERSON_INDEX_2, …​`
-* The group index refers to the group number shown in the displayed group list.
-* The person index refers to the person index number show in the displayed person list.
+* Adds to a group specified at `GROUP_INDEX`, multiple people specified at `PERSON_INDEX_1, PERSON_INDEX_2, …​`.
+* The group index refers to the group number shown in the **displayed group list**.
+* The person index refers to the person index number show in the **displayed person list**.
 * Group index **must be a positive integer** 1, 2, 3, …​
 * Person index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `groups` followed by `list` and finally `addG 1,2,3 g/2` adds the persons indexed 1, 2 and 
-  3 to the group indexed 2.
+* `groups` followed by `list` and finally `joinG p/1 p/2 p/3 g/2` adds the persons indexed 1, 2 and 
+  3 in the displayed person list to the group indexed 2 in the displayed group list.
   
 ### Adding a person to multiple groups: `join`
 
@@ -228,6 +236,16 @@ Format: `remove PERSON_INDEX`
 
 Example:
 * `remove 2`
+
+### Delete a task from the current group: `deleteT`
+
+Delete the task from the group that ThunderCat is displaying.
+
+Format: `deleteT TASK_INDEX`
+
+* The task with the specified `TASK_INDEX` will be removed from the current group.
+* The `TASK_INDEX` refers to the index number shown in the displayed task list.
+* The index **must be a positive integer** 1, 2 ,3, …​
 
 ### Clearing all entries : `clear`
 

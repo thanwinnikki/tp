@@ -43,7 +43,7 @@ public class TaskCard extends Card {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
-        description.setText(task.getDescription());
+        description.setText(task.getDescription().toString());
         if (task.getDoneTask()) {
             isDoneIndicator.setText(IS_DONE_INDICATOR_DONE_TEXT);
             isDoneIndicator.setStyle(getIsDoneIndicatorDoneStyle());
