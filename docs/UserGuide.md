@@ -50,13 +50,13 @@ This is a warning.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all persons.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the application's records.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a person named `John Doe` to the application's records.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd person shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all persons.
 
    * **`exit`** : Exits the app.
 
@@ -189,7 +189,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the ThunderCat (removes all groups related to this contact automatically).
+Deletes the specified person from the ThunderCat (removes all groups related to this person automatically).
 
 Format: `delete INDEX`
 
@@ -364,7 +364,7 @@ If any of the changes you make to the data file makes it have an invalid format,
 
 Action | Format | Examples | Home Panel | Group Information Panel
 --------|---------|---------|---------|---------
-**Add contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark: | :white_check_mark:
+**Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark: | :white_check_mark:
 **Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
 **Delete person** | `delete INDEX` | `delete 3` | :white_check_mark: 
 **Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: | 
@@ -375,9 +375,8 @@ Action | Format | Examples | Home Panel | Group Information Panel
 **Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
 **Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark: 
 **Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
-**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark:
-**Adding person to Group** | `addToG p/PERSON_INDEX_1, p/PERSON_INDEX_2.. g/GROUP_INDEX` |`addToG p/1, p/2, p/3 g/2` | :white_check_mark: | 
-**Join Person to Groups** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: | 
+**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark: 
+**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: | 
 **Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
 **Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
