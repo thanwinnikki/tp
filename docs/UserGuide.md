@@ -293,7 +293,7 @@ Examples:
 
 ### Listing all group mates and tasks in a group: `group`
 
-Lists out all the group mates and tasks in a group.
+Lists out all the group mates and tasks in the specified group.
 
 :bulb: Panel where this can be called :
 * Home Panel
