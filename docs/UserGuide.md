@@ -278,10 +278,10 @@ If the data file has an invalid format, such as after editing the file wrongly, 
 
 ### Editing the data file
 
-The data is saved as a JSON file `[JAR file location]/data/records.json`. Advanced users are welcome to update data directly by editing that data file.
+The data is saved as a JSON file called `records.json` located in `[JAR file location]/data`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If any of your changes to the data file makes its format invalid, the application will discard all the data and start with an empty data file on the next run.
+If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
