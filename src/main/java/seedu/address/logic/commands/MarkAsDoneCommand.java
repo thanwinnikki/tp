@@ -51,7 +51,9 @@ public class MarkAsDoneCommand extends Command {
         } else {
             taskToMarkAsDone.setDoneTask();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToMarkAsDone));
+        return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, taskToMarkAsDone))
+                .displayGroupInformation(group)
+                .build();
     }
 
     @Override
