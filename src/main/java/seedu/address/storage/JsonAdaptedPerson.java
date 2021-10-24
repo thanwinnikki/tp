@@ -114,7 +114,10 @@ public class JsonAdaptedPerson {
          */
         @JsonProperty
         public Builder withTagged(List<JsonAdaptedTag> tagged) {
-            this.tagged = tagged;
+            if (tagged != null) {
+                this.tagged = new ArrayList<>();
+                this.tagged.addAll(tagged);
+            }
             return this;
         }
     }
@@ -129,10 +132,7 @@ public class JsonAdaptedPerson {
         this.email = email;
         this.address = address;
         this.id = id;
-        this.tagged = new ArrayList<>();
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+        this.tagged = tagged;
     }
 
     /**
@@ -142,9 +142,10 @@ public class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        assert tagged != null : "The tags list cannot be empty.";
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        if (tagged != null) {
+            for (JsonAdaptedTag tag : tagged) {
+                personTags.add(tag.toModelType());
+            }
         }
 
         if (name == null) {
