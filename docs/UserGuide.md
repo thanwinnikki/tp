@@ -289,7 +289,7 @@ Format: `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
 * Person index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed person list.
+* `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
 
 ### Listing all group mates and tasks in a group: `group`
 
