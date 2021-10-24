@@ -108,7 +108,8 @@ class JsonSerializableAddressBook {
             Iterable<Group> groups, Map<Group, Id> groupToIdMap, Map<Person, Id> personToIdMap) {
         for (Group group : groups) {
             Id personId = groupToIdMap.get(group);
-            JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup(group, personToIdMap);
+            JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(group, personToIdMap)
+                    .build();
             idToJsonAdaptedGroupMap.put(personId.toString(), jsonAdaptedGroup);
         }
     }
