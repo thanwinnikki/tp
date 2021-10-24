@@ -264,6 +264,18 @@ Format: `exit`
 
 The data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
+### Loading the data
+
+The data is loaded automatically from the hard disk when the application starts. There is no need to load the data manually.
+
+If there is no data file to load, such as when the application has just been downloaded and has not been run yet or when the data file is deleted, then sample records are loaded instead.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Use [`clear`](#clearing-all-entries--clear) to easily and quickly remove the sample records if desired.
+</div>
+
+If the data file has an invalid format, such as after editing the file wrongly, then the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
+
 ### Editing the data file
 
 The data is saved as a JSON file `[JAR file location]/data/records.json`. Advanced users are welcome to update data directly by editing that data file.
