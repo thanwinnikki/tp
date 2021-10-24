@@ -350,6 +350,8 @@ The data is saved as a JSON file called `records.json` located in `[JAR file loc
 If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 </div>
 
+#### Structure of the data file
+
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 The following is more suitable for more advanced users.
 </div>
