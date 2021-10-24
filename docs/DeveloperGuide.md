@@ -247,6 +247,19 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Add Panel to the UI
+
+#### Proposed Implementation
+
+The proposed adding Panel mechanism is facilitated by `MainWindow.fxml`. It extends the `MainWindow` with one more panel, making it easier to render `Group` list and `Task` list at the same time.
+
+Overall, the `MainWindow.fxml` uses `VBox` (Vertical Box) layout to stores components (e.g. `CommandBox`, `ResultDisplay`). The key point to implement the extension is using `HBox` (Horizontal Box) layout. Panels insides the layout is ordered horizontally, making two parallel display panels at the same time.
+
+#### Proposed Toolkit
+
+![UndoRedoState5](images/AddPanelToolkit_SenceBuilder.png)
+
+Application `ScenceBuilder` makes it easier to implement the feature by the running time visualization and list of possible components
 
 --------------------------------------------------------------------------------------------------------------------
 
