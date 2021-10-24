@@ -5,8 +5,32 @@ title: User Guide
 
 Thundercat (TC) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TC can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
+* <div id="table-of-contents">Table of Contents</div>
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Usage
+
+### Navigation
+
+Use the [table of contents](#table-of-contents) to navigate the user guide easily. There will also be links in some sections linking to other relevant sections or to other websites which provide useful information.
+
+### Formatting
+
+There will be paragraphs that will have coloured backgrounds and with icons. These paragraphs highlight useful information:
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+This is a tip.
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source: **Heading:**
+This provides details.
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This is a warning.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
