@@ -362,7 +362,7 @@ If any of the changes you make to the data file makes it have an invalid format,
 
 ## Command summary
 
-Action | Format | Examples | Home Panel | Groups Information Panel
+Action | Format | Examples | Home Panel | Group Information Panel
 --------|---------|---------|---------|---------
 **Add contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark: | :white_check_mark:
 **Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
