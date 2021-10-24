@@ -43,8 +43,8 @@ public class SampleDataUtil {
 
     public static Group[] getSampleGroups() {
         return new Group[] {
-                new Group(new Name("CS2103T")),
-                new Group(new Name("CS2100"))
+            new Group(new Name("CS2103T")),
+            new Group(new Name("CS2100"))
         };
     }
 
