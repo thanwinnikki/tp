@@ -7,7 +7,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.common.Name;
@@ -20,6 +22,8 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Person}.
  */
+@JsonDeserialize(builder = JsonAdaptedPerson.Builder.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -28,19 +32,50 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedTag> tagged;
+
+    public static class Builder {
+
+        private String name;
+        private String phone;
+        private String email;
+        private String address;
+        private List<JsonAdaptedTag> tagged;
+
+        /**
+         * Constructs a {@code JsonAdaptedPerson.Builder} for a {@code JsonAdaptedPerson} with the given person details.
+         *
+         * @param name The name of the person.
+         * @param phone The phone number of the person.
+         * @param email The email address of the person.
+         * @param address The physical address of the person.
+         * @param tagged The list of tags assigned to the person.
+         */
+        @JsonCreator
+        public Builder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+                @JsonProperty("email") String email, @JsonProperty("address") String address,
+                @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            this.name = name;
+            this.phone = phone;
+            this.email = email;
+            this.address = address;
+            this.tagged = tagged;
+        }
+
+        public JsonAdaptedPerson build() {
+            return new JsonAdaptedPerson(name, phone, email, address, tagged);
+        }
+    }
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
-    @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    private JsonAdaptedPerson(String name, String phone, String email, String address, List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.tagged = new ArrayList<>();
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +89,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        tagged = new ArrayList<>();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
