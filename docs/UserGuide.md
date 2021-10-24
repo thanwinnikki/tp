@@ -339,7 +339,7 @@ Example:
 
 ### Deleting a task from the current group: `deleteT`
 
-Delete the task from the group that ThunderCat is displaying.
+Deletes the specified task from the group that ThunderCat is displaying.
 
 :bulb: Panel where this can be called :
 * Group Information Panel
