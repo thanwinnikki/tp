@@ -100,6 +100,17 @@ public class JsonAdaptedPerson {
          * @param id The ID to be included.
          * @return This {@code JsonAdaptedPerson.Builder} instance.
          */
+        public Builder withId(Id id) {
+            this.id = id.toString();
+            return this;
+        }
+
+        /**
+         * Includes the given ID.
+         *
+         * @param id The ID to be included.
+         * @return This {@code JsonAdaptedPerson.Builder} instance.
+         */
         @JsonProperty
         public Builder withId(String id) {
             this.id = id;
@@ -133,6 +144,15 @@ public class JsonAdaptedPerson {
         this.address = address;
         this.id = id;
         this.tagged = tagged;
+    }
+
+    public boolean hasId() {
+        return id != null;
+    }
+
+    public Id getId() throws IllegalValueException {
+        assert hasId() : "This JsonAdaptedPerson has no ID.";
+        return Id.parse(id);
     }
 
     /**
