@@ -46,7 +46,7 @@ public class JsonAdaptedGroup {
         private List<JsonAdaptedTask> tasks;
 
         /**
-         * Constructs a {@code JsonAdaptedGroup.Builder} for a {@code JsonAdaptedPerson} with the given group details.
+         * Constructs a {@code JsonAdaptedGroup.Builder} for a {@code JsonAdaptedGroup} with the given group details.
          *
          * @param name The group's name.
          */
