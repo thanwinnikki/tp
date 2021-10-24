@@ -259,7 +259,7 @@ Examples:
 
 ### Deleting a group : `deleteG`
 
-Deletes a specified group from ThunderCat.
+Deletes the specified group from the displayed group list.
 
 :bulb: Panel where this can be called :
 * Home Panel
