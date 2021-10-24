@@ -157,6 +157,7 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the Thundercat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `mates 2` followed by `delete 1` deletes the 1st person in the 2nd group.
 
 ### Locating groups by name: `findG`
 
