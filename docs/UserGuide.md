@@ -6,6 +6,7 @@ title: User Guide
 ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
 ___
+<a name="table-of-contents"></a>
 * Table of Contents
 {:toc}
   
@@ -14,20 +15,22 @@ ___
 
 ## Usage
 
+If you are a user of ThunderCat and you would like to get to know how to use ThunderCat, then this user guide is for you. Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge. However, the user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still only a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+
 ### Navigation
 
-Use the [table of contents](#table-of-contents) to navigate the user guide easily. There will also be links in some sections linking to other relevant sections or to other websites which provide useful information.
+Use the [table of contents](#table-of-contents) to navigate the user guide easily. There will also be links in some sections linking to other relevant sections within this user guide or to other websites which provide useful information.
 
 ### Formatting
 
-There will be paragraphs that will have coloured backgrounds and with icons. These paragraphs highlight useful information:
+There are blocks that have coloured backgrounds and have icons. The content of these highlight useful information:
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 This is a tip.
 </div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Heading:**
-This provides details.
+<div markdown="span" class="alert alert-info">:information_source: **[HEADING]:**
+This provides further information.
 </div>
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
