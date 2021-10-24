@@ -144,7 +144,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete` [update coming soon]
+### Deleting a person : `delete`
 
 Deletes the specified person from the Thundercat (removes all groups related to this contact automatically).
 
@@ -157,8 +157,27 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the Thundercat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `mates 2` followed by `delete 1` deletes the 1st person in the 2nd group.
 
-### Deleting a group : `deleteG` [coming soon]
+### Locating groups by name: `findG`
+
+Find groups whose names contain any of the given keywords.
+
+Format: `findG KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `cs2103T` will match `CS2103T`
+* The order of the keywords does not matter. e.g. `Favourite Group` will match `Group Favourite`
+* Only the name is searched.
+* Only full words will be matched e.g. `CS2103` will not match `CS2103T`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `CS2103T` will return `CS2103T Friends`, `CS2103T Tutors`
+
+Examples:
+* `findG CS2103T` returns `CS2103T Mates` and `CS2103T Tutors`
+* `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`<br>
+  ![result for 'find alex david'](images/findG_CS2103T%20Mates_Result.png)
+
+### Deleting a group : `deleteG`
 
 Deletes a specified group from the Thundercat.
 
