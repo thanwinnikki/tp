@@ -383,6 +383,19 @@ Action | Format | Examples
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book`
 **Mark task as done** | `done TASK_INDEX` | `done 3`
 **Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`
-
 **Exit application** | `exit`
 **Help** | `help`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **Home Panel**: The home page where the lists of persons and groups are displayed.<br>
+<br>![Home Panel](images/HomePanel.png)
+
+
+* **Group Information Panel**: The group information page where the lists of group members and tasks are displayed.<br>
+<br>![Group Information Panel](images/GroupInformationPanel.png)
+
+
+* **JSON**: JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
