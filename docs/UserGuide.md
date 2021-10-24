@@ -217,7 +217,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the ThunderCat (removes all groups related to this contact automatically).
+Deletes the specified person from ThunderCat (removes all groups related to this contact automatically).
 
 :bulb: Panel where this can be called :
 * Home Panel
