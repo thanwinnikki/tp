@@ -3,17 +3,9 @@ layout: page
 title: User Guide
 ---
 
-Thundercat (TC) is a **desktop app designed for Year 2 Computer Science Students in NUS.** The application acts as a address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TC can get your project groups' management tasks done faster than traditional GUI apps.
+ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-  
-  Section | Description 
-  --------|---------|
-  **Introduction** | Brief introduction to application and its purpose.
-  **Quick Start** | Getting you started on using the application.
-  **Features** | All you need to know about how to use the application.
-  **FAQ** | Frequently asked questions that you might have.
-  **Command Summary** | Summary lists of commands you can use for the application.
+* Table of Contents {:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## Usage
@@ -44,7 +36,7 @@ This is a warning.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `thundercat.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-3/tp/releases).
+1. Download the latest `ThunderCat.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-3/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
@@ -105,7 +97,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to Thundercat.
+Adds a person to ThunderCat.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -119,7 +111,7 @@ Examples:
 
 ### Creating a group : `addG`
 
-Creates a group in Thundercat.
+Creates a group in ThunderCat.
 
 Format: `addG g/GROUP_NAME [d/DESCRIPTION]`
 
@@ -129,19 +121,19 @@ Examples:
 
 ### Viewing all groups: `groups`
 
-Shows a list of all groups in Thundercat.
+Shows a list of all groups in ThunderCat.
 
 Format: `groups`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in Thundercat.
+Shows a list of all persons in ThunderCat.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the Thundercat.
+Edits an existing person in ThunderCat.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -156,20 +148,21 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Edit a group: `editG`
+### Editing a group: `editG`
 
-Edit an existing person
+Edits an existing group in ThunderCat.
+
 Panel where this command can be called :
 * Group Information panel
 
-Format: `remove PERSON_INDEX`
+Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
-* The group mates with the specified `PERSON_INDEX` will be removed from the group.
-* The `PERSON_INDEX` refers to the index number shown in the last displayed person list.
+* The group with the specified `GROUP_INDEX` will be edited.
+* The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `remove 2`
+* `editG 1 n/ES2660 d/Communications Mod`
 
 ### Locating persons by name: `find`
 
@@ -192,7 +185,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the Thundercat (removes all groups related to this contact automatically).
+Deletes the specified person from the ThunderCat (removes all groups related to this contact automatically).
 
 Format: `delete INDEX`
 
@@ -201,7 +194,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the Thundercat.
+* `list` followed by `delete 2` deletes the 2nd person in the ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `mates 2` followed by `delete 1` deletes the 1st person in the 2nd group.
 
@@ -220,12 +213,14 @@ Format: `findG KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `findG CS2103T` returns `CS2103T Mates` and `CS2103T Tutors`
-* `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`<br>
+* `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`
+  
+
   ![result for 'find alex david'](images/findG_CS2103T%20Mates_Result.png)
 
 ### Deleting a group : `deleteG`
 
-Deletes a specified group from the Thundercat.
+Deletes a specified group from ThunderCat.
 
 Format: `deleteG g/GROUP_INDEX`
 
@@ -234,11 +229,14 @@ Format: `deleteG g/GROUP_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `groups` followed by `deleteG g/2` deletes the 2nd group in the Thundercat.
+* `deleteG g/2` deletes the 2nd group in ThunderCat.
 
 ### Adding multiple people to a group : `joinG`
 
 Adds multiple specified people to a specified group.
+
+:bulb: Panel where this command can be called :
+* Home panel
 
 Format: `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
 
@@ -249,24 +247,7 @@ Format: `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
 * Person index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `groups` followed by `list` and finally `joinG p/1 p/2 p/3 g/2` adds the persons indexed 1, 2 and 
-  3 in the displayed person list to the group indexed 2 in the displayed group list.
-  
-### Adding a person to multiple groups: `join`
-
-Adds a person to a list of groups.
-
-Format: `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...`
-
-* The person at the specified `PERSON_INDEX` is set to join all the group(s) at the specified `GROUP_INDEX_1`,
-`GROUP_INDEX_2`, etc.
-* The `PERSON_INDEX` refers to the index number shown in the last displayed person list.
-* `GROUP_INDEX_1`, `GROUP_INDEX_2`, etc. refer to the index numbers shown in the last displayed group list.
-* The indices **must all be positive integers** 1, 2, 3, …​
-
-Examples:
-* `join 1 g/2`
-* `join 2 g/1,3,6,8`
+* `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 to group 2.
 
 ### Listing all group mates and tasks in a group: `group`
 
@@ -279,11 +260,11 @@ Format: `group GROUP_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `group 7`
+* `group 1`
 
 ### Remove a person from the current group: `remove`
 
-Remove the person from the group that Thundercat is displaying.
+Remove the person from the group that ThunderCat is displaying.
 
 Panel where this command can be called :
 * Group Information panel
@@ -297,7 +278,15 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2`
 
-<<<<<<< HEAD
+### Adding a task to the current group: `addT`
+
+Adds a task to the group that ThunderCat is displaying.
+
+Format: `addT d/TASK_DESCRIPTION`
+
+Example:
+* `addT d/Prepare pitch`
+
 ### Delete a task from the current group: `deleteT`
 
 Delete the task from the group that ThunderCat is displaying.
@@ -307,15 +296,6 @@ Format: `deleteT TASK_INDEX`
 * The task with the specified `TASK_INDEX` will be removed from the current group.
 * The `TASK_INDEX` refers to the index number shown in the displayed task list.
 * The index **must be a positive integer** 1, 2 ,3, …​
-=======
-### Adding a task to the current group: `addT`
-
-Adds a task to the group that Thundercat is displaying.
-
-Format: `addT d/TASK_DESCRIPTION`
-
-Example:
-* `addT d/Prepare pitch`
 
 ### Marking a task as done: `done`
 
@@ -329,17 +309,16 @@ Format: `done TASK_INDEX`
 
 Example:
 * `done 2`
->>>>>>> 1348cd6eacb1bc2089f485236f3a250b028df23c
 
 ### Clearing all entries : `clear`
 
-Clears all entries from Thundercat.
+Clears all entries from ThunderCat.
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits Thundercat.
+Exits ThunderCat.
 
 Format: `exit`
 
@@ -367,9 +346,6 @@ The data is saved as a JSON file called `records.json` located in `[JAR file loc
 If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
