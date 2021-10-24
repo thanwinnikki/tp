@@ -405,6 +405,126 @@ The data is saved as a JSON file called `records.json` located in `[JAR file loc
 If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 </div>
 
+#### Structure of the data file
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+The following is more suitable for more advanced users.
+</div>
+
+The data file consists of a JSON object containing a `persons` JSON array and a `groups` JSON array:
+
+```json
+{
+  "persons" : [
+    ...
+  ],
+  "groups" : [
+    ...
+  ]
+}
+```
+
+The `persons` JSON array consists of entries of each saved person and their details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+
+In each person entry, these are the required attributes:
+* `"name"` is a string that refers to the person's saved name.
+* `"phone"` is a string that refers to the person's saved phone number.
+* `"email"` is a string that refers to the person's saved email.
+* `"address"` is a string that refers to the person's saved address.
+
+There are also some optional attributes:
+* `"tagged"` is a JSON array that contains strings that each refer to a tag the person is assigned.
+* `"id"` is a string which is used by group entries to refer to the person with the ID as a group mate.
+  * Each ID is made of two _hexadecimal_ numbers separated by a hyphen `[hex]-[hex]`.
+  * Each ID must be unique among all person entries.
+  * The value of the ID does not matter, so it can have any value, so long as each ID is **unique** among all person entries.
+  * If a person belongs to a group, then the person must have an ID and this ID must also appear in that group's `groupMateIds` JSON array.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If you are not familiar with _hexadecimal_ numbers, it suffices to use the usual decimal numbers (so using only the digits from 0 to 9).
+</div>
+
+```json
+{
+  "persons" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Bernice Yu",
+    "phone" : "99272758",
+    "email" : "berniceyu@example.com",
+    "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "id" : "49ec-f5d46507b2c"
+  },
+    ...
+  ],
+  "groups" : [
+    ...
+  ]
+}
+```
+
+The `groups` JSON array consists of entries of each saved group and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+
+In each group entry, this is the required attribute:
+* `"name"` is a string that refers to the group's saved name.
+
+These are the optional attributes:
+* `"description"` is a string that refers to the group's saved description.
+* `"groupMateIds"` is a JSON array containing the IDs of the person entries of the group mates in the group.
+  * The ID of each group mate must correspond to the ID in the group mate's person entry.
+  * The group mate IDs must be unique within a group entry.
+* `"tasks"` is a JSON array containing the entries of each saved task of a group and its details structured as a JSON object.
+
+```json
+{
+  "persons" : [
+    ...
+  ],
+  "groups" : [ {
+    "name" : "ThunderCat",
+    "description" : "CS2103T tP Group",
+    "groupMateIds" : [ "49ec-f5d46507b2c", "0-0", "0-1", ... ],
+    "tasks" : [
+      ...
+    ]
+  }, {
+    "name" : "Carry"
+  },
+    ...
+  ]
+}
+```
+
+The `tasks` JSON array consists of the corresponding group's entries of each saved task and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+
+In each task entry, these are the required attributes:
+* `"description"` is a string that refers to the task's saved description.
+* `"isDone"` is a boolean value that is set to `true` if the task is done and `false` otherwise.
+
+```json
+{
+  "persons" : [
+    ...
+  ],
+  "groups" : [ {
+    "name" : "ThunderCat",
+    ...
+    "tasks" : [ {
+      "description" : "Write the Developer Guide acknowledgements section",
+      "isDone" : true
+    }, {
+      "description" : "Polish the Developer Guide",
+      "isDone" : false
+    } ]
+  },
+    ...
+  ]
+}
+```
 
 --------------------------------------------------------------------------------------------------------------------
 
