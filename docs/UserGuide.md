@@ -327,7 +327,7 @@ Example:
 
 ### Adding a task to the current group: `addT`
 
-Adds a task to the group that ThunderCat is displaying. By default, the task is marked undone.
+Adds a task to the group that ThunderCat is displaying. By default, the task is marked `undone`.
 
 :bulb: Panel where this can be called :
 * Group Information Panel
