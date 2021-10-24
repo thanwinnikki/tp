@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
  */
 @JsonDeserialize(builder = JsonAdaptedPerson.Builder.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-class JsonAdaptedPerson {
+public class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
@@ -34,6 +34,9 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tagged;
 
+    /**
+     * Builder class for {@code JsonAdaptedPerson}.
+     */
     public static class Builder {
 
         private String name;
@@ -49,21 +52,30 @@ class JsonAdaptedPerson {
          * @param phone The phone number of the person.
          * @param email The email address of the person.
          * @param address The physical address of the person.
-         * @param tagged The list of tags assigned to the person.
          */
         @JsonCreator
         public Builder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                @JsonProperty("email") String email, @JsonProperty("address") String address,
-                @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                @JsonProperty("email") String email, @JsonProperty("address") String address) {
             this.name = name;
             this.phone = phone;
             this.email = email;
             this.address = address;
-            this.tagged = tagged;
         }
 
         public JsonAdaptedPerson build() {
             return new JsonAdaptedPerson(name, phone, email, address, tagged);
+        }
+
+        /**
+         * Includes the given tags.
+         *
+         * @param tagged The list of tags to be included
+         * @return This {@code JsonAdaptedPerson.Builder} instance.
+         */
+        @JsonProperty
+        public Builder withTagged(List<JsonAdaptedTag> tagged) {
+            this.tagged = tagged;
+            return this;
         }
     }
 
@@ -89,10 +101,15 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged = new ArrayList<>();
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        Set<Tag> tags = source.getTags();
+        if (!tags.isEmpty()) {
+            tagged = new ArrayList<>();
+            tagged.addAll(tags.stream()
+                    .map(JsonAdaptedTag::new)
+                    .collect(Collectors.toList()));
+        } else {
+            tagged = null;
+        }
     }
 
     /**
@@ -102,6 +119,7 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        assert tagged != null : "The tags list cannot be empty.";
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
