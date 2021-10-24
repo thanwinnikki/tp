@@ -220,7 +220,7 @@ Examples:
 * `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`
   
 
-  ![result for 'find alex david'](images/findG_CS2103T%20Mates_Result.png)
+  ![result for 'find CS2103T Mates'](images/findG_CS2103T_Mates_Result.png)
 
 ### Deleting a group : `deleteG`
 
