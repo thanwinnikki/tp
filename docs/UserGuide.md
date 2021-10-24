@@ -129,7 +129,7 @@ Format: `addG g/GROUP_NAME [d/DESCRIPTION]`
 
 Examples:  
 * `addG g/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
-* `addG g/Family` adds group with name "Family" with the default description.
+* `addG g/Family` adds a group with the name "Family" with the default description.
 
 ### Viewing all groups: `groups`
 
