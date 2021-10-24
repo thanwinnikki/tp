@@ -318,7 +318,7 @@ Removes the specified person from the group that ThunderCat is displaying.
 
 Format: `remove PERSON_INDEX`
 
-* The group mates with the specified `PERSON_INDEX` will be removed from the group.
+* The groupmate with the specified `PERSON_INDEX` will be removed from the group.
 * The `PERSON_INDEX` refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
