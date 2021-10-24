@@ -190,7 +190,7 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `editG 1 n/ES2660 d/Communications Mod` Edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
+* `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
 
 ### Locating persons by name: `find`
 
