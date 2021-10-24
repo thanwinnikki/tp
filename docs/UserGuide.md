@@ -96,7 +96,7 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-:bulb: Panel where this can be called :
+:bulb: Panel(s) where this command can be called :
 * Home Panel
 * Group Information Panel
 
