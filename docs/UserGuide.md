@@ -335,7 +335,7 @@ Adds a task to the group that ThunderCat is displaying. By default, the task is 
 Format: `addT d/TASK_DESCRIPTION`
 
 Example:
-* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked undone by default.
+* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `undone` by default.
 
 ### Deleting a task from the current group: `deleteT`
 
