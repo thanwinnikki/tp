@@ -29,9 +29,9 @@ import seedu.address.model.person.IsGroupMemberPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code MatesCommand}.
+ * {@code groupCommand}.
  */
-public class MatesCommandTest {
+public class GroupCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
@@ -41,9 +41,9 @@ public class MatesCommandTest {
         Group groupToDisplay = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
         IsGroupMemberPredicate personPredicate = prepareGroupMemberPredicate(groupToDisplay);
         IsGroupPredicate groupPredicate = prepareGroupPredicate(groupToDisplay);
-        MatesCommand command = new MatesCommand(INDEX_FIRST);
+        GroupCommand command = new GroupCommand(INDEX_FIRST);
 
-        String expectedMessage = MatesCommand.MESSAGE_SUCCESS;
+        String expectedMessage = GroupCommand.MESSAGE_SUCCESS;
         CommandResult expectedCommandResult = new CommandResult.Builder(expectedMessage)
                 .displayGroupInformation(groupToDisplay)
                 .build();
@@ -57,7 +57,7 @@ public class MatesCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MatesCommand command = new MatesCommand(outOfBoundIndex);
+        GroupCommand command = new GroupCommand(outOfBoundIndex);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
@@ -69,9 +69,9 @@ public class MatesCommandTest {
         Group groupToDisplay = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
         IsGroupMemberPredicate personPredicate = prepareGroupMemberPredicate(groupToDisplay);
         IsGroupPredicate groupPredicate = prepareGroupPredicate(groupToDisplay);
-        MatesCommand command = new MatesCommand(INDEX_FIRST);
+        GroupCommand command = new GroupCommand(INDEX_FIRST);
 
-        String expectedMessage = MatesCommand.MESSAGE_SUCCESS;
+        String expectedMessage = GroupCommand.MESSAGE_SUCCESS;
         CommandResult expectedCommandResult = new CommandResult.Builder(expectedMessage)
                 .displayGroupInformation(groupToDisplay)
                 .build();
@@ -90,31 +90,31 @@ public class MatesCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        MatesCommand command = new MatesCommand(outOfBoundIndex);
+        GroupCommand command = new GroupCommand(outOfBoundIndex);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        MatesCommand matesFirstCommand = new MatesCommand(INDEX_FIRST);
-        MatesCommand matesSecondCommand = new MatesCommand(INDEX_SECOND);
+        GroupCommand groupFirstCommand = new GroupCommand(INDEX_FIRST);
+        GroupCommand groupSecondCommand = new GroupCommand(INDEX_SECOND);
 
         // same object -> returns true
-        assertTrue(matesFirstCommand.equals(matesFirstCommand));
+        assertTrue(groupFirstCommand.equals(groupFirstCommand));
 
         // same values -> returns true
-        MatesCommand matesFirstCommandCopy = new MatesCommand(INDEX_FIRST);
-        assertTrue(matesFirstCommand.equals(matesFirstCommandCopy));
+        GroupCommand groupFirstCommandCopy = new GroupCommand(INDEX_FIRST);
+        assertTrue(groupFirstCommand.equals(groupFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(matesFirstCommand.equals(1));
+        assertFalse(groupFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(matesFirstCommand.equals(null));
+        assertFalse(groupFirstCommand.equals(null));
 
         // different group -> returns false
-        assertFalse(matesFirstCommand.equals(matesSecondCommand));
+        assertFalse(groupFirstCommand.equals(groupSecondCommand));
     }
 
     /**

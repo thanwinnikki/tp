@@ -21,10 +21,10 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.MatesCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
@@ -61,10 +61,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_mates() throws Exception {
-        MatesCommand command = (MatesCommand) parser.parseCommand(
-                MatesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), null);
-        assertEquals(new MatesCommand(INDEX_FIRST), command);
+    public void parseCommand_addToG() throws Exception {
+        GroupCommand command = (GroupCommand) parser.parseCommand(
+                GroupCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), null);
+        assertEquals(new GroupCommand(INDEX_FIRST), command);
     }
 
     @Test
