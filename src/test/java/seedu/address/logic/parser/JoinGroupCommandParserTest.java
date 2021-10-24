@@ -13,10 +13,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddToGroupCommand;
+import seedu.address.logic.commands.JoinGroupCommand;
 
-public class AddToGroupCommandParserTest {
-    private AddToGroupCommandParser parser = new AddToGroupCommandParser();
+public class JoinGroupCommandParserTest {
+    private JoinGroupCommandParser parser = new JoinGroupCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -25,7 +25,7 @@ public class AddToGroupCommandParserTest {
         assertParseSuccess(
                 parser,
                 INDEX_DESC_PERSON1 + INDEX_DESC_GROUP1,
-                new AddToGroupCommand(INDEX_FIRST, personIndexesSet)
+                new JoinGroupCommand(INDEX_FIRST, personIndexesSet)
         );
     }
 
@@ -34,7 +34,7 @@ public class AddToGroupCommandParserTest {
         assertParseFailure(
                 parser,
                 "hello",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToGroupCommand.MESSAGE_USAGE)
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, JoinGroupCommand.MESSAGE_USAGE)
         );
     }
 }

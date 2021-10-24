@@ -8,10 +8,10 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddToGroupCommand;
+import seedu.address.logic.commands.JoinGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class AddToGroupCommandParser implements Parser<AddToGroupCommand> {
+public class JoinGroupCommandParser implements Parser<JoinGroupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddGroupCommand
@@ -20,19 +20,19 @@ public class AddToGroupCommandParser implements Parser<AddToGroupCommand> {
      * @throws ParseException if  the user does not conform to the expected format
      */
     @Override
-    public AddToGroupCommand parse(String args) throws ParseException {
+    public JoinGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP, PREFIX_PERSON);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToGroupCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, JoinGroupCommand.MESSAGE_USAGE));
         }
 
         Index groupIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP).get());
         Set<Index> personIndexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_PERSON));
 
-        return new AddToGroupCommand(groupIndex, personIndexes);
+        return new JoinGroupCommand(groupIndex, personIndexes);
     }
 
     /**

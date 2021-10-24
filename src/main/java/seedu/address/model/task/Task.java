@@ -24,8 +24,8 @@ public class Task {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description.toString();
+    public Description getDescription() {
+        return description;
     }
 
     public void setDoneTask() {
