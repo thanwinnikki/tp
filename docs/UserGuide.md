@@ -144,7 +144,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete` [update coming soon]
+### Deleting a person : `delete`
 
 Deletes the specified person from the Thundercat (removes all groups related to this contact automatically).
 
