@@ -98,7 +98,8 @@ class JsonSerializableAddressBook {
     private void initialisePersonIdToJsonAdaptedPersonMap(Iterable<Person> persons, Map<Person, Id> personToIdMap) {
         for (Person person : persons) {
             Id personId = personToIdMap.get(person);
-            JsonAdaptedPerson jsonAdaptedPerson = new JsonAdaptedPerson(person);
+            JsonAdaptedPerson jsonAdaptedPerson = new JsonAdaptedPerson.Builder(person)
+                    .build();
             idToJsonAdaptedPersonMap.put(personId.toString(), jsonAdaptedPerson);
         }
     }

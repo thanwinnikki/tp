@@ -32,6 +32,7 @@ public class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String id;
     private final List<JsonAdaptedTag> tagged;
 
     /**
@@ -43,6 +44,7 @@ public class JsonAdaptedPerson {
         private String phone;
         private String email;
         private String address;
+        private String id;
         private List<JsonAdaptedTag> tagged;
 
         /**
@@ -62,14 +64,52 @@ public class JsonAdaptedPerson {
             this.address = address;
         }
 
+        /**
+         * Starts converting a given {@code Person} into a {@code JsonAdaptedPerson} for Jackson use.
+         *
+         * @param source The given {@code Person}.
+         */
+        public Builder(Person source) {
+            name = source.getName().fullName;
+            phone = source.getPhone().value;
+            email = source.getEmail().value;
+            address = source.getAddress().value;
+            Set<Tag> tags = source.getTags();
+            if (!tags.isEmpty()) {
+                tagged = new ArrayList<>();
+                tagged.addAll(tags.stream()
+                        .map(JsonAdaptedTag::new)
+                        .collect(Collectors.toList()));
+            } else {
+                tagged = null;
+            }
+        }
+
+        /**
+         * Completes the {@code JsonAdaptedPerson} being built by this {@code JsonAdaptedPerson.Builder}.
+         *
+         * @return The completed {@code JsonAdaptedPerson} object.
+         */
         public JsonAdaptedPerson build() {
-            return new JsonAdaptedPerson(name, phone, email, address, tagged);
+            return new JsonAdaptedPerson(name, phone, email, address, id, tagged);
+        }
+
+        /**
+         * Includes the given ID.
+         *
+         * @param id The ID to be included.
+         * @return This {@code JsonAdaptedPerson.Builder} instance.
+         */
+        @JsonProperty
+        public Builder withId(String id) {
+            this.id = id;
+            return this;
         }
 
         /**
          * Includes the given tags.
          *
-         * @param tagged The list of tags to be included
+         * @param tagged The list of tags to be included.
          * @return This {@code JsonAdaptedPerson.Builder} instance.
          */
         @JsonProperty
@@ -82,33 +122,16 @@ public class JsonAdaptedPerson {
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
-    private JsonAdaptedPerson(String name, String phone, String email, String address, List<JsonAdaptedTag> tagged) {
+    private JsonAdaptedPerson(String name, String phone, String email, String address, String id,
+                List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.id = id;
         this.tagged = new ArrayList<>();
         if (tagged != null) {
             this.tagged.addAll(tagged);
-        }
-    }
-
-    /**
-     * Converts a given {@code Person} into this class for Jackson use.
-     */
-    public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
-        Set<Tag> tags = source.getTags();
-        if (!tags.isEmpty()) {
-            tagged = new ArrayList<>();
-            tagged.addAll(tags.stream()
-                    .map(JsonAdaptedTag::new)
-                    .collect(Collectors.toList()));
-        } else {
-            tagged = null;
         }
     }
 
