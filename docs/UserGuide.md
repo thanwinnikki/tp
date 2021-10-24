@@ -369,7 +369,7 @@ The data file consists of a JSON object containing a `persons` JSON array and a 
 }
 ```
 
-The `persons` JSON array consists of entries of each saved person and their details structured as a JSON object.
+The `persons` JSON array consists of entries of each saved person and their details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
 
 In each person entry, these are the required attributes:
 * `"name"` is a string that refers to the person's saved name.
@@ -412,7 +412,7 @@ If you are not familiar with _hexadecimal_ numbers, it suffices to use the usual
 }
 ```
 
-The `groups` JSON array consists of entries of each saved group and its details structured as a JSON object.
+The `groups` JSON array consists of entries of each saved group and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
 
 In each group entry, this is the required attribute:
 * `"name"` is a string that refers to the group's saved name.
@@ -444,7 +444,7 @@ These are the optional attributes:
 }
 ```
 
-The `tasks` JSON array consists of the corresponding group's entries of each saved task and its details structured as a JSON object.
+The `tasks` JSON array consists of the corresponding group's entries of each saved task and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
 
 In each task entry, these are the required attributes:
 * `"description"` is a string that refers to the task's saved description.
