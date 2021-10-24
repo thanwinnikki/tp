@@ -366,10 +366,10 @@ Action | Format | Examples | Home Panel | Group Information Panel
 --------|---------|---------|---------|---------
 **Add contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark: | :white_check_mark:
 **Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
-**Delete contact** | `delete INDEX` | `delete 3` | :white_check_mark: 
-**Edit contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: | 
-**Find contact** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
-**List all contacts** | `list` | | :white_check_mark: | :white_check_mark:
+**Delete person** | `delete INDEX` | `delete 3` | :white_check_mark: 
+**Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: | 
+**Find person** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
+**List all persons** | `list` | | :white_check_mark: | :white_check_mark:
 **Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
 **Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
 **Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
