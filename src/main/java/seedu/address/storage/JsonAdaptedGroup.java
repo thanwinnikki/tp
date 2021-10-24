@@ -62,26 +62,10 @@ public class JsonAdaptedGroup {
          * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
          */
         public Builder(Group source, Map<Person, Id> personToIdMap) {
-            name = source.getName().fullName;
-            Description description = source.getDescription();
-            if (description != null) {
-                this.description = description.toString();
-            }
-            if (!source.getPersons().asUnmodifiableObservableList().isEmpty()) {
-                groupMateIds = new ArrayList<>();
-                source.doForEachGroupMate(groupMate -> {
-                    assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
-                    Id personId = personToIdMap.get(groupMate);
-                    groupMateIds.add(personId.toString());
-                });
-            }
-            if (!source.getTasks().asUnmodifiableObservableList().isEmpty()) {
-                tasks = new ArrayList<>();
-                source.doForEachTask(task -> {
-                    JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(task);
-                    tasks.add(jsonAdaptedTask);
-                });
-            }
+            initialiseName(source);
+            initialiseDescription(source);
+            initialiseGroupMateIds(source, personToIdMap);
+            initialiseTasks(source);
         }
 
         /**
@@ -133,6 +117,38 @@ public class JsonAdaptedGroup {
          */
         public JsonAdaptedGroup build() {
             return new JsonAdaptedGroup(name, description, groupMateIds, tasks);
+        }
+
+        private void initialiseName(Group source) {
+            name = source.getName().fullName;
+        }
+
+        private void initialiseDescription(Group source) {
+            Description description = source.getDescription();
+            if (description != null) {
+                this.description = description.toString();
+            }
+        }
+
+        private void initialiseGroupMateIds(Group source, Map<Person, Id> personToIdMap) {
+            if (!source.getPersons().asUnmodifiableObservableList().isEmpty()) {
+                groupMateIds = new ArrayList<>();
+                source.doForEachGroupMate(groupMate -> {
+                    assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
+                    Id personId = personToIdMap.get(groupMate);
+                    groupMateIds.add(personId.toString());
+                });
+            }
+        }
+
+        private void initialiseTasks(Group source) {
+            if (!source.getTasks().asUnmodifiableObservableList().isEmpty()) {
+                tasks = new ArrayList<>();
+                source.doForEachTask(task -> {
+                    JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(task);
+                    tasks.add(jsonAdaptedTask);
+                });
+            }
         }
     }
 
