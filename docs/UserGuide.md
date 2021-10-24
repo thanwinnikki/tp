@@ -309,7 +309,7 @@ Example:
 
 ### Remove a person from the current group: `remove`
 
-Remove the person from the group that ThunderCat is displaying.
+Removes the specified person from the group that ThunderCat is displaying.
 
 :bulb: Panel where this can be called :
 * Group Information Panel
