@@ -17,9 +17,9 @@ import seedu.address.model.person.Person;
 /** Adds a person to a group in the address book.
  *
  */
-public class AddToGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class JoinGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
-    public static final String COMMAND_WORD = "addToG";
+    public static final String COMMAND_WORD = "joinG";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds person to a group identified by the index number used in the displayed "
@@ -45,7 +45,7 @@ public class AddToGroupCommand extends AlwaysRunnableCommand implements Undoable
      * @param groupIndex
      * @param personIndexes
      */
-    public AddToGroupCommand(Index groupIndex, Set<Index> personIndexes) {
+    public JoinGroupCommand(Index groupIndex, Set<Index> personIndexes) {
         requireAllNonNull(groupIndex, personIndexes);
         this.groupIndex = groupIndex;
         this.personIndexes = personIndexes;
@@ -97,7 +97,7 @@ public class AddToGroupCommand extends AlwaysRunnableCommand implements Undoable
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddToGroupCommand // instanceof handles nulls
-                && groupIndex.equals(((AddToGroupCommand) other).groupIndex));
+                || (other instanceof JoinGroupCommand // instanceof handles nulls
+                && groupIndex.equals(((JoinGroupCommand) other).groupIndex));
     }
 }

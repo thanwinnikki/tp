@@ -13,14 +13,14 @@ import seedu.address.model.group.IsGroupPredicate;
 import seedu.address.model.person.IsGroupMemberPredicate;
 
 /**
- * Lists all persons in the given group.
+ * Lists all persons and tasks in the given group.
  */
-public class MatesCommand extends AlwaysRunnableCommand {
+public class GroupCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "mates";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists members in group index indicated."
+            + ": Lists members and tasks in group index indicated."
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -28,7 +28,7 @@ public class MatesCommand extends AlwaysRunnableCommand {
 
     private final Index index;
 
-    public MatesCommand(Index index) {
+    public GroupCommand(Index index) {
         this.index = index;
     }
 
@@ -49,7 +49,7 @@ public class MatesCommand extends AlwaysRunnableCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof MatesCommand // instanceof handles nulls
-                && index.equals(((MatesCommand) other).index)); // state check
+                || (other instanceof GroupCommand // instanceof handles nulls
+                && index.equals(((GroupCommand) other).index)); // state check
     }
 }

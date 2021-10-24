@@ -247,6 +247,19 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Add Panel to the UI
+
+#### Proposed Implementation
+
+The proposed adding Panel mechanism is facilitated by `MainWindow.fxml`. It extends the `MainWindow` with one more panel, making it easier to render `Group` list and `Task` list at the same time.
+
+Overall, the `MainWindow.fxml` uses `VBox` (Vertical Box) layout to stores components (e.g. `CommandBox`, `ResultDisplay`). The key point to implement the extension is using `HBox` (Horizontal Box) layout. Panels insides the layout is ordered horizontally, making two parallel display panels at the same time.
+
+#### Proposed Toolkit
+
+![UndoRedoState5](images/AddPanelToolkit_SenceBuilder.png)
+
+Application `ScenceBuilder` makes it easier to implement the feature by the running time visualization and list of possible components
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -330,91 +343,103 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `ThunderCat AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case1: UC01 - Input the detail of group mate**
+**Use case: UC01 - View basic instructions**
 
 **MSS**
-1. User type adding command into the terminal
-2. ThunderCat announces that the contact is successfully added
+1. User enters help command into the terminal or clicks “help” button.
+2. ThunderCat opens the instruction page for the user. <br>
    Use case ends.
+
+**Use case: UC02 - Add a new Group**
+
+**MSS**
+1. User enters the group name and description to be added into the terminal.
+2. ThunderCat announces that the group has been successfully created.
+   <br>Use case ends.
 
 **Extensions**
 * 1a. ThunderCat detects an error in the entered command.
-  * 1a1. ThunderCat requests for the correct command, and gives examples.
-  * 1a2. User enters a new command.
-    Steps 1a1-1a2 are repeated until the commands entered are correct.
-    Use case resumes from step 2.
-  
-**Use case: UC02 - Totally delete the contact**
+    * 1a1. ThunderCat requests for the correct command, and gives examples.
+    * 1a2. User enters a new command.
+      <br>Steps 1a1-1a2 are repeated until the commands entered are correct.
+      <br>Use case resumes from step 2.
+* 1b. ThunderCat detects that the group already exists in the application.
+    * 1b1. ThunderCat announces that the group already exists.
+    * 1b2. Use case restarts from step 1.
+   
+**Use case: UC03 - Add a Person to a Group**
 
 **MSS**
-1. User enters the user's ID to be deleted.
-2. ThunderCat makes warning about the contact that will be deleted, and all groups that the contact is in.
-3. User confirms the deletion.
-4. ThunderCat announces that the address is successfully deleted.
-   Use case ends.
+1. User enters the adding command into the terminal.
+2. ThunderCat announces that the person has been successfully added.
+   <br>Use case ends.
 
 **Extensions**
-* 1a. ThunderCat detects an error in the entered command (UC01 - extension 1a).
-* 1b. ThunderCat cannot find the contact needed to be deleted.
-  * 1b1. ThunderCat announces that the contact cannot be found.
-  * 1b2. User start again from step 1.
+* 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
+* 1b. ThunderCat detects that the person is already in the group.
+    * 1b1. ThunderCat announces that the person is already in the group.
+    * 1b2. Use case restarts from step 1.
+
+**Use case: UC04 - Remove a Person from a Group**
+
+**MSS**
+1. User navigates to the group which the user want to remove person from.
+2. User enters the removing command into the terminal.
+3. ThunderCat announces that the person has been successfully removed from the group.
+   <br>Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
+* 1b. ThunderCat is unable to find the group with the given index.
+    * 1b1. ThunderCat announces that the group cannot be found.
+    * 1b2. Use case restarts from step 1.
+* 2b. ThunderCat is unable to find the person index to be removed from the group.
+  * 2b1. ThunderCat announces that the person cannot be found.
+  * 2b2. Use case restarts from step 1.
+    
+**Use case: UC05 - Delete a Person**
+
+**MSS**
+1. User enters the deleting command into the terminal.
+2. ThunderCat makes a warning about the person that will be deleted, and all groups that the person is in.
+3. User confirms the deletion.
+4. ThunderCat announces that the person has been successfully deleted.
+   <br>Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC02 - extension 1a).
 * 2a. User cancels the request.
   * 2a1. User choose not to delete the contact.
-  * 2a2.  ThunderCat announces that the deleting process is canceled.
-    Use case ends.
-
-**Use case: UC03 - View basic instructions**
-
-**MSS**
-1. User types help command into the terminal or click “help” button.
-2. ThunderCat open the instruction page for user.
-
-**Use case: UC04 - Remove a contact from a group**
-
-**MSS**
-1. User enters the user's ID to be deleted and group's ID that the contact is in.
-2. ThunderCat announces that the address is successfully deleted from the group.
-   Use case ends.
-
-**Extensions**
-* 1a. ThunderCat detects an error in the entered command (UC01 - extension 1a).
-* 1b. ThunderCat cannot find the group with the given group's ID.
-    * 1b1. ThunderCat announces that the group cannot be found.
-    * 1b2. User start again from step 1.
-* 1c. ThunderCat cannot find the contact needed to be deleted in the group.
-    * 1c1. ThunderCat announces that the contact cannot be found.
-    * 1c2. User start again from step 1.
+  * 2a2. ThunderCat announces that the deleting process has been canceled.
     
-**Use case: UC05 - Add a task to the group**
+**Use case: UC06 - Add a Task to a Group**
 
 **MSS**
 1. User navigates to the group which the user want to add tasks to.
-2. User enters the task description to be added to the group.
-3. ThunderCat announces that the task is successfully added to the group.
-    Use case ends.
+2. User enters the task to be added to the group into the terminal.
+3. ThunderCat announces that the task has been successfully added to the group.
+   <br>Use case ends.
    
 **Extensions**
-* 1a. ThunderCat detects an error in the entered command (UC01 -extension 1a).
-* 1b. ThunderCat cannot find the group with the given group's ID. (UC04 - extension 1b).
-* 2a. ThunderCat detects an error in the entered command.
-    * 2a1. ThunderCat announces that the command format is wrong and shows an example of the correct format.
-    * 2a2. User starts again from step 2.
+* 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a). 
+* 1b. ThunderCat is unable to find the group with the given index (UC04 -extension 1b).
 * 2b. ThunderCat detects that the task already exists in the group.
-    * 2b1. ThunderCat announces that the task already exists.
-    * 2b2. User starts again from step 2.
-
-**Use case: UC06 - Add a new Group**
+  * 2b1. ThunderCat announces that the task already exists.
+  * 2b2. Use case resumes from step 2 again.
+    
+**Use case: UC07 - Mark a Task as Done**
 
 **MSS**
-1. User enters the group name and description to be added.
-2. ThunderCat announces that the group is successfully created.
-   Use case ends.
-
+1. User navigates to the group in which the user wants to mark task as done in.
+2. User enters the task index to be marked as done into the terminal.
+3. ThunderCat announces that the task has been successfully marked as done.
+   <br>Use case ends.
+   
 **Extensions**
-* 1a. ThunderCat detects an error in the entered command (UC01 -extension 1a).
-* 1b. ThunderCat detects that the group already exists in the application.
-    * 1b1. ThunderCat announces that the group already exists.
-    * 1b2. User starts again from step 1.
+* 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
+* 1b. ThunderCat is unable to find the group with the given index (UC04 -extension 1b).
+* 2b. ThunderCat detects that the task has already been marked as done.
+    * 2b1. ThunderCat announces that the task has already been marked as done.
 
 ### Non-Functional Requirements
 

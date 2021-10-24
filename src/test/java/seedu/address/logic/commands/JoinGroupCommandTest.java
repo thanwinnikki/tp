@@ -30,18 +30,18 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
-public class AddToGroupCommandTest {
+public class JoinGroupCommandTest {
     private Set<Index> emptySet = Collections.emptySet();
     private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
     public void constructor_nullGroupIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddToGroupCommand(null, emptySet));
+        assertThrows(NullPointerException.class, () -> new JoinGroupCommand(null, emptySet));
     }
 
     @Test
     public void constructor_nullPersonIndexSet_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddToGroupCommand(Index.fromZeroBased(0), null));
+        assertThrows(NullPointerException.class, () -> new JoinGroupCommand(Index.fromZeroBased(0), null));
     }
 
     @Test
@@ -55,15 +55,15 @@ public class AddToGroupCommandTest {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(INDEX_FIRST);
 
-        AddToGroupCommand addToGroupCommand = new AddToGroupCommand(INDEX_SECOND, personIndexesSet);
+        JoinGroupCommand joinGroupCommand = new JoinGroupCommand(INDEX_SECOND, personIndexesSet);
 
-        String expectedMessage = String.format(AddToGroupCommand.MESSAGE_SUCCESS, validGroup);
+        String expectedMessage = String.format(JoinGroupCommand.MESSAGE_SUCCESS, validGroup);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Group expectedModelValidGroup = expectedModel.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
         expectedModel.addToGroup(expectedModelValidGroup, personSet);
 
-        assertCommandSuccess(addToGroupCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(joinGroupCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -71,10 +71,10 @@ public class AddToGroupCommandTest {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(INDEX_INVALID);
 
-        AddToGroupCommand addToGroupCommand = new AddToGroupCommand(INDEX_SECOND, personIndexesSet);
-        String expectedMessage = AddToGroupCommand.MESSAGE_INVALID_PERSON_INDEX;
+        JoinGroupCommand joinGroupCommand = new JoinGroupCommand(INDEX_SECOND, personIndexesSet);
+        String expectedMessage = JoinGroupCommand.MESSAGE_INVALID_PERSON_INDEX;
 
-        assertCommandFailure(addToGroupCommand, model, expectedMessage);
+        assertCommandFailure(joinGroupCommand, model, expectedMessage);
     }
 
     @Test
@@ -82,10 +82,10 @@ public class AddToGroupCommandTest {
         Set<Index> personIndexesSet = new HashSet<>();
         personIndexesSet.add(Index.fromZeroBased(1));
 
-        AddToGroupCommand addToGroupCommand = new AddToGroupCommand(Index.fromOneBased(30), personIndexesSet);
-        String expectedMessage = AddToGroupCommand.MESSAGE_INVALID_GROUP_INDEX;
+        JoinGroupCommand joinGroupCommand = new JoinGroupCommand(Index.fromOneBased(30), personIndexesSet);
+        String expectedMessage = JoinGroupCommand.MESSAGE_INVALID_GROUP_INDEX;
 
-        assertCommandFailure(addToGroupCommand, model, expectedMessage);
+        assertCommandFailure(joinGroupCommand, model, expectedMessage);
     }
 
     /**
@@ -202,7 +202,7 @@ public class AddToGroupCommandTest {
     /**
      * A Model stub that always accept the group being added.
      */
-    private class ModelStubAcceptingGroupAdded extends AddToGroupCommandTest.ModelStub {
+    private class ModelStubAcceptingGroupAdded extends JoinGroupCommandTest.ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
 
         @Override
