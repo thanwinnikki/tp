@@ -111,15 +111,15 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-### Creating a group : `group`
+### Creating a group : `addG`
 
 Creates a group in Thundercat.
 
-Format: `group g/GROUP_NAME`
+Format: `addG g/GROUP_NAME [d/DESCRIPTION]`
 
 Examples:  
-* `group g/CS2103 Project Group`
-* `group g/Family`
+* `addG g/CS2103 d/Project group Y2S1`
+* `addG g/Family`
 
 ### Viewing all groups: `groups`
 
@@ -147,8 +147,23 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+### Edit a group: `editG`
+
+Edit an existing person
+Panel where this command can be called :
+* Group Information panel
+
+Format: `remove PERSON_INDEX`
+
+* The group mates with the specified `PERSON_INDEX` will be removed from the group.
+* The `PERSON_INDEX` refers to the index number shown in the last displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `remove 2`
 
 ### Locating persons by name: `find`
 
@@ -263,6 +278,9 @@ Example:
 
 Remove the person from the group that Thundercat is displaying.
 
+Panel where this command can be called :
+* Group Information panel
+
 Format: `remove PERSON_INDEX`
 
 * The group mates with the specified `PERSON_INDEX` will be removed from the group.
@@ -331,11 +349,19 @@ Action | Format | Examples
 **Edit contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com`
 **Find contact** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake`
 **List all contacts** | `list`
-**Create Group** | `group GROUP_NAME` | `group CS2103 Project Group`
+**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group`
 **Show all Groups** | `groups`
+**Show Group information** | `group GROUP_INDEX` | `group 2`
+**Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1`
+**Find Group** | `findG KEYWORD [MORE_KEYWORDS]`
 **Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2`
-**Adding people to Group** | `addG p/PERSON_INDEX_1, p/PERSON_INDEX_2.. g/GROUP_INDEX` |`addG p/1, p/2, p/3 g/2`
+**Adding person to Group** | `addToG p/PERSON_INDEX_1, p/PERSON_INDEX_2.. g/GROUP_INDEX` |`addToG p/1, p/2, p/3 g/2`
 **Join Person to Groups** | `join PERSON_INDEX g/GROUP_INDEX_1[,GROUP_INDEX_2]...` | `join 2 g/1,3,6,8`
 **Show all people in Group** | `mates GROUP_INDEX` | `mates 7`
 **Remove person from Group** | `remove PERSON_INDEX` | `remove 2`
+**Add task to group** | `addT d/DESCRIPTION` | `addT d/read book`
+**Mark task as done** | `done TASK_INDEX` | `done 3`
+**Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`
+
+**Exit application** | `exit`
 **Help** | `help`
