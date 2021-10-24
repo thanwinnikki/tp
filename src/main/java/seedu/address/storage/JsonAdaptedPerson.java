@@ -77,17 +77,6 @@ public class JsonAdaptedPerson {
             initialiseTagged(source);
         }
 
-        private void initialiseTagged(Person source) {
-            Set<Tag> tags = source.getTags();
-            if (tags.isEmpty()) {
-                return;
-            }
-            tagged = new ArrayList<>();
-            tagged.addAll(tags.stream()
-                    .map(JsonAdaptedTag::new)
-                    .collect(Collectors.toList()));
-        }
-
         /**
          * Completes the {@code JsonAdaptedPerson} being built by this {@code JsonAdaptedPerson.Builder}.
          *
@@ -133,6 +122,17 @@ public class JsonAdaptedPerson {
                 this.tagged.addAll(tagged);
             }
             return this;
+        }
+
+        private void initialiseTagged(Person source) {
+            Set<Tag> tags = source.getTags();
+            if (tags.isEmpty()) {
+                return;
+            }
+            tagged = new ArrayList<>();
+            tagged.addAll(tags.stream()
+                    .map(JsonAdaptedTag::new)
+                    .collect(Collectors.toList()));
         }
     }
 

@@ -131,24 +131,26 @@ public class JsonAdaptedGroup {
         }
 
         private void initialiseGroupMateIds(Group source, Map<Person, Id> personToIdMap) {
-            if (!source.getPersons().asUnmodifiableObservableList().isEmpty()) {
-                groupMateIds = new ArrayList<>();
-                source.doForEachGroupMate(groupMate -> {
-                    assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
-                    Id personId = personToIdMap.get(groupMate);
-                    groupMateIds.add(personId.toString());
-                });
+            if (source.getPersons().asUnmodifiableObservableList().isEmpty()) {
+                return;
             }
+            groupMateIds = new ArrayList<>();
+            source.doForEachGroupMate(groupMate -> {
+                assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
+                Id personId = personToIdMap.get(groupMate);
+                groupMateIds.add(personId.toString());
+            });
         }
 
         private void initialiseTasks(Group source) {
-            if (!source.getTasks().asUnmodifiableObservableList().isEmpty()) {
-                tasks = new ArrayList<>();
-                source.doForEachTask(task -> {
-                    JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(task);
-                    tasks.add(jsonAdaptedTask);
-                });
+            if (source.getTasks().asUnmodifiableObservableList().isEmpty()) {
+                return;
             }
+            tasks = new ArrayList<>();
+            source.doForEachTask(task -> {
+                JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(task);
+                tasks.add(jsonAdaptedTask);
+            });
         }
     }
 
