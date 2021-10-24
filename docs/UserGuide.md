@@ -7,7 +7,7 @@ ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The
 
 ___
 * Table of Contents
-  {:toc}
+{:toc}
   
 
 --------------------------------------------------------------------------------------------------------------------
