@@ -358,3 +358,7 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#stateDisplay {
+    -fx-text-fill: white;
+}
