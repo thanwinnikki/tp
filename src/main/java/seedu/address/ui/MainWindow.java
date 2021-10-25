@@ -230,11 +230,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void changeDisplayForHomeAppState() {
+        listPanelLeft.setState(ListPanel.PanelState.PERSONS);
+        listPanelRight.setState(ListPanel.PanelState.GROUPS);
+
         listPanelLeft.setList(logic.getFilteredPersonList());
         listPanelRight.setList(logic.getFilteredGroupList());
     }
 
     private void changeDisplayForGroupInformationAppState(Group group) {
+        listPanelLeft.setState(ListPanel.PanelState.PERSONS);
+        listPanelRight.setState(ListPanel.PanelState.TASKS);
+
         listPanelLeft.setList(logic.getFilteredPersonList());
         listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
     }
