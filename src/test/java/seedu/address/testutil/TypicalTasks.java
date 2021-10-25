@@ -35,17 +35,17 @@ public class TypicalTasks {
 
     private TypicalTasks() {} // prevents instantiation
 
-//    /**
-//     * Returns an {@code AddressBook} with all the typical Tasks.
-//     */
-//    public static AddressBook getTypicalAddressBook() {
-//        AddressBook ab = new AddressBook();
-//        Group group = new Group();
-//        for (Task task : getTypicalTasks()) {
-//            group.addTask(task);
-//        }
-//        return ab;
-//    }
+    //    /**
+    //     * Returns an {@code AddressBook} with all the typical Tasks.
+    //     */
+    //    public static AddressBook getTypicalAddressBook() {
+    //        AddressBook ab = new AddressBook();
+    //        Group group = new Group();
+    //        for (Task task : getTypicalTasks()) {
+    //            group.addTask(task);
+    //        }
+    //        return ab;
+    //    }
 
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(TASK_A, TASK_B, TASK_C, TASK_D, TASK_E));

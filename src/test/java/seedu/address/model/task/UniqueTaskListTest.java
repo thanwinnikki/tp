@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TASK_1;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTasks.TASK_A;
 import static seedu.address.testutil.TypicalTasks.TASK_1;
+import static seedu.address.testutil.TypicalTasks.TASK_A;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,23 +28,23 @@ public class UniqueTaskListTest {
     }
 
     @Test
-    public void contains_TaskNotInList_returnsFalse() {
+    public void contains_taskNotInList_returnsFalse() {
         assertFalse(uniqueTaskList.contains(TASK_A));
     }
 
     @Test
-    public void contains_TaskInList_returnsTrue() {
+    public void contains_taskInList_returnsTrue() {
         uniqueTaskList.add(TASK_A);
         assertTrue(uniqueTaskList.contains(TASK_A));
     }
 
-//    @Test
-//    public void contains_TaskWithSameIdentityFieldsInList_returnsTrue() {
-//        uniqueTaskList.add(TASK_A);
-//        Task editedTaskA = new TaskBuilder(TASK_A).withDescription(VALID_DESCRIPTION_TASK_1)
-//                .build();
-//        assertTrue(uniqueTaskList.contains(editedTaskA));
-//    }
+    //    @Test
+    //    public void contains_TaskWithSameIdentityFieldsInList_returnsTrue() {
+    //        uniqueTaskList.add(TASK_A);
+    //        Task editedTaskA = new TaskBuilder(TASK_A).withDescription(VALID_DESCRIPTION_TASK_1)
+    //                .build();
+    //        assertTrue(uniqueTaskList.contains(editedTaskA));
+    //    }
 
     @Test
     public void add_nullTask_throwsNullPointerException() {
@@ -114,7 +114,7 @@ public class UniqueTaskListTest {
     }
 
     @Test
-    public void remove_TaskDoesNotExist_throwsTaskNotFoundException() {
+    public void remove_taskDoesNotExist_throwsTaskNotFoundException() {
         assertThrows(TaskNotFoundException.class, () -> uniqueTaskList.remove(TASK_A));
     }
 
@@ -164,6 +164,6 @@ public class UniqueTaskListTest {
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueTaskList.asUnmodifiableObservableList().remove(0));
+            -> uniqueTaskList.asUnmodifiableObservableList().remove(0));
     }
 }
