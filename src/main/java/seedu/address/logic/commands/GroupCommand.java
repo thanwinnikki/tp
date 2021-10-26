@@ -17,7 +17,7 @@ import seedu.address.model.person.IsGroupMemberPredicate;
  */
 public class GroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "mates";
+    public static final String COMMAND_WORD = "group";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists members and tasks in group index indicated."
