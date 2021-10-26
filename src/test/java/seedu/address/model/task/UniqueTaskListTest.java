@@ -38,13 +38,13 @@ public class UniqueTaskListTest {
         assertTrue(uniqueTaskList.contains(TASK_A));
     }
 
-    //    @Test
-    //    public void contains_TaskWithSameIdentityFieldsInList_returnsTrue() {
-    //        uniqueTaskList.add(TASK_A);
-    //        Task editedTaskA = new TaskBuilder(TASK_A).withDescription(VALID_DESCRIPTION_TASK_1)
-    //                .build();
-    //        assertTrue(uniqueTaskList.contains(editedTaskA));
-    //    }
+//    @Test
+//    public void contains_TaskWithSameIdentityFieldsInList_returnsTrue() {
+//        uniqueTaskList.add(TASK_A);
+//        Task editedTaskA = new TaskBuilder(TASK_A).withDescription(VALID_DESCRIPTION_TASK_1)
+//                .build();
+//        assertTrue(uniqueTaskList.contains(editedTaskA));
+//    }
 
     @Test
     public void add_nullTask_throwsNullPointerException() {
