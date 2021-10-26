@@ -22,9 +22,10 @@ public class ListPanel extends UiPart<Region> {
      * PanelState indicates what the panel is containing, such as persons or groups.
      */
     public enum PanelState {
-        PERSONS ("Person"),
-        GROUPS ("Group"),
-        TASKS ("Task");
+        PERSONS ("Persons"),
+        GROUPS ("Groups"),
+        GROUP_MATES ("Group Mates"),
+        TASKS ("Tasks");
 
         private final String description;
         PanelState(String description) {
@@ -33,7 +34,7 @@ public class ListPanel extends UiPart<Region> {
 
         @Override
         public String toString() {
-            return String.format("Displaying " + description);
+            return String.format(description);
         }
     }
 

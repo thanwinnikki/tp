@@ -238,7 +238,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void changeDisplayForGroupInformationAppState(Group group) {
-        listPanelLeft.setState(ListPanel.PanelState.PERSONS);
+        listPanelLeft.setState(ListPanel.PanelState.GROUP_MATES);
         listPanelRight.setState(ListPanel.PanelState.TASKS);
 
         listPanelLeft.setList(logic.getFilteredPersonList());
