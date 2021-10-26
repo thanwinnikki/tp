@@ -27,6 +27,17 @@ public class Group {
     private final UniqueTaskList tasks;
 
     /**
+     * Name, Description, persons and tasks must be present and not null.
+     */
+    public Group(Name name, Description description, UniquePersonList persons, UniqueTaskList tasks) {
+        requireAllNonNull(name, description, persons, tasks);
+        this.name = name;
+        this.description = description;
+        this.persons = persons;
+        this.tasks = tasks;
+    }
+
+    /**
      * Name and Description must be present and not null.
      */
     public Group(Name name, Description description) {
@@ -39,7 +50,6 @@ public class Group {
 
     /**
      * Name must be present and not null.
-     * This is just a temporary fix
      */
     public Group(Name name) {
         requireAllNonNull(name);

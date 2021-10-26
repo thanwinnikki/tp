@@ -16,6 +16,8 @@ import seedu.address.model.Model;
 import seedu.address.model.common.Description;
 import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.UniqueTaskList;
 
 public class EditGroupCommand extends Command {
     public static final String COMMAND_WORD = "editG";
@@ -80,8 +82,10 @@ public class EditGroupCommand extends Command {
 
         Name updatedName = editGroupDescriptor.getName().orElse(groupToEdit.getName());
         Description updatedDescription = editGroupDescriptor.getDescription().orElse(groupToEdit.getDescription());
+        UniquePersonList persons = groupToEdit.getPersons();
+        UniqueTaskList tasks = groupToEdit.getTasks();
 
-        return new Group(updatedName, updatedDescription);
+        return new Group(updatedName, updatedDescription, persons, tasks);
     }
 
     @Override
@@ -109,6 +113,8 @@ public class EditGroupCommand extends Command {
     public static class EditGroupDescriptor {
         private Name name;
         private Description description;
+        private UniquePersonList personList;
+        private UniqueTaskList taskList;
 
         public EditGroupDescriptor() {}
 
@@ -118,6 +124,8 @@ public class EditGroupCommand extends Command {
          */
         public EditGroupDescriptor(EditGroupCommand.EditGroupDescriptor toCopy) {
             setName(toCopy.name);
+            setPersons(toCopy.personList);
+            setTasks(toCopy.taskList);
             setDescription(toCopy.description);
         }
 
@@ -144,6 +152,23 @@ public class EditGroupCommand extends Command {
             return Optional.ofNullable(description);
         }
 
+        public void setPersons(UniquePersonList persons) {
+            this.personList = persons;
+        }
+
+        public Optional<UniquePersonList> getPersons() {
+            return Optional.ofNullable(personList);
+        }
+
+        public void setTasks(UniqueTaskList tasks) {
+            this.taskList = tasks;
+        }
+
+        public Optional<UniqueTaskList> getTasks() {
+            return Optional.ofNullable(taskList);
+        }
+
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -160,7 +185,9 @@ public class EditGroupCommand extends Command {
             EditGroupCommand.EditGroupDescriptor e = (EditGroupCommand.EditGroupDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getDescription().equals(e.getDescription());
+                    && getDescription().equals(e.getDescription())
+                    && getPersons().equals(e.getPersons())
+                    && getTasks().equals(e.getTasks());
         }
     }
 }
