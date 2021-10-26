@@ -113,8 +113,6 @@ public class EditGroupCommand extends Command {
     public static class EditGroupDescriptor {
         private Name name;
         private Description description;
-        private UniquePersonList personList;
-        private UniqueTaskList taskList;
 
         public EditGroupDescriptor() {}
 
@@ -124,8 +122,6 @@ public class EditGroupCommand extends Command {
          */
         public EditGroupDescriptor(EditGroupCommand.EditGroupDescriptor toCopy) {
             setName(toCopy.name);
-            setPersons(toCopy.personList);
-            setTasks(toCopy.taskList);
             setDescription(toCopy.description);
         }
 
@@ -152,23 +148,6 @@ public class EditGroupCommand extends Command {
             return Optional.ofNullable(description);
         }
 
-        public void setPersons(UniquePersonList persons) {
-            this.personList = persons;
-        }
-
-        public Optional<UniquePersonList> getPersons() {
-            return Optional.ofNullable(personList);
-        }
-
-        public void setTasks(UniqueTaskList tasks) {
-            this.taskList = tasks;
-        }
-
-        public Optional<UniqueTaskList> getTasks() {
-            return Optional.ofNullable(taskList);
-        }
-
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -185,9 +164,7 @@ public class EditGroupCommand extends Command {
             EditGroupCommand.EditGroupDescriptor e = (EditGroupCommand.EditGroupDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getDescription().equals(e.getDescription())
-                    && getPersons().equals(e.getPersons())
-                    && getTasks().equals(e.getTasks());
+                    && getDescription().equals(e.getDescription());
         }
     }
 }
