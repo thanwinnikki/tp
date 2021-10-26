@@ -41,7 +41,7 @@ public class EditGroupCommand extends Command {
      * @param index of the group in the filtered group list to edit
      * @param editGroupDescriptor details to edit the group with
      */
-    public EditGroupCommand(Index index, EditGroupCommand.EditGroupDescriptor editGroupDescriptor) {
+    public EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor) {
         requireNonNull(index);
         requireNonNull(editGroupDescriptor);
 
