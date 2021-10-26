@@ -7,8 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -62,7 +60,8 @@ public class AddTaskCommandTest {
         // set the filtered list for both groups and person
         setFilteredList(model, group);
 
-        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(model));
+        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK,
+            () -> addTaskCommand.execute(model));
     }
 
     @Test
