@@ -25,6 +25,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
+import seedu.address.testutil.EditGroupDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -81,6 +82,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditGroupCommand.EditGroupDescriptor DESC_TENNIS;
+    public static final EditGroupCommand.EditGroupDescriptor DESC_VOLLEYBALL;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -88,6 +92,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_TENNIS = new EditGroupDescriptorBuilder().withName(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS).build();
+
+        DESC_VOLLEYBALL = new EditGroupDescriptorBuilder().withName(VALID_NAME_VOLLEYBALL)
+                .withDescription(VALID_DESCRIPTION_SPORTS).build();
     }
 
     /**
