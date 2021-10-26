@@ -22,8 +22,8 @@ public class TaskBuilder {
     /**
      * Initializes the TaskBuilder with the data of {@code TaskToCopy}.
      */
-    public TaskBuilder(Task TaskToCopy) {
-        description = TaskToCopy.getDescription();
+    public TaskBuilder(Task taskToCopy) {
+        description = taskToCopy.getDescription();
     }
 
     /**

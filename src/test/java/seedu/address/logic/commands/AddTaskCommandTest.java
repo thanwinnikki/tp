@@ -60,22 +60,22 @@ public class AddTaskCommandTest {
         // set the filtered list for both groups and person
         setFilteredList(model, group);
 
-        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK,
-            () -> addTaskCommand.execute(model));
+        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, ()
+            -> addTaskCommand.execute(model));
     }
 
     @Test
     public void equals() {
-        Task task_a = new TaskBuilder().withDescription("Prepare pitch").build();
-        Task task_b = new TaskBuilder().withDescription("Prepare demo").build();
-        AddTaskCommand addTaskACommand = new AddTaskCommand(task_a);
-        AddTaskCommand addTaskBCommand = new AddTaskCommand(task_b);
+        Task taskA = new TaskBuilder().withDescription("Prepare pitch").build();
+        Task taskB = new TaskBuilder().withDescription("Prepare demo").build();
+        AddTaskCommand addTaskACommand = new AddTaskCommand(taskA);
+        AddTaskCommand addTaskBCommand = new AddTaskCommand(taskB);
 
         // same object -> returns true
         assertTrue(addTaskACommand.equals(addTaskACommand));
 
         // same values -> returns true
-        AddTaskCommand addTaskACommandCopy = new AddTaskCommand(task_a);
+        AddTaskCommand addTaskACommandCopy = new AddTaskCommand(taskA);
         assertTrue(addTaskACommand.equals(addTaskACommandCopy));
 
         // different types -> returns false
