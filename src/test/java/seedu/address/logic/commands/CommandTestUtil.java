@@ -38,6 +38,9 @@ public class CommandTestUtil {
     public static final String VALID_NAME_TENNIS = "Tennis Club";
     public static final String VALID_NAME_VOLLEYBALL = "Volleyball club";
     public static final String VALID_DESCRIPTION_SPORTS = "Sports Club";
+    public static final String VALID_DESCRIPTION_CSMODULE = "CS module";
+    public static final String VALID_DESCRIPTION_FAMILY = "Family";
+    public static final String VALID_DESCRIPTION_FRIENDS = "Friends";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";

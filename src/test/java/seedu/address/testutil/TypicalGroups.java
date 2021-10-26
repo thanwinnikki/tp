@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CSMODULE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FAMILY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
@@ -30,15 +33,22 @@ import seedu.address.model.person.Person;
 public class TypicalGroups {
 
     public static final GroupBuilder CS2103T_GROUP_BUILDER = new GroupBuilder().withName("CS2103T Project Group")
+            .withDescription(VALID_DESCRIPTION_CSMODULE)
             .withMembers(ALICE, BENSON, CARL);
 
     public static final GroupBuilder CS2101_GROUP_BUILDER = new GroupBuilder().withName("CS2101 Project Group")
+            .withDescription(VALID_DESCRIPTION_CSMODULE)
+            .withMembers(ELLE, FIONA, GEORGE);
+    public static final GroupBuilder VOLLEYBALL_GROUP_BUILDER = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
+            .withDescription(VALID_DESCRIPTION_SPORTS)
             .withMembers(ELLE, FIONA, GEORGE);
 
     // Manually added
     public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family").withDescription("casual group")
+            .withDescription(VALID_DESCRIPTION_FAMILY)
             .withMembers(DANIEL, ELLE, ALICE);
     public static final GroupBuilder FRIENDS = new GroupBuilder().withName("Friends").withDescription("casual group")
+            .withDescription(VALID_DESCRIPTION_FRIENDS)
             .withMembers(HOON, IDA);
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -69,6 +79,6 @@ public class TypicalGroups {
     }
 
     public static List<GroupBuilder> getTypicalGroupBuilder() {
-        return new ArrayList<>(Arrays.asList(CS2103T_GROUP_BUILDER, CS2101_GROUP_BUILDER));
+        return new ArrayList<>(Arrays.asList(CS2103T_GROUP_BUILDER, CS2101_GROUP_BUILDER, VOLLEYBALL_GROUP_BUILDER));
     }
 }
