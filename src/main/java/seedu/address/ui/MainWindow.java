@@ -40,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private ListPanel listPanelRight;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatusBarFooter statusBarFooter;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -122,19 +123,19 @@ public class MainWindow extends UiPart<Stage> {
         listPanelLeft = new ListPanel();
         listPanelRight = new ListPanel();
 
-        changeDisplayForHomeAppState();
-
         listPanelPlaceholderLeft.getChildren().add(listPanelLeft.getRoot());
         listPanelPlaceholderRight.getChildren().add(listPanelRight.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        changeDisplayForHomeAppState();
     }
 
     /**
@@ -230,12 +231,22 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void changeDisplayForHomeAppState() {
+        listPanelLeft.setState(ListPanel.PanelState.PERSONS);
+        listPanelRight.setState(ListPanel.PanelState.GROUPS);
+
         listPanelLeft.setList(logic.getFilteredPersonList());
         listPanelRight.setList(logic.getFilteredGroupList());
+
+        statusBarFooter.changeDisplayForHomeAppState();
     }
 
     private void changeDisplayForGroupInformationAppState(Group group) {
+        listPanelLeft.setState(ListPanel.PanelState.GROUP_MATES);
+        listPanelRight.setState(ListPanel.PanelState.TASKS);
+
         listPanelLeft.setList(logic.getFilteredPersonList());
         listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
+
+        statusBarFooter.changeDisplayForGroupInformationAppState(group);
     }
 }
