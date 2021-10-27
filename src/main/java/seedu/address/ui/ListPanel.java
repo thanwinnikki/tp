@@ -1,22 +1,48 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Panel containing the list of listable entities, such as persons, or groups.
+ * Panel containing panel's state as well as the list of listable entities, such as persons, or groups.
  */
 public class ListPanel extends UiPart<Region> {
+    /**
+     * PanelState indicates what the panel is containing, such as persons or groups.
+     */
+    public enum PanelState {
+        PERSONS ("Persons"),
+        GROUPS ("Groups"),
+        GROUP_MATES ("Group Mates"),
+        TASKS ("Tasks");
+
+        private final String description;
+        PanelState(String description) {
+            this.description = description;
+        }
+
+        @Override
+        public String toString() {
+            return String.format(description);
+        }
+    }
+
     private static final String FXML = "ListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ListPanel.class);
+
+    @FXML
+    private Label stateDisplay;
 
     @FXML
     private ListView<Listable> listableListView;
@@ -26,6 +52,15 @@ public class ListPanel extends UiPart<Region> {
      */
     public ListPanel() {
         super(FXML);
+    }
+
+    /**
+     * Sets the state of the panel that is currently displayed on the UI.
+     * @param panelState
+     */
+    public void setState(PanelState panelState) {
+        requireNonNull(panelState);
+        stateDisplay.setText(panelState.toString());
     }
 
     /**
