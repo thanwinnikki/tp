@@ -54,6 +54,7 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalGroupsAddressBook = TypicalGroups.getTypicalAddressBookWithGroups();
+        boolean test = addressBookFromFile.equals(typicalGroupsAddressBook);
         assertEquals(addressBookFromFile, typicalGroupsAddressBook);
     }
 
