@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
-<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="Thunder Cats" type="javafx.stage.Stage"
+<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="ThunderCat" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
