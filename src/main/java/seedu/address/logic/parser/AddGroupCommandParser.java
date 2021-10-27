@@ -20,7 +20,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGroupCommand parse(String args) throws ParseException {
-        Description description;
+        Group group;
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION);
 
@@ -32,12 +32,11 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+            group = new Group(name, description);
         } else {
-            description = new Description("Enter description here!");
+            group = new Group(name);
         }
-
-        Group group = new Group(name, description);
 
         return new AddGroupCommand(group);
     }

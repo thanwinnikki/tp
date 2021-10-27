@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -24,6 +25,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
+import seedu.address.testutil.TypicalGroups;
 
 public class AddGroupCommandTest {
 
@@ -213,6 +215,8 @@ public class AddGroupCommandTest {
      */
     private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
+        final FilteredList<Group> filteredGroups = new FilteredList<Group>(TypicalGroups
+                .getTypicalAddressBookWithGroups().getGroupList());
 
         @Override
         public boolean hasGroup(Group group) {
@@ -224,6 +228,12 @@ public class AddGroupCommandTest {
         public void addGroup(Group group) {
             requireNonNull(group);
             groupsAdded.add(group);
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+            requireNonNull(predicate);
+            filteredGroups.setPredicate(predicate);
         }
 
         @Override
