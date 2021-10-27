@@ -16,14 +16,14 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.testutil.TypicalTasks.TASK_1;
-import static seedu.address.testutil.TypicalTasks.TASK_A;
-import static seedu.address.testutil.TypicalTasks.TASK_B;
-import static seedu.address.testutil.TypicalTasks.TASK_C;
-import static seedu.address.testutil.TypicalTasks.TASK_D;
-import static seedu.address.testutil.TypicalTasks.TASK_E;
-import static seedu.address.testutil.TypicalTasks.TASK_F;
-import static seedu.address.testutil.TypicalTasks.TASK_G;
+import static seedu.address.testutil.TypicalTasks.TASK_1_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_A_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_B_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_C_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_D_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_E_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_F_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_G_BUILDER;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,20 +38,21 @@ import seedu.address.model.person.Person;
 public class TypicalGroups {
 
     public static final GroupBuilder CS2103T_GROUP_BUILDER = new GroupBuilder().withName("CS2103T Project Group")
-            .withMembers(ALICE, BENSON, CARL).withTasks(TASK_A, TASK_B, TASK_E);
+            .withMembers(ALICE, BENSON, CARL).withTasks(TASK_A_BUILDER.build(), TASK_B_BUILDER.build()
+                    , TASK_E_BUILDER.build());
 
     public static final GroupBuilder CS2101_GROUP_BUILDER = new GroupBuilder().withName("CS2101 Project Group")
-            .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_C, TASK_D);
+            .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_C_BUILDER.build(), TASK_D_BUILDER.build());
 
     // Manually added
     public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family").withDescription("casual group")
-            .withMembers(DANIEL, ELLE, ALICE).withTasks(TASK_G, TASK_F);
+            .withMembers(DANIEL, ELLE, ALICE).withTasks(TASK_G_BUILDER.build(), TASK_F_BUILDER.build());
     public static final GroupBuilder FRIENDS = new GroupBuilder().withName("Friends").withDescription("casual group")
-            .withMembers(HOON, IDA).withTasks(TASK_F, TASK_G);
+            .withMembers(HOON, IDA).withTasks(TASK_F_BUILDER.build(), TASK_G_BUILDER.build());
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB).withTasks(TASK_1);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB).withTasks(TASK_1_BUILDER.build());
     public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
             .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
     public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)

@@ -21,7 +21,7 @@ public class AddTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Task expectedTask = TypicalTasks.TASK_1;
+        Task expectedTask = TypicalTasks.TASK_1_BUILDER.build();
 
         // whitespace only preamble
         assertParseSuccess(parser, DESCRIPTION_DESC_TASK_1, new AddTaskCommand(expectedTask));

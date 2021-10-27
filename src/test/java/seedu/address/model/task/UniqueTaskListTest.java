@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TASK_1;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalTasks.TASK_1;
-import static seedu.address.testutil.TypicalTasks.TASK_A;
+import static seedu.address.testutil.TypicalTasks.TASK_1_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_A_BUILDER;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +20,10 @@ import seedu.address.testutil.TaskBuilder;
 
 public class UniqueTaskListTest {
 
+
     private final UniqueTaskList uniqueTaskList = new UniqueTaskList();
+    private final Task TASK_A = TASK_A_BUILDER.build();
+    private final Task TASK_1 = TASK_1_BUILDER.build();
 
     @Test
     public void contains_nullTask_throwsNullPointerException() {
