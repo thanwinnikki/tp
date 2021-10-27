@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Stack;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -9,6 +10,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.StateDependentCommand;
+import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,6 +35,7 @@ public class LogicManager implements Logic {
     private final AddressBookParser addressBookParser;
     private ApplicationState currentApplicationState;
     private Object currentDataStored;
+    private Stack<UndoableCommand> undoableCommandStack;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -42,6 +46,7 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
         currentApplicationState = ApplicationState.HOME;
         currentDataStored = null;
+        undoableCommandStack = new Stack<>();
     }
 
     @Override
@@ -50,12 +55,11 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText, currentDataStored);
-        if (!command.isAbleToRunInAppState(currentApplicationState)) {
-            throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
-        }
+        checkIfCommandCanRunInApplicationState(command);
         commandResult = command.execute(model);
-        currentApplicationState = commandResult.getNextAppState();
-        currentDataStored = commandResult.getNextDataToStore();
+        processCommandResult(commandResult);
+        commandResult = undoIfMustUndo(commandResult);
+        addToUndoableCommandStackIfUndoable(command);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -94,5 +98,36 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    private void checkIfCommandCanRunInApplicationState(Command command) throws CommandException {
+        boolean isAbleToRunInApplicationState = command instanceof StateDependentCommand
+                && !((StateDependentCommand) command).isAbleToRunInApplicationState(currentApplicationState);
+        if (isAbleToRunInApplicationState) {
+            throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
+        }
+    }
+
+    private void processCommandResult(CommandResult commandResult) throws CommandException {
+        currentApplicationState = commandResult.getNextAppState();
+        currentDataStored = commandResult.getNextDataToStore();
+    }
+
+    private CommandResult undoIfMustUndo(CommandResult commandResult) throws CommandException {
+        boolean mustUndo = commandResult.isGoingToCauseUndo();
+        boolean canUndo = !undoableCommandStack.empty();
+        if (!(mustUndo && canUndo)) {
+            return commandResult;
+        }
+        UndoableCommand undoableCommand = undoableCommandStack.pop();
+        CommandResult undoResult = undoableCommand.undo(model);
+        processCommandResult(undoResult);
+        return undoResult;
+    }
+
+    private void addToUndoableCommandStackIfUndoable(Command command) {
+        if (command instanceof UndoableCommand) {
+            undoableCommandStack.push((UndoableCommand) command);
+        }
     }
 }

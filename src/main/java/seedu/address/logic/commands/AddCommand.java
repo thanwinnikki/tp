@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends Command {
+public class AddCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -35,6 +35,7 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of addition of person: %1$s";
 
     private final Person toAdd;
 
@@ -56,6 +57,14 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        assert model.hasPerson(toAdd) : "The model must contain the person to undo its addition.";
+        model.deletePerson(toAdd);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
+                .build();
     }
 
     @Override
