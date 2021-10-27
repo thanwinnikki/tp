@@ -31,26 +31,41 @@ public class JsonAdaptedGroup {
     public static final String MESSAGE_DUPLICATE_TASK = "Duplicate task(s) found in storage.";
 
     private final String name;
+    private final String description;
     private final List<String> groupMateIds;
     private final List<JsonAdaptedTask> tasks;
-
-    private String description;
 
     /**
      * Builder class for {@code JsonAdaptedGroup}.
      */
     public static class Builder {
 
-        private JsonAdaptedGroup groupToBuild;
+        private String name;
+        private String description;
+        private List<String> groupMateIds;
+        private List<JsonAdaptedTask> tasks;
 
         /**
-         * Constructs a {@code JsonAdaptedGroup.Builder} for a {@code JsonAdaptedPerson} with the given group details.
+         * Constructs a {@code JsonAdaptedGroup.Builder} for a {@code JsonAdaptedGroup} with the given group details.
          *
          * @param name The group's name.
          */
         @JsonCreator
         public Builder(@JsonProperty("name") String name) {
-            groupToBuild = new JsonAdaptedGroup(name);
+            this.name = name;
+        }
+
+        /**
+         * Starts converting the given {@code Group} to a {@code JsonAdaptedGroup} for Jackson use.
+         *
+         * @param source The {@code Group} object to be converted.
+         * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
+         */
+        public Builder(Group source, Map<Person, Id> personToIdMap) {
+            initialiseName(source);
+            initialiseDescription(source);
+            initialiseGroupMateIds(source, personToIdMap);
+            initialiseTasks(source);
         }
 
         /**
@@ -61,7 +76,7 @@ public class JsonAdaptedGroup {
          */
         @JsonProperty
         public Builder withDescription(String description) {
-            groupToBuild.description = description;
+            this.description = description;
             return this;
         }
 
@@ -73,8 +88,10 @@ public class JsonAdaptedGroup {
          */
         @JsonProperty
         public Builder withGroupMateIds(List<String> groupMateIds) {
-            assert groupMateIds != null : "The list of group mate person IDs should not be null.";
-            groupToBuild.groupMateIds.addAll(groupMateIds);
+            if (groupMateIds != null) {
+                this.groupMateIds = new ArrayList<>();
+                this.groupMateIds.addAll(groupMateIds);
+            }
             return this;
         }
 
@@ -86,8 +103,10 @@ public class JsonAdaptedGroup {
          */
         @JsonProperty
         public Builder withTasks(List<JsonAdaptedTask> tasks) {
-            assert tasks != null : "The list of group mate person IDs should not be null.";
-            groupToBuild.tasks.addAll(tasks);
+            if (tasks != null) {
+                this.tasks = new ArrayList<>();
+                this.tasks.addAll(tasks);
+            }
             return this;
         }
 
@@ -97,37 +116,49 @@ public class JsonAdaptedGroup {
          * @return The completed {@code JsonAdaptedGroup} object.
          */
         public JsonAdaptedGroup build() {
-            return groupToBuild;
+            return new JsonAdaptedGroup(name, description, groupMateIds, tasks);
+        }
+
+        private void initialiseName(Group source) {
+            name = source.getName().fullName;
+        }
+
+        private void initialiseDescription(Group source) {
+            Description description = source.getDescription();
+            if (description != null) {
+                this.description = description.toString();
+            }
+        }
+
+        private void initialiseGroupMateIds(Group source, Map<Person, Id> personToIdMap) {
+            if (source.getPersons().asUnmodifiableObservableList().isEmpty()) {
+                return;
+            }
+            groupMateIds = new ArrayList<>();
+            source.doForEachGroupMate(groupMate -> {
+                assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
+                Id personId = personToIdMap.get(groupMate);
+                groupMateIds.add(personId.toString());
+            });
+        }
+
+        private void initialiseTasks(Group source) {
+            if (source.getTasks().asUnmodifiableObservableList().isEmpty()) {
+                return;
+            }
+            tasks = new ArrayList<>();
+            source.doForEachTask(task -> {
+                JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(task);
+                tasks.add(jsonAdaptedTask);
+            });
         }
     }
 
-    private JsonAdaptedGroup(String name) {
+    private JsonAdaptedGroup(String name, String description, List<String> groupMateIds, List<JsonAdaptedTask> tasks) {
         this.name = name;
-        groupMateIds = new ArrayList<>();
-        tasks = new ArrayList<>();
-    }
-
-    /**
-     * Converts the given {@code Group} to a {@code JsonAdaptedGroup}.
-     *
-     * @param source The {@code Group} object to be converted.
-     * @param personToIdMap The mapping from each {@code Person} object to its respective stored person ID.
-     */
-    public JsonAdaptedGroup(Group source, Map<Person, Id> personToIdMap) {
-        this(source.getName().fullName);
-        Description description = source.getDescription();
-        if (description != null) {
-            this.description = description.toString();
-        }
-        source.doForEachGroupMate(groupMate -> {
-            assert personToIdMap.containsKey(groupMate) : "This group mate has no assigned person ID.";
-            Id personId = personToIdMap.get(groupMate);
-            groupMateIds.add(personId.toString());
-        });
-        source.doForEachTask(task -> {
-            JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(task);
-            tasks.add(jsonAdaptedTask);
-        });
+        this.description = description;
+        this.groupMateIds = groupMateIds;
+        this.tasks = tasks;
     }
 
     /**
@@ -174,6 +205,9 @@ public class JsonAdaptedGroup {
     }
 
     private void addGroupMates(Group group, Map<Id, Person> idToPersonMap) throws IllegalValueException {
+        if (groupMateIds == null) {
+            return;
+        }
         for (String personIdString : groupMateIds) {
             Id personId = Id.parse(personIdString);
             Person person = idToPersonMap.get(personId);
@@ -189,6 +223,9 @@ public class JsonAdaptedGroup {
     }
 
     private void addTasks(Group group) throws IllegalValueException {
+        if (tasks == null) {
+            return;
+        }
         for (JsonAdaptedTask jsonAdaptedTask : tasks) {
             Task task = jsonAdaptedTask.toModelType();
             try {
@@ -209,11 +246,15 @@ public class JsonAdaptedGroup {
         }
         JsonAdaptedGroup o = (JsonAdaptedGroup) other;
         boolean haveSameNames = name.equals(o.name);
-        boolean haveSameGroupMateIdLists = groupMateIds.equals(o.groupMateIds);
-        boolean haveSameTaskLists = tasks.equals(o.tasks);
         boolean haveNullDescriptions = description == null && o.description == null;
         boolean haveSameDescriptions = haveNullDescriptions
-                || description != null && description.equals(o.description);
-        return haveSameNames && haveSameGroupMateIdLists && haveSameTaskLists && haveSameDescriptions;
+                || (description != null && description.equals(o.description));
+        boolean haveNullGroupMateIdLists = groupMateIds == null && o.groupMateIds == null;
+        boolean haveSameGroupMateIdLists = haveNullGroupMateIdLists
+                || (groupMateIds != null && groupMateIds.equals(o.groupMateIds));
+        boolean haveNullTaskLists = tasks == null && o.tasks == null;
+        boolean haveSameTaskLists = haveNullTaskLists
+                || (tasks != null && tasks.equals(o.tasks));
+        return haveSameNames && haveSameDescriptions && haveSameGroupMateIdLists && haveSameTaskLists;
     }
 }

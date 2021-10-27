@@ -10,7 +10,7 @@ import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
  * Finds and lists all groups in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindGroupCommand extends Command {
+public class FindGroupCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "findG";
 

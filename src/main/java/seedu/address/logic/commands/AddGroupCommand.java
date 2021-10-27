@@ -10,7 +10,7 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
-public class AddGroupCommand extends Command {
+public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "addG";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
@@ -25,12 +25,12 @@ public class AddGroupCommand extends Command {
             + PREFIX_DESCRIPTION + "This is a group for my summer project";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of addition of group: %1$s";
 
     private final Group toAdd;
 
-
     /**
-     * Creates an GroupCommand to add the specified {@code Group}
+     * Creates an AddGroupCommand to add the specified {@code Group}
      */
     public AddGroupCommand(Group group) {
         requireNonNull(group);
@@ -49,6 +49,14 @@ public class AddGroupCommand extends Command {
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
                 .setNextAppState(ApplicationState.HOME)
+                .build();
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        assert model.hasGroup(toAdd) : "The model must contain the group to undo its addition.";
+        model.deleteGroup(toAdd);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
                 .build();
     }
 

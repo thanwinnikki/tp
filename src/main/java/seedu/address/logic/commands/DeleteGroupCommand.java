@@ -7,13 +7,15 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteGroupCommand extends Command {
+public class DeleteGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "deleteG";
 
@@ -23,8 +25,12 @@ public class DeleteGroupCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_DELETE_GROUP_SUCCESS = "Deleted Group: %1$s";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of deletion of group: %1$s";
 
     private final Index targetIndex;
+
+    private ReadOnlyAddressBook oldReadOnlyAddressBook;
+    private Group deletedGroup;
 
     public DeleteGroupCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -33,6 +39,8 @@ public class DeleteGroupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        oldReadOnlyAddressBook = new AddressBook(model.getAddressBook());
+
         List<Group> lastShownList = model.getFilteredGroupList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -41,7 +49,18 @@ public class DeleteGroupCommand extends Command {
 
         Group groupToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteGroup(groupToDelete);
+        deletedGroup = groupToDelete;
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        // Probably not the best to save the whole address book but this is the easiest way to undo
+        model.setAddressBook(oldReadOnlyAddressBook);
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, deletedGroup))
+                .goToHome()
+                .build();
     }
 
     @Override

@@ -17,7 +17,7 @@ import seedu.address.model.common.Description;
 import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
 
-public class EditGroupCommand extends Command {
+public class EditGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "editG";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the group identified "
@@ -33,9 +33,13 @@ public class EditGroupCommand extends Command {
     public static final String MESSAGE_EDIT_GROUP_SUCCESS = "Edited Group: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book.";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of edit of group: %1$s";
 
     private final Index index;
     private final EditGroupCommand.EditGroupDescriptor editGroupDescriptor;
+
+    private Group groupBeforeEdit;
+    private Group groupAfterEdit;
 
     /**
      * @param index of the group in the filtered group list to edit
@@ -66,8 +70,22 @@ public class EditGroupCommand extends Command {
         }
 
         model.setGroup(groupToEdit, editedGroup);
+
+        groupBeforeEdit = groupToEdit;
+        groupAfterEdit = editedGroup;
+
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(MESSAGE_EDIT_GROUP_SUCCESS, editedGroup));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        assert model.hasGroup(groupAfterEdit) : "The edited group must be in the records to undo its edit.";
+        model.setGroup(groupAfterEdit, groupBeforeEdit);
+        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupBeforeEdit))
+                .goToHome()
+                .build();
     }
 
     /**

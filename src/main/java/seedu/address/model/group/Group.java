@@ -49,6 +49,22 @@ public class Group {
         this.tasks = new UniqueTaskList();
     }
 
+    /**
+     * Copies the given group.
+     *
+     * @param groupToCopy The group to be copied.
+     */
+    public Group(Group groupToCopy) {
+        name = groupToCopy.name;
+        description = groupToCopy.description;
+        persons = new UniquePersonList();
+        UniquePersonList oldUniquePersonList = groupToCopy.persons;
+        oldUniquePersonList.forEach(persons::add);
+        tasks = new UniqueTaskList();
+        UniqueTaskList oldUniqueTaskList = groupToCopy.tasks;
+        oldUniqueTaskList.forEach(tasks::add);
+    }
+
     public Name getName() {
         return name;
     }
@@ -74,6 +90,25 @@ public class Group {
     }
 
     /**
+     * Removes a group mate from the group.
+     *
+     * @param groupMate The group mate which is to be removed from the group.
+     */
+    public void removeGroupMate(Person groupMate) {
+        persons.remove(groupMate);
+    }
+
+    /**
+     * Checks whether the group has the given group mate.
+     *
+     * @param groupMate The group mate.
+     * @return Whether the group mate is in the group.
+     */
+    public boolean hasGroupMate(Person groupMate) {
+        return persons.contains(groupMate);
+    }
+
+    /**
      * Adds a task to the group.
      * @param task Task to be added to the group.
      */
@@ -86,6 +121,16 @@ public class Group {
      */
     public void deleteTask(Task task) {
         tasks.remove(task);
+    }
+
+    /**
+     * Checks whether the group has the given task.
+     *
+     * @param task The task.
+     * @return Whether the group has the given task.
+     */
+    public boolean hasTask(Task task) {
+        return tasks.contains(task);
     }
 
     /**

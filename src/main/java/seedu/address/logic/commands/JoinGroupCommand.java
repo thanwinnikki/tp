@@ -11,12 +11,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 
 /** Adds a person to a group in the address book.
  *
  */
-public class JoinGroupCommand extends Command {
+public class JoinGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "joinG";
 
@@ -30,9 +31,14 @@ public class JoinGroupCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Person(s) added to group : %1$s";
     public static final String MESSAGE_INVALID_GROUP_INDEX = "Please enter a valid group number";
     public static final String MESSAGE_INVALID_PERSON_INDEX = "Please enter all valid person indexes";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS =
+            "Successful undo of addition of group mates to group: %1$s";
 
     private final Index groupIndex;
     private final Set<Index> personIndexes;
+
+    private Group groupAddedTo;
+    private Iterable<Person> addedGroupMates;
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Person} objects to the specified {@code Group}.
@@ -68,9 +74,24 @@ public class JoinGroupCommand extends Command {
                 .map(x -> lastShownPersonList.get(x.getZeroBased()))
                 .collect(Collectors.toSet());
 
+        groupAddedTo = groupToChange;
+        addedGroupMates = personSet;
+
         model.addToGroup(groupToChange, personSet);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, groupToChange));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        addedGroupMates.forEach(groupMate -> {
+            assert groupAddedTo.hasGroupMate(groupMate) : "The group mate must be in the group to undo the addition.";
+            groupAddedTo.removeGroupMate(groupMate);
+        });
+        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupAddedTo));
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupAddedTo))
+                .displayGroupInformation(groupAddedTo)
+                .build();
     }
 
     @Override

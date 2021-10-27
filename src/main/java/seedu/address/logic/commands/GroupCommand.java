@@ -15,7 +15,7 @@ import seedu.address.model.person.IsGroupMemberPredicate;
 /**
  * Lists all persons and tasks in the given group.
  */
-public class GroupCommand extends Command {
+public class GroupCommand extends AlwaysRunnableCommand {
 
     public static final String COMMAND_WORD = "group";
 
