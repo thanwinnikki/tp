@@ -29,7 +29,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends Command {
+public class EditCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -49,9 +49,13 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of edit of person: %1$s";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
+
+    private Person personBeforeEdit;
+    private Person personAfterEdit;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -82,8 +86,22 @@ public class EditCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+
+        personBeforeEdit = personToEdit;
+        personAfterEdit = editedPerson;
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        assert model.hasPerson(personAfterEdit) : "The edited person must be in the records to undo its edit.";
+        model.setPerson(personAfterEdit, personBeforeEdit);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personBeforeEdit))
+                .goToHome()
+                .build();
     }
 
     /**

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
@@ -63,7 +64,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setGroups(newData.getGroupList());
+        ObservableList<Group> oldGroupList = newData.getGroupList();
+        ObservableList<Group> newGroupList = FXCollections.observableArrayList();
+        oldGroupList.forEach(oldGroup -> {
+            Group newGroup = new Group(oldGroup);
+            newGroupList.add(newGroup);
+        });
+        setGroups(newGroupList);
     }
 
     //// person-level operations

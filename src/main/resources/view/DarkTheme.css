@@ -358,3 +358,18 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#stateDisplay {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 19px;
+    -fx-text-fill: white;
+}
+
+#applicationState {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+}
+
+#stateDisplay {
+    -fx-text-fill: white;
+}

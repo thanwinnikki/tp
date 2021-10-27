@@ -47,7 +47,7 @@ public class JoinGroupCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         Group validGroup = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
-        Person validPerson = model.getFilteredPersonList().get(INDEX_FIRST.getOneBased());
+        Person validPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
 
         Set<Person> personSet = new HashSet<>();
         personSet.add(validPerson);
@@ -60,7 +60,8 @@ public class JoinGroupCommandTest {
         String expectedMessage = String.format(JoinGroupCommand.MESSAGE_SUCCESS, validGroup);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addToGroup(validGroup, personSet);
+        Group expectedModelValidGroup = expectedModel.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
+        expectedModel.addToGroup(expectedModelValidGroup, personSet);
 
         assertCommandSuccess(joinGroupCommand, model, expectedMessage, expectedModel);
     }

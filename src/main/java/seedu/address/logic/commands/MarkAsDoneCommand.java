@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
-public class MarkAsDoneCommand extends Command {
+public class MarkAsDoneCommand extends AlwaysRunnableCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as done "
@@ -21,10 +21,14 @@ public class MarkAsDoneCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Task marked as done: %1$s";
     public static final String MESSAGE_TASK_ALREADY_DONE = "This task has already been marked as done!";
+    public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS = "Successful undo of marking as done for task: %1$s";
 
     private final Index targetIndex;
 
     private final Index firstIndex = Index.fromZeroBased(0);
+
+    private Group groupOfTask;
+    private Task taskMarkedDone;
 
     public MarkAsDoneCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -50,9 +54,22 @@ public class MarkAsDoneCommand extends Command {
             throw new CommandException(MESSAGE_TASK_ALREADY_DONE);
         } else {
             taskToMarkAsDone.setDoneTask();
+            groupOfTask = group;
+            taskMarkedDone = taskToMarkAsDone;
         }
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, taskToMarkAsDone))
                 .displayGroupInformation(group)
+                .build();
+    }
+
+    @Override
+    public CommandResult undo(Model model) throws CommandException {
+        assert model.hasGroup(groupOfTask) : "The group of the task marked done must still exist to undo the mark.";
+        assert groupOfTask.hasTask(taskMarkedDone) : "The group must still have the task marked done to undo the mark.";
+        assert taskMarkedDone.getDoneTask() : "The task marked done must still be marked done to undo the mark.";
+        taskMarkedDone.setUndoneTask();
+        return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, taskMarkedDone))
+                .displayGroupInformation(groupOfTask)
                 .build();
     }
 
