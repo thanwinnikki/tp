@@ -19,6 +19,14 @@ import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
+import static seedu.address.testutil.TypicalTasks.TASK_1;
+import static seedu.address.testutil.TypicalTasks.TASK_A;
+import static seedu.address.testutil.TypicalTasks.TASK_B;
+import static seedu.address.testutil.TypicalTasks.TASK_C;
+import static seedu.address.testutil.TypicalTasks.TASK_D;
+import static seedu.address.testutil.TypicalTasks.TASK_E;
+import static seedu.address.testutil.TypicalTasks.TASK_F;
+import static seedu.address.testutil.TypicalTasks.TASK_G;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,26 +42,27 @@ public class TypicalGroups {
 
     public static final GroupBuilder CS2103T_GROUP_BUILDER = new GroupBuilder().withName("CS2103T Project Group")
             .withDescription(VALID_DESCRIPTION_CSMODULE)
-            .withMembers(ALICE, BENSON, CARL);
+            .withMembers(ALICE, BENSON, CARL).withTasks(TASK_A, TASK_B);
 
     public static final GroupBuilder CS2101_GROUP_BUILDER = new GroupBuilder().withName("CS2101 Project Group")
             .withDescription(VALID_DESCRIPTION_CSMODULE)
-            .withMembers(ELLE, FIONA, GEORGE);
+            .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_C, TASK_D);
+
     public static final GroupBuilder VOLLEYBALL_GROUP_BUILDER = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
             .withDescription(VALID_DESCRIPTION_SPORTS)
-            .withMembers(ELLE, FIONA, GEORGE);
+            .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_E);
 
     // Manually added
     public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family").withDescription("casual group")
             .withDescription(VALID_DESCRIPTION_FAMILY)
-            .withMembers(DANIEL, ELLE, ALICE);
+            .withMembers(DANIEL, ELLE, ALICE).withTasks(TASK_G);
     public static final GroupBuilder FRIENDS = new GroupBuilder().withName("Friends").withDescription("casual group")
             .withDescription(VALID_DESCRIPTION_FRIENDS)
-            .withMembers(HOON, IDA);
+            .withMembers(HOON, IDA).withTasks(TASK_1);
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB).withTasks(TASK_F);
     public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
             .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
     public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)

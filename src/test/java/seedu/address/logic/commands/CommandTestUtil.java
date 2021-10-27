@@ -59,6 +59,7 @@ public class CommandTestUtil {
     public static final String NAME_DESC_SWIMMING = " " + PREFIX_NAME + VALID_NAME_SWIMMING;
     public static final String NAME_DESC_VOLLEYBALL = " " + PREFIX_NAME + VALID_NAME_VOLLEYBALL;
     public static final String DESCRIPTION_DESC_SPORTS = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_SPORTS;
+    public static final String DESCRIPTION_DESC_TASK_1 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TASK_1;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -75,6 +76,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DESCRIPTION_DESC = " "
+            + PREFIX_DESCRIPTION + " "; //empty string not allowed for addresses
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

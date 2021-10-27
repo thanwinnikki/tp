@@ -71,7 +71,8 @@ public class EditGroupCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditGroupCommand editGroupCommand = new EditGroupCommand(INDEX_FIRST, new EditGroupCommand.EditGroupDescriptor());
+        EditGroupCommand editGroupCommand = new EditGroupCommand(INDEX_FIRST,
+                new EditGroupCommand.EditGroupDescriptor());
         Group editedGroup = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditGroupCommand.MESSAGE_EDIT_GROUP_SUCCESS, editedGroup);
