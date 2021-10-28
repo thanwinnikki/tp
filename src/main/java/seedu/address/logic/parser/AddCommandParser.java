@@ -47,8 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Optional<String> possibleAddress = argMultimap.getValue(PREFIX_ADDRESS);
         if (possibleAddress.isPresent()) {
-            Address address = ParserUtil.parseAddress(possibleAddress.get());
-            personBuilder.withAddress(address);
+            addAddressIfNotEmpty(personBuilder, possibleAddress);
         }
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
@@ -58,6 +57,14 @@ public class AddCommandParser implements Parser<AddCommand> {
                 .build();
 
         return new AddCommand(person);
+    }
+
+    private static void addAddressIfNotEmpty(Person.Builder personBuilder, Optional<String> possibleAddress)
+            throws ParseException {
+        Address address = ParserUtil.parseAddress(possibleAddress.get());
+        if (address != Address.EMPTY_ADDRESS) {
+            personBuilder.withAddress(address);
+        }
     }
 
     /**

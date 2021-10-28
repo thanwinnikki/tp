@@ -117,10 +117,13 @@ public class EditCommand extends AlwaysRunnableCommand implements UndoableComman
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person.Builder(updatedName, updatedPhone, updatedEmail)
-                .withAddress(updatedAddress)
-                .withTags(updatedTags)
-                .build();
+        Person.Builder personBuilder = new Person.Builder(updatedName, updatedPhone, updatedEmail)
+                .withTags(updatedTags);
+        if (!updatedAddress.equals(Address.EMPTY_ADDRESS)) {
+            personBuilder.withAddress(updatedAddress);
+        }
+
+        return personBuilder.build();
     }
 
     @Override

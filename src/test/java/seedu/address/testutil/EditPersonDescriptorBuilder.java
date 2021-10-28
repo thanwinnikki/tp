@@ -67,7 +67,11 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        if (address.equals(Address.EMPTY_ADDRESS.value)) {
+            descriptor.setAddress(Address.EMPTY_ADDRESS);
+        } else {
+            descriptor.setAddress(new Address(address));
+        }
         return this;
     }
 
