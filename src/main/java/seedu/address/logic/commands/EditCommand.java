@@ -18,6 +18,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.common.Name;
 import seedu.address.model.person.Address;
@@ -29,7 +30,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing person in the address book.
  */
-public class EditCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class EditCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "edit";
 
@@ -119,6 +120,15 @@ public class EditCommand extends AlwaysRunnableCommand implements UndoableComman
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.HOME) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     @Override
     public boolean equals(Object other) {
