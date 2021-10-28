@@ -61,11 +61,10 @@
       "description" : "Delegate roles",
       "isDone" : false
     } ]
-  } ]
   }, {
     "name" : "CS2101 Project Group",
     "description" : "CS module",
-    "groupMateIds" : [ "0-4", "0-5", "0-6" ]
+    "groupMateIds" : [ "0-4", "0-5", "0-6" ],
     "tasks" : [ {
       "description" : "Add testing",
       "isDone" : false
@@ -73,10 +72,13 @@
       "description" : "Group meeting",
       "isDone" : false
     } ]
-  } ]
- }, {
+  }, {
     "name" : "Volleyball club",
     "description" : "Sports Club",
-    "groupMateIds" : [ "0-4", "0-5", "0-6" ]
-  }  ]
+    "groupMateIds" : [ "0-4", "0-5", "0-6" ],
+    "tasks" : [ {
+      "description" : "Delegate roles",
+      "isDone" : false
+    } ]
+  } ]
 }

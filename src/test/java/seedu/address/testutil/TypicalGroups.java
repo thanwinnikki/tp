@@ -49,11 +49,10 @@ public class TypicalGroups {
             .withDescription(VALID_DESCRIPTION_CSMODULE)
             .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_C_BUILDER.build(), TASK_D_BUILDER.build());
 
-  
     public static final GroupBuilder VOLLEYBALL_GROUP_BUILDER = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
             .withDescription(VALID_DESCRIPTION_SPORTS)
-            .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_E);
-  
+            .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_E_BUILDER.build());
+
     // Manually added
     public static final GroupBuilder FAMILY = new GroupBuilder().withName("Family").withDescription("casual group")
             .withDescription(VALID_DESCRIPTION_FAMILY)
