@@ -29,24 +29,28 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand implements Undoable
 
     private Group groupOfTask;
     private Task taskMarkedDone;
+    private final Group currentDataStored;
 
-    public MarkAsDoneCommand(Index targetIndex) {
+    public MarkAsDoneCommand(Index targetIndex, Object currentDataStored) {
         this.targetIndex = targetIndex;
+        if (currentDataStored instanceof Group) {
+            this.currentDataStored = (Group) currentDataStored;
+        } else {
+            this.currentDataStored = null;
+        }
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Group> lastShownGroupList = model.getFilteredGroupList();
-        if (lastShownGroupList.size() != 1) {
-            //todo
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-        }
-        Group group = lastShownGroupList.get(firstIndex.getZeroBased());
-        UniqueTaskList tasks = group.getTasks();
+
+        UniqueTaskList tasks = currentDataStored.getTasks();
 
         if (targetIndex.getZeroBased() >= tasks.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+        if (currentDataStored == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Task taskToMarkAsDone = tasks.getTask(targetIndex.getZeroBased());
@@ -54,11 +58,11 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand implements Undoable
             throw new CommandException(MESSAGE_TASK_ALREADY_DONE);
         } else {
             taskToMarkAsDone.setDoneTask();
-            groupOfTask = group;
+            groupOfTask = currentDataStored;
             taskMarkedDone = taskToMarkAsDone;
         }
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, taskToMarkAsDone))
-                .displayGroupInformation(group)
+                .displayGroupInformation(currentDataStored)
                 .build();
     }
 

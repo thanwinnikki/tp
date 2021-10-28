@@ -104,10 +104,10 @@ public class AddressBookParser {
             return new DeleteTaskCommandParser().parse(arguments);
 
         case AddTaskCommand.COMMAND_WORD:
-            return new AddTaskCommandParser().parse(arguments);
+            return new AddTaskCommandParser(currentDataStored).parse(arguments);
 
         case MarkAsDoneCommand.COMMAND_WORD:
-            return new MarkAsDoneCommandParser().parse(arguments);
+            return new MarkAsDoneCommandParser(currentDataStored).parse(arguments);
 
         case EditGroupCommand.COMMAND_WORD:
             return new EditGroupCommandParser().parse(arguments);
