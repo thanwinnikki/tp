@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
@@ -10,7 +11,7 @@ import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
  * Finds and lists all groups in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindGroupCommand extends AlwaysRunnableCommand {
+public class FindGroupCommand implements StateDependentCommand {
 
     public static final String COMMAND_WORD = "findG";
 
@@ -32,6 +33,15 @@ public class FindGroupCommand extends AlwaysRunnableCommand {
         return new CommandResult(
                 String.format(Messages.MESSAGE_GROUPS_LISTED_OVERVIEW, model.getFilteredGroupList().size()));
     }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.HOME) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     @Override
     public boolean equals(Object other) {
