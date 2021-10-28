@@ -71,7 +71,10 @@ public class JsonAdaptedPerson {
             name = source.getName().fullName;
             phone = source.getPhone().value;
             email = source.getEmail().value;
-            address = source.getAddress().value;
+            Address address = source.getAddress();
+            if (address != null) {
+                this.address = address.value;
+            }
             initialiseTagged(source);
         }
 

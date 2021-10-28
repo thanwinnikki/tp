@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,7 +50,13 @@ public class PersonCard extends Card {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        Address address = person.getAddress();
+        if (address != null) {
+            this.address.setText(address.value);
+        } else {
+            this.address.setVisible(false);
+            this.address.setManaged(false);
+        }
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
