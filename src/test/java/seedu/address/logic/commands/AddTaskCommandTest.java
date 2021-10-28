@@ -26,25 +26,25 @@ public class AddTaskCommandTest {
         assertThrows(NullPointerException.class, () -> new AddTaskCommand(null));
     }
 
-    @Test
-    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-        Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
-
-        // identify group to add task to
-        Group group = getFirstGroup(model);
-        Task validTask = new TaskBuilder().build();
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
-
-        assertFalse(group.getTasks().contains(validTask));
-
-        // set the filtered list for both groups and person
-        setFilteredList(model, group);
-
-        CommandResult commandResult = new AddTaskCommand(validTask).execute(model);
-
-        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
-        assertTrue(group.getTasks().contains(validTask));
-    }
+    //   @Test
+    //    public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
+    //        Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+    //
+    //        // identify group to add task to
+    //        Group group = getFirstGroup(model);
+    //        Task validTask = new TaskBuilder().build();
+    //        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
+    //
+    //        assertFalse(group.getTasks().contains(validTask));
+    //
+    //        // set the filtered list for both groups and person
+    //        setFilteredList(model, group);
+    //
+    //        CommandResult commandResult = new AddTaskCommand(validTask).execute(model);
+    //
+    //        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
+    //        assertTrue(group.getTasks().contains(validTask));
+    //    }
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {

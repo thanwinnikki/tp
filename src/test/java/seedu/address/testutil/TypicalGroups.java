@@ -38,8 +38,8 @@ import seedu.address.model.person.Person;
 public class TypicalGroups {
 
     public static final GroupBuilder CS2103T_GROUP_BUILDER = new GroupBuilder().withName("CS2103T Project Group")
-            .withMembers(ALICE, BENSON, CARL).withTasks(TASK_A_BUILDER.build(), TASK_B_BUILDER.build()
-                    , TASK_E_BUILDER.build());
+            .withMembers(ALICE, BENSON, CARL).withTasks(TASK_A_BUILDER.build(), TASK_B_BUILDER.build(),
+                    TASK_E_BUILDER.build());
 
     public static final GroupBuilder CS2101_GROUP_BUILDER = new GroupBuilder().withName("CS2101 Project Group")
             .withMembers(ELLE, FIONA, GEORGE).withTasks(TASK_C_BUILDER.build(), TASK_D_BUILDER.build());

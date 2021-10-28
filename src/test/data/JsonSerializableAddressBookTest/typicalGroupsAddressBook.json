@@ -48,10 +48,27 @@
   "groups" : [ {
     "name" : "CS2103T Project Group",
     "description" : "This is a CS module group",
-    "groupMateIds" : [ "0-0", "0-1", "0-2" ]
+    "groupMateIds" : [ "0-0", "0-1", "0-2" ],
+    "tasks" : [ {
+      "description" : "Prepare demo",
+      "isDone" : false
+    }, {
+      "description" : "Deliver v1.3",
+      "isDone" : false
+    }, {
+      "description" : "Delegate roles",
+      "isDone" : false
+    } ]
   }, {
     "name" : "CS2101 Project Group",
     "description" : "This is a CS module group",
-    "groupMateIds" : [ "1-0", "1-1", "1-2" ]
+    "groupMateIds" : [ "1-0", "1-1", "1-2" ],
+    "tasks" : [ {
+      "description" : "Add testing",
+      "isDone" : false
+    }, {
+      "description" : "Group meeting",
+      "isDone" : false
+    } ]
   } ]
 }
