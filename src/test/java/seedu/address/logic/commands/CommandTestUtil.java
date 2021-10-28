@@ -25,6 +25,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
+import seedu.address.testutil.EditGroupDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -38,6 +39,9 @@ public class CommandTestUtil {
     public static final String VALID_NAME_TENNIS = "Tennis Club";
     public static final String VALID_NAME_VOLLEYBALL = "Volleyball club";
     public static final String VALID_DESCRIPTION_SPORTS = "Sports Club";
+    public static final String VALID_DESCRIPTION_CSMODULE = "CS module";
+    public static final String VALID_DESCRIPTION_FAMILY = "Family";
+    public static final String VALID_DESCRIPTION_FRIENDS = "Friends";
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -55,6 +59,7 @@ public class CommandTestUtil {
     public static final String NAME_DESC_SWIMMING = " " + PREFIX_NAME + VALID_NAME_SWIMMING;
     public static final String NAME_DESC_VOLLEYBALL = " " + PREFIX_NAME + VALID_NAME_VOLLEYBALL;
     public static final String DESCRIPTION_DESC_SPORTS = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_SPORTS;
+    public static final String DESCRIPTION_DESC_TASK_1 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_TASK_1;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
@@ -71,12 +76,17 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DESCRIPTION_DESC = " "
+            + PREFIX_DESCRIPTION + " "; //empty string not allowed for addresses
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditGroupCommand.EditGroupDescriptor DESC_TENNIS;
+    public static final EditGroupCommand.EditGroupDescriptor DESC_VOLLEYBALL;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -85,6 +95,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_TENNIS = new EditGroupDescriptorBuilder().withName(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS).build();
+
+        DESC_VOLLEYBALL = new EditGroupDescriptorBuilder().withName(VALID_NAME_VOLLEYBALL)
+                .withDescription(VALID_DESCRIPTION_SPORTS).build();
     }
 
     /**

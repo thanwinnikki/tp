@@ -8,6 +8,8 @@ import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building Group objects.
@@ -20,6 +22,7 @@ public class GroupBuilder {
     private Name name;
     private Description description;
     private UniquePersonList persons;
+    private UniqueTaskList tasks;
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
@@ -28,6 +31,7 @@ public class GroupBuilder {
         name = new Name(DEFAULT_GROUP_NAME);
         description = new Description(DEFAULT_GROUP_DESCRIPTION);
         persons = new UniquePersonList();
+        tasks = new UniqueTaskList();
     }
 
     /**
@@ -37,6 +41,7 @@ public class GroupBuilder {
         name = groupToCopy.getName();
         description = groupToCopy.getDescription();
         persons = groupToCopy.getPersons();
+        tasks = groupToCopy.getTasks();
     }
 
     /**
@@ -52,6 +57,17 @@ public class GroupBuilder {
      */
     public GroupBuilder withDescription(String description) {
         this.description = new Description(description);
+        return this;
+    }
+
+    /**
+     * Sets the {@code UniqueTaskList} of the {@code Group} to contain specified {@code Task}.
+     * @return
+     */
+    public GroupBuilder withTasks(Task... taskList) {
+        UniqueTaskList editedList = new UniqueTaskList();
+        Arrays.stream(taskList).forEach(task -> editedList.add(task));
+        this.tasks = editedList;
         return this;
     }
 
