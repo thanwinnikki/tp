@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,9 +32,16 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand implements Undoable
     private ReadOnlyAddressBook oldReadOnlyAddressBook;
     private Group groupDeletedFrom;
     private Task deletedTask;
+    private final Group group;
 
-    public DeleteTaskCommand(Index targetIndex) {
+    /**
+     * Constructor for DeleteTaskCommand
+     * @param targetIndex of the person in the filtered list to be removed
+     * @param group is the group where task will be deleted from
+     */
+    public DeleteTaskCommand(Index targetIndex, Group group) {
         this.targetIndex = targetIndex;
+        this.group = group;
     }
 
     @Override
@@ -44,28 +49,26 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand implements Undoable
         requireNonNull(model);
         oldReadOnlyAddressBook = new AddressBook(model.getAddressBook());
 
-        List<Group> lastShownGroupList = model.getFilteredGroupList();
-        if (lastShownGroupList.size() != 1) {
+        if (group == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
-        Group targetGroup = lastShownGroupList.get(firstIndex.getZeroBased());
         oldReadOnlyAddressBook.getGroupList().forEach(group -> {
-            if (group.equals(targetGroup)) {
+            if (group.equals(this.group)) {
                 groupDeletedFrom = group;
             }
         });
-        UniqueTaskList targetTaskList = targetGroup.getTasks();
+        UniqueTaskList targetTaskList = group.getTasks();
         if (targetTaskList.size() < targetIndex.getOneBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
         Task targetTask = targetTaskList.getTask(targetIndex.getZeroBased());
 
-        targetGroup.deleteTask(targetTask);
+        group.deleteTask(targetTask);
         deletedTask = targetTask;
         return new CommandResult.Builder(String.format(MESSAGE_REMOVE_TASK_SUCCESS, targetTask))
-                .displayGroupInformation(targetGroup)
+                .displayGroupInformation(group)
                 .build();
     }
 
@@ -82,7 +85,8 @@ public class DeleteTaskCommand extends AlwaysRunnableCommand implements Undoable
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteTaskCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteTaskCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((DeleteTaskCommand) other).targetIndex)
+                && group.equals(((DeleteTaskCommand) other).group)); // state check
     }
 
 }

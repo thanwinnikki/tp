@@ -101,7 +101,7 @@ public class AddressBookParser {
             return new JoinGroupCommandParser().parse(arguments);
 
         case DeleteTaskCommand.COMMAND_WORD:
-            return new DeleteTaskCommandParser().parse(arguments);
+            return new DeleteTaskCommandParser(currentDataStored).parse(arguments);
 
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser(currentDataStored).parse(arguments);
