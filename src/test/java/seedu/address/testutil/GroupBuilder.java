@@ -61,6 +61,17 @@ public class GroupBuilder {
     }
 
     /**
+     * Sets the {@code UniqueTaskList} of the {@code Group} to contain specified {@code Task}.
+     * @return
+     */
+    public GroupBuilder withTasks(Task... taskList) {
+        UniqueTaskList editedList = new UniqueTaskList();
+        Arrays.stream(taskList).forEach(task -> editedList.add(task));
+        this.tasks = editedList;
+        return this;
+    }
+
+    /**
      * Sets the {@code UniquePersonList} of the {@code Group} to contain specified {@code Person}.
      * @return
      */

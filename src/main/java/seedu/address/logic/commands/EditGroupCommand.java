@@ -16,6 +16,8 @@ import seedu.address.model.Model;
 import seedu.address.model.common.Description;
 import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.task.UniqueTaskList;
 
 public class EditGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "editG";
@@ -45,7 +47,7 @@ public class EditGroupCommand extends AlwaysRunnableCommand implements UndoableC
      * @param index of the group in the filtered group list to edit
      * @param editGroupDescriptor details to edit the group with
      */
-    public EditGroupCommand(Index index, EditGroupCommand.EditGroupDescriptor editGroupDescriptor) {
+    public EditGroupCommand(Index index, EditGroupDescriptor editGroupDescriptor) {
         requireNonNull(index);
         requireNonNull(editGroupDescriptor);
 
@@ -98,8 +100,10 @@ public class EditGroupCommand extends AlwaysRunnableCommand implements UndoableC
 
         Name updatedName = editGroupDescriptor.getName().orElse(groupToEdit.getName());
         Description updatedDescription = editGroupDescriptor.getDescription().orElse(groupToEdit.getDescription());
+        UniquePersonList persons = groupToEdit.getPersons();
+        UniqueTaskList tasks = groupToEdit.getTasks();
 
-        return new Group(updatedName, updatedDescription);
+        return new Group(updatedName, updatedDescription, persons, tasks);
     }
 
     @Override

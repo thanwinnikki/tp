@@ -8,14 +8,16 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.RemoveCommand;
+import seedu.address.testutil.TypicalGroups;
 
 public class RemoveCommandParserTest {
 
-    private RemoveCommandParser parser = new RemoveCommandParser();
+    private RemoveCommandParser parser = new RemoveCommandParser(TypicalGroups.CS2101_GROUP_BUILDER.build());
 
     @Test
     public void parse_validArgs_returnsRemoveCommand() {
-        assertParseSuccess(parser, "1", new RemoveCommand(INDEX_FIRST));
+        assertParseSuccess(parser, "1", new RemoveCommand(INDEX_FIRST,
+                TypicalGroups.CS2101_GROUP_BUILDER.build()));
     }
 
     @Test
