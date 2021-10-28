@@ -8,6 +8,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class RemoveCommandParser implements Parser<RemoveCommand> {
 
+    private final Object currentDataStored;
+
+    public RemoveCommandParser(Object currentDataStored) {
+        this.currentDataStored = currentDataStored;
+    }
     /**
      * Parses the given {@code String} of arguments in the context of the RemoveCommand
      * and returns a RemoveCommand object for execution.
@@ -16,7 +21,7 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
     public RemoveCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new RemoveCommand(index);
+            return new RemoveCommand(index, currentDataStored);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCommand.MESSAGE_USAGE), pe);

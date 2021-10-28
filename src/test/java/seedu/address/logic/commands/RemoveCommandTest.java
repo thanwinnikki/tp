@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.IsGroupPredicate;
 import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 
@@ -30,7 +29,7 @@ public class RemoveCommandTest {
 
         // identify group to have its person removed from
         Group group = getFirstGroup(model);
-        RemoveCommand removeCommand = new RemoveCommand(INDEX_FIRST);
+        RemoveCommand removeCommand = new RemoveCommand(INDEX_FIRST, group);
 
         // set the filtered list for both groups and person
         setFilteredList(model, group);
@@ -61,21 +60,23 @@ public class RemoveCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        RemoveCommand removeCommand = new RemoveCommand(outOfBoundIndex);
+        RemoveCommand removeCommand = new RemoveCommand(outOfBoundIndex, group);
 
         assertCommandFailure(removeCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        RemoveCommand removeFirstCommand = new RemoveCommand(INDEX_FIRST);
-        RemoveCommand removeSecondCommand = new RemoveCommand(INDEX_SECOND);
+        Group group = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
+        RemoveCommand removeFirstCommand = new RemoveCommand(INDEX_FIRST, group);
+        RemoveCommand removeSecondCommand = new RemoveCommand(INDEX_SECOND, group);
+        RemoveCommand removeThirdCommand = new RemoveCommand(INDEX_SECOND, group);
 
         // same object -> returns true
         assertTrue(removeFirstCommand.equals(removeFirstCommand));
 
         // same values -> returns true
-        RemoveCommand removeFirstCommandCopy = new RemoveCommand(INDEX_FIRST);
+        RemoveCommand removeFirstCommandCopy = new RemoveCommand(INDEX_FIRST, group);
         assertTrue(removeFirstCommand.equals(removeFirstCommandCopy));
 
         // different types -> returns false
@@ -86,6 +87,10 @@ public class RemoveCommandTest {
 
         // different person -> returns false
         assertFalse(removeFirstCommand.equals(removeSecondCommand));
+
+        // same index and target group
+        assertTrue(removeThirdCommand.equals(removeSecondCommand));
+
     }
 
     public Group getFirstGroup(Model model) {
@@ -94,7 +99,6 @@ public class RemoveCommandTest {
 
     public void setFilteredList(Model model, Group group) {
         model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
-        model.updateFilteredGroupList(new IsGroupPredicate(group));
     }
 
 }

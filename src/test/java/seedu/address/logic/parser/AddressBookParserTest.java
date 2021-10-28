@@ -35,6 +35,7 @@ import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TypicalGroups;
 
 public class AddressBookParserTest {
 
@@ -119,8 +120,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_remove() throws Exception {
         RemoveCommand command = (RemoveCommand) parser.parseCommand(
-                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), null);
-        assertEquals(new RemoveCommand(INDEX_FIRST), command);
+                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
+                TypicalGroups.CS2101_GROUP_BUILDER.build());
+        assertEquals(new RemoveCommand(INDEX_FIRST, TypicalGroups.CS2101_GROUP_BUILDER.build()), command);
     }
 
     @Test
