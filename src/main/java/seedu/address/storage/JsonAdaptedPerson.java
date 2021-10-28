@@ -53,15 +53,13 @@ public class JsonAdaptedPerson {
          * @param name The name of the person.
          * @param phone The phone number of the person.
          * @param email The email address of the person.
-         * @param address The physical address of the person.
          */
         @JsonCreator
         public Builder(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                @JsonProperty("email") String email, @JsonProperty("address") String address) {
+                @JsonProperty("email") String email) {
             this.name = name;
             this.phone = phone;
             this.email = email;
-            this.address = address;
         }
 
         /**
@@ -106,6 +104,18 @@ public class JsonAdaptedPerson {
         @JsonProperty
         public Builder withId(String id) {
             this.id = id;
+            return this;
+        }
+
+        /**
+         * Includes the given address.
+         *
+         * @param address The address to be included.
+         * @return This {@code JsonAdaptedPerson.Builder} instance.
+         */
+        @JsonProperty
+        public Builder withAddress(String address) {
+            this.address = address;
             return this;
         }
 
@@ -188,15 +198,9 @@ public class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
+        Person.Builder modelBuilder = new Person.Builder(modelName, modelPhone, modelEmail);
 
-        Person.Builder modelBuilder = new Person.Builder(modelName, modelPhone, modelEmail, modelAddress);
+        storeAddressIfExists(modelBuilder);
 
         if (tagged != null) {
             final Set<Tag> modelTags = new HashSet<>();
@@ -208,6 +212,17 @@ public class JsonAdaptedPerson {
 
         return modelBuilder
                 .build();
+    }
+
+    private void storeAddressIfExists(Person.Builder modelBuilder) throws IllegalValueException {
+        if (address == null) {
+            return;
+        }
+        if (!Address.isValidAddress(address)) {
+            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        }
+        final Address modelAddress = new Address(address);
+        modelBuilder.withAddress(modelAddress);
     }
 
 }

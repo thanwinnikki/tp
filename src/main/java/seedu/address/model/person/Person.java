@@ -12,7 +12,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: identity fields are present and not null, present field values are validated, immutable.
  */
 public class Person {
 
@@ -42,13 +42,11 @@ public class Person {
          * @param name The name of the person.
          * @param phone The phone number of the person.
          * @param email The email address of the person.
-         * @param address The physical address of the person.
          */
-        public Builder(Name name, Phone phone, Email email, Address address) {
+        public Builder(Name name, Phone phone, Email email) {
             this.name = name;
             this.phone = phone;
             this.email = email;
-            this.address = address;
         }
 
         /**
@@ -58,6 +56,17 @@ public class Person {
          */
         public Person build() {
             return new Person(name, phone, email, address, tags);
+        }
+
+        /**
+         * Stores the given address.
+         *
+         * @param address The address to be stored.
+         * @return This {@code Person.Builder} instance.
+         */
+        public Builder withAddress(Address address) {
+            this.address = address;
+            return this;
         }
 
         /**
@@ -74,10 +83,10 @@ public class Person {
     }
 
     /**
-     * Every field must be present and not null.
+     * Identity fields must be present and not null.
      */
     private Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address);
+        requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -100,6 +109,11 @@ public class Person {
         return email;
     }
 
+    /**
+     * Returns the address, or null if there is no address saved.
+     *
+     * @return The address, or null if there is no address saved.
+     */
     public Address getAddress() {
         return address;
     }
@@ -140,11 +154,15 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+        boolean haveSameNames = otherPerson.getName().equals(getName());
+        boolean haveSamePhones = otherPerson.getPhone().equals(getPhone());
+        boolean haveSameEmails = otherPerson.getEmail().equals(getEmail());
+        boolean haveNullAddresses = otherPerson.getAddress() == null && getAddress() == null;
+        boolean haveSameAddresses = haveNullAddresses
+                || (otherPerson.getAddress() != null && otherPerson.getAddress().equals(getAddress()));
+        assert otherPerson.getTags() != null && getTags() != null : "Tags should have been initialised as a set.";
+        boolean haveSameTags = otherPerson.getTags().equals(getTags());
+        return haveSameNames && haveSamePhones && haveSameEmails && haveSameAddresses && haveSameTags;
     }
 
     @Override
@@ -160,9 +178,12 @@ public class Person {
                 .append("; Phone: ")
                 .append(getPhone())
                 .append("; Email: ")
-                .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append(getEmail());
+
+        if (address != null) {
+            builder.append("; Address: ")
+                    .append(getAddress());
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
