@@ -95,7 +95,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case RemoveCommand.COMMAND_WORD:
-            return new RemoveCommandParser().parse(arguments);
+            return new RemoveCommandParser(currentDataStored).parse(arguments);
 
         case JoinGroupCommand.COMMAND_WORD:
             return new JoinGroupCommandParser().parse(arguments);
