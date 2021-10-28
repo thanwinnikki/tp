@@ -33,9 +33,21 @@ public class RemoveCommand extends AlwaysRunnableCommand implements UndoableComm
     private Person personRemoved;
     private Group groupWithRemoval;
     private Group groupWithoutRemoval;
+    private final Group currentDataStored;
 
-    public RemoveCommand(Index targetIndex) {
+    /**
+     * Constructor for RemoveCommand
+     * @param targetIndex of the person in the filtered list to be removed
+     * @param currentDataStored is the group where person will be removed from
+     */
+    public RemoveCommand(Index targetIndex, Object currentDataStored) {
         this.targetIndex = targetIndex;
+        if (currentDataStored instanceof Group) {
+            this.currentDataStored = (Group) currentDataStored;
+        } else {
+            this.currentDataStored = null;
+        }
+
     }
 
     @Override
@@ -48,13 +60,13 @@ public class RemoveCommand extends AlwaysRunnableCommand implements UndoableComm
         }
 
         List<Group> lastShownGroupList = model.getFilteredGroupList();
-        if (lastShownGroupList.size() != 1) {
+        if (currentDataStored == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());
         personRemoved = personToRemove;
-        Group group = lastShownGroupList.get(firstIndex.getZeroBased());
+        Group group = (Group) currentDataStored;
         groupWithoutRemoval = new Group(group);
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
@@ -79,6 +91,7 @@ public class RemoveCommand extends AlwaysRunnableCommand implements UndoableComm
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RemoveCommand // instanceof handles nulls
-                && targetIndex.equals(((RemoveCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((RemoveCommand) other).targetIndex)
+                && (currentDataStored).equals(((RemoveCommand) other).currentDataStored)); // state check
     }
 }
