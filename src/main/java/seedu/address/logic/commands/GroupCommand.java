@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.IsGroupMemberPredicate;
@@ -14,7 +15,7 @@ import seedu.address.model.person.IsGroupMemberPredicate;
 /**
  * Lists all persons and tasks in the given group.
  */
-public class GroupCommand extends AlwaysRunnableCommand {
+public class GroupCommand implements StateDependentCommand {
 
     public static final String COMMAND_WORD = "group";
 
@@ -43,6 +44,15 @@ public class GroupCommand extends AlwaysRunnableCommand {
         return new CommandResult.Builder(MESSAGE_SUCCESS).displayGroupInformation(group).setNextDataToStore(group)
                 .build();
     }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.HOME) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     @Override
     public boolean equals(Object other) {
