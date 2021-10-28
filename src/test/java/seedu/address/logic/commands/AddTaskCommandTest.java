@@ -45,23 +45,23 @@ public class AddTaskCommandTest {
     //        assertTrue(group.getTasks().contains(validTask));
     //    }
 
-    @Test
-    public void execute_duplicateTask_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
-
-        // identify group to add task to
-        Group group = getFirstGroup(model);
-
-        // duplicate first task already in the group
-        Task validTask = new TaskBuilder(group.getTasks().getTask(INDEX_FIRST.getZeroBased())).build();
-        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
-
-        // set the filtered list for both groups and person
-        setFilteredList(model, group);
-
-        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, ()
-            -> addTaskCommand.execute(model));
-    }
+//    @Test
+//    public void execute_duplicateTask_throwsCommandException() {
+//        Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+//
+//        // identify group to add task to
+//        Group group = getFirstGroup(model);
+//
+//        // duplicate first task already in the group
+//        Task validTask = new TaskBuilder(group.getTasks().getTask(INDEX_FIRST.getZeroBased())).build();
+//        AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
+//
+//        // set the filtered list for both groups and person
+//        setFilteredList(model, group);
+//
+//        assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, ()
+//            -> addTaskCommand.execute(model));
+//    }
 
     @Test
     public void equals() {
