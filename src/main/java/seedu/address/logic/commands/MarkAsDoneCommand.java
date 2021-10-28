@@ -23,8 +23,6 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand implements Undoable
 
     private final Index targetIndex;
 
-    private final Index firstIndex = Index.fromZeroBased(0);
-
     private Group groupOfTask;
     private Task taskMarkedDone;
     private final Group currentDataStored;
