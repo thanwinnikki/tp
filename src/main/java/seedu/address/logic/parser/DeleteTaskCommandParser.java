@@ -5,8 +5,15 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 
 public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
+
+    private final Group group;
+
+    public DeleteTaskCommandParser(Object group) {
+        this.group = (Group) group;
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTaskCommand
@@ -16,7 +23,7 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
     public DeleteTaskCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new DeleteTaskCommand(index);
+            return new DeleteTaskCommand(index, group);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTaskCommand.MESSAGE_USAGE), pe);
