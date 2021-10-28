@@ -95,7 +95,8 @@ public class PersonBuilder {
      * @return The person being built.
      */
     public Person build() {
-        return new Person.Builder(name, phone, email, address, tags)
+        return new Person.Builder(name, phone, email, address)
+                .withTags(tags)
                 .build();
     }
 

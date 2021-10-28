@@ -164,13 +164,6 @@ public class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        if (tagged != null) {
-            for (JsonAdaptedTag tag : tagged) {
-                personTags.add(tag.toModelType());
-            }
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -203,8 +196,17 @@ public class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person.Builder(modelName, modelPhone, modelEmail, modelAddress, modelTags)
+        Person.Builder modelBuilder = new Person.Builder(modelName, modelPhone, modelEmail, modelAddress);
+
+        if (tagged != null) {
+            final Set<Tag> modelTags = new HashSet<>();
+            for (JsonAdaptedTag tag : tagged) {
+                modelTags.add(tag.toModelType());
+            }
+            modelBuilder.withTags(modelTags);
+        }
+
+        return modelBuilder
                 .build();
     }
 

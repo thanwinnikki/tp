@@ -23,7 +23,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Tag> tags;
 
     /**
      * Builder class for {@code Person}.
@@ -43,14 +43,12 @@ public class Person {
          * @param phone The phone number of the person.
          * @param email The email address of the person.
          * @param address The physical address of the person.
-         * @param tags The tags assigned to the person.
          */
-        public Builder(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+        public Builder(Name name, Phone phone, Email email, Address address) {
             this.name = name;
             this.phone = phone;
             this.email = email;
             this.address = address;
-            this.tags = tags;
         }
 
         /**
@@ -61,18 +59,33 @@ public class Person {
         public Person build() {
             return new Person(name, phone, email, address, tags);
         }
+
+        /**
+         * Assigns the given tags to the person being built.
+         * This replaces any current tags if they exist; it does not add on to them.
+         *
+         * @param tags The tags to be assigned.
+         * @return This {@code Person.Builder} instance.
+         */
+        public Builder withTags(Set<Tag> tags) {
+            this.tags = tags;
+            return this;
+        }
     }
 
     /**
      * Every field must be present and not null.
      */
     private Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
+        this.tags = new HashSet<>();
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
     }
 
     public Name getName() {

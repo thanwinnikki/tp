@@ -44,7 +44,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person.Builder(name, phone, email, address, tagList)
+        Person person = new Person.Builder(name, phone, email, address)
+                .withTags(tagList)
                 .build();
 
         return new AddCommand(person);
