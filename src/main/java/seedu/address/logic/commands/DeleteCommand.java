@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -15,7 +16,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class DeleteCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -63,6 +64,16 @@ public class DeleteCommand extends AlwaysRunnableCommand implements UndoableComm
                 .goToHome()
                 .build();
     }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.HOME) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
 
     @Override
     public boolean equals(Object other) {

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.IsGroupMemberPredicate;
@@ -17,7 +18,7 @@ import seedu.address.model.person.Person;
 /** Adds a person to a group in the address book.
  *
  */
-public class JoinGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class JoinGroupCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "joinG";
 
@@ -93,6 +94,15 @@ public class JoinGroupCommand extends AlwaysRunnableCommand implements UndoableC
                 .displayGroupInformation(groupAddedTo)
                 .build();
     }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.HOME) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     @Override
     public boolean equals(Object other) {

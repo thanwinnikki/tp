@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
@@ -13,7 +14,7 @@ import seedu.address.model.task.UniqueTaskList;
 /**
  * Adds a person to the address book.
  */
-public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "addT";
 
@@ -71,6 +72,15 @@ public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCom
                 .displayGroupInformation(groupAddedTo)
                 .build();
     }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.GROUP_INFORMATION) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     @Override
     public boolean equals(Object other) {
