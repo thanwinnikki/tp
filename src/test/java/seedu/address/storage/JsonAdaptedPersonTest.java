@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.common.Name;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
@@ -41,91 +42,107 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(INVALID_NAME, VALID_PHONE, VALID_EMAIL)
-                        .withAddress(VALID_ADDRESS)
-                        .withTagged(VALID_TAGS)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(INVALID_NAME, VALID_PHONE, VALID_EMAIL)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(VALID_TAGS)
+                .build();
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(null, VALID_PHONE, VALID_EMAIL)
-                        .withAddress(VALID_ADDRESS)
-                        .withTagged(VALID_TAGS)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(null, VALID_PHONE, VALID_EMAIL)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(VALID_TAGS)
+                .build();
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(VALID_NAME, INVALID_PHONE, VALID_EMAIL)
-                        .withAddress(VALID_ADDRESS)
-                        .withTagged(VALID_TAGS)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, INVALID_PHONE, VALID_EMAIL)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(VALID_TAGS)
+                .build();
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(VALID_NAME, null, VALID_EMAIL)
-                        .withAddress(VALID_ADDRESS)
-                        .withTagged(VALID_TAGS)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, null, VALID_EMAIL)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(VALID_TAGS)
+                .build();
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, INVALID_EMAIL)
-                        .withAddress(VALID_ADDRESS)
-                        .withTagged(VALID_TAGS)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, INVALID_EMAIL)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(VALID_TAGS)
+                .build();
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, null)
-                        .withAddress(VALID_ADDRESS)
-                        .withTagged(VALID_TAGS)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, null)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(VALID_TAGS)
+                .build();
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, VALID_EMAIL)
-                        .withAddress(INVALID_ADDRESS)
-                        .withTagged(VALID_TAGS)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, VALID_EMAIL)
+                .withAddress(INVALID_ADDRESS)
+                .withTagged(VALID_TAGS)
+                .build();
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAddress_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, VALID_EMAIL)
+                .withAddress(null)
+                .withTagged(VALID_TAGS)
+                .build();
+        Person expectedPerson = new Person.Builder(BENSON.getName(), BENSON.getPhone(), BENSON.getEmail())
+                .withTags(BENSON.getTags())
+                .build();
+        assertEquals(expectedPerson, person.toModelType());
     }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
-        JsonAdaptedPerson person =
-                new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, VALID_EMAIL)
-                        .withAddress(VALID_ADDRESS)
-                        .withTagged(invalidTags)
-                        .build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, VALID_EMAIL)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(invalidTags)
+                .build();
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTags_returnsPerson() throws IllegalValueException {
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(VALID_NAME, VALID_PHONE, VALID_EMAIL)
+                .withAddress(VALID_ADDRESS)
+                .withTagged(null)
+                .build();
+        Person expectedPerson = new Person.Builder(BENSON.getName(), BENSON.getPhone(), BENSON.getEmail())
+                .withAddress(BENSON.getAddress())
+                .build();
+        assertEquals(expectedPerson, person.toModelType());
     }
 
 }
