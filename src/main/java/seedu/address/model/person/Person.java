@@ -26,9 +26,47 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * Builder class for {@code Person}.
+     */
+    public static class Builder {
+
+        private Name name;
+        private Phone phone;
+        private Email email;
+        private Address address;
+        private Set<Tag> tags;
+
+        /**
+         * Constructs a {@code Person.Builder} for a {@code Person} with the given attributes.
+         *
+         * @param name The name of the person.
+         * @param phone The phone number of the person.
+         * @param email The email address of the person.
+         * @param address The physical address of the person.
+         * @param tags The tags assigned to the person.
+         */
+        public Builder(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+            this.name = name;
+            this.phone = phone;
+            this.email = email;
+            this.address = address;
+            this.tags = tags;
+        }
+
+        /**
+         * Finishes building the {@code Person}.
+         *
+         * @return The person being built.
+         */
+        public Person build() {
+            return new Person(name, phone, email, address, tags);
+        }
+    }
+
+    /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    private Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;

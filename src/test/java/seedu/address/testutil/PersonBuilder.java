@@ -89,8 +89,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Finishes building the {@code Person}.
+     *
+     * @return The person being built.
+     */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person.Builder(name, phone, email, address, tags)
+                .build();
     }
 
 }
