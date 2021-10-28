@@ -92,7 +92,10 @@ public class GroupBuilder {
         for (int i = 0; i < personList.size(); i++) {
             buildGroup.add(personList.get(i));
         }
+        ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
+        for (int i = 0; i < taskList.size(); i++) {
+            buildGroup.addTask(taskList.get(i));
+        }
         return buildGroup;
     }
-
 }

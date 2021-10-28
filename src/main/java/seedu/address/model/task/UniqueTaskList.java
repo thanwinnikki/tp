@@ -111,6 +111,11 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.setAll(tasks);
     }
 
+    @Override
+    public String toString() {
+        return internalList.toString();
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

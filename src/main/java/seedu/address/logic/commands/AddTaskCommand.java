@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
-import java.util.List;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -34,33 +32,35 @@ public class AddTaskCommand extends AlwaysRunnableCommand implements UndoableCom
     private final Index firstIndex = Index.fromZeroBased(0);
 
     private Group groupAddedTo;
+    private final Group currentDataStored;
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
      */
-    public AddTaskCommand(Task task) {
+    public AddTaskCommand(Task task, Object currentDataStored) {
         requireNonNull(task);
         toAdd = task;
+        if (currentDataStored instanceof Group) {
+            this.currentDataStored = (Group) currentDataStored;
+        } else {
+            this.currentDataStored = null;
+        }
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Group> lastShownGroupList = model.getFilteredGroupList();
-        if (lastShownGroupList.size() != 1) {
-            //todo
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-        }
-        Group group = lastShownGroupList.get(firstIndex.getZeroBased());
-        UniqueTaskList tasks = group.getTasks();
+        UniqueTaskList tasks = currentDataStored.getTasks();
         if (tasks.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
+        if (currentDataStored == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+        }
         tasks.add(toAdd);
-        groupAddedTo = group;
+        groupAddedTo = currentDataStored;
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
-                .displayGroupInformation(group)
+                .displayGroupInformation(currentDataStored)
                 .build();
     }
 

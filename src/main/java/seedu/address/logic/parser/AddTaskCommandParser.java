@@ -15,6 +15,12 @@ import seedu.address.model.task.Task;
  */
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
+    private final Object currentDataStored;
+
+    public AddTaskCommandParser(Object currentDataStored) {
+        this.currentDataStored = currentDataStored;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddTaskCommand
      * and returns an AddTaskCommand object for execution.
@@ -33,7 +39,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         Task task = new Task(taskDescription);
 
-        return new AddTaskCommand(task);
+        return new AddTaskCommand(task, currentDataStored);
     }
 
     /**

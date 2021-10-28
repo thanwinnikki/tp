@@ -11,6 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MarkAsDoneCommandParser implements Parser<MarkAsDoneCommand> {
 
+    private final Object currentDataStored;
+
+    public MarkAsDoneCommandParser(Object currentDataStored) {
+        this.currentDataStored = currentDataStored;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the MarkAsDoneCommand
      * and returns a MarkAsDoneCommand object for execution.
@@ -19,7 +25,7 @@ public class MarkAsDoneCommandParser implements Parser<MarkAsDoneCommand> {
     public MarkAsDoneCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new MarkAsDoneCommand(index);
+            return new MarkAsDoneCommand(index, currentDataStored);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAsDoneCommand.MESSAGE_USAGE), pe);
