@@ -7,13 +7,14 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
-public class RemoveCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class RemoveCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "remove";
 
@@ -86,6 +87,15 @@ public class RemoveCommand extends AlwaysRunnableCommand implements UndoableComm
                 .displayGroupInformation(groupWithoutRemoval)
                 .build();
     }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.GROUP_INFORMATION) {
+            return true;
+        } else {
+            return false;
+        }
+    };
 
     @Override
     public boolean equals(Object other) {
