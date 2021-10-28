@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,6 +29,11 @@ public class MarkAsDoneCommand extends AlwaysRunnableCommand implements Undoable
     private Task taskMarkedDone;
     private final Group currentDataStored;
 
+    /**
+     * Constructor for MarkAsDoneCommand
+     * @param targetIndex of the task in the filtered list to be marked as done
+     * @param currentDataStored is the group where the task will be marked as done
+     */
     public MarkAsDoneCommand(Index targetIndex, Object currentDataStored) {
         this.targetIndex = targetIndex;
         if (currentDataStored instanceof Group) {

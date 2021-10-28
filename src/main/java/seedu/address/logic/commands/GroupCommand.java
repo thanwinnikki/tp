@@ -9,7 +9,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.IsGroupPredicate;
 import seedu.address.model.person.IsGroupMemberPredicate;
 
 /**

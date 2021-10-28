@@ -41,7 +41,8 @@
 //    //
 //    //        CommandResult commandResult = new AddTaskCommand(validTask).execute(model);
 //    //
-//    //        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
+//    //        assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask),
+//    commandResult.getFeedbackToUser());
 //    //        assertTrue(group.getTasks().contains(validTask));
 //    //    }
 //
