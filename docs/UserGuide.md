@@ -382,6 +382,16 @@ Goes to the Home Page.
 
 Format: `home`
 
+### Showing all persons and groups : `all`
+
+Shows all persons and groups.
+
+:bulb: Panel where this can be called :
+* Home Panel
+* Group Information Panel
+
+Format: `all`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
