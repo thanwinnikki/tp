@@ -19,12 +19,10 @@ import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindGroupCommand;
-import seedu.address.logic.commands.GoToHomeCommand;
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.GroupsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.JoinGroupCommand;
-import seedu.address.logic.commands.ListAllCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAsDoneCommand;
 import seedu.address.logic.commands.RemoveCommand;
@@ -116,12 +114,6 @@ public class AddressBookParser {
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-
-        case GoToHomeCommand.COMMAND_WORD:
-            return new GoToHomeCommand();
-
-        case ListAllCommand.COMMAND_WORD:
-            return new ListAllCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -372,26 +372,6 @@ Format: `done TASK_INDEX`
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
 
-### Going to Home Page : `home`
-
-Goes to the Home Page.
-
-:bulb: Panel where this can be called :
-* Home Panel
-* Group Information Panel
-
-Format: `home`
-
-### Showing all persons and groups : `all`
-
-Shows all persons and groups.
-
-:bulb: Panel where this can be called :
-* Home Panel
-* Group Information Panel
-
-Format: `all`
-
 ### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
