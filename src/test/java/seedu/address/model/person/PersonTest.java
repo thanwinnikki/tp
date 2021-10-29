@@ -1,21 +1,163 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.common.Name;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+
+    private static final Name AMY_NAME = new Name(VALID_NAME_AMY);
+    private static final Phone AMY_PHONE = new Phone(VALID_PHONE_AMY);
+    private static final Email AMY_EMAIL = new Email(VALID_EMAIL_AMY);
+    private static final Address AMY_ADDRESS = new Address(VALID_ADDRESS_AMY);
+    private static final Set<Tag> AMY_TAGS = new HashSet<>();
+
+    static {
+        AMY_TAGS.add(new Tag(VALID_TAG_FRIEND));
+    }
+
+    @Test
+    public void withAddress_nonNullAddress_successfullyProducesEqualAddress() {
+        // Equivalence Partition {address}: Non-null address
+        Person person = new Person.Builder(AMY_NAME, AMY_PHONE, AMY_EMAIL)
+                .withAddress(AMY_ADDRESS)
+                .withTags(AMY_TAGS)
+                .build();
+
+        Address addressAfterBuild = person.getAddress();
+        assertNotEquals(null, addressAfterBuild);
+        assertEquals(AMY_ADDRESS, addressAfterBuild);
+    }
+
+    @Test
+    public void withAddress_nullAddress_successfullyStoresNull() {
+        // Equivalence Partition {address}: Null address
+        Person person = new Person.Builder(AMY_NAME, AMY_PHONE, AMY_EMAIL)
+                .withAddress(null)
+                .withTags(AMY_TAGS)
+                .build();
+
+        Address addressAfterBuild = person.getAddress();
+        assertEquals(null, addressAfterBuild);
+    }
+
+    @Test
+    public void withAddress_notCalled_successfullyStoresNull() {
+        // Equivalence Partition {address}: Method not called
+        Person person = new Person.Builder(AMY_NAME, AMY_PHONE, AMY_EMAIL)
+                .withTags(AMY_TAGS)
+                .build();
+
+        Address addressAfterBuild = person.getAddress();
+        assertEquals(null, addressAfterBuild);
+    }
+
+    @Test
+    public void withTags_nonNullTags_successfullyProducesEqualTags() {
+        // Equivalence Partition {tags}: Non-null tags
+        Person person = new Person.Builder(AMY_NAME, AMY_PHONE, AMY_EMAIL)
+                .withAddress(AMY_ADDRESS)
+                .withTags(AMY_TAGS)
+                .build();
+
+        Set<Tag> tagsAfterBuild = person.getTags();
+        assertNotEquals(null, tagsAfterBuild);
+        assertEquals(AMY_TAGS, tagsAfterBuild);
+    }
+
+    @Test
+    public void withTags_nullTags_successfullyCreatesEmptySet() {
+        // Equivalence Partition {tags}: Null tags
+        Person person = new Person.Builder(AMY_NAME, AMY_PHONE, AMY_EMAIL)
+                .withAddress(AMY_ADDRESS)
+                .withTags(null)
+                .build();
+
+        Set<Tag> tagsAfterBuild = person.getTags();
+        assertEquals(new HashSet<>(), tagsAfterBuild);
+    }
+
+    @Test
+    public void withTags_notCalled_successfullyCreatesEmptySet() {
+        // Equivalence Partition {address}: Method not called
+        Person person = new Person.Builder(AMY_NAME, AMY_PHONE, AMY_EMAIL)
+                .withAddress(AMY_ADDRESS)
+                .build();
+
+        Set<Tag> tagsAfterBuild = person.getTags();
+        assertEquals(new HashSet<>(), tagsAfterBuild);
+    }
+
+    @Test
+    public void build_validCompulsoryFields_successfullyProducesEqualFields() {
+        // Equivalence Partition {name, phone, email}: Valid non-null fields for builder constructor
+        Person person = new Person.Builder(AMY_NAME, AMY_PHONE, AMY_EMAIL)
+                .withAddress(AMY_ADDRESS)
+                .withTags(AMY_TAGS)
+                .build();
+
+        Name nameAfterBuild = person.getName();
+        assertEquals(AMY_NAME, nameAfterBuild);
+
+        Phone phoneAfterBuild = person.getPhone();
+        assertEquals(AMY_PHONE, phoneAfterBuild);
+
+        Email emailAfterBuild = person.getEmail();
+        assertEquals(AMY_EMAIL, emailAfterBuild);
+    }
+
+    @Test
+    public void build_nullName_throwsNullPointerException() {
+        // Equivalence Partition {name}: Null name
+        Person.Builder personBuilder = new Person.Builder(null, AMY_PHONE, AMY_EMAIL)
+                .withAddress(AMY_ADDRESS)
+                .withTags(AMY_TAGS);
+
+        assertThrows(NullPointerException.class, () -> personBuilder.build());
+    }
+
+    @Test
+    public void build_nullPhone_throwsNullPointerException() {
+        // Equivalence Partition {phone}: Null phone
+        Person.Builder personBuilder = new Person.Builder(AMY_NAME, null, AMY_EMAIL)
+                .withAddress(AMY_ADDRESS)
+                .withTags(AMY_TAGS);
+
+        assertThrows(NullPointerException.class, () -> personBuilder.build());
+    }
+
+    @Test
+    public void build_nullEmail_throwsNullPointerException() {
+        // Equivalence Partition {email}: Null email
+        Person.Builder personBuilder = new Person.Builder(AMY_NAME, AMY_PHONE, null)
+                .withAddress(AMY_ADDRESS)
+                .withTags(AMY_TAGS);
+
+        assertThrows(NullPointerException.class, () -> personBuilder.build());
+    }
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {

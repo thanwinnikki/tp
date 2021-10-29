@@ -6,10 +6,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * The only invalid instance allowed is {@code EMPTY_ADDRESS} used to remove a Person's address in the edit command.
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank, "
+            + "unless you want there to be no address.";
+
+    public static final Address EMPTY_ADDRESS = new Address();
 
     /*
      * The first character of the address must not be a whitespace,
@@ -28,6 +32,10 @@ public class Address {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
+    }
+
+    private Address() {
+        value = "";
     }
 
     /**

@@ -75,10 +75,13 @@ public class ParserUtil {
     public static Address parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        if (Address.isValidAddress(trimmedAddress)) {
+            return new Address(trimmedAddress);
         }
-        return new Address(trimmedAddress);
+        if (trimmedAddress.equals(Address.EMPTY_ADDRESS.value)) {
+            return Address.EMPTY_ADDRESS;
+        }
+        throw new ParseException(Address.MESSAGE_CONSTRAINTS);
     }
 
     /**
