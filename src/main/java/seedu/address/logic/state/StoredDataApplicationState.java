@@ -1,5 +1,7 @@
 package seedu.address.logic.state;
 
+import java.util.Objects;
+
 public abstract class StoredDataApplicationState<T> implements ApplicationState {
 
     private final T storedData;
@@ -10,5 +12,10 @@ public abstract class StoredDataApplicationState<T> implements ApplicationState 
 
     public T getStoredData() {
         return storedData;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getApplicationStateType(), storedData);
     }
 }

@@ -14,4 +14,16 @@ public class GroupInformationState extends StoredDataApplicationState<Group> {
     public ApplicationStateType getApplicationStateType() {
         return APPLICATION_STATE_TYPE;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof GroupInformationState)) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        GroupInformationState otherGroupInformationState = (GroupInformationState) obj;
+        return getStoredData().equals(otherGroupInformationState.getStoredData());
+    }
 }

@@ -16,7 +16,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
+import seedu.address.logic.state.GroupInformationState;
 import seedu.address.model.group.Group;
 
 /**
@@ -216,13 +218,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void changeDisplayForNextAppState(CommandResult commandResult) {
-        ApplicationStateType nextApplicationStateType = commandResult.getNextAppState();
+        ApplicationState nextApplicationState = commandResult.getNextApplicationState();
+        ApplicationStateType nextApplicationStateType = nextApplicationState.getApplicationStateType();
         switch (nextApplicationStateType) {
         case HOME:
             changeDisplayForHomeAppState();
             break;
         case GROUP_INFORMATION:
-            Group group = commandResult.getNextDataToStore();
+            GroupInformationState groupInformationState = (GroupInformationState) nextApplicationState;
+            Group group = groupInformationState.getStoredData();
             changeDisplayForGroupInformationAppState(group);
             break;
         default:

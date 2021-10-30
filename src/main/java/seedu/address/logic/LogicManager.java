@@ -15,7 +15,8 @@ import seedu.address.logic.commands.UndoableCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.state.ApplicationStateType;
+import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.HomeState;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
@@ -33,8 +34,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private ApplicationStateType currentApplicationStateType;
-    private Object currentDataStored;
+    private ApplicationState currentApplicationState;
     private Stack<UndoableCommand> undoableCommandStack;
 
     /**
@@ -44,8 +44,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
-        currentApplicationStateType = ApplicationStateType.HOME;
-        currentDataStored = null;
+        currentApplicationState = new HomeState();
         undoableCommandStack = new Stack<>();
     }
 
@@ -54,7 +53,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText, currentDataStored);
+        Command command = addressBookParser.parseCommand(commandText, currentApplicationState);
         checkIfCommandCanRunInApplicationState(command);
         commandResult = command.execute(model);
         processCommandResult(commandResult);
@@ -102,15 +101,14 @@ public class LogicManager implements Logic {
 
     private void checkIfCommandCanRunInApplicationState(Command command) throws CommandException {
         boolean isAbleToRunInApplicationState = !(command instanceof StateDependentCommand)
-                || ((StateDependentCommand) command).isAbleToRunInApplicationState(currentApplicationStateType);
+                || ((StateDependentCommand) command).isAbleToRunInApplicationState(currentApplicationState);
         if (!isAbleToRunInApplicationState) {
             throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
         }
     }
 
-    private void processCommandResult(CommandResult commandResult) throws CommandException {
-        currentApplicationStateType = commandResult.getNextAppState();
-        currentDataStored = commandResult.getNextDataToStore();
+    private void processCommandResult(CommandResult commandResult) {
+        currentApplicationState = commandResult.getNextApplicationState();
     }
 
     private CommandResult undoIfMustUndo(CommandResult commandResult) throws CommandException {

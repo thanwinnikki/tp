@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -65,13 +66,10 @@ public class DeleteGroupCommand implements UndoableCommand, StateDependentComman
     }
 
     @Override
-    public boolean isAbleToRunInApplicationState(ApplicationStateType applicationStateType) {
-        if (applicationStateType == ApplicationStateType.HOME) {
-            return true;
-        } else {
-            return false;
-        }
-    };
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        ApplicationStateType applicationStateType = applicationState.getApplicationStateType();
+        return applicationStateType == ApplicationStateType.HOME;
+    }
 
     @Override
     public boolean equals(Object other) {
