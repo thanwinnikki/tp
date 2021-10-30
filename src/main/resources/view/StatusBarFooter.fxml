@@ -9,5 +9,5 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
   </columnConstraints>
   <Label fx:id="saveLocationStatus" alignment="CENTER_RIGHT" GridPane.columnIndex="0"/>
-  <Label fx:id="applicationState" text="\$state" styleClass="cell_big_label" GridPane.columnIndex="1" wrapText="true" maxWidth="300"/>
+  <Label fx:id="applicationStateType" text="\$state" styleClass="cell_big_label" GridPane.columnIndex="1" wrapText="true" maxWidth="300"/>
 </GridPane>

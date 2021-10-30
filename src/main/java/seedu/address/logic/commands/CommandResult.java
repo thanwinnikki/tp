@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.group.Group;
 
 /**
@@ -20,7 +20,7 @@ public class CommandResult {
     /** The application should exit. */
     private boolean exit;
 
-    private ApplicationState nextApplicationState;
+    private ApplicationStateType nextApplicationStateType;
     private Object nextDataToStore;
     private boolean isGoingToCauseUndo;
 
@@ -92,12 +92,12 @@ public class CommandResult {
         /**
          * Sets the {@code CommandResult} object to cause the application to change to the given state.
          *
-         * @param nextApplicationState The application state to change to as a result of the command execution.
+         * @param nextApplicationStateType The application state to change to as a result of the command execution.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setNextAppState(ApplicationState nextApplicationState) {
-            assert nextApplicationState != null : "The value of nextApplicationState cannot be null.";
-            commandResultToBuild.nextApplicationState = nextApplicationState;
+        public Builder setNextAppState(ApplicationStateType nextApplicationStateType) {
+            assert nextApplicationStateType != null : "The value of nextApplicationState cannot be null.";
+            commandResultToBuild.nextApplicationStateType = nextApplicationStateType;
             return this;
         }
 
@@ -119,7 +119,7 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goToHome() {
-            return setNextAppState(ApplicationState.HOME)
+            return setNextAppState(ApplicationStateType.HOME)
                     .setNextDataToStore(null);
         }
 
@@ -131,7 +131,7 @@ public class CommandResult {
          */
         public Builder displayGroupInformation(Group group) {
             assert group != null : "The value of group cannot be null.";
-            return setNextAppState(ApplicationState.GROUP_INFORMATION)
+            return setNextAppState(ApplicationStateType.GROUP_INFORMATION)
                     .setNextDataToStore(group);
         }
 
@@ -153,7 +153,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        nextApplicationState = ApplicationState.HOME;
+        nextApplicationStateType = ApplicationStateType.HOME;
         nextDataToStore = null;
         isGoingToCauseUndo = false;
     }
@@ -166,7 +166,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         showHelp = false;
         exit = false;
-        nextApplicationState = ApplicationState.HOME;
+        nextApplicationStateType = ApplicationStateType.HOME;
         nextDataToStore = null;
         isGoingToCauseUndo = false;
     }
@@ -183,8 +183,8 @@ public class CommandResult {
         return exit;
     }
 
-    public ApplicationState getNextAppState() {
-        return nextApplicationState;
+    public ApplicationStateType getNextAppState() {
+        return nextApplicationStateType;
     }
 
     public <T> T getNextDataToStore() {
@@ -210,7 +210,7 @@ public class CommandResult {
         boolean haveSameFeedbacksToUser = feedbackToUser.equals(otherCommandResult.feedbackToUser);
         boolean willBothShowHelp = showHelp == otherCommandResult.showHelp;
         boolean willBothExit = exit == otherCommandResult.exit;
-        boolean haveSameNextApplicationStates = nextApplicationState.equals(otherCommandResult.nextApplicationState);
+        boolean haveSameNextApplicationStates = nextApplicationStateType.equals(otherCommandResult.nextApplicationStateType);
         boolean haveNullNextDataToStore = nextDataToStore == null && otherCommandResult.nextDataToStore == null;
         boolean haveSameNextDataToStore = haveNullNextDataToStore
                 || (nextDataToStore != null && nextDataToStore.equals(otherCommandResult.nextDataToStore));
@@ -221,6 +221,6 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationState, nextDataToStore, isGoingToCauseUndo);
+        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationStateType, nextDataToStore, isGoingToCauseUndo);
     }
 }

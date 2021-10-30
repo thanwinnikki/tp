@@ -18,7 +18,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.common.Name;
 import seedu.address.model.person.Address;
@@ -128,8 +128,8 @@ public class EditCommand implements UndoableCommand, StateDependentCommand {
     }
 
     @Override
-    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
-        if (applicationState == ApplicationState.HOME) {
+    public boolean isAbleToRunInApplicationState(ApplicationStateType applicationStateType) {
+        if (applicationStateType == ApplicationStateType.HOME) {
             return true;
         } else {
             return false;

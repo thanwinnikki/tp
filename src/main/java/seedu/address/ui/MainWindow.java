@@ -16,7 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.group.Group;
 
 /**
@@ -216,8 +216,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void changeDisplayForNextAppState(CommandResult commandResult) {
-        ApplicationState nextApplicationState = commandResult.getNextAppState();
-        switch (nextApplicationState) {
+        ApplicationStateType nextApplicationStateType = commandResult.getNextAppState();
+        switch (nextApplicationStateType) {
         case HOME:
             changeDisplayForHomeAppState();
             break;
@@ -226,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
             changeDisplayForGroupInformationAppState(group);
             break;
         default:
-            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationState);
+            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationStateType);
         }
     }
 

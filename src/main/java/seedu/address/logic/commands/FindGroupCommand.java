@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
@@ -35,8 +35,8 @@ public class FindGroupCommand implements StateDependentCommand {
     }
 
     @Override
-    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
-        if (applicationState == ApplicationState.HOME) {
+    public boolean isAbleToRunInApplicationState(ApplicationStateType applicationStateType) {
+        if (applicationStateType == ApplicationStateType.HOME) {
             return true;
         } else {
             return false;
