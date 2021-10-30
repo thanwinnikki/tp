@@ -5,13 +5,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 
 public class RemoveCommandParser implements Parser<RemoveCommand> {
 
-    private final Object currentDataStored;
+    private final Group group;
 
-    public RemoveCommandParser(Object currentDataStored) {
-        this.currentDataStored = currentDataStored;
+    public RemoveCommandParser(Group group) {
+        this.group = group;
     }
     /**
      * Parses the given {@code String} of arguments in the context of the RemoveCommand
@@ -21,7 +22,7 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
     public RemoveCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new RemoveCommand(index, currentDataStored);
+            return new RemoveCommand(index, group);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCommand.MESSAGE_USAGE), pe);

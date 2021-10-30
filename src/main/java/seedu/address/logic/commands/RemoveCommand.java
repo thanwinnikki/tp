@@ -35,21 +35,16 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
     private Person personRemoved;
     private Group groupWithRemoval;
     private Group groupWithoutRemoval;
-    private final Group currentDataStored;
+    private final Group groupToRemoveFrom;
 
     /**
      * Constructor for RemoveCommand
      * @param targetIndex of the person in the filtered list to be removed
-     * @param currentDataStored is the group where person will be removed from
+     * @param group is the group where person will be removed from
      */
-    public RemoveCommand(Index targetIndex, Object currentDataStored) {
+    public RemoveCommand(Index targetIndex, Group group) {
         this.targetIndex = targetIndex;
-        if (currentDataStored instanceof Group) {
-            this.currentDataStored = (Group) currentDataStored;
-        } else {
-            this.currentDataStored = null;
-        }
-
+        groupToRemoveFrom = group;
     }
 
     @Override
@@ -61,14 +56,13 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        List<Group> lastShownGroupList = model.getFilteredGroupList();
-        if (currentDataStored == null) {
+        if (groupToRemoveFrom == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());
         personRemoved = personToRemove;
-        Group group = (Group) currentDataStored;
+        Group group = groupToRemoveFrom;
         groupWithoutRemoval = new Group(group);
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
@@ -100,6 +94,6 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
         return other == this // short circuit if same object
                 || (other instanceof RemoveCommand // instanceof handles nulls
                 && targetIndex.equals(((RemoveCommand) other).targetIndex)
-                && (currentDataStored).equals(((RemoveCommand) other).currentDataStored)); // state check
+                && (groupToRemoveFrom).equals(((RemoveCommand) other).groupToRemoveFrom)); // state check
     }
 }

@@ -32,35 +32,31 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
     private final Task toAdd;
 
     private Group groupAddedTo;
-    private final Group currentDataStored;
+    private final Group groupToAddTo;
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
      */
-    public AddTaskCommand(Task task, Object currentDataStored) {
+    public AddTaskCommand(Task task, Group group) {
         requireNonNull(task);
         toAdd = task;
-        if (currentDataStored instanceof Group) {
-            this.currentDataStored = (Group) currentDataStored;
-        } else {
-            this.currentDataStored = null;
-        }
+        groupToAddTo = group;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        UniqueTaskList tasks = currentDataStored.getTasks();
+        UniqueTaskList tasks = groupToAddTo.getTasks();
         if (tasks.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-        if (currentDataStored == null) {
+        if (groupToAddTo == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
         tasks.add(toAdd);
-        groupAddedTo = currentDataStored;
+        groupAddedTo = groupToAddTo;
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
-                .displayGroupInformation(currentDataStored)
+                .displayGroupInformation(groupToAddTo)
                 .build();
     }
 

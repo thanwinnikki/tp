@@ -27,32 +27,28 @@ public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand
 
     private Group groupOfTask;
     private Task taskMarkedDone;
-    private final Group currentDataStored;
+    private final Group taskGroup;
 
     /**
      * Constructor for MarkAsDoneCommand
      * @param targetIndex of the task in the filtered list to be marked as done
-     * @param currentDataStored is the group where the task will be marked as done
+     * @param group is the group where the task will be marked as done
      */
-    public MarkAsDoneCommand(Index targetIndex, Object currentDataStored) {
+    public MarkAsDoneCommand(Index targetIndex, Group group) {
         this.targetIndex = targetIndex;
-        if (currentDataStored instanceof Group) {
-            this.currentDataStored = (Group) currentDataStored;
-        } else {
-            this.currentDataStored = null;
-        }
+        taskGroup = group;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        UniqueTaskList tasks = currentDataStored.getTasks();
+        UniqueTaskList tasks = taskGroup.getTasks();
 
         if (targetIndex.getZeroBased() >= tasks.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        if (currentDataStored == null) {
+        if (taskGroup == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
@@ -61,11 +57,11 @@ public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand
             throw new CommandException(MESSAGE_TASK_ALREADY_DONE);
         } else {
             taskToMarkAsDone.setDoneTask();
-            groupOfTask = currentDataStored;
+            groupOfTask = taskGroup;
             taskMarkedDone = taskToMarkAsDone;
         }
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, taskToMarkAsDone))
-                .displayGroupInformation(currentDataStored)
+                .displayGroupInformation(taskGroup)
                 .build();
     }
 
