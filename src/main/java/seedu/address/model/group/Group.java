@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import seedu.address.model.common.Description;
@@ -116,6 +117,16 @@ public class Group {
      */
     public boolean hasGroupMate(Person groupMate) {
         return persons.contains(groupMate);
+    }
+
+    /**
+     * Checks whether the group has the given set of group mates.
+     *
+     * @param groupMates The group mates.
+     * @return Whether the set of group mates is in the group.
+     */
+    public boolean hasGroupMates(Set<Person> groupMates) {
+        return groupMates.stream().anyMatch(groupMate -> this.hasGroupMate(groupMate));
     }
 
     /**
