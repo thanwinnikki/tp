@@ -18,10 +18,10 @@ public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCo
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_DESCRIPTION + "Description "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION]"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Favourite Group"
+            + PREFIX_NAME + "Favourite Group "
             + PREFIX_DESCRIPTION + "This is a group for my summer project";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
