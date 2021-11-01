@@ -23,7 +23,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="description" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="description" text="\$first" styleClass="cell_big_label" maxHeight="50" wrapText="true" />
       </HBox>
       <Label fx:id="isDoneIndicator" styleClass="cell_small_label" />
     </VBox>
