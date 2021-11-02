@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 
@@ -36,12 +37,9 @@ public class FindGroupCommand implements StateDependentCommand {
 
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
-        if (applicationState == ApplicationState.HOME) {
-            return true;
-        } else {
-            return false;
-        }
-    };
+        ApplicationStateType applicationStateType = applicationState.getApplicationStateType();
+        return applicationStateType == ApplicationStateType.HOME;
+    }
 
     @Override
     public boolean equals(Object other) {

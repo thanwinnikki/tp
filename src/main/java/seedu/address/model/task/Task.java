@@ -10,9 +10,6 @@ import seedu.address.model.common.Description;
  */
 public class Task {
 
-    private static final String DONE_TASK = "[DONE] ";
-    private static final String UNDONE_TASK = "[    ] ";
-
     private final Description description;
     private boolean done = false;
 
@@ -56,11 +53,7 @@ public class Task {
 
     @Override
     public String toString() {
-        if (done) {
-            return DONE_TASK + description.toString();
-        } else {
-            return UNDONE_TASK + description.toString();
-        }
+        return description.toString();
     }
 
     @Override

@@ -28,6 +28,9 @@ import seedu.address.logic.commands.MarkAsDoneCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.GroupInformationState;
+import seedu.address.model.group.Group;
 
 /**
  * Parses user input.
@@ -42,12 +45,12 @@ public class AddressBookParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @param currentDataStored The current data being stored.
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput Full user input string.
+     * @param currentApplicationState The current application state.
+     * @return The command based on the user input.
+     * @throws ParseException If the user input does not conform the expected format.
      */
-    public Command parseCommand(String userInput, Object currentDataStored) throws ParseException {
+    public Command parseCommand(String userInput, ApplicationState currentApplicationState) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -55,6 +58,8 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+        GroupInformationState groupInformationState;
+        Group group;
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -92,28 +97,36 @@ public class AddressBookParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommand(currentApplicationState);
 
         case RemoveCommand.COMMAND_WORD:
-            return new RemoveCommandParser(currentDataStored).parse(arguments);
+            groupInformationState = (GroupInformationState) currentApplicationState;
+            group = groupInformationState.getStoredData();
+            return new RemoveCommandParser(group).parse(arguments);
 
         case JoinGroupCommand.COMMAND_WORD:
             return new JoinGroupCommandParser().parse(arguments);
 
         case DeleteTaskCommand.COMMAND_WORD:
-            return new DeleteTaskCommandParser(currentDataStored).parse(arguments);
+            groupInformationState = (GroupInformationState) currentApplicationState;
+            group = groupInformationState.getStoredData();
+            return new DeleteTaskCommandParser(group).parse(arguments);
 
         case AddTaskCommand.COMMAND_WORD:
-            return new AddTaskCommandParser(currentDataStored).parse(arguments);
+            groupInformationState = (GroupInformationState) currentApplicationState;
+            group = groupInformationState.getStoredData();
+            return new AddTaskCommandParser(group).parse(arguments);
 
         case MarkAsDoneCommand.COMMAND_WORD:
-            return new MarkAsDoneCommandParser(currentDataStored).parse(arguments);
+            groupInformationState = (GroupInformationState) currentApplicationState;
+            group = groupInformationState.getStoredData();
+            return new MarkAsDoneCommandParser(group).parse(arguments);
 
         case EditGroupCommand.COMMAND_WORD:
             return new EditGroupCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            return new UndoCommand(currentApplicationState);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
