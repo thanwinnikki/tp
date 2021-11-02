@@ -160,7 +160,6 @@ Edits an existing person in ThunderCat.
 
 :bulb: Panel where this can be called :
 * Home Panel
-* Group Information Panel
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
