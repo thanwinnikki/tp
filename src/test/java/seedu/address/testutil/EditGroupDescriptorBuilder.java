@@ -16,7 +16,7 @@ public class EditGroupDescriptorBuilder {
     }
 
     public EditGroupDescriptorBuilder(EditGroupDescriptor descriptor) {
-        this.descriptor = descriptor;
+        this.descriptor = new EditGroupDescriptor(descriptor);
     }
 
     /**

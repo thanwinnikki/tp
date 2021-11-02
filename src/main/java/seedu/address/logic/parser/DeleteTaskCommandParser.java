@@ -11,8 +11,8 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
 
     private final Group group;
 
-    public DeleteTaskCommandParser(Object group) {
-        this.group = (Group) group;
+    public DeleteTaskCommandParser(Group group) {
+        this.group = group;
     }
 
     /**
