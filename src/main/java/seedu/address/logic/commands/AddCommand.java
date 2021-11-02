@@ -8,13 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
  * Adds a person to the address book.
  */
-public class AddCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class AddCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -65,6 +66,15 @@ public class AddCommand extends AlwaysRunnableCommand implements UndoableCommand
         model.deletePerson(toAdd);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
                 .build();
+    }
+
+    @Override
+    public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
+        if (applicationState == ApplicationState.HOME) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

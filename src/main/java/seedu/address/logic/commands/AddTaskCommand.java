@@ -80,7 +80,7 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
         } else {
             return false;
         }
-    };
+    }
 
     @Override
     public boolean equals(Object other) {
