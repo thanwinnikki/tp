@@ -21,7 +21,7 @@ public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCo
             + PREFIX_DESCRIPTION + "Description "
             + "\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Favourite Group"
+            + PREFIX_NAME + "Favourite Group "
             + PREFIX_DESCRIPTION + "This is a group for my summer project";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
