@@ -11,7 +11,6 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.IsGroupMemberPredicate;
 
 /**
  * Lists all persons and tasks in the given group.
@@ -41,7 +40,6 @@ public class GroupCommand implements StateDependentCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
         Group group = lastShownList.get(index.getZeroBased());
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         return new CommandResult.Builder(MESSAGE_SUCCESS)
                 .displayGroupInformation(group)
                 .build();

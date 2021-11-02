@@ -248,7 +248,7 @@ public class MainWindow extends UiPart<Stage> {
         listPanelLeft.setState(ListPanel.PanelState.GROUP_MATES);
         listPanelRight.setState(ListPanel.PanelState.TASKS);
 
-        listPanelLeft.setList(logic.getFilteredPersonList());
+        listPanelLeft.setList(group.getPersons().asUnmodifiableObservableList());
         listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
 
         statusBarFooter.changeDisplayForGroupInformationAppState(group);
