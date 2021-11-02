@@ -25,7 +25,7 @@ public class RemoveCommandTest {
     private Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
 
     @Test
-    public void execute_validIndexFilteredList_success() throws CommandException {
+    public void execute_validIndexUnfilteredList_success() throws CommandException {
 
         // identify group to have its person removed from
         Group group = getFirstGroup(model);
@@ -51,7 +51,7 @@ public class RemoveCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Group group = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
 
         // set the filtered list for both groups and person
