@@ -8,6 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.IsGroupMemberPredicate;
@@ -34,22 +35,16 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
     private Person personRemoved;
     private Group groupWithRemoval;
     private Group groupWithoutRemoval;
-    private final Group group;
+    private final Group groupToRemoveFrom;
 
     /**
      * Constructor for RemoveCommand
      * @param targetIndex of the person in the filtered list to be removed
-     * @param currentDataStored is the group where person will be removed from
+     * @param group is the group where person will be removed from
      */
-    public RemoveCommand(Index targetIndex, Object currentDataStored) {
+    public RemoveCommand(Index targetIndex, Group group) {
         this.targetIndex = targetIndex;
-        if (currentDataStored instanceof Group) {
-            this.group = (Group) currentDataStored;
-        } else {
-
-            this.group = null;
-        }
-
+        groupToRemoveFrom = group;
     }
 
     @Override
@@ -61,12 +56,15 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (group == null) {
+
+        if (groupToRemoveFrom == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());
         personRemoved = personToRemove;
+
+        Group group = groupToRemoveFrom;
         groupWithoutRemoval = new Group(group);
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
@@ -88,18 +86,15 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
 
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
-        if (applicationState == ApplicationState.GROUP_INFORMATION) {
-            return true;
-        } else {
-            return false;
-        }
-    };
+        ApplicationStateType applicationStateType = applicationState.getApplicationStateType();
+        return applicationStateType == ApplicationStateType.GROUP_INFORMATION;
+    }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RemoveCommand // instanceof handles nulls
                 && targetIndex.equals(((RemoveCommand) other).targetIndex)
-                && (group).equals(((RemoveCommand) other).group)); // state check
+                && (groupToRemoveFrom).equals(((RemoveCommand) other).groupToRemoveFrom)); // state check
     }
 }

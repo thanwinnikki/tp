@@ -5,16 +5,17 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkAsDoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new MarkAsDoneCommand object
  */
 public class MarkAsDoneCommandParser implements Parser<MarkAsDoneCommand> {
 
-    private final Object currentDataStored;
+    private final Group group;
 
-    public MarkAsDoneCommandParser(Object currentDataStored) {
-        this.currentDataStored = currentDataStored;
+    public MarkAsDoneCommandParser(Group group) {
+        this.group = group;
     }
 
     /**
@@ -25,7 +26,7 @@ public class MarkAsDoneCommandParser implements Parser<MarkAsDoneCommand> {
     public MarkAsDoneCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new MarkAsDoneCommand(index, currentDataStored);
+            return new MarkAsDoneCommand(index, group);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAsDoneCommand.MESSAGE_USAGE), pe);

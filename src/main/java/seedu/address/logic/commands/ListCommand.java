@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 
 /**
@@ -21,7 +20,7 @@ public class ListCommand extends AlwaysRunnableCommand {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .setNextAppState(ApplicationState.HOME)
+                .goToHome()
                 .build();
     }
 }

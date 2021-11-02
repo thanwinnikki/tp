@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -31,7 +30,7 @@ public class GroupsCommandTest {
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new GroupsCommand(), model,
                 new CommandResult.Builder(GroupsCommand.MESSAGE_SUCCESS)
-                        .setNextAppState(ApplicationState.HOME)
+                        .goToHome()
                         .build(),
                 expectedModel);
     }
@@ -41,7 +40,7 @@ public class GroupsCommandTest {
         showGroupAtIndex(model, INDEX_FIRST);
         assertCommandSuccess(new GroupsCommand(), model,
                 new CommandResult.Builder(GroupsCommand.MESSAGE_SUCCESS)
-                        .setNextAppState(ApplicationState.HOME)
+                        .goToHome()
                         .build(),
                 expectedModel);
     }

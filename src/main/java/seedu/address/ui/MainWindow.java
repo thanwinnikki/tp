@@ -17,6 +17,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
+import seedu.address.logic.state.GroupInformationState;
 import seedu.address.model.group.Group;
 
 /**
@@ -197,11 +199,11 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.isGoingToShowHelp()) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            if (commandResult.isGoingToExit()) {
                 handleExit();
             }
 
@@ -216,17 +218,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void changeDisplayForNextAppState(CommandResult commandResult) {
-        ApplicationState nextApplicationState = commandResult.getNextAppState();
-        switch (nextApplicationState) {
+        ApplicationState nextApplicationState = commandResult.getNextApplicationState();
+        ApplicationStateType nextApplicationStateType = nextApplicationState.getApplicationStateType();
+        switch (nextApplicationStateType) {
         case HOME:
             changeDisplayForHomeAppState();
             break;
         case GROUP_INFORMATION:
-            Group group = commandResult.getNextDataToStore();
+            GroupInformationState groupInformationState = (GroupInformationState) nextApplicationState;
+            Group group = groupInformationState.getStoredData();
             changeDisplayForGroupInformationAppState(group);
             break;
         default:
-            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationState);
+            assert false : String.format(MESSAGE_TEMPLATE_APP_STATE_NOT_IMPLEMENTED, nextApplicationStateType);
         }
     }
 
@@ -244,7 +248,7 @@ public class MainWindow extends UiPart<Stage> {
         listPanelLeft.setState(ListPanel.PanelState.GROUP_MATES);
         listPanelRight.setState(ListPanel.PanelState.TASKS);
 
-        listPanelLeft.setList(logic.getFilteredPersonList());
+        listPanelLeft.setList(group.getPersons().asUnmodifiableObservableList());
         listPanelRight.setList(group.getTasks().asUnmodifiableObservableList());
 
         statusBarFooter.changeDisplayForGroupInformationAppState(group);
