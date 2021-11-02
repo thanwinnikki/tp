@@ -97,7 +97,7 @@ public class AddressBookParser {
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            return new HelpCommand(currentApplicationState);
 
         case RemoveCommand.COMMAND_WORD:
             groupInformationState = (GroupInformationState) currentApplicationState;
