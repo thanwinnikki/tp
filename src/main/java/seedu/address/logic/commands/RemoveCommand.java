@@ -61,7 +61,6 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        List<Group> lastShownGroupList = model.getFilteredGroupList();
         if (group == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
@@ -72,7 +71,6 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
         groupWithRemoval = group;
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         return new CommandResult.Builder(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove))
                 .displayGroupInformation(group)
                 .build();
