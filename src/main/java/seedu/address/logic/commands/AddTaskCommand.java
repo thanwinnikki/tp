@@ -21,7 +21,7 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the group. "
             + "Parameters: "
-            + PREFIX_DESCRIPTION + "TASK_DESCRIPTION"
+            + PREFIX_DESCRIPTION + "TASK_DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DESCRIPTION + "Read book";
 
