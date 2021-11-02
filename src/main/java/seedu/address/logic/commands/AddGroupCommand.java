@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
@@ -48,7 +47,7 @@ public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCo
         model.addGroup(toAdd);
         model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult.Builder(String.format(MESSAGE_SUCCESS, toAdd))
-                .setNextAppState(ApplicationState.HOME)
+                .goToHome()
                 .build();
     }
 
