@@ -126,7 +126,7 @@ public class AddressBookParser {
             return new EditGroupCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            return new UndoCommand(currentApplicationState);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
