@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TASK_1;
 import static seedu.address.testutil.TypicalTasks.TASK_1_BUILDER;
 import static seedu.address.testutil.TypicalTasks.TASK_A_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_B_BUILDER;
 
 import java.util.Locale;
 
@@ -15,6 +16,7 @@ import seedu.address.testutil.TaskBuilder;
 public class TaskTest {
 
     private Task taskA = TASK_A_BUILDER.build();
+    private Task taskB = TASK_B_BUILDER.build();
     private final Task task1 = TASK_1_BUILDER.build(); // a task with a valid description.
 
     @Test
@@ -30,7 +32,7 @@ public class TaskTest {
         assertTrue(taskA.isSameTask(taskADone));
 
         // different task description, done attribute is the same -> returns false
-        assertFalse(taskA.isSameTask(task1));
+        assertFalse(taskA.isSameTask(taskB));
 
         // task name differs in case, done attribute remains the same -> returns false
         Task editedTask1 = new TaskBuilder(task1).withDescription(VALID_DESCRIPTION_TASK_1.toLowerCase(Locale.ROOT))
@@ -69,6 +71,5 @@ public class TaskTest {
         // different done attribute -> returns false
         Task editedTaskA = TASK_A_BUILDER.withDoneStatus(true).build();
         assertFalse(taskA.equals(editedTaskA));
-        
     }
 }
