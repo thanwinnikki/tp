@@ -13,7 +13,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 public class ClearCommand extends AlwaysRunnableCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "ThunderCat has been cleared!";
     public static final String MESSAGE_UNDO_SUCCESS = "Successful undo of clear.";
 
     private ReadOnlyAddressBook oldReadOnlyAddressBook;
