@@ -52,9 +52,10 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
         requireNonNull(model);
         List<Person> lastShownPersonList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownPersonList.size()) {
+        if (targetIndex.getZeroBased() >= groupToRemoveFrom.getPersons().asUnmodifiableObservableList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+
 
         if (groupToRemoveFrom == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
@@ -62,12 +63,12 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
 
         Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());
         personRemoved = personToRemove;
+
         Group group = groupToRemoveFrom;
         groupWithoutRemoval = new Group(group);
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
         groupWithRemoval = group;
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
         return new CommandResult.Builder(String.format(MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove))
                 .displayGroupInformation(group)
                 .build();
