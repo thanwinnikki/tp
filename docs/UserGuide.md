@@ -542,7 +542,7 @@ In each task entry, these are the required attributes:
 
 Action | Format | Examples | Home Panel | Group Information Panel
 --------|---------|---------|---------|---------
-**Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark: | :white_check_mark:
+**Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark:
 **Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
 **Delete person** | `delete INDEX` | `delete 3` | :white_check_mark: 
 **Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: | 
