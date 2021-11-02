@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 
 public class RemoveCommandTest {
@@ -31,21 +30,15 @@ public class RemoveCommandTest {
         Group group = getFirstGroup(model);
         RemoveCommand removeCommand = new RemoveCommand(INDEX_FIRST, group);
 
-        // set the filtered list for both groups and person
-        setFilteredList(model, group);
-
         // set person to remove as the first person
-        Person personToRemove = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        Person personToRemove = group.getPersons().asUnmodifiableObservableList().get(0);
         String expectedMessage = String.format(RemoveCommand.MESSAGE_REMOVE_PERSON_SUCCESS, personToRemove);
         CommandResult expectedCommandResult = new CommandResult.Builder(expectedMessage)
                 .displayGroupInformation(group)
                 .build();
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
-        setFilteredList(expectedModel, getFirstGroup(expectedModel));
-
-        getFirstGroup(expectedModel).getPersons().remove(personToRemove);
-        setFilteredList(expectedModel, getFirstGroup(expectedModel));
+        getFirstGroup(expectedModel).removeGroupMate(personToRemove);
 
         assertCommandSuccess(removeCommand, model, expectedCommandResult, expectedModel);
     }
@@ -54,10 +47,7 @@ public class RemoveCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Group group = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
 
-        // set the filtered list for both groups and person
-        setFilteredList(model, group);
-
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(group.getPersons().asUnmodifiableObservableList().size() + 1);
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         RemoveCommand removeCommand = new RemoveCommand(outOfBoundIndex, group);
@@ -97,8 +87,5 @@ public class RemoveCommandTest {
         return model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
     }
 
-    public void setFilteredList(Model model, Group group) {
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
-    }
 
 }

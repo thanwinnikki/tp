@@ -34,7 +34,7 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
     private Person personRemoved;
     private Group groupWithRemoval;
     private Group groupWithoutRemoval;
-    private final Group currentDataStored;
+    private final Group group;
 
     /**
      * Constructor for RemoveCommand
@@ -44,9 +44,10 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
     public RemoveCommand(Index targetIndex, Object currentDataStored) {
         this.targetIndex = targetIndex;
         if (currentDataStored instanceof Group) {
-            this.currentDataStored = (Group) currentDataStored;
+            this.group = (Group) currentDataStored;
         } else {
-            this.currentDataStored = null;
+
+            this.group = null;
         }
 
     }
@@ -61,13 +62,12 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
         }
 
         List<Group> lastShownGroupList = model.getFilteredGroupList();
-        if (currentDataStored == null) {
+        if (group == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());
         personRemoved = personToRemove;
-        Group group = (Group) currentDataStored;
         groupWithoutRemoval = new Group(group);
         UniquePersonList persons = group.getPersons();
         persons.remove(personToRemove);
@@ -102,6 +102,6 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
         return other == this // short circuit if same object
                 || (other instanceof RemoveCommand // instanceof handles nulls
                 && targetIndex.equals(((RemoveCommand) other).targetIndex)
-                && (currentDataStored).equals(((RemoveCommand) other).currentDataStored)); // state check
+                && (group).equals(((RemoveCommand) other).group)); // state check
     }
 }
