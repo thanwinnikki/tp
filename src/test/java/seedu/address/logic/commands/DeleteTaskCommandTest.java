@@ -32,25 +32,6 @@ public class DeleteTaskCommandTest {
         Group groupToDeleteFrom = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
         Task taskToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased())
                 .getTasks().getTask(INDEX_FIRST.getZeroBased());
-
-        DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST, groupToDeleteFrom);
-
-        String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_REMOVE_TASK_SUCCESS, taskToDelete);
-        CommandResult expectedCommandResult = new CommandResult.Builder(expectedMessage)
-                .displayGroupInformation(groupToDeleteFrom)
-                .build();
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        getFirstGroup(expectedModel).deleteTask(taskToDelete);
-
-        assertCommandSuccess(deleteTaskCommand, model, expectedCommandResult, expectedModel);
-    }
-
-    @Test
-    public void execute_validTaskIndex_sizeOfTaskListChange_success() {
-        Group groupToDeleteFrom = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
-        Task taskToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased())
-                .getTasks().getTask(INDEX_FIRST.getZeroBased());
         int initialSizeOfTaskList = groupToDeleteFrom.getTasks().size();
 
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST, groupToDeleteFrom);
