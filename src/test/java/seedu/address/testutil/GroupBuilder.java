@@ -94,7 +94,7 @@ public class GroupBuilder {
         }
         ObservableList<Task> taskList = tasks.asUnmodifiableObservableList();
         for (int i = 0; i < taskList.size(); i++) {
-            buildGroup.addTask(taskList.get(i));
+            buildGroup.addTask(new TaskBuilder(taskList.get(i)).build());
         }
         return buildGroup;
     }
