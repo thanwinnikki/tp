@@ -51,15 +51,12 @@ public class DeleteTaskCommand implements UndoableCommand, StateDependentCommand
         requireNonNull(model);
         oldReadOnlyAddressBook = new AddressBook(model.getAddressBook());
 
-        if (group == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-        }
-
         oldReadOnlyAddressBook.getGroupList().forEach(group -> {
             if (group.equals(this.group)) {
                 groupDeletedFrom = group;
             }
         });
+
         UniqueTaskList targetTaskList = group.getTasks();
         if (targetTaskList.size() < targetIndex.getOneBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
