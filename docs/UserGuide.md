@@ -410,9 +410,11 @@ Example:
 
 Undoes an undoable command.
 
-:bulb: Panel where this command can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home panel
 * Group Information Panel
+</div>
 
 Format: `undo`
 
