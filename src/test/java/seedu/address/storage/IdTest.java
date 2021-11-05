@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashSet;
@@ -85,6 +86,37 @@ public class IdTest {
     public void parse_invalidTimeRange_throwsIllegalValueException() {
         String expectedMessage = Id.MESSAGE_MALFORMED_ID;
         assertThrows(IllegalValueException.class, expectedMessage, () -> Id.parse("1-4e94914f0000"));
+    }
+
+    @Test
+    public void compareTo_equalIds_returnsZero() throws IllegalValueException {
+        Id id1 = Id.parse("0-1");
+        Id id2 = Id.parse("0-1");
+        int expectedComparisonResult = 0;
+        int actualComparisonResult = id1.compareTo(id2);
+        assertEquals(expectedComparisonResult, actualComparisonResult);
+    }
+
+    @Test
+    public void compareTo_differentTime_returnsCorrectNonZero() throws IllegalValueException {
+        Id id1 = Id.parse("0-1");
+        Id id2 = Id.parse("0-2");
+        int actualComparisonResult = id1.compareTo(id2);
+        assertTrue(actualComparisonResult < 0);
+
+        actualComparisonResult = id2.compareTo(id1);
+        assertTrue(actualComparisonResult > 0);
+    }
+
+    @Test
+    public void compareTo_differentDate_returnsCorrectNonZero() throws IllegalValueException {
+        Id id1 = Id.parse("0-1");
+        Id id2 = Id.parse("1-1");
+        int actualComparisonResult = id1.compareTo(id2);
+        assertTrue(actualComparisonResult < 0);
+
+        actualComparisonResult = id2.compareTo(id1);
+        assertTrue(actualComparisonResult > 0);
     }
 
     @Test
