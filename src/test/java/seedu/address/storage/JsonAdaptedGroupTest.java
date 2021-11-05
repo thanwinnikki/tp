@@ -26,6 +26,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.common.Description;
 import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
@@ -136,6 +137,18 @@ public class JsonAdaptedGroupTest {
         JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupName)
                 .build();
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
+    public void toModelType_invalidDescription_throwsIllegalValueException() {
+        // Equivalence Partition {description}: Invalid description
+        String description = " ";
+        Map<Id, Person> idToPersonMap = new HashMap<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+                .withDescription(description)
+                .build();
+        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
 
@@ -253,6 +266,20 @@ public class JsonAdaptedGroupTest {
                 .build();
 
         assertEquals(jsonAdaptedGroupFromJson, jsonAdaptedGroupFromModel);
+    }
+
+    @Test
+    public void toModelType_invalidTasks_throwsIllegalValueException() {
+        // Equivalence Partition {tasks}: Invalid task in tasks list
+        List<JsonAdaptedTask> tasks = new ArrayList<>();
+        tasks.add(new JsonAdaptedTask(null, false));
+        Map<Id, Person> idToPersonMap = new HashMap<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+                .withTasks(tasks)
+                .build();
+        String expectedMessage = String.format(JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT,
+                Description.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
 
     @Test

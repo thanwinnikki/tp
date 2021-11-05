@@ -199,7 +199,7 @@ public class JsonAdaptedGroup {
     private Description createDescription() throws IllegalValueException {
         assert description != null : "There is no description.";
         if (!Description.isValidDescription(description)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(description);
     }
