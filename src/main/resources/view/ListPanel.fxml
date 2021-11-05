@@ -6,12 +6,12 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-  <StackPane fx:id="infoDisplayPlaceholder" maxHeight="50" minHeight="50" prefHeight="50"
+  <StackPane fx:id="infoDisplayPlaceholder" maxHeight="40" minHeight="40" prefHeight="40"
              styleClass="header-panel" VBox.vgrow="NEVER">
     <padding>
       <Insets bottom="5" left="10" right="10" top="5" />
     </padding>
-    <Label fx:id="stateDisplay" text="\$info" styleClass="cell_big_label"/>
+    <Label fx:id="stateDisplay" text="\$info"/>
   </StackPane>
   <ListView fx:id="listableListView" VBox.vgrow="ALWAYS" />
 </VBox>
