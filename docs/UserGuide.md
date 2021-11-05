@@ -406,6 +406,32 @@ Format: `done TASK_INDEX`
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
 
+### Undoing an undoable command : `undo`
+
+Undoes an undoable command.
+
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
+* Home panel
+* Group Information Panel
+</div>
+
+Format: `undo`
+
+* The following are the commands that can be undone:
+  * [`add`](#adding-a-person-add)
+  * [`addG`](#creating-a-group--addg)
+  * [`addT`](#adding-a-task-to-the-current-group-addt)
+  * [`clear`](#clearing-all-entries--clear)
+  * [`delete`](#deleting-a-person--delete)
+  * [`deleteG`](#deleting-a-group--deleteg)
+  * [`deleteT`](#deleting-a-task-from-the-current-group-deletet)
+  * [`edit`](#editing-a-person--edit)
+  * [`editG`](#editing-a-group-editg)
+  * [`joinG`](#adding-multiple-people-to-a-group--joing)
+  * [`done`](#marking-a-task-as-done-done)
+  * [`remove`](#remove-a-person-from-the-current-group-remove)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
