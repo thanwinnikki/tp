@@ -79,6 +79,40 @@ public class JsonAdaptedGroupTest {
     }
 
     @Test
+    public void toModelType_validDetailsWithNullOptionalFields_returnsGroup() throws IllegalValueException {
+        // Equivalence Partition {description, groupMateIds, tasks}: Valid with null optional fields
+        Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+                .withDescription(null)
+                .withGroupMateIds(null)
+                .withTasks(null)
+                .build();
+        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
+    public void toModelType_validDetailsWithUnspecifiedOptionalFields_returnsGroup() throws IllegalValueException {
+        // Equivalence Partition {description, groupMateIds, tasks}: Valid with unspecified optional fields
+        Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+                .build();
+        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
+    public void toModelType_validDetailsWithEmptyListFields_returnsGroup() throws IllegalValueException {
+        // Equivalence Partition {groupMateIds, tasks}: Valid with empty list fields
+        Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
+        List<String> groupMateIds = new ArrayList<>();
+        List<JsonAdaptedTask> tasks = new ArrayList<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(tasks)
+                .build();
+        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         String groupNameString = null;
         List<String> groupMateIds = new ArrayList<>();
