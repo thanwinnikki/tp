@@ -1,6 +1,7 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -14,14 +15,16 @@ public class ConfigTest {
                 + "Preference file Location : preferences.json";
 
         assertEquals(defaultConfigAsString, new Config().toString());
+
     }
 
     @Test
     public void equalsMethod() {
         Config defaultConfig = new Config();
+        Config anotherConfig = new Config();
         assertNotNull(defaultConfig);
         assertTrue(defaultConfig.equals(defaultConfig));
+        assertTrue(defaultConfig.hashCode() == anotherConfig.hashCode());
+        assertFalse(defaultConfig.equals(" "));
     }
-
-
 }
