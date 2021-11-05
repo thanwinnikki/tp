@@ -132,13 +132,22 @@ public class CommandResult {
         }
 
         /**
+         * Sets whether the {@code CommandResult} object will cause the application to undo.
+         *
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder setGoCauseUndo(boolean isGoingToCauseUndo) {
+            this.isGoingToCauseUndo = isGoingToCauseUndo;
+            return this;
+        }
+
+        /**
          * Sets the {@code CommandResult} object to cause the application to undo.
          *
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goCauseUndo() {
-            isGoingToCauseUndo = true;
-            return this;
+            return setGoCauseUndo(true);
         }
     }
 
