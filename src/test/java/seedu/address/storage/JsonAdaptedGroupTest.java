@@ -3,11 +3,12 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BASKETBALL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.storage.JsonAdaptedGroup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.GroupBuilder.DEFAULT_GROUP_NAME;
+import static seedu.address.testutil.TypicalGroups.BASKETBALL;
 import static seedu.address.testutil.TypicalGroups.SWIMMING;
 import static seedu.address.testutil.TypicalGroups.TENNIS;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -104,25 +105,19 @@ public class JsonAdaptedGroupTest {
     @Test
     public void toModelType_nullGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(DEFAULT_GROUP_NAME)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
                 .build();
 
-        Group group = new GroupBuilder()
-                .build();
-
-        assertEquals(group, jsonAdaptedGroup.toModelType(idToPersonMap));
+        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
     }
 
     @Test
     public void toModelType_emptyGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(DEFAULT_GROUP_NAME)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
                 .build();
 
-        Group group = new GroupBuilder()
-                .build();
-
-        assertEquals(group, jsonAdaptedGroup.toModelType(idToPersonMap));
+        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
     }
 
     @Test
