@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.common.Description;
+import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
 /**
@@ -15,10 +16,10 @@ import seedu.address.model.task.Task;
  */
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
-    private final Object currentDataStored;
+    private final Group group;
 
-    public AddTaskCommandParser(Object currentDataStored) {
-        this.currentDataStored = currentDataStored;
+    public AddTaskCommandParser(Group group) {
+        this.group = group;
     }
 
     /**
@@ -39,7 +40,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         Task task = new Task(taskDescription);
 
-        return new AddTaskCommand(task, currentDataStored);
+        return new AddTaskCommand(task, group);
     }
 
     /**

@@ -8,9 +8,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.IsGroupMemberPredicate;
 
 /**
  * Lists all persons and tasks in the given group.
@@ -40,19 +40,16 @@ public class GroupCommand implements StateDependentCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
         Group group = lastShownList.get(index.getZeroBased());
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(group));
-        return new CommandResult.Builder(MESSAGE_SUCCESS).displayGroupInformation(group).setNextDataToStore(group)
+        return new CommandResult.Builder(MESSAGE_SUCCESS)
+                .displayGroupInformation(group)
                 .build();
     }
 
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
-        if (applicationState == ApplicationState.HOME) {
-            return true;
-        } else {
-            return false;
-        }
-    };
+        ApplicationStateType applicationStateType = applicationState.getApplicationStateType();
+        return applicationStateType == ApplicationStateType.HOME;
+    }
 
     @Override
     public boolean equals(Object other) {

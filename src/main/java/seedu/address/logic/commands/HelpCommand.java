@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 
 /**
@@ -14,8 +15,17 @@ public class HelpCommand extends AlwaysRunnableCommand {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
+    private final ApplicationState currentApplicationState;
+
+    public HelpCommand(ApplicationState currentApplicationState) {
+        this.currentApplicationState = currentApplicationState;
+    }
+
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult.Builder(SHOWING_HELP_MESSAGE)
+                .showHelp()
+                .setNextAppState(currentApplicationState)
+                .build();
     }
 }
