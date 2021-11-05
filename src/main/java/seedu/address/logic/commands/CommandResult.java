@@ -65,7 +65,7 @@ public class CommandResult {
          * @param isGoingToShowHelp Whether help information will be shown.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setShowHelp(boolean isGoingToShowHelp) {
+        public Builder setGoShowHelp(boolean isGoingToShowHelp) {
             this.isGoingToShowHelp = isGoingToShowHelp;
             return this;
         }
@@ -75,8 +75,8 @@ public class CommandResult {
          *
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder showHelp() {
-            return setShowHelp(true);
+        public Builder goShowHelp() {
+            return setGoShowHelp(true);
         }
 
         /**
@@ -134,6 +134,7 @@ public class CommandResult {
         /**
          * Sets whether the {@code CommandResult} object will cause the application to undo.
          *
+         * @param isGoingToCauseUndo Whether the application will undo.
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder setGoCauseUndo(boolean isGoingToCauseUndo) {

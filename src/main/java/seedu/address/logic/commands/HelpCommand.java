@@ -24,7 +24,7 @@ public class HelpCommand extends AlwaysRunnableCommand {
     @Override
     public CommandResult execute(Model model) {
         return new CommandResult.Builder(SHOWING_HELP_MESSAGE)
-                .showHelp()
+                .goShowHelp()
                 .setNextApplicationState(currentApplicationState)
                 .build();
     }
