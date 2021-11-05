@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.storage.JsonAdaptedGroup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.GroupBuilder.DEFAULT_GROUP_DESCRIPTION;
 import static seedu.address.testutil.GroupBuilder.DEFAULT_GROUP_NAME;
 import static seedu.address.testutil.TypicalGroups.SWIMMING;
 import static seedu.address.testutil.TypicalGroups.TENNIS;
@@ -106,7 +105,6 @@ public class JsonAdaptedGroupTest {
     public void toModelType_nullGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
         Map<Id, Person> idToPersonMap = new HashMap<>();
         JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(DEFAULT_GROUP_NAME)
-                .withDescription(DEFAULT_GROUP_DESCRIPTION)
                 .build();
 
         Group group = new GroupBuilder()
@@ -119,7 +117,6 @@ public class JsonAdaptedGroupTest {
     public void toModelType_emptyGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
         Map<Id, Person> idToPersonMap = new HashMap<>();
         JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(DEFAULT_GROUP_NAME)
-                .withDescription(DEFAULT_GROUP_DESCRIPTION)
                 .build();
 
         Group group = new GroupBuilder()
