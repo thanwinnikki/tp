@@ -7,18 +7,45 @@ import static seedu.address.testutil.TypicalTasks.TASK_1_BUILDER;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
 public class JsonAdaptedTaskTest {
 
     @Test
+    public void toModelType_validUndoneTask_returnsTask() throws IllegalValueException {
+        // Equivalence Partition {description, isDone}: Undone task with valid description
+        boolean isDone = false;
+        JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, isDone);
+        Task expectedTask = new TaskBuilder(TASK_1_BUILDER.build())
+                .withDoneStatus(false)
+                .build();
+        Task actualTask = jsonAdaptedTask.toModelType();
+        assertEquals(expectedTask, actualTask);
+    }
+
+    @Test
+    public void toModelType_validDoneTask_returnsTask() throws IllegalValueException {
+        // Equivalence Partition {description, isDone}: Done task with valid description
+        boolean isDone = true;
+        JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, isDone);
+        Task expectedTask = new TaskBuilder(TASK_1_BUILDER.build())
+                .withDoneStatus(true)
+                .build();
+        Task actualTask = jsonAdaptedTask.toModelType();
+        assertEquals(expectedTask, actualTask);
+    }
+
+    @Test
     public void constructor_differentConstructors_sameTask() {
-        JsonAdaptedTask jsonAdaptedTask1 = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, false);
+        boolean isDone1 = false;
+        JsonAdaptedTask jsonAdaptedTask1 = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, isDone1);
         JsonAdaptedTask jsonAdaptedTask2 = new JsonAdaptedTask(TASK_1_BUILDER.build());
         assertEquals(jsonAdaptedTask1, jsonAdaptedTask2);
 
-        jsonAdaptedTask1 = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, true);
+        isDone1 = true;
+        jsonAdaptedTask1 = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, isDone1);
         Task task2 = new TaskBuilder(TASK_1_BUILDER.build())
                 .withDoneStatus(true)
                 .build();
