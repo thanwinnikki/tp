@@ -68,7 +68,7 @@ public class TypicalGroups {
             .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB, CAROL, DONALD)
             .withTasks(TASK_F_BUILDER.build(), TASK_G_BUILDER.build());
     public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
-            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(DONALD, BOB);
     public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
             .withDescription(VALID_DESCRIPTION_SPORTS);
 
