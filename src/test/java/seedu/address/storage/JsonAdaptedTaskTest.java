@@ -3,11 +3,13 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TASK_1;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.TASK_1_BUILDER;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.common.Description;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.TaskBuilder;
 
@@ -35,6 +37,27 @@ public class JsonAdaptedTaskTest {
                 .build();
         Task actualTask = jsonAdaptedTask.toModelType();
         assertEquals(expectedTask, actualTask);
+    }
+
+    @Test
+    public void toModelType_nullDescription_throwsIllegalValueException() {
+        // Equivalence Partition {description}: Null description
+        String description = null;
+        boolean isDone = false;
+        JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(description, isDone);
+        String expectedMessage = String.format(JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT,
+                Description.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, jsonAdaptedTask::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDescription_throwsIllegalValueException() {
+        // Equivalence Partition {description}: Invalid description
+        String description = " ";
+        boolean isDone = false;
+        JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(description, isDone);
+        String expectedMessage = Description.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, jsonAdaptedTask::toModelType);
     }
 
     @Test
