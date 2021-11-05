@@ -4,7 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CSM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FAMILY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BASKETBALL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_QUIDDITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
@@ -72,7 +72,7 @@ public class TypicalGroups {
             .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(DONALD, BOB);
     public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
             .withDescription(VALID_DESCRIPTION_SPORTS);
-    public static final GroupBuilder BASKETBALL = new GroupBuilder().withName(VALID_NAME_BASKETBALL);
+    public static final GroupBuilder QUIDDITCH = new GroupBuilder().withName(VALID_NAME_QUIDDITCH);
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

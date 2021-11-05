@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CSMODULE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BASKETBALL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_QUIDDITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.storage.JsonAdaptedGroup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGroups.BASKETBALL;
+import static seedu.address.testutil.TypicalGroups.QUIDDITCH;
 import static seedu.address.testutil.TypicalGroups.SWIMMING;
 import static seedu.address.testutil.TypicalGroups.TENNIS;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -84,12 +84,12 @@ public class JsonAdaptedGroupTest {
     public void toModelType_validDetailsWithNullOptionalFields_returnsGroup() throws IllegalValueException {
         // Equivalence Partition {description, groupMateIds, tasks}: Valid with null optional fields
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_QUIDDITCH)
                 .withDescription(null)
                 .withGroupMateIds(null)
                 .withTasks(null)
                 .build();
-        Group expectedGroup = BASKETBALL.build();
+        Group expectedGroup = QUIDDITCH.build();
         Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
         assertEquals(expectedGroup, actualGroup);
     }
@@ -98,9 +98,9 @@ public class JsonAdaptedGroupTest {
     public void toModelType_validDetailsWithUnspecifiedOptionalFields_returnsGroup() throws IllegalValueException {
         // Equivalence Partition {description, groupMateIds, tasks}: Valid with unspecified optional fields
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_QUIDDITCH)
                 .build();
-        Group expectedGroup = BASKETBALL.build();
+        Group expectedGroup = QUIDDITCH.build();
         Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
         assertEquals(expectedGroup, actualGroup);
     }
@@ -111,11 +111,11 @@ public class JsonAdaptedGroupTest {
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
         List<String> groupMateIds = new ArrayList<>();
         List<JsonAdaptedTask> tasks = new ArrayList<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_QUIDDITCH)
                 .withGroupMateIds(groupMateIds)
                 .withTasks(tasks)
                 .build();
-        Group expectedGroup = BASKETBALL.build();
+        Group expectedGroup = QUIDDITCH.build();
         Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
         assertEquals(expectedGroup, actualGroup);
     }
@@ -147,7 +147,7 @@ public class JsonAdaptedGroupTest {
         // Equivalence Partition {description}: Invalid description
         String description = " ";
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_QUIDDITCH)
                 .withDescription(description)
                 .build();
         String expectedMessage = Description.MESSAGE_CONSTRAINTS;
@@ -254,7 +254,7 @@ public class JsonAdaptedGroupTest {
         List<JsonAdaptedTask> tasks = new ArrayList<>();
         tasks.add(new JsonAdaptedTask(null, false));
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_QUIDDITCH)
                 .withTasks(tasks)
                 .build();
         String expectedMessage = String.format(JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT,

@@ -40,7 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_SWIMMING = "Swimming Club";
     public static final String VALID_NAME_TENNIS = "Tennis Club";
     public static final String VALID_NAME_VOLLEYBALL = "Volleyball club";
-    public static final String VALID_NAME_BASKETBALL = "Basketball club";
+    public static final String VALID_NAME_QUIDDITCH = "Quidditch Club";
     public static final String VALID_DESCRIPTION_SPORTS = "Sports Club";
     public static final String VALID_DESCRIPTION_CSMODULE = "CS module";
     public static final String VALID_DESCRIPTION_FAMILY = "Family";
