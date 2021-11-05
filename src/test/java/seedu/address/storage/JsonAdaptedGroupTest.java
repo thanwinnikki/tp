@@ -121,9 +121,9 @@ public class JsonAdaptedGroupTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         // Equivalence Partition {name}: Null name
-        String groupName = null;
+        String name = null;
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupName)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(name)
                 .build();
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
@@ -132,9 +132,9 @@ public class JsonAdaptedGroupTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         // Equivalence Partition {name}: Invalid name
-        String groupName = "T3@m";
+        String name = "T3@m";
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupName)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(name)
                 .build();
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
