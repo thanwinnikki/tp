@@ -14,6 +14,12 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class IdTest {
 
     @Test
+    public void parse_null_throwsIllegalValueException() {
+        String expectedMessage = Id.MESSAGE_MALFORMED_ID;
+        assertThrows(IllegalValueException.class, expectedMessage, () -> Id.parse(null));
+    }
+
+    @Test
     public void parse_noDelimiter_throwsIllegalValueException() {
         String expectedMessage = Id.MESSAGE_MALFORMED_ID;
         assertThrows(IllegalValueException.class, expectedMessage, () -> Id.parse("12"));
