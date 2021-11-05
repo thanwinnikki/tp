@@ -63,7 +63,7 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_validNonNullGroupDetails_returnsGroup() throws IllegalValueException {
-        // Equivalence Partition {groupName, description, groupMateIds, tasks}: Valid and non-null
+        // Equivalence Partition {name, description, groupMateIds, tasks}: Valid and non-null
         List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
         List<JsonAdaptedTask> tasks = new ArrayList<>(TENNIS_TASKS);
@@ -72,10 +72,9 @@ public class JsonAdaptedGroupTest {
                 .withGroupMateIds(groupMateIds)
                 .withTasks(tasks)
                 .build();
-
-        Group group = TENNIS.build();
-
-        assertEquals(group, jsonAdaptedGroup.toModelType(idToPersonMap));
+        Group expectedGroup = TENNIS.build();
+        Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
@@ -87,7 +86,9 @@ public class JsonAdaptedGroupTest {
                 .withGroupMateIds(null)
                 .withTasks(null)
                 .build();
-        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
+        Group expectedGroup = BASKETBALL.build();
+        Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
@@ -96,7 +97,9 @@ public class JsonAdaptedGroupTest {
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
         JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
                 .build();
-        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
+        Group expectedGroup = BASKETBALL.build();
+        Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
@@ -109,16 +112,17 @@ public class JsonAdaptedGroupTest {
                 .withGroupMateIds(groupMateIds)
                 .withTasks(tasks)
                 .build();
-        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
+        Group expectedGroup = BASKETBALL.build();
+        Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        String groupNameString = null;
-        List<String> groupMateIds = new ArrayList<>();
+        // Equivalence Partition {name}: Null name
+        String groupName = null;
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
-                .withGroupMateIds(groupMateIds)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupName)
                 .build();
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
@@ -126,36 +130,18 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        String groupNameString = "T3@m";
-        List<String> groupMateIds = new ArrayList<>();
+        // Equivalence Partition {name}: Invalid name
+        String groupName = "T3@m";
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
-                .withGroupMateIds(groupMateIds)
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupName)
                 .build();
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
 
     @Test
-    public void toModelType_nullGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
-        Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
-                .build();
-
-        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
-    }
-
-    @Test
-    public void toModelType_emptyGroupMateIds_returnsGroupWithNoGroupMates() throws IllegalValueException {
-        Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
-                .build();
-
-        assertEquals(BASKETBALL.build(), jsonAdaptedGroup.toModelType(idToPersonMap));
-    }
-
-    @Test
     public void toModelType_invalidGroupMateIdFormat_throwsIllegalValueException() {
+        // Equivalence Partition {groupMateIds}: Invalid group mate ID
         List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
         groupMateIds.remove("1-2");
         groupMateIds.add("g-2");
@@ -169,6 +155,7 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_groupMateIdMissingFromMap_throwsIllegalValueException() throws IllegalValueException {
+        // Equivalence Partition {groupMateIds}: Missing group mate ID
         List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
         idToPersonMap.remove(Id.parse("3-5"));
@@ -181,6 +168,7 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_duplicateGroupMateId_throwsIllegalValueException() {
+        // Equivalence Partition {groupMateIds}: Duplicated group mate ID
         List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
         groupMateIds.add("0-1");
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
@@ -194,6 +182,7 @@ public class JsonAdaptedGroupTest {
     @Test
     public void toModelType_differentGroupMateIdReferencingSameGroupMate_throwsIllegalValueException()
             throws IllegalValueException {
+        // Equivalence Partition {groupMateIds}: Duplicated group mate but same ID
         List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
         idToPersonMap.put(Id.parse("3-5"), BOB);
@@ -206,6 +195,7 @@ public class JsonAdaptedGroupTest {
 
     @Test
     public void toModelType_groupMateOrdering_returnsGroupWithCorrectGroupMateOrdering() throws IllegalValueException {
+        // Equivalence Partition {groupMateIds}: Specific ordering (reverse here)
         List<String> groupMateIds = new ArrayList<>();
         groupMateIds.add("8-d");
         groupMateIds.add("3-5");
@@ -231,20 +221,16 @@ public class JsonAdaptedGroupTest {
     @Test
     public void toModelType_respectiveGroupMatesOnly_returnsGroupWithOnlyRespectiveGroupMates()
             throws IllegalValueException {
+        // Equivalence Partition {groupMateIds}: Only some group mate IDs in the map
         Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
-        List<String> tennisGroupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
-        JsonAdaptedGroup tennisJsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+        List<String> groupMateIds = new ArrayList<>(SWIMMING_GROUP_MATE_IDS);
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_SWIMMING)
                 .withDescription(VALID_DESCRIPTION_SPORTS)
-                .withGroupMateIds(tennisGroupMateIds)
-                .withTasks(TENNIS_TASKS)
+                .withGroupMateIds(groupMateIds)
                 .build();
-        List<String> swimmingGroupMateIds = new ArrayList<>(SWIMMING_GROUP_MATE_IDS);
-        JsonAdaptedGroup swimmingJsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_SWIMMING)
-                .withDescription(VALID_DESCRIPTION_SPORTS)
-                .withGroupMateIds(swimmingGroupMateIds)
-                .build();
-        assertEquals(TENNIS.build(), tennisJsonAdaptedGroup.toModelType(idToPersonMap));
-        assertEquals(SWIMMING.build(), swimmingJsonAdaptedGroup.toModelType(idToPersonMap));
+        Group expectedGroup = SWIMMING.build();
+        Group actualGroup = jsonAdaptedGroup.toModelType(idToPersonMap);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
