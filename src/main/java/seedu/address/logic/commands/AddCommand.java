@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -70,11 +71,8 @@ public class AddCommand implements UndoableCommand, StateDependentCommand {
 
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
-        if (applicationState == ApplicationState.HOME) {
-            return true;
-        } else {
-            return false;
-        }
+        ApplicationStateType applicationStateType = applicationState.getApplicationStateType();
+        return applicationStateType == ApplicationStateType.HOME;
     }
 
     @Override
