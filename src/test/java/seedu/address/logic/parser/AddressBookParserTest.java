@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.CS2101_GROUP_BUILDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
@@ -27,6 +28,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.GroupInformationState;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonNameContainsKeywordsPredicate;
@@ -35,7 +38,6 @@ import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupUtil;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.TypicalGroups;
 
 public class AddressBookParserTest {
 
@@ -119,10 +121,11 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_remove() throws Exception {
+        Group group = CS2101_GROUP_BUILDER.build();
+        ApplicationState applicationState = new GroupInformationState(group);
         RemoveCommand command = (RemoveCommand) parser.parseCommand(
-                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
-                TypicalGroups.CS2101_GROUP_BUILDER.build());
-        assertEquals(new RemoveCommand(INDEX_FIRST, TypicalGroups.CS2101_GROUP_BUILDER.build()), command);
+                RemoveCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), applicationState);
+        assertEquals(new RemoveCommand(INDEX_FIRST, CS2101_GROUP_BUILDER.build()), command);
     }
 
     @Test

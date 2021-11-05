@@ -24,7 +24,7 @@ public class JoinGroupCommandParser implements Parser<JoinGroupCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_GROUP, PREFIX_PERSON);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP)
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP, PREFIX_PERSON)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, JoinGroupCommand.MESSAGE_USAGE));
         }

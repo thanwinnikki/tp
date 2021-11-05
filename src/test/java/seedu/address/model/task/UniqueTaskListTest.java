@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TAS
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalTasks.TASK_1_BUILDER;
 import static seedu.address.testutil.TypicalTasks.TASK_A_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_B_BUILDER;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,6 +24,7 @@ public class UniqueTaskListTest {
 
     private final UniqueTaskList uniqueTaskList = new UniqueTaskList();
     private final Task taskA = TASK_A_BUILDER.build();
+    private final Task taskB = TASK_B_BUILDER.build();
     private final Task task1 = TASK_1_BUILDER.build();
 
     @Test
@@ -110,8 +112,8 @@ public class UniqueTaskListTest {
     @Test
     public void setTask_editedTaskHasNonUniqueIdentity_throwsDuplicateTaskException() {
         uniqueTaskList.add(taskA);
-        uniqueTaskList.add(task1);
-        assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.setTask(taskA, task1));
+        uniqueTaskList.add(taskB);
+        assertThrows(DuplicateTaskException.class, () -> uniqueTaskList.setTask(taskA, taskB));
     }
 
     @Test
