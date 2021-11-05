@@ -36,6 +36,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CAROL = "Carol Peletier";
+    public static final String VALID_NAME_DONALD = "Donald Zuramp";
     public static final String VALID_NAME_SWIMMING = "Swimming Club";
     public static final String VALID_NAME_TENNIS = "Tennis Club";
     public static final String VALID_NAME_VOLLEYBALL = "Volleyball club";
@@ -46,14 +47,18 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_AMY = "11111111";
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_PHONE_CAROL = "12321232";
+    public static final String VALID_PHONE_DONALD = "78987898";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_EMAIL_CAROL = "carol@example.com";
+    public static final String VALID_EMAIL_DONALD = "donald@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ADDRESS_DONALD = "Zuramp Tower, 7347 State Rd., Philadelphia, PA 19136";
     public static final String VALID_TAG_WIFE = "wife";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_COVFEFE = "covfefe";
     public static final String VALID_GROUP_NAME_CS2101 = "CS2101";
     public static final String VALID_DESCRIPTION_TASK_1 = "Prepare Pitch";
 

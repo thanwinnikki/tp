@@ -2,17 +2,26 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.storage.JsonAdaptedGroup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.TENNIS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.CAROL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.DONALD;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
+import static seedu.address.testutil.TypicalTasks.TASK_F_BUILDER;
+import static seedu.address.testutil.TypicalTasks.TASK_G_BUILDER;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,28 +38,28 @@ import seedu.address.model.person.Person;
 public class JsonAdaptedGroupTest {
 
     @Test
-    public void toModelType_validGroupDetails_returnsGroup() throws IllegalValueException {
-        String groupNameString = "group";
+    public void toModelType_validNonNullGroupDetails_returnsGroup() throws IllegalValueException {
+        // Equivalence Partition {groupName, description, groupMateIds, tasks}: Valid and non-null
         List<String> groupMateIds = new ArrayList<>();
         groupMateIds.add("0-1");
         groupMateIds.add("1-2");
         groupMateIds.add("3-5");
         groupMateIds.add("8-d");
         Map<Id, Person> idToPersonMap = new HashMap<>();
-        idToPersonMap.put(Id.parse("0-1"), ALICE);
-        idToPersonMap.put(Id.parse("1-2"), BENSON);
-        idToPersonMap.put(Id.parse("3-5"), CARL);
-        idToPersonMap.put(Id.parse("8-d"), DANIEL);
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(groupNameString)
+        idToPersonMap.put(Id.parse("0-1"), AMY);
+        idToPersonMap.put(Id.parse("1-2"), BOB);
+        idToPersonMap.put(Id.parse("3-5"), CAROL);
+        idToPersonMap.put(Id.parse("8-d"), DONALD);
+        List<JsonAdaptedTask> tasks = new ArrayList<>();
+        tasks.add(new JsonAdaptedTask(TASK_F_BUILDER.build()));
+        tasks.add(new JsonAdaptedTask(TASK_G_BUILDER.build()));
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
                 .withGroupMateIds(groupMateIds)
+                .withTasks(tasks)
                 .build();
 
-        Name groupName = new Name("group");
-        Group group = new Group(groupName);
-        group.add(ALICE);
-        group.add(BENSON);
-        group.add(CARL);
-        group.add(DANIEL);
+        Group group = TENNIS.build();
 
         assertEquals(group, jsonAdaptedGroup.toModelType(idToPersonMap));
     }

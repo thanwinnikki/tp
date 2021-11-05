@@ -12,7 +12,9 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.CAROL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.DONALD;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
@@ -63,7 +65,8 @@ public class TypicalGroups {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB).withTasks(TASK_F_BUILDER.build());
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB, CAROL, DONALD)
+            .withTasks(TASK_F_BUILDER.build(), TASK_G_BUILDER.build());
     public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
             .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
     public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
