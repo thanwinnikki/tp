@@ -13,6 +13,20 @@ import seedu.address.testutil.TaskBuilder;
 public class JsonAdaptedTaskTest {
 
     @Test
+    public void constructor_differentConstructors_sameTask() {
+        JsonAdaptedTask jsonAdaptedTask1 = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, false);
+        JsonAdaptedTask jsonAdaptedTask2 = new JsonAdaptedTask(TASK_1_BUILDER.build());
+        assertEquals(jsonAdaptedTask1, jsonAdaptedTask2);
+
+        jsonAdaptedTask1 = new JsonAdaptedTask(VALID_DESCRIPTION_TASK_1, true);
+        Task task2 = new TaskBuilder(TASK_1_BUILDER.build())
+                .withDoneStatus(true)
+                .build();
+        jsonAdaptedTask2 = new JsonAdaptedTask(task2);
+        assertEquals(jsonAdaptedTask1, jsonAdaptedTask2);
+    }
+
+    @Test
     public void equals_differentType_returnsFalse() {
         // Equivalence Partition {type}: Different type
         JsonAdaptedTask jsonAdaptedTask = new JsonAdaptedTask(TASK_1_BUILDER.build());
