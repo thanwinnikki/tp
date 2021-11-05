@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CSMODULE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BASKETBALL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
@@ -15,6 +16,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CAROL;
 import static seedu.address.testutil.TypicalPersons.DONALD;
+import static seedu.address.testutil.TypicalTasks.TASK_1_BUILDER;
 import static seedu.address.testutil.TypicalTasks.TASK_F_BUILDER;
 import static seedu.address.testutil.TypicalTasks.TASK_G_BUILDER;
 
@@ -308,5 +310,103 @@ public class JsonAdaptedGroupTest {
         JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
                 .build();
         assertEquals(jsonAdaptedGroup, jsonAdaptedGroup);
+    }
+
+    @Test
+    public void equals_sameAttributes_returnsTrue() {
+        // Equivalence Partition {name, description, groupMateIds, tasks}: Same and non-null
+        List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
+        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        assertEquals(jsonAdaptedGroup1, jsonAdaptedGroup2);
+    }
+
+    @Test
+    public void equals_bothNullOptionalAttributes_returnsTrue() {
+        // Equivalence Partition {name, description, groupMateIds, tasks}: Same and both have null optional attributes
+        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .build();
+        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .build();
+        assertEquals(jsonAdaptedGroup1, jsonAdaptedGroup2);
+    }
+
+    @Test
+    public void equals_differentNames_returnsTrue() {
+        // Equivalence Partition {name}: Different names
+        List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
+        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(VALID_NAME_SWIMMING)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        assertNotEquals(jsonAdaptedGroup1, jsonAdaptedGroup2);
+    }
+
+    @Test
+    public void equals_differentDescriptions_returnsTrue() {
+        // Equivalence Partition {description}: Different descriptions
+        List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
+        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_CSMODULE)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        assertNotEquals(jsonAdaptedGroup1, jsonAdaptedGroup2);
+    }
+
+    @Test
+    public void equals_differentGroupMateIdsLists_returnsTrue() {
+        // Equivalence Partition {groupMateIds}: Different group mate IDs lists
+        List<String> groupMateIds1 = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
+        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds1)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        List<String> groupMateIds2 = new ArrayList<>(SWIMMING_GROUP_MATE_IDS);
+        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds2)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        assertNotEquals(jsonAdaptedGroup1, jsonAdaptedGroup2);
+    }
+
+    @Test
+    public void equals_differentTasksLists_returnsTrue() {
+        // Equivalence Partition {tasks}: Different tasks lists
+        List<String> groupMateIds = new ArrayList<>(TENNIS_GROUP_MATE_IDS);
+        JsonAdaptedGroup jsonAdaptedGroup1 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(TENNIS_TASKS)
+                .build();
+        List<JsonAdaptedTask> tasks = new ArrayList<>(TENNIS_TASKS);
+        tasks.add(new JsonAdaptedTask(TASK_1_BUILDER.build()));
+        JsonAdaptedGroup jsonAdaptedGroup2 = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withDescription(VALID_DESCRIPTION_SPORTS)
+                .withGroupMateIds(groupMateIds)
+                .withTasks(tasks)
+                .build();
+        assertNotEquals(jsonAdaptedGroup1, jsonAdaptedGroup2);
     }
 }
