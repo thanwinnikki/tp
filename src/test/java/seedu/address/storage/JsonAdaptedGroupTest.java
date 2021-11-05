@@ -247,6 +247,33 @@ public class JsonAdaptedGroupTest {
     }
 
     @Test
+    public void toModelType_invalidTasks_throwsIllegalValueException() {
+        // Equivalence Partition {tasks}: Invalid task in tasks list
+        List<JsonAdaptedTask> tasks = new ArrayList<>();
+        tasks.add(new JsonAdaptedTask(null, false));
+        Map<Id, Person> idToPersonMap = new HashMap<>();
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
+                .withTasks(tasks)
+                .build();
+        String expectedMessage = String.format(JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT,
+                Description.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
+    public void toModelType_duplicateTasks_throwsIllegalValueException() {
+        // Equivalence Partition {tasks}: Duplicate tasks in tasks list
+        Map<Id, Person> idToPersonMap = new HashMap<>(ID_TO_PERSON_MAP);
+        List<JsonAdaptedTask> tasks = new ArrayList<>(TENNIS_TASKS);
+        tasks.add(new JsonAdaptedTask(TASK_F_BUILDER.build()));
+        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_TENNIS)
+                .withTasks(tasks)
+                .build();
+        String expectedMessage = JsonAdaptedGroup.MESSAGE_DUPLICATE_TASK;
+        assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
+    }
+
+    @Test
     public void jsonAdaptedGroupBuilder_sameGroupDifferentConstructors_returnsSameJsonAdaptedGroup()
             throws IllegalValueException {
         Map<Person, Id> personToIdMap = new HashMap<>();
@@ -266,20 +293,6 @@ public class JsonAdaptedGroupTest {
                 .build();
 
         assertEquals(jsonAdaptedGroupFromJson, jsonAdaptedGroupFromModel);
-    }
-
-    @Test
-    public void toModelType_invalidTasks_throwsIllegalValueException() {
-        // Equivalence Partition {tasks}: Invalid task in tasks list
-        List<JsonAdaptedTask> tasks = new ArrayList<>();
-        tasks.add(new JsonAdaptedTask(null, false));
-        Map<Id, Person> idToPersonMap = new HashMap<>();
-        JsonAdaptedGroup jsonAdaptedGroup = new JsonAdaptedGroup.Builder(VALID_NAME_BASKETBALL)
-                .withTasks(tasks)
-                .build();
-        String expectedMessage = String.format(JsonAdaptedTask.MISSING_FIELD_MESSAGE_FORMAT,
-                Description.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, () -> jsonAdaptedGroup.toModelType(idToPersonMap));
     }
 
     @Test
