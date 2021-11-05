@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CAROL;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +35,26 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
 
     @Test
+    public void build_withIdObject_constructsWithCorrectId() throws IllegalValueException {
+        Id id = Id.parse("0-1");
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(BENSON)
+                .withId(id)
+                .build();
+        assertEquals(Id.parse("0-1"), person.getId());
+    }
+
+    @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(BENSON)
                 .build();
         assertEquals(BENSON, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_validPersonDetailsWithNoOptionalAttributes_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson.Builder(CAROL)
+                .build();
+        assertEquals(CAROL, person.toModelType());
     }
 
     @Test
