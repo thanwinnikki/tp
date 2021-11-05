@@ -105,7 +105,7 @@ public class CommandResult {
          * @param nextApplicationState The application state to change to as a result of the command execution.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setNextAppState(ApplicationState nextApplicationState) {
+        public Builder setNextApplicationState(ApplicationState nextApplicationState) {
             assert nextApplicationState != null : "The value of nextApplicationState cannot be null.";
             this.nextApplicationState = nextApplicationState;
             return this;
@@ -117,7 +117,7 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goToHome() {
-            return setNextAppState(new HomeState());
+            return setNextApplicationState(new HomeState());
         }
 
         /**
@@ -128,7 +128,7 @@ public class CommandResult {
          */
         public Builder displayGroupInformation(Group group) {
             assert group != null : "The value of group cannot be null.";
-            return setNextAppState(new GroupInformationState(group));
+            return setNextApplicationState(new GroupInformationState(group));
         }
 
         /**

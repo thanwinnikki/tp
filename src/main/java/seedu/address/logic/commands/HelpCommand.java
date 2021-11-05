@@ -25,7 +25,7 @@ public class HelpCommand extends AlwaysRunnableCommand {
     public CommandResult execute(Model model) {
         return new CommandResult.Builder(SHOWING_HELP_MESSAGE)
                 .showHelp()
-                .setNextAppState(currentApplicationState)
+                .setNextApplicationState(currentApplicationState)
                 .build();
     }
 }

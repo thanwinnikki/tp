@@ -25,7 +25,7 @@ public class UndoCommand extends AlwaysRunnableCommand {
         // This means this message will only appear if nothing was undone.
         return new CommandResult.Builder(MESSAGE_NOTHING_UNDONE)
                 .goCauseUndo()
-                .setNextAppState(currentApplicationState)
+                .setNextApplicationState(currentApplicationState)
                 .build();
     }
 
