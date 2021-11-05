@@ -23,4 +23,5 @@ public class GroupUtil {
         sb.append(PREFIX_DESCRIPTION + group.getDescription().value + " ");
         return sb.toString();
     }
+
 }
