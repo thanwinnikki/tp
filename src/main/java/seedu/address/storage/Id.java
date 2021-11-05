@@ -70,7 +70,7 @@ public class Id implements Comparable<Id> {
     }
 
     private static String[] getTokens(String idString) throws IllegalValueException {
-        if (idString.startsWith(DELIMITER) || idString.endsWith(DELIMITER)) {
+        if (idString == null || idString.startsWith(DELIMITER) || idString.endsWith(DELIMITER)) {
             throw new IllegalValueException(MESSAGE_MALFORMED_ID);
         }
         String[] tokens = idString.split(DELIMITER);
