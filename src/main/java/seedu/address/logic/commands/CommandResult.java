@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.logic.state.ApplicationState;
+import seedu.address.logic.state.GroupInformationState;
+import seedu.address.logic.state.HomeState;
 import seedu.address.model.group.Group;
 
 /**
@@ -12,24 +14,27 @@ import seedu.address.model.group.Group;
  */
 public class CommandResult {
 
-    private String feedbackToUser;
+    private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private boolean showHelp;
+    private final boolean isGoingToShowHelp;
 
     /** The application should exit. */
-    private boolean exit;
+    private final boolean isGoingToExit;
 
-    private ApplicationState nextApplicationState;
-    private Object nextDataToStore;
-    private boolean isGoingToCauseUndo;
+    private final ApplicationState nextApplicationState;
+    private final boolean isGoingToCauseUndo;
 
     /**
      * Builder class to help with creating different types of {@code CommandResult} objects.
      */
     public static class Builder {
 
-        private CommandResult commandResultToBuild;
+        private String feedbackToUser;
+        private boolean isGoingToShowHelp;
+        private boolean isGoingToExit;
+        private ApplicationState nextApplicationState;
+        private boolean isGoingToCauseUndo;
 
         /**
          * Creates a {@code CommandResult.Builder} to help with creating a {@code CommandResult} object.
@@ -37,7 +42,11 @@ public class CommandResult {
          * @param feedbackToUser The feedback to be shown to the user.
          */
         public Builder(String feedbackToUser) {
-            commandResultToBuild = new CommandResult(feedbackToUser);
+            this.feedbackToUser = feedbackToUser;
+            isGoingToShowHelp = false;
+            isGoingToExit = false;
+            nextApplicationState = new HomeState();
+            isGoingToCauseUndo = false;
         }
 
         /**
@@ -46,17 +55,18 @@ public class CommandResult {
          * @return The {@code CommandResult} object that was created.
          */
         public CommandResult build() {
-            return commandResultToBuild;
+            return new CommandResult(feedbackToUser, isGoingToShowHelp, isGoingToExit, nextApplicationState,
+                    isGoingToCauseUndo);
         }
 
         /**
          * Sets whether the {@code CommandResult} object will cause help information to be shown to the user.
          *
-         * @param willShowHelp Whether help information will be shown.
+         * @param isGoingToShowHelp Whether help information will be shown.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setShowHelp(boolean willShowHelp) {
-            commandResultToBuild.showHelp = willShowHelp;
+        public Builder setGoShowHelp(boolean isGoingToShowHelp) {
+            this.isGoingToShowHelp = isGoingToShowHelp;
             return this;
         }
 
@@ -65,18 +75,18 @@ public class CommandResult {
          *
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder showHelp() {
-            return setShowHelp(true);
+        public Builder goShowHelp() {
+            return setGoShowHelp(true);
         }
 
         /**
          * Sets whether the {@code CommandResult} object will cause the application to exit.
          *
-         * @param willExit Whether the application will exit.
+         * @param isGoingToExit Whether the application will exit.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setExit(boolean willExit) {
-            commandResultToBuild.exit = willExit;
+        public Builder setGoExit(boolean isGoingToExit) {
+            this.isGoingToExit = isGoingToExit;
             return this;
         }
 
@@ -86,7 +96,7 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goExit() {
-            return setExit(true);
+            return setGoExit(true);
         }
 
         /**
@@ -95,21 +105,9 @@ public class CommandResult {
          * @param nextApplicationState The application state to change to as a result of the command execution.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setNextAppState(ApplicationState nextApplicationState) {
+        public Builder setNextApplicationState(ApplicationState nextApplicationState) {
             assert nextApplicationState != null : "The value of nextApplicationState cannot be null.";
-            commandResultToBuild.nextApplicationState = nextApplicationState;
-            return this;
-        }
-
-        /**
-         * Sets the {@code CommandResult} object to cause the application to store the given data.
-         *
-         * @param nextDataToStore The data to store.
-         * @param <T> The type of the data to be stored.
-         * @return This {@code CommandResult.Builder} instance.
-         */
-        public <T> Builder setNextDataToStore(T nextDataToStore) {
-            commandResultToBuild.nextDataToStore = nextDataToStore;
+            this.nextApplicationState = nextApplicationState;
             return this;
         }
 
@@ -119,8 +117,7 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goToHome() {
-            return setNextAppState(ApplicationState.HOME)
-                    .setNextDataToStore(null);
+            return setNextApplicationState(new HomeState());
         }
 
         /**
@@ -131,8 +128,18 @@ public class CommandResult {
          */
         public Builder displayGroupInformation(Group group) {
             assert group != null : "The value of group cannot be null.";
-            return setNextAppState(ApplicationState.GROUP_INFORMATION)
-                    .setNextDataToStore(group);
+            return setNextApplicationState(new GroupInformationState(group));
+        }
+
+        /**
+         * Sets whether the {@code CommandResult} object will cause the application to undo.
+         *
+         * @param isGoingToCauseUndo Whether the application will undo.
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder setGoCauseUndo(boolean isGoingToCauseUndo) {
+            this.isGoingToCauseUndo = isGoingToCauseUndo;
+            return this;
         }
 
         /**
@@ -141,21 +148,15 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goCauseUndo() {
-            commandResultToBuild.isGoingToCauseUndo = true;
-            return this;
+            return setGoCauseUndo(true);
         }
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        nextApplicationState = ApplicationState.HOME;
-        nextDataToStore = null;
-        isGoingToCauseUndo = false;
+    public CommandResult(String feedbackToUser, boolean isGoingToShowHelp, boolean isGoingToExit) {
+        this(requireNonNull(feedbackToUser), isGoingToShowHelp, isGoingToExit, new HomeState(), false);
     }
 
     /**
@@ -163,32 +164,32 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
+        this(requireNonNull(feedbackToUser), false, false, new HomeState(), false);
+    }
+
+    private CommandResult(String feedbackToUser, boolean isGoingToShowHelp, boolean isGoingToExit,
+            ApplicationState nextApplicationState, boolean isGoingToCauseUndo) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        showHelp = false;
-        exit = false;
-        nextApplicationState = ApplicationState.HOME;
-        nextDataToStore = null;
-        isGoingToCauseUndo = false;
+        this.isGoingToShowHelp = isGoingToShowHelp;
+        this.isGoingToExit = isGoingToExit;
+        this.nextApplicationState = nextApplicationState;
+        this.isGoingToCauseUndo = isGoingToCauseUndo;
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
+    public boolean isGoingToShowHelp() {
+        return isGoingToShowHelp;
     }
 
-    public boolean isExit() {
-        return exit;
+    public boolean isGoingToExit() {
+        return isGoingToExit;
     }
 
-    public ApplicationState getNextAppState() {
+    public ApplicationState getNextApplicationState() {
         return nextApplicationState;
-    }
-
-    public <T> T getNextDataToStore() {
-        return (T) nextDataToStore;
     }
 
     public boolean isGoingToCauseUndo() {
@@ -208,19 +209,17 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         boolean haveSameFeedbacksToUser = feedbackToUser.equals(otherCommandResult.feedbackToUser);
-        boolean willBothShowHelp = showHelp == otherCommandResult.showHelp;
-        boolean willBothExit = exit == otherCommandResult.exit;
+        boolean willBothShowHelp = isGoingToShowHelp == otherCommandResult.isGoingToShowHelp;
+        boolean willBothExit = isGoingToExit == otherCommandResult.isGoingToExit;
+        assert nextApplicationState != null : "The next application state must always be non-null.";
         boolean haveSameNextApplicationStates = nextApplicationState.equals(otherCommandResult.nextApplicationState);
-        boolean haveNullNextDataToStore = nextDataToStore == null && otherCommandResult.nextDataToStore == null;
-        boolean haveSameNextDataToStore = haveNullNextDataToStore
-                || (nextDataToStore != null && nextDataToStore.equals(otherCommandResult.nextDataToStore));
         boolean areBothGoingToCauseUndo = isGoingToCauseUndo == otherCommandResult.isGoingToCauseUndo;
         return haveSameFeedbacksToUser && willBothShowHelp && willBothExit && haveSameNextApplicationStates
-                && haveSameNextDataToStore && areBothGoingToCauseUndo;
+                && areBothGoingToCauseUndo;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, nextApplicationState, nextDataToStore, isGoingToCauseUndo);
+        return Objects.hash(feedbackToUser, isGoingToShowHelp, isGoingToExit, nextApplicationState, isGoingToCauseUndo);
     }
 }

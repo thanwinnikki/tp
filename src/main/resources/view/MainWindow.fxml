@@ -25,7 +25,7 @@
       </stylesheets>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+        <MenuBar fx:id="menuBar" styleClass="status-bar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
@@ -34,27 +34,30 @@
           </Menu>
         </MenuBar>
 
-        <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
+        <VBox spacing="5" styleClass="main-stack-pane" VBox.vgrow="ALWAYS">
+          <HBox fx:id="listPanel" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <StackPane fx:id="listPanelPlaceholderLeft" HBox.hgrow="ALWAYS" />
+            <StackPane minWidth="10" HBox.hgrow="NEVER" />
+            <StackPane fx:id="listPanelPlaceholderRight" HBox.hgrow="ALWAYS" />
+          </HBox>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
-                   styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
+          <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100"
+                     styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <padding>
+              <Insets bottom="5" left="10" right="10" top="5" />
+            </padding>
+          </StackPane>
 
-        <HBox fx:id="listPanel" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets bottom="10" left="10" right="10" top="10" />
-          </padding>
-          <StackPane fx:id="listPanelPlaceholderLeft" HBox.hgrow="ALWAYS" />
-          <StackPane minWidth="10" HBox.hgrow="NEVER" />
-          <StackPane fx:id="listPanelPlaceholderRight" HBox.hgrow="ALWAYS" />
-        </HBox>
+          <StackPane fx:id="commandBoxPlaceholder" maxHeight="65" minHeight="65" prefHeight="65"
+                     styleClass="pane-with-border" VBox.vgrow="NEVER">
+            <padding>
+              <Insets bottom="5" left="10" right="10" top="5" />
+            </padding>
+          </StackPane>
+        </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
