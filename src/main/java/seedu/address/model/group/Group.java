@@ -30,7 +30,7 @@ public class Group {
      * Name, Description, persons and tasks must be present and not null.
      */
     public Group(Name name, Description description, UniquePersonList persons, UniqueTaskList tasks) {
-        requireAllNonNull(name, description, persons, tasks);
+        requireAllNonNull(name, persons, tasks);
         this.name = name;
         this.description = description;
         this.persons = persons;

@@ -146,7 +146,7 @@ public class EditGroupCommand implements UndoableCommand, StateDependentCommand 
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditGroupDescriptor(EditGroupCommand.EditGroupDescriptor toCopy) {
+        public EditGroupDescriptor(EditGroupDescriptor toCopy) {
             setName(toCopy.name);
             setDescription(toCopy.description);
         }
