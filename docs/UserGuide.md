@@ -120,7 +120,7 @@ Shows a message explaining how to access the user guide.
 <div markdown="span" class="alert alert-primary">
 
 :tv: **Tip:**
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -134,7 +134,7 @@ Adds a person to ThunderCat.
 <div markdown="span" class="alert alert-primary">
 
 :tv: **Tip:**
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -151,9 +151,10 @@ Examples:
 
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="span" class="alert alert-primary">
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+:tv: **Tip:**
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -169,7 +170,7 @@ Shows a list of all groups in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -182,7 +183,7 @@ Shows a list of all persons in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -195,7 +196,7 @@ Edits an existing person in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -219,7 +220,7 @@ Edits an existing group in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -238,7 +239,7 @@ Finds persons whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -263,7 +264,7 @@ Deletes the specified person from ThunderCat (also removes the person from all g
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -283,7 +284,7 @@ Find groups whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -309,7 +310,7 @@ Deletes the specified group from the displayed group list.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -328,7 +329,7 @@ Adds multiple specified people to a specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -349,7 +350,7 @@ Lists out all the group mates and tasks in the specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -368,7 +369,7 @@ Removes the specified person from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
@@ -389,7 +390,7 @@ Adds a task to the group that ThunderCat is displaying. By default, the task is 
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
@@ -404,7 +405,7 @@ Deletes the specified task from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
@@ -423,7 +424,7 @@ Marks the specified task in the group as done.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 
 </div>
@@ -443,7 +444,7 @@ Undoes an undoable command.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 
