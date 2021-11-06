@@ -116,7 +116,7 @@ This is a warning.
 
 Adds a person to ThunderCat.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :tv: **Tip:**
 
