@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.CS2103T_GROUP_BUILDER;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -56,6 +58,18 @@ public class AddTaskCommandTest {
 
         assertThrows(CommandException.class, AddTaskCommand.MESSAGE_DUPLICATE_TASK, () ->
                 addTaskCommand.execute(model));
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Group group = CS2103T_GROUP_BUILDER.build();
+        Task task = new TaskBuilder().build();
+        UndoableCommand addTaskCommand = new AddTaskCommand(task, group);
+        String expectedMessage = String.format(AddTaskCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, task);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(group)
+                .build();
+        assertUndoSuccess(addTaskCommand, model, expectedUndoResult);
     }
 
     @Test
