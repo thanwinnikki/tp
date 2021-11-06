@@ -111,8 +111,7 @@ This is a warning.
 
 </div>
 
-## Persons:
-
+## Persons
 ### Adding a person: `add`
 
 Adds a person to ThunderCat.
@@ -215,8 +214,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-## Groups:
-
+## Groups
 ### Creating a group : `addG`
 
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
@@ -372,8 +370,7 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2` removes the 2nd person in the displayed person list from the group.
 
-## Tasks:
-
+## Tasks
 ### Adding a task to the current group: `addT`
 
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
@@ -493,7 +490,6 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 
 ## Data Storage
-
 ### Saving the data
 
 The data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
