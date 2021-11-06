@@ -335,6 +335,10 @@ Adds a task to the group that ThunderCat is displaying. By default, the task is 
 :bulb: Panel where this can be called :
 * Group Information Panel
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The task's name can only be displayed up to first 70 characters.
+</div>
+
 Format: `addT d/TASK_DESCRIPTION`
 
 Example:
