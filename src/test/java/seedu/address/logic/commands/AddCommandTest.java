@@ -54,7 +54,7 @@ public class AddCommandTest {
 
     @Test
     public void undo_validPrecondition_successfulUndo() throws CommandException {
-        AddAndRemovePersonModelStub modelStub = new AddAndRemovePersonModelStub();
+        AddAndDeletePersonModelStub modelStub = new AddAndDeletePersonModelStub();
         Person person = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(person);
         addCommand.execute(modelStub);
@@ -265,7 +265,7 @@ public class AddCommandTest {
     /**
      * A Model stub that can add and remove a person.
      */
-    private class AddAndRemovePersonModelStub extends ModelStubAcceptingPersonAdded {
+    private class AddAndDeletePersonModelStub extends ModelStubAcceptingPersonAdded {
 
         @Override
         public void deletePerson(Person target) {
