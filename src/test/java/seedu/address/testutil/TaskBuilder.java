@@ -48,10 +48,14 @@ public class TaskBuilder {
 
     /**
      * Builds the {@code Task} as intended for testing.
-     * @return
+     * @return The task that was built.
      */
     public Task build() {
-        return new Task(description);
+        Task task = new Task(description);
+        if (done) {
+            task.setDoneTask();
+        }
+        return task;
     }
 
 }
