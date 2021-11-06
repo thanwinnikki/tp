@@ -7,10 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.function.Predicate;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -41,6 +44,9 @@ public class AddCommand implements UndoableCommand, StateDependentCommand {
 
     private final Person toAdd;
 
+    private Predicate<? super Person> personPredicate;
+    private Predicate<? super Group> groupPredicate;
+
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
@@ -52,6 +58,9 @@ public class AddCommand implements UndoableCommand, StateDependentCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        personPredicate = model.getFilteredPersonListPredicate();
+        groupPredicate = model.getFilteredGroupListPredicate();
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -65,6 +74,14 @@ public class AddCommand implements UndoableCommand, StateDependentCommand {
     public CommandResult undo(Model model) throws CommandException {
         assert model.hasPerson(toAdd) : "The model must contain the person to undo its addition.";
         model.deletePerson(toAdd);
+        if (personPredicate == null) {
+            personPredicate = Model.PREDICATE_SHOW_ALL_PERSONS;
+        }
+        model.updateFilteredPersonList(personPredicate);
+        if (groupPredicate == null) {
+            groupPredicate = Model.PREDICATE_SHOW_ALL_GROUPS;
+        }
+        model.updateFilteredGroupList(groupPredicate);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
                 .build();
     }

@@ -21,6 +21,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -123,7 +125,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -141,6 +143,23 @@ public class CommandTestUtil {
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Undoes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedUndoResult} <br>
+     * - the {@code actualModel} is the same as it was before execution
+     */
+    public static void assertUndoSuccess(UndoableCommand command, Model actualModel, CommandResult expectedUndoResult) {
+        try {
+            Model expectedModel = new ModelManager(actualModel.getAddressBook(), new UserPrefs());
+            command.execute(actualModel);
+            CommandResult actualUndoResult = command.undo(actualModel);
+            assertEquals(expectedUndoResult, actualUndoResult);
+            assertEquals(expectedModel, actualModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Undo of command should not fail.", ce);
+        }
     }
 
     /**

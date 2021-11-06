@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -40,6 +41,16 @@ public class AddCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Person person = new PersonBuilder().build();
+        UndoableCommand addCommand = new AddCommand(person);
+        String expectedMessage = String.format(AddCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, person);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .build();
+        assertUndoSuccess(addCommand, model, expectedUndoResult);
     }
 
 }

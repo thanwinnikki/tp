@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -20,12 +22,13 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
-import seedu.address.testutil.TypicalGroups;
 
 public class AddGroupCommandTest {
 
@@ -53,6 +56,34 @@ public class AddGroupCommandTest {
 
         assertThrows(CommandException.class, AddGroupCommand.MESSAGE_DUPLICATE_GROUP, () ->
                 addGroupCommand.execute(modelStub));
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() throws CommandException {
+        UndoModelStub modelStub = new UndoModelStub();
+        Group group = new GroupBuilder().build();
+        AddGroupCommand addGroupCommand = new AddGroupCommand(group);
+        addGroupCommand.execute(modelStub);
+        assertTrue(modelStub.hasGroup(group));
+
+        CommandResult actualUndoResult = addGroupCommand.undo(modelStub);
+        String expectedMessage = String.format(AddGroupCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, group);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .build();
+        assertEquals(expectedUndoResult, actualUndoResult);
+        assertFalse(modelStub.hasGroup(group));
+        assertEquals(new ArrayList<>(), modelStub.groupsAdded);
+    }
+
+    @Test
+    public void undo_validPreconditionIntegration_successfulUndo() {
+        Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+        Group group = new GroupBuilder().build();
+        UndoableCommand addGroupCommand = new AddGroupCommand(group);
+        String expectedMessage = String.format(AddGroupCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, group);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .build();
+        assertUndoSuccess(addGroupCommand, model, expectedUndoResult);
     }
 
     @Test
@@ -172,8 +203,13 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
         }
 
         @Override
@@ -182,8 +218,13 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
         }
 
         @Override
@@ -215,8 +256,7 @@ public class AddGroupCommandTest {
      */
     private class ModelStubAcceptingGroupAdded extends AddGroupCommandTest.ModelStub {
         final ArrayList<Group> groupsAdded = new ArrayList<>();
-        final FilteredList<Group> filteredGroups = new FilteredList<Group>(TypicalGroups
-                .getTypicalAddressBookWithGroups().getGroupList());
+        final FilteredList<Group> filteredGroups = new FilteredList<>(getTypicalAddressBookWithGroups().getGroupList());
 
         @Override
         public boolean hasGroup(Group group) {
@@ -231,7 +271,7 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {
             requireNonNull(predicate);
             filteredGroups.setPredicate(predicate);
         }
@@ -239,6 +279,33 @@ public class AddGroupCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+    }
+
+    /**
+     * A Model stub that always accept the person being added.
+     */
+    private class UndoModelStub extends ModelStubAcceptingGroupAdded {
+
+        @Override
+        public void deleteGroup(Group target) {
+            groupsAdded.remove(target);
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {}
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {}
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
         }
     }
 }

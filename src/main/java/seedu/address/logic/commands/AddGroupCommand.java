@@ -5,9 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
+import java.util.function.Predicate;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 
 public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "addG";
@@ -28,6 +31,9 @@ public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCo
 
     private final Group toAdd;
 
+    private Predicate<? super Person> personPredicate;
+    private Predicate<? super Group> groupPredicate;
+
     /**
      * Creates an AddGroupCommand to add the specified {@code Group}
      */
@@ -39,6 +45,9 @@ public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCo
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        personPredicate = model.getFilteredPersonListPredicate();
+        groupPredicate = model.getFilteredGroupListPredicate();
 
         if (model.hasGroup(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
@@ -55,6 +64,14 @@ public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCo
     public CommandResult undo(Model model) throws CommandException {
         assert model.hasGroup(toAdd) : "The model must contain the group to undo its addition.";
         model.deleteGroup(toAdd);
+        if (personPredicate == null) {
+            personPredicate = Model.PREDICATE_SHOW_ALL_PERSONS;
+        }
+        model.updateFilteredPersonList(personPredicate);
+        if (groupPredicate == null) {
+            groupPredicate = Model.PREDICATE_SHOW_ALL_GROUPS;
+        }
+        model.updateFilteredGroupList(groupPredicate);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, toAdd))
                 .build();
     }

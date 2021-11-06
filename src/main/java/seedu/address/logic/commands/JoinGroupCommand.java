@@ -13,7 +13,6 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 
 /** Adds a person to a group in the address book.
@@ -95,7 +94,6 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
             assert groupAddedTo.hasGroupMate(groupMate) : "The group mate must be in the group to undo the addition.";
             groupAddedTo.removeGroupMate(groupMate);
         });
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupAddedTo));
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupAddedTo))
                 .displayGroupInformation(groupAddedTo)
                 .build();

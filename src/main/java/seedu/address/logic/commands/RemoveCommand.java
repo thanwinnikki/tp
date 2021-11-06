@@ -11,7 +11,6 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -78,7 +77,6 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
     public CommandResult undo(Model model) throws CommandException {
         assert model.hasGroup(groupWithRemoval) : "The group removed from must still exist to undo the removal.";
         model.setGroup(groupWithRemoval, groupWithoutRemoval);
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupWithoutRemoval));
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, personRemoved))
                 .displayGroupInformation(groupWithoutRemoval)
                 .build();
