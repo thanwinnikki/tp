@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -64,6 +65,18 @@ public class MarkAsDoneCommandTest {
         MarkAsDoneCommand markAsDoneCommand = new MarkAsDoneCommand(outOfBoundIndex, group);
 
         assertCommandFailure(markAsDoneCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Group group = getFirstGroup(model);
+        Task taskToMarkAsDone = group.getTasks().getTask(INDEX_FIRST.getZeroBased());
+        UndoableCommand markAsDoneCommand = new MarkAsDoneCommand(INDEX_FIRST, group);
+        String expectedMessage = String.format(MarkAsDoneCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, taskToMarkAsDone);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(group)
+                .build();
+        assertUndoSuccess(markAsDoneCommand, model, expectedUndoResult);
     }
 
     @Test
