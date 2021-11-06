@@ -118,6 +118,7 @@ Shows a message explaining how to access the user guide.
 ![help message](images/helpMessage.png)
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
@@ -130,6 +131,7 @@ Format: `help`
 Adds a person to ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -148,6 +150,7 @@ Examples:
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -163,6 +166,7 @@ Examples:
 Shows a list of all groups in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
@@ -175,6 +179,7 @@ Format: `groups`
 Shows a list of all persons in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
@@ -187,6 +192,7 @@ Format: `list`
 Edits an existing person in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
@@ -210,6 +216,7 @@ Examples:
 Edits an existing group in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -228,6 +235,7 @@ Example:
 Finds persons whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -252,6 +260,7 @@ Examples:
 Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -271,6 +280,7 @@ Examples:
 Find groups whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -296,6 +306,7 @@ Examples:
 Deletes the specified group from the displayed group list.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -314,6 +325,7 @@ Examples:
 Adds multiple specified people to a specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -334,6 +346,7 @@ Examples:
 Lists out all the group mates and tasks in the specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -352,6 +365,7 @@ Example:
 Removes the specified person from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -372,6 +386,7 @@ Example:
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -386,6 +401,7 @@ Example:
 Deletes the specified task from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -404,8 +420,10 @@ Example:
 Marks the specified task in the group as done.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
+
 </div>
 
 Format: `done TASK_INDEX`
@@ -422,9 +440,11 @@ Example:
 Undoes an undoable command.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
+
 </div>
 
 Format: `undo`
