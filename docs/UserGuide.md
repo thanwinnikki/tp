@@ -381,6 +381,10 @@ Adds a task to the group that ThunderCat is displaying. By default, the task is 
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The task's name can only be displayed up to first 70 characters.
+</div>
+
 Format: `addT d/TASK_DESCRIPTION`
 
 Example:
