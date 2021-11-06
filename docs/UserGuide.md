@@ -15,7 +15,7 @@ ___
 
 ## About The Guide
 
-Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and JSON. This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
 
 ### Navigation
 
@@ -138,7 +138,7 @@ Examples:
 
 Shows a list of all persons in ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -151,7 +151,7 @@ Format: `list`
 
 Edits an existing person in ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -175,7 +175,7 @@ Examples:
 
 Finds persons whose names contain any of the given keywords.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -200,7 +200,7 @@ Examples:
 
 Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -221,7 +221,7 @@ Examples:
 
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :tv: **Tip:**
 [Page(s)](#graphical-user-interface) which you can use this command in.
@@ -238,7 +238,7 @@ Examples:
 
 Shows a list of all groups in ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -251,7 +251,7 @@ Format: `groups`
 
 Edits an existing group in ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -270,7 +270,7 @@ Example:
 
 Find groups whose names contain any of the given keywords.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -296,7 +296,7 @@ Examples:
 
 Deletes the specified group from the displayed group list.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -315,7 +315,7 @@ Examples:
 
 Adds multiple specified people to a specified group.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -336,7 +336,7 @@ Examples:
 
 Lists out all the group mates and tasks in the specified group.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -355,7 +355,7 @@ Example:
 
 Removes the specified person from the group that ThunderCat is displaying.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
@@ -377,7 +377,7 @@ Example:
 
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
@@ -396,7 +396,7 @@ Example:
 
 Deletes the specified task from the group that ThunderCat is displaying.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
@@ -415,7 +415,7 @@ Example:
 
 Marks the specified task in the group as done.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
@@ -437,7 +437,7 @@ Example:
 
 Undoes an undoable command.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -465,6 +465,14 @@ Format: `undo`
 
 Clears all entries from ThunderCat.
 
+<div markdown="block" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#graphical-user-interface) which you can use this command in
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+</div>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If done accidentally, you can use the undo command to undo the clear!
 </div>
@@ -477,7 +485,7 @@ Shows a message explaining how to access the user guide.
 
 ![help message](images/helpMessage.png)
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 :tv: **Tip:**
 [Page(s)](#graphical-user-interface) which you can use this command in
@@ -519,22 +527,15 @@ If the data file has an invalid format, such as after editing the file wrongly, 
 This piece of information is meant for more advanced users.
 </div>
 
-The data is saved as a JSON file called `records.json` located in `[JAR file location]/data`. Advanced users are welcome to update data directly by editing that data file.
+The data is saved as a [JSON](#json) file called `records.json` located in `[JAR file location]/data`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 </div>
 
 #### Structure of the data file
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This piece of information is meant for more advanced users.
-</div>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-The following is more suitable for more advanced users.
-</div>
-
-The data file consists of a JSON object containing a `persons` JSON array and a `groups` JSON array:
+The data file consists of a [JSON](#json) object containing a `persons` [JSON](#json) array and a `groups` [JSON](#json) array:
 
 ```json
 {
@@ -547,7 +548,7 @@ The data file consists of a JSON object containing a `persons` JSON array and a 
 }
 ```
 
-The `persons` JSON array consists of entries of each saved person and their details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+The `persons` [JSON](#json) array consists of entries of each saved person and their details structured as a [JSON](#json) object. The order the entries appear in the [JSON](#json) array determines the order the entries will appear in ThunderCat.
 
 In each person entry, these are the required attributes:
 * `"name"` is a string that refers to the person's saved name.
@@ -561,7 +562,7 @@ There are also some optional attributes:
   * Each ID is made of two _[hexadecimal](#hexadecimal)_ numbers separated by a hyphen `[hex]-[hex]`.
   * Each ID must be unique among all person entries.
   * The value of the ID does not matter, so it can have any value, so long as each ID is **unique** among all person entries.
-  * If a person belongs to a group, then the person must have an ID and this ID must also appear in that group's `groupMateIds` JSON array.
+  * If a person belongs to a group, then the person must have an ID and this ID must also appear in that group's `groupMateIds` [JSON](#json) array.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -691,6 +692,8 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 
 * **[Group Information Page](#group-info-page-anchor)**: The group information page where the lists of group members and tasks are displayed.<br>
 
+<a name="json"></a>
 * **JSON**: JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
 
+<a name="hexadecimal"></a>
 * **Hexadecimal**: Hexadecimal describes a base-16 number system. That is, it describes a numbering system containing 16 sequential numbers as base units (including 0) before adding a new position for the next number.
