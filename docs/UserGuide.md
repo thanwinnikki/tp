@@ -13,7 +13,7 @@ ___
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Target Audience
+## About The Guide
 
 Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and JSON. This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
 
@@ -111,16 +111,18 @@ This is a warning.
 
 </div>
 
-## Persons
-### Adding a person: `add`
+### Persons
+#### Adding a person: `add`
 
 Adds a person to ThunderCat.
 
 <div markdown="span" class="alert alert-primary">
 
 :tv: **Tip:**
+
 [Page(s)](#graphical-user-interface) which you can use this command in
 * [Home Page](#home-page-anchor)
+
 </div>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
@@ -132,7 +134,7 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`
 
-### Listing all persons : `list`
+#### Listing all persons : `list`
 
 Shows a list of all persons in ThunderCat.
 
@@ -145,7 +147,7 @@ Shows a list of all persons in ThunderCat.
 
 Format: `list`
 
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing person in ThunderCat.
 
@@ -169,7 +171,7 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -194,7 +196,7 @@ Examples:
   <br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+#### Deleting a person : `delete`
 
 Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
 
@@ -214,8 +216,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-## Groups
-### Creating a group : `addG`
+### Groups
+#### Creating a group : `addG`
 
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
@@ -232,7 +234,7 @@ Examples:
 * `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
 * `addG n/Family` adds a group with the name "Family" with the default description.
 
-### Viewing all groups: `groups`
+#### Viewing all groups: `groups`
 
 Shows a list of all groups in ThunderCat.
 
@@ -245,7 +247,7 @@ Shows a list of all groups in ThunderCat.
 
 Format: `groups`
 
-### Editing a group: `editG`
+#### Editing a group: `editG`
 
 Edits an existing group in ThunderCat.
 
@@ -264,7 +266,7 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 Example:
 * `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
 
-### Locating groups by name: `findG`
+#### Locating groups by name: `findG`
 
 Find groups whose names contain any of the given keywords.
 
@@ -290,7 +292,7 @@ Examples:
 
   ![result for 'find CS2103T Mates'](images/findG_CS2103T_Mates_Result.png)
 
-### Deleting a group : `deleteG`
+#### Deleting a group : `deleteG`
 
 Deletes the specified group from the displayed group list.
 
@@ -309,7 +311,7 @@ Format: `deleteG GROUP_INDEX`
 Examples:
 * `deleteG 2` deletes the 2nd group in ThunderCat.
 
-### Adding multiple people to a group : `joinG`
+#### Adding multiple people to a group : `joinG`
 
 Adds multiple specified people to a specified group.
 
@@ -330,7 +332,7 @@ Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
 Examples:
 * `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
 
-### Listing all group mates and tasks in a group: `group`
+#### Listing all group mates and tasks in a group: `group`
 
 Lists out all the group mates and tasks in the specified group.
 
@@ -349,7 +351,7 @@ Format: `group GROUP_INDEX`
 Example:
 * `group 1` shows the information of the group at index 1 of the displayed group list.
 
-### Remove a person from the current group: `remove`
+#### Remove a person from the current group: `remove`
 
 Removes the specified person from the group that ThunderCat is displaying.
 
@@ -370,8 +372,8 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2` removes the 2nd person in the displayed person list from the group.
 
-## Tasks
-### Adding a task to the current group: `addT`
+### Tasks
+#### Adding a task to the current group: `addT`
 
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
@@ -386,7 +388,7 @@ Format: `addT d/TASK_DESCRIPTION`
 Example:
 * `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `Not done` by default.
 
-### Deleting a task from the current group: `deleteT`
+#### Deleting a task from the current group: `deleteT`
 
 Deletes the specified task from the group that ThunderCat is displaying.
 
@@ -405,7 +407,7 @@ Format: `deleteT TASK_INDEX`
 Example:
 * `deleteT 1` deletes the 1st task in the displayed task list.
 
-### Marking a task as done: `done`
+#### Marking a task as done: `done`
 
 Marks the specified task in the group as done.
 
@@ -425,9 +427,9 @@ Format: `done TASK_INDEX`
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
 
-## General:
+### General:
 
-### Undoing an undoable command : `undo`
+#### Undoing an undoable command : `undo`
 
 Undoes an undoable command.
 
@@ -455,7 +457,7 @@ Format: `undo`
   * [`done`](#marking-a-task-as-done-done)
   * [`remove`](#remove-a-person-from-the-current-group-remove)
 
-### Clearing all entries : `clear`
+#### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
 
@@ -465,7 +467,7 @@ If done accidentally, you can use the undo command to undo the clear!
 
 Format: `clear`
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
 Shows a message explaining how to access the user guide.
 
@@ -481,7 +483,7 @@ Shows a message explaining how to access the user guide.
 
 Format: `help`
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Exits ThunderCat.
 
