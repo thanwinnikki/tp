@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -17,6 +18,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
+import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.TypicalGroups;
 
 public class DeleteTaskCommandTest {
@@ -59,6 +61,20 @@ public class DeleteTaskCommandTest {
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(outOfBoundIndex, groupToDeleteFrom);
 
         assertCommandFailure(deleteTaskCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Group groupToDeleteFrom = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
+        Task taskToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased())
+                .getTasks().getTask(INDEX_FIRST.getZeroBased());
+        UndoableCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST, groupToDeleteFrom);
+        String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, taskToDelete);
+        Group expectedGroup = new GroupBuilder(groupToDeleteFrom).build();
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(expectedGroup)
+                .build();
+        assertUndoSuccess(deleteTaskCommand, model, expectedUndoResult);
     }
 
     @Test
