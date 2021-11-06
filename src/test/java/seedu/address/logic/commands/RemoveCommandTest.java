@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -18,6 +19,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.GroupBuilder;
 
 public class RemoveCommandTest {
 
@@ -53,6 +55,19 @@ public class RemoveCommandTest {
         RemoveCommand removeCommand = new RemoveCommand(outOfBoundIndex, group);
 
         assertCommandFailure(removeCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Group group = getFirstGroup(model);
+        Person personToRemove = group.getPersons().asUnmodifiableObservableList().get(0);
+        UndoableCommand removeCommand = new RemoveCommand(INDEX_FIRST, group);
+        String expectedMessage = String.format(RemoveCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, personToRemove);
+        Group expectedGroup = new GroupBuilder(group).build();
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(expectedGroup)
+                .build();
+        assertUndoSuccess(removeCommand, model, expectedUndoResult);
     }
 
     @Test
