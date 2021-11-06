@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -86,6 +87,19 @@ public class JoinGroupCommandTest {
         String expectedMessage = JoinGroupCommand.MESSAGE_INVALID_GROUP_INDEX;
 
         assertCommandFailure(joinGroupCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Group group = model.getFilteredGroupList().get(INDEX_SECOND.getZeroBased());
+        Set<Index> personIndexesSet = new HashSet<>();
+        personIndexesSet.add(INDEX_SECOND);
+        UndoableCommand joinGroupCommand = new JoinGroupCommand(INDEX_SECOND, personIndexesSet);
+        String expectedMessage = String.format(JoinGroupCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, group);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .displayGroupInformation(group)
+                .build();
+        assertUndoSuccess(joinGroupCommand, model, expectedUndoResult);
     }
 
     /**
