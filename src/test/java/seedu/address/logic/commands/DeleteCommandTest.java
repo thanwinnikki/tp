@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -100,6 +101,17 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        UndoableCommand deleteCommand = new DeleteCommand(INDEX_FIRST);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, personToDelete);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .goToHome()
+                .build();
+        assertUndoSuccess(deleteCommand, model, expectedUndoResult);
     }
 
     @Test
