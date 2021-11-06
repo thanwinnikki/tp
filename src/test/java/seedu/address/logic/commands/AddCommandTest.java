@@ -53,6 +53,23 @@ public class AddCommandTest {
     }
 
     @Test
+    public void undo_validPrecondition_successfulUndo() throws CommandException {
+        AddAndRemovePersonModelStub modelStub = new AddAndRemovePersonModelStub();
+        Person person = new PersonBuilder().build();
+        AddCommand addCommand = new AddCommand(person);
+        addCommand.execute(modelStub);
+        assertTrue(modelStub.hasPerson(person));
+
+        CommandResult actualUndoResult = addCommand.undo(modelStub);
+        String expectedMessage = String.format(AddCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, person);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .build();
+        assertEquals(expectedUndoResult, actualUndoResult);
+        assertFalse(modelStub.hasPerson(person));
+        assertEquals(new ArrayList<>(), modelStub.personsAdded);
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
@@ -209,7 +226,11 @@ public class AddCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Person> personsAdded;
+
+        private ModelStubAcceptingPersonAdded() {
+            personsAdded = new ArrayList<>();
+        }
 
         @Override
         public boolean hasPerson(Person person) {
@@ -227,6 +248,28 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof ModelStubAcceptingPersonAdded)) {
+                return false;
+            }
+            if (obj == this) {
+                return true;
+            }
+            ModelStubAcceptingPersonAdded other = (ModelStubAcceptingPersonAdded) obj;
+            return personsAdded.equals(other.personsAdded);
+        }
     }
 
+    /**
+     * A Model stub that can add and remove a person.
+     */
+    private class AddAndRemovePersonModelStub extends ModelStubAcceptingPersonAdded {
+
+        @Override
+        public void deletePerson(Person target) {
+            personsAdded.remove(target);
+        }
+    }
 }
