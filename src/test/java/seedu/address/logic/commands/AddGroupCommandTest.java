@@ -60,7 +60,7 @@ public class AddGroupCommandTest {
 
     @Test
     public void undo_validPrecondition_successfulUndo() throws CommandException {
-        AddAndDeleteGroupModelStub modelStub = new AddAndDeleteGroupModelStub();
+        UndoModelStub modelStub = new UndoModelStub();
         Group group = new GroupBuilder().build();
         AddGroupCommand addGroupCommand = new AddGroupCommand(group);
         addGroupCommand.execute(modelStub);
@@ -203,8 +203,13 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
         }
 
         @Override
@@ -213,8 +218,13 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
         }
 
         @Override
@@ -261,7 +271,7 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {
             requireNonNull(predicate);
             filteredGroups.setPredicate(predicate);
         }
@@ -275,11 +285,27 @@ public class AddGroupCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class AddAndDeleteGroupModelStub extends ModelStubAcceptingGroupAdded {
+    private class UndoModelStub extends ModelStubAcceptingGroupAdded {
 
         @Override
         public void deleteGroup(Group target) {
             groupsAdded.remove(target);
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {}
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {}
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
         }
     }
 }

@@ -54,7 +54,7 @@ public class AddCommandTest {
 
     @Test
     public void undo_validPrecondition_successfulUndo() throws CommandException {
-        AddAndDeletePersonModelStub modelStub = new AddAndDeletePersonModelStub();
+        UndoModelStub modelStub = new UndoModelStub();
         Person person = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(person);
         addCommand.execute(modelStub);
@@ -184,8 +184,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
         }
 
         @Override
@@ -194,8 +199,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
         }
 
         @Override
@@ -265,11 +275,27 @@ public class AddCommandTest {
     /**
      * A Model stub that can add and remove a person.
      */
-    private class AddAndDeletePersonModelStub extends ModelStubAcceptingPersonAdded {
+    private class UndoModelStub extends ModelStubAcceptingPersonAdded {
 
         @Override
         public void deletePerson(Person target) {
             personsAdded.remove(target);
+        }
+
+        @Override
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {}
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {}
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
+            return null;
         }
     }
 }

@@ -193,7 +193,12 @@ public class JoinGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredPersonList(Predicate<? super Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Person> getFilteredPersonListPredicate() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -203,7 +208,12 @@ public class JoinGroupCommandTest {
         }
 
         @Override
-        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        public void updateFilteredGroupList(Predicate<? super Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<? super Group> getFilteredGroupListPredicate() {
             throw new AssertionError("This method should not be called.");
         }
 

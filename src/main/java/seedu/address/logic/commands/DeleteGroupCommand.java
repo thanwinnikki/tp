@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -13,6 +14,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -33,6 +35,8 @@ public class DeleteGroupCommand implements UndoableCommand, StateDependentComman
 
     private ReadOnlyAddressBook oldReadOnlyAddressBook;
     private Group deletedGroup;
+    private Predicate<? super Person> personPredicate;
+    private Predicate<? super Group> groupPredicate;
 
     public DeleteGroupCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -42,6 +46,8 @@ public class DeleteGroupCommand implements UndoableCommand, StateDependentComman
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         oldReadOnlyAddressBook = new AddressBook(model.getAddressBook());
+        personPredicate = model.getFilteredPersonListPredicate();
+        groupPredicate = model.getFilteredGroupListPredicate();
 
         List<Group> lastShownList = model.getFilteredGroupList();
 
@@ -59,7 +65,14 @@ public class DeleteGroupCommand implements UndoableCommand, StateDependentComman
     public CommandResult undo(Model model) throws CommandException {
         // Probably not the best to save the whole address book but this is the easiest way to undo
         model.setAddressBook(oldReadOnlyAddressBook);
-        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
+        if (personPredicate == null) {
+            personPredicate = Model.PREDICATE_SHOW_ALL_PERSONS;
+        }
+        model.updateFilteredPersonList(personPredicate);
+        if (groupPredicate == null) {
+            groupPredicate = Model.PREDICATE_SHOW_ALL_GROUPS;
+        }
+        model.updateFilteredGroupList(groupPredicate);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, deletedGroup))
                 .goToHome()
                 .build();
