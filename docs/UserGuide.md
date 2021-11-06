@@ -552,13 +552,14 @@ In each person entry, these are the required attributes:
 There are also some optional attributes:
 * `"tagged"` is a JSON array that contains strings that each refer to a tag the person is assigned.
 * `"id"` is a string which is used by group entries to refer to the person with the ID as a group mate.
-  * Each ID is made of two _hexadecimal_ numbers separated by a hyphen `[hex]-[hex]`.
+  * Each ID is made of two _[hexadecimal](#hexadecimal)_ numbers separated by a hyphen `[hex]-[hex]`.
   * Each ID must be unique among all person entries.
   * The value of the ID does not matter, so it can have any value, so long as each ID is **unique** among all person entries.
   * If a person belongs to a group, then the person must have an ID and this ID must also appear in that group's `groupMateIds` JSON array.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you are not familiar with _hexadecimal_ numbers, it suffices to use the usual decimal numbers (so using only the digits from 0 to 9).
+
+If you are not familiar with _[hexadecimal](#hexadecimal)_ numbers, it suffices to use the usual decimal numbers (so using only the digits from 0 to 9).
 </div>
 
 ```json
@@ -685,3 +686,5 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 * **[Group Information Page](#group-info-page-anchor)**: The group information page where the lists of group members and tasks are displayed.<br>
 
 * **JSON**: JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
+
+* **Hexadecimal**: Hexadecimal describes a base-16 number system. That is, it describes a numbering system containing 16 sequential numbers as base units (including 0) before adding a new position for the next number.
