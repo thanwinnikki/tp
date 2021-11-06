@@ -121,7 +121,7 @@ public class EditCommand implements UndoableCommand, StateDependentCommand {
 
         Person.Builder personBuilder = new Person.Builder(updatedName, updatedPhone, updatedEmail)
                 .withTags(updatedTags);
-        if (!updatedAddress.equals(Address.EMPTY_ADDRESS)) {
+        if (updatedAddress != null && !updatedAddress.equals(Address.EMPTY_ADDRESS)) {
             personBuilder.withAddress(updatedAddress);
         }
 

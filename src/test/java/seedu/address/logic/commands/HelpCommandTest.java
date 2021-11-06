@@ -21,7 +21,7 @@ public class HelpCommandTest {
     public void execute_helpFromHome_success() {
         ApplicationState currentApplicationState = new HomeState();
         CommandResult expectedCommandResult = new CommandResult.Builder(SHOWING_HELP_MESSAGE)
-                .showHelp()
+                .goShowHelp()
                 .goToHome()
                 .build();
         assertCommandSuccess(new HelpCommand(currentApplicationState), model, expectedCommandResult, expectedModel);
@@ -32,7 +32,7 @@ public class HelpCommandTest {
         Group group = CS2103T_GROUP_BUILDER.build();
         ApplicationState currentApplicationState = new GroupInformationState(group);
         CommandResult expectedCommandResult = new CommandResult.Builder(SHOWING_HELP_MESSAGE)
-                .showHelp()
+                .goShowHelp()
                 .displayGroupInformation(group)
                 .build();
         assertCommandSuccess(new HelpCommand(currentApplicationState), model, expectedCommandResult, expectedModel);

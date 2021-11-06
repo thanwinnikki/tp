@@ -29,6 +29,10 @@ There are blocks that have coloured backgrounds and have icons. The content of t
 This is a tip.
 </div>
 
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+This is the screen(s) you can use the commands in.
+</div>
+
 <div markdown="span" class="alert alert-info">:information_source: **[HEADING]:**
 This provides further information.
 </div>
@@ -49,6 +53,9 @@ This is a warning.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+
+1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
+   ![Ui](images/macError.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -99,9 +106,11 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-:bulb: Panel(s) where this command can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
 * Group Information Panel
+</div>
 
 Format: `help`
 
@@ -109,8 +118,10 @@ Format: `help`
 
 Adds a person to ThunderCat.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
+</div>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
@@ -123,24 +134,28 @@ Examples:
 
 ### Creating a group : `addG`
 
-Creates a group in ThunderCat with an optional description. If no description is given in the command, the default description of "Enter description here!" is given instead.
+Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
+</div>
 
-Format: `addG g/GROUP_NAME [d/DESCRIPTION]`
+Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
 
 Examples:  
-* `addG g/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
-* `addG g/Family` adds a group with the name "Family" with the default description.
+* `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
+* `addG n/Family` adds a group with the name "Family" with the default description.
 
 ### Viewing all groups: `groups`
 
 Shows a list of all groups in ThunderCat.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
 * Group Information Panel
+</div>
 
 Format: `groups`
 
@@ -148,9 +163,11 @@ Format: `groups`
 
 Shows a list of all persons in ThunderCat.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
 * Group Information Panel
+</div>
 
 Format: `list`
 
@@ -158,8 +175,11 @@ Format: `list`
 
 Edits an existing person in ThunderCat.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
+* Group Information Panel
+</div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -178,12 +198,10 @@ Examples:
 
 Edits an existing group in ThunderCat.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
-* Group Information Panel
-
-Panel where this command can be called :
-* Home panel
+</div>
 
 Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
@@ -198,9 +216,10 @@ Example:
 
 Finds persons whose names contain any of the given keywords.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
-* Group Information Panel
+</div>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -219,11 +238,12 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from ThunderCat (removes all groups related to this person automatically).
+Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
-* Group Information Panel
+</div>
 
 Format: `delete INDEX`
 
@@ -234,22 +254,23 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `group 2` followed by `delete 1` deletes the 1st person in the 2nd group.
 
 ### Locating groups by name: `findG`
 
-Finds groups whose names contain any of the given keywords.
+Find groups whose names contain any of the given keywords.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
+</div>
 
 Format: `findG KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `cs2103T` will match `CS2103T`
 * The order of the keywords does not matter. e.g. `Favourite Group` will match `Group Favourite`
-* Only the name is searched.
+* Only the group name is searched.
 * Only full words will be matched e.g. `CS2103` will not match `CS2103T`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Groups matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `CS2103T` will return `CS2103T Friends`, `CS2103T Tutors`
 
 Examples:
@@ -263,28 +284,32 @@ Examples:
 
 Deletes the specified group from the displayed group list.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
+</div>
 
-Format: `deleteG g/GROUP_INDEX`
+Format: `deleteG GROUP_INDEX`
 
 * Deletes the group at the specified `GROUP_INDEX`.
 * The group index refers to the group number shown in the displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `deleteG g/2` deletes the 2nd group in ThunderCat.
+* `deleteG 2` deletes the 2nd group in ThunderCat.
 
 ### Adding multiple people to a group : `joinG`
 
 Adds multiple specified people to a specified group.
 
-:bulb: Panel where this command can be called :
-* Home panel
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
+* Home Panel
+</div>
 
-Format: `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX`
+Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
 
-* Adds to a group specified at `GROUP_INDEX`, multiple people specified at `PERSON_INDEX_1, PERSON_INDEX_2, …​`.
+* Adds to a group specified at `GROUP_INDEX`, multiple people specified at `PERSON_INDEX_1 PERSON_INDEX_2 …​`.
 * The group index refers to the group number shown in the displayed group list.
 * The person index refers to the person index number show in the displayed person list.
 * Group index **must be a positive integer** 1, 2, 3, …​
@@ -297,8 +322,10 @@ Examples:
 
 Lists out all the group mates and tasks in the specified group.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Home Panel
+</div>
 
 Format: `group GROUP_INDEX`
 
@@ -313,8 +340,10 @@ Example:
 
 Removes the specified person from the group that ThunderCat is displaying.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Group Information Panel
+</div>
 
 :bulb: Not to be confused with the delete command.
 
@@ -329,22 +358,26 @@ Example:
 
 ### Adding a task to the current group: `addT`
 
-Adds a task to the group that ThunderCat is displaying. By default, the task is marked `undone`.
+Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Group Information Panel
+</div>
 
 Format: `addT d/TASK_DESCRIPTION`
 
 Example:
-* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `undone` by default.
+* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `Not done` by default.
 
 ### Deleting a task from the current group: `deleteT`
 
 Deletes the specified task from the group that ThunderCat is displaying.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Group Information Panel
+</div>
 
 Format: `deleteT TASK_INDEX`
 
@@ -359,8 +392,10 @@ Example:
 
 Marks the specified task in the group as done.
 
-:bulb: Panel where this can be called :
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
 * Group Information Panel
+</div>
 
 Format: `done TASK_INDEX`
 
@@ -371,9 +406,39 @@ Format: `done TASK_INDEX`
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
 
+### Undoing an undoable command : `undo`
+
+Undoes an undoable command.
+
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+Panels which you can use this command in.
+* Home panel
+* Group Information Panel
+</div>
+
+Format: `undo`
+
+* The following are the commands that can be undone:
+  * [`add`](#adding-a-person-add)
+  * [`addG`](#creating-a-group--addg)
+  * [`addT`](#adding-a-task-to-the-current-group-addt)
+  * [`clear`](#clearing-all-entries--clear)
+  * [`delete`](#deleting-a-person--delete)
+  * [`deleteG`](#deleting-a-group--deleteg)
+  * [`deleteT`](#deleting-a-task-from-the-current-group-deletet)
+  * [`edit`](#editing-a-person--edit)
+  * [`editG`](#editing-a-group-editg)
+  * [`joinG`](#adding-multiple-people-to-a-group--joing)
+  * [`done`](#marking-a-task-as-done-done)
+  * [`remove`](#remove-a-person-from-the-current-group-remove)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+If done accidentally, you can use the undo command to undo the clear!
+</div>
 
 Format: `clear`
 

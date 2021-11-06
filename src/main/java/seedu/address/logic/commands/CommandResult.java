@@ -65,7 +65,7 @@ public class CommandResult {
          * @param isGoingToShowHelp Whether help information will be shown.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setShowHelp(boolean isGoingToShowHelp) {
+        public Builder setGoShowHelp(boolean isGoingToShowHelp) {
             this.isGoingToShowHelp = isGoingToShowHelp;
             return this;
         }
@@ -75,8 +75,8 @@ public class CommandResult {
          *
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder showHelp() {
-            return setShowHelp(true);
+        public Builder goShowHelp() {
+            return setGoShowHelp(true);
         }
 
         /**
@@ -105,7 +105,7 @@ public class CommandResult {
          * @param nextApplicationState The application state to change to as a result of the command execution.
          * @return This {@code CommandResult.Builder} instance.
          */
-        public Builder setNextAppState(ApplicationState nextApplicationState) {
+        public Builder setNextApplicationState(ApplicationState nextApplicationState) {
             assert nextApplicationState != null : "The value of nextApplicationState cannot be null.";
             this.nextApplicationState = nextApplicationState;
             return this;
@@ -117,7 +117,7 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goToHome() {
-            return setNextAppState(new HomeState());
+            return setNextApplicationState(new HomeState());
         }
 
         /**
@@ -128,7 +128,18 @@ public class CommandResult {
          */
         public Builder displayGroupInformation(Group group) {
             assert group != null : "The value of group cannot be null.";
-            return setNextAppState(new GroupInformationState(group));
+            return setNextApplicationState(new GroupInformationState(group));
+        }
+
+        /**
+         * Sets whether the {@code CommandResult} object will cause the application to undo.
+         *
+         * @param isGoingToCauseUndo Whether the application will undo.
+         * @return This {@code CommandResult.Builder} instance.
+         */
+        public Builder setGoCauseUndo(boolean isGoingToCauseUndo) {
+            this.isGoingToCauseUndo = isGoingToCauseUndo;
+            return this;
         }
 
         /**
@@ -137,8 +148,7 @@ public class CommandResult {
          * @return This {@code CommandResult.Builder} instance.
          */
         public Builder goCauseUndo() {
-            isGoingToCauseUndo = true;
-            return this;
+            return setGoCauseUndo(true);
         }
     }
 
