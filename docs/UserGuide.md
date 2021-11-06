@@ -13,9 +13,9 @@ ___
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Usage
+## Target Audience
 
-If you are a user of ThunderCat and you would like to get to know how to use ThunderCat, then this user guide is for you. Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge. However, the user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still only a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and JSON. This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
 
 ### Navigation
 
@@ -51,7 +51,7 @@ This is a warning.
 
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
@@ -71,6 +71,17 @@ This is a warning.
    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+--------------------------------------------------------------------------------------------------------------------
+
+## Graphical User Interface
+
+<a name="home-page-anchor"></a>
+* **Home Page**: The home page where the lists of persons and groups are displayed.<br>
+  <br>![Home Page](images/HomePanel.png)
+
+<a name="group-info-page-anchor"></a>
+* **Group Information Page**: The group information page where the lists of group members and tasks are displayed.<br>
+ <br>![[Group Information Page](#group-info-page-anchor)](images/GroupInformationPanel.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -102,14 +113,16 @@ This is a warning.
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the user guide.
 
 ![help message](images/helpMessage.png)
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
+<div markdown="span" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `help`
@@ -118,9 +131,11 @@ Format: `help`
 
 Adds a person to ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="span" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
@@ -137,8 +152,9 @@ Examples:
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
@@ -152,9 +168,10 @@ Examples:
 Shows a list of all groups in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `groups`
@@ -164,9 +181,10 @@ Format: `groups`
 Shows a list of all persons in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `list`
@@ -176,9 +194,10 @@ Format: `list`
 Edits an existing person in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -199,8 +218,9 @@ Examples:
 Edits an existing group in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
@@ -217,8 +237,9 @@ Example:
 Finds persons whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -241,8 +262,9 @@ Examples:
 Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `delete INDEX`
@@ -260,8 +282,9 @@ Examples:
 Find groups whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `findG KEYWORD [MORE_KEYWORDS]`
@@ -285,8 +308,9 @@ Examples:
 Deletes the specified group from the displayed group list.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `deleteG GROUP_INDEX`
@@ -303,8 +327,9 @@ Examples:
 Adds multiple specified people to a specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
@@ -323,8 +348,9 @@ Examples:
 Lists out all the group mates and tasks in the specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `group GROUP_INDEX`
@@ -341,8 +367,9 @@ Example:
 Removes the specified person from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 :bulb: Not to be confused with the delete command.
@@ -361,8 +388,9 @@ Example:
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `addT d/TASK_DESCRIPTION`
@@ -375,8 +403,9 @@ Example:
 Deletes the specified task from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `deleteT TASK_INDEX`
@@ -393,8 +422,10 @@ Example:
 Marks the specified task in the group as done.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
+
 </div>
 
 Format: `done TASK_INDEX`
@@ -411,9 +442,11 @@ Example:
 Undoes an undoable command.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home panel
-* Group Information Panel
+
+[Page(s)](#Graphical-User-Interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+
 </div>
 
 Format: `undo`
@@ -604,7 +637,7 @@ In each task entry, these are the required attributes:
 
 ## Command summary
 
-Action | Format | Examples | Home Panel | Group Information Panel
+Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information Page](#group-info-page-anchor)
 --------|---------|---------|---------|---------
 **Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark:
 **Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
@@ -630,12 +663,8 @@ Action | Format | Examples | Home Panel | Group Information Panel
 
 ## Glossary
 
-* **Home Panel**: The home page where the lists of persons and groups are displayed.<br>
-<br>![Home Panel](images/HomePanel.png)
+* **[Home Page](#home-page-anchor)**: The home page where the lists of persons and groups are displayed.<br>
 
-
-* **Group Information Panel**: The group information page where the lists of group members and tasks are displayed.<br>
-<br>![Group Information Panel](images/GroupInformationPanel.png)
-
+* **[Group Information Page](#group-info-page-anchor)**: The group information page where the lists of group members and tasks are displayed.<br>
 
 * **JSON**: JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
