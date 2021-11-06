@@ -510,7 +510,12 @@ Use [`clear`](#clearing-all-entries--clear) to easily and quickly remove the sam
 
 If the data file has an invalid format, such as after editing the file wrongly, then the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 
+
+
 ### Editing the data file
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This piece of information is meant for more advanced users.
+</div>
 
 The data is saved as a JSON file called `records.json` located in `[JAR file location]/data`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -519,6 +524,9 @@ If any of the changes you make to the data file makes it have an invalid format,
 </div>
 
 #### Structure of the data file
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This piece of information is meant for more advanced users.
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 The following is more suitable for more advanced users.
