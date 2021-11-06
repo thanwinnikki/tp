@@ -77,7 +77,7 @@ This is a warning.
 
 <a name="home-page-anchor"></a>
 * **Home Page**: The home page where the lists of persons and groups are displayed.<br>
-  <br>![Home Panel](images/HomePanel.png)
+  <br>![Home Page](images/HomePanel.png)
 
 <a name="group-info-page-anchor"></a>
 * **Group Information Page**: The group information page where the lists of group members and tasks are displayed.<br>
@@ -117,8 +117,9 @@ Shows a message explaining how to access the user guide.
 
 ![help message](images/helpMessage.png)
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="span" class="alert alert-primary">
 
+:tv: **Tip:**
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
@@ -130,8 +131,9 @@ Format: `help`
 
 Adds a person to ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+<div markdown="span" class="alert alert-primary">
 
+:tv: **Tip:**
 [Page(s)](#Graphical-User-Interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
