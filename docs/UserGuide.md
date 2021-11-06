@@ -74,13 +74,13 @@ This is a warning.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Graphical User Interface
+
+<a name="home-page-anchor"></a>
 * **Home Page**: The home page where the lists of persons and groups are displayed.<br>
-  <a name="home-page-anchor"></a>
   <br>![Home Panel](images/HomePanel.png)
 
-
+<a name="group-info-page-anchor"></a>
 * **Group Information Page**: The group information page where the lists of group members and tasks are displayed.<br>
- <a name="group-info-page-anchor"></a>
  <br>![[Group Information Page](#group-info-page-anchor)](images/GroupInformationPanel.png)
 
 --------------------------------------------------------------------------------------------------------------------
