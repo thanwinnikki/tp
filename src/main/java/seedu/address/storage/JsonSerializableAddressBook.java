@@ -105,10 +105,11 @@ class JsonSerializableAddressBook {
     private Map<Id, JsonAdaptedPerson> createIdToJsonAdaptedGroupMateMap() throws IllegalValueException {
         Map<Id, JsonAdaptedPerson> idToJsonAdaptedPersonMap = new HashMap<>();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            if (jsonAdaptedPerson.hasId()) {
-                Id id = jsonAdaptedPerson.getId();
-                idToJsonAdaptedPersonMap.put(id, jsonAdaptedPerson);
+            if (!jsonAdaptedPerson.hasId()) {
+                continue;
             }
+            Id id = jsonAdaptedPerson.getId();
+            idToJsonAdaptedPersonMap.put(id, jsonAdaptedPerson);
         }
         return idToJsonAdaptedPersonMap;
     }
@@ -172,11 +173,12 @@ class JsonSerializableAddressBook {
 
     private void assignIdToGroupMatesIfNoId(Group group, Map<Person, Id> groupMateToIdMap, Set<Id> idSet) {
         group.doForEachGroupMate(groupMate -> {
-            if (!groupMateToIdMap.containsKey(groupMate)) {
-                Id id = Id.generateUniqueId(idSet);
-                groupMateToIdMap.put(groupMate, id);
-                idSet.add(id);
+            if (groupMateToIdMap.containsKey(groupMate)) {
+                return;
             }
+            Id id = Id.generateUniqueId(idSet);
+            groupMateToIdMap.put(groupMate, id);
+            idSet.add(id);
         });
     }
 
