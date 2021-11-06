@@ -111,21 +111,7 @@ This is a warning.
 
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaining how to access the user guide.
-
-![help message](images/helpMessage.png)
-
-<div markdown="span" class="alert alert-primary">
-
-:tv: **Tip:**
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
-* [Home Page](#home-page-anchor)
-* [Group Information Page](#group-info-page-anchor)
-</div>
-
-Format: `help`
+## Persons:
 
 ### Adding a person: `add`
 
@@ -134,7 +120,7 @@ Adds a person to ThunderCat.
 <div markdown="span" class="alert alert-primary">
 
 :tv: **Tip:**
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -147,42 +133,13 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`
 
-### Creating a group : `addG`
-
-Creates a group in ThunderCat with an optional description. A description for the group is optional.
-
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
-* [Home Page](#home-page-anchor)
-</div>
-
-Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
-
-Examples:  
-* `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
-* `addG n/Family` adds a group with the name "Family" with the default description.
-
-### Viewing all groups: `groups`
-
-Shows a list of all groups in ThunderCat.
-
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
-* [Home Page](#home-page-anchor)
-* [Group Information Page](#group-info-page-anchor)
-</div>
-
-Format: `groups`
-
 ### Listing all persons : `list`
 
 Shows a list of all persons in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -195,7 +152,7 @@ Edits an existing person in ThunderCat.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -213,32 +170,13 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Editing a group: `editG`
-
-Edits an existing group in ThunderCat.
-
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
-* [Home Page](#home-page-anchor)
-</div>
-
-Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
-
-* The group with the specified `GROUP_INDEX` will be edited.
-* The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example:
-* `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
-
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -263,7 +201,7 @@ Deletes the specified person from ThunderCat (also removes the person from all g
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -277,13 +215,64 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+## Groups:
+
+### Creating a group : `addG`
+
+Creates a group in ThunderCat with an optional description. A description for the group is optional.
+
+<div markdown="span" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+</div>
+
+Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
+
+Examples:  
+* `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
+* `addG n/Family` adds a group with the name "Family" with the default description.
+
+### Viewing all groups: `groups`
+
+Shows a list of all groups in ThunderCat.
+
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+</div>
+
+Format: `groups`
+
+### Editing a group: `editG`
+
+Edits an existing group in ThunderCat.
+
+<div markdown="span" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+</div>
+
+Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
+
+* The group with the specified `GROUP_INDEX` will be edited.
+* The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
+
 ### Locating groups by name: `findG`
 
 Find groups whose names contain any of the given keywords.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -309,7 +298,7 @@ Deletes the specified group from the displayed group list.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -328,7 +317,7 @@ Adds multiple specified people to a specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -349,7 +338,7 @@ Lists out all the group mates and tasks in the specified group.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
 
@@ -368,7 +357,7 @@ Removes the specified person from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
@@ -383,13 +372,15 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2` removes the 2nd person in the displayed person list from the group.
 
+## Tasks:
+
 ### Adding a task to the current group: `addT`
 
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
@@ -404,7 +395,7 @@ Deletes the specified task from the group that ThunderCat is displaying.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
@@ -423,7 +414,7 @@ Marks the specified task in the group as done.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 
 </div>
@@ -437,13 +428,15 @@ Format: `done TASK_INDEX`
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
 
+## General:
+
 ### Undoing an undoable command : `undo`
 
 Undoes an undoable command.
 
 <div markdown="span" class="alert alert-primary">:tv: **Tip:**
 
-[Page(s)](#Graphical-User-Interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 
@@ -475,11 +468,31 @@ If done accidentally, you can use the undo command to undo the clear!
 
 Format: `clear`
 
+### Viewing help : `help`
+
+Shows a message explaining how to access the user guide.
+
+![help message](images/helpMessage.png)
+
+<div markdown="span" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#graphical-user-interface) which you can use this command in
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+</div>
+
+Format: `help`
+
 ### Exiting the program : `exit`
 
 Exits ThunderCat.
 
 Format: `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Data Storage
 
 ### Saving the data
 
@@ -497,7 +510,12 @@ Use [`clear`](#clearing-all-entries--clear) to easily and quickly remove the sam
 
 If the data file has an invalid format, such as after editing the file wrongly, then the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 
+
+
 ### Editing the data file
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This piece of information is meant for more advanced users.
+</div>
 
 The data is saved as a JSON file called `records.json` located in `[JAR file location]/data`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -506,6 +524,9 @@ If any of the changes you make to the data file makes it have an invalid format,
 </div>
 
 #### Structure of the data file
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This piece of information is meant for more advanced users.
+</div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:**
 The following is more suitable for more advanced users.
