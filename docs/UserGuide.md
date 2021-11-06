@@ -120,7 +120,7 @@ Shows a message explaining how to access the user guide.
 <div markdown="span" class="alert alert-primary">
 
 :tv: **Tip:**
-[Page(s)](#graphical-user-interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
@@ -134,7 +134,7 @@ Adds a person to ThunderCat.
 <div markdown="span" class="alert alert-primary">
 
 :tv: **Tip:**
-[Page(s)](#graphical-user-interface) which you can use this command in.
+[Page(s)](#graphical-user-interface) which you can use this command in
 * [Home Page](#home-page-anchor)
 </div>
 
