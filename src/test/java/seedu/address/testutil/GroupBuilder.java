@@ -17,7 +17,6 @@ import seedu.address.model.task.UniqueTaskList;
 public class GroupBuilder {
 
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
-    public static final String DEFAULT_GROUP_DESCRIPTION = "This is a CS module group";
 
     private Name name;
     private Description description;
@@ -29,7 +28,7 @@ public class GroupBuilder {
      */
     public GroupBuilder() {
         name = new Name(DEFAULT_GROUP_NAME);
-        description = new Description(DEFAULT_GROUP_DESCRIPTION);
+        description = null;
         persons = new UniquePersonList();
         tasks = new UniqueTaskList();
     }
@@ -87,7 +86,12 @@ public class GroupBuilder {
      * @return
      */
     public Group build() {
-        Group buildGroup = new Group(name, description);
+        Group buildGroup;
+        if (description == null) {
+            buildGroup = new Group(name);
+        } else {
+            buildGroup = new Group(name, description);
+        }
         ObservableList<Person> personList = persons.asUnmodifiableObservableList();
         for (int i = 0; i < personList.size(); i++) {
             buildGroup.add(personList.get(i));
