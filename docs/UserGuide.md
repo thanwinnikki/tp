@@ -286,6 +286,7 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 * The group with the specified `GROUP_INDEX` will be edited.
 * The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Description can be empty if group was created without one but once set, description should never be empty.
 
 Example:
 * `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
