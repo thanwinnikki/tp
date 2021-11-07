@@ -20,11 +20,17 @@ ___
 
 ## About The Guide
 
-Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of [CLI](#cli-glossary) and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to [CLI](#cli-glossary) and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have 
+a basic level of technical knowledge of [CLI](#cli-glossary) and [JSON](#json), as well as terms like 'parameters', 'boolean' and 'array'. This guide also serves its purpose to 
+help you improve on and get used to CLI and JSON usages. This user guide also provides some elaboration 
+on certain technical terms that you likely may not be familiar with especially since you are a student. 
+The definitions for some of these terms can be found in the [glossary](#glossary).
+
 
 ### Navigation
 
-Use the [table of contents](#table-of-contents) to navigate the user guide easily. There will also be links in some sections linking to other relevant sections within this user guide or to other websites which provide useful information.
+Use the [table of contents](#table-of-contents) to navigate this user guide easily. There will also be links in some sections linking to other relevant sections within this user guide or to other websites which provide useful information.
 
 ### Formatting
 
@@ -64,16 +70,16 @@ This is a warning.
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
    ![Ui](images/user-guide/macError.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and enter to execute it. e.g. typing **`help`** and entering will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all persons.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a person named `John Doe` to the application's records.
 
-   * **`delete`**`3` : Deletes the 3rd person shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd person shown in the displayed list.
 
-   * **`clear`** : Deletes all persons.
+   * **`clear`** : Deletes all data in ThunderCat.
 
    * **`exit`** : Exits the app.
 
@@ -84,7 +90,7 @@ This is a warning.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Graphical User Interface
+## Graphical User Interface (GUI)
 
 <a name="home-page-anchor"></a>
 * **Home Page**: The home page where the lists of persons and groups are displayed.<br>
@@ -119,7 +125,7 @@ This is a warning.
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -609,7 +615,7 @@ Format: `clear`
 
 #### Viewing help : `help`
 
-Shows a message explaining how to access the user guide.
+Shows a message explaining how to access the command summary on this user guide.
 
 ![help message](images/user-guide/helpMessage.png)
 
