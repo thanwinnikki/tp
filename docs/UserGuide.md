@@ -15,7 +15,7 @@ ___
 
 ## About The Guide
 
-Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are a student. The definitions for some of these terms can be found in the [glossary](#glossary).
 
 ### Navigation
 
