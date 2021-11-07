@@ -307,10 +307,10 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
 Example:
 * `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
-  * Before
-    ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)
-  * After
-    ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
+
+  Before             |  After
+  :-------------------------:|:-------------------------:
+  ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)  |  ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
 
 #### Locating groups by name: `findG`
 
