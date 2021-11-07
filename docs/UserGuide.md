@@ -153,7 +153,7 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
 **Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
 **Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
-**Undo a command** | `undo` | | | :white_check_mark: | :white_check_mark:
+**Undo a command** | `undo`  | | :white_check_mark: | :white_check_mark:
 **Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
 **Help** | `help`| | :white_check_mark: | :white_check_mark:
 
