@@ -428,7 +428,7 @@ Examples:
 * `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
   <span style="font-size:24px"><center><b>Second group initially</b></center></span>
     ![result for 'second group initially'](images/user-guide/secondGroupInitially.png)
-  <span style="font-size:24px"><center><b>Type JoinG command in <a href="#home-page-anchor">Home panel</a></b></center></span>
+  <span style="font-size:24px"><center><b>Type JoinG command in <a href="#home-page-anchor">Home page</a></b></center></span>
       ![result for 'type JoinG command in home panel'](images/user-guide/typeJoinGCommand.png)
   <span style="font-size:24px"><center><b>Second group after</b></center></span>
       ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
