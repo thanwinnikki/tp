@@ -164,9 +164,9 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 
 Adds a person to ThunderCat.
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-success">
 
-:tv: **Tip:**
+:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in
 * [Home Page](#home-page-anchor)
@@ -292,9 +292,9 @@ Examples:
 
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-success">
 
-:tv: **Tip:**
+:tv: **Page(s):**
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
@@ -597,9 +597,10 @@ Format: `undo`
 
 Clears all entries from ThunderCat.
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-success">
 
-:tv: **Tip:**
+:tv: **Page(s):**
+
 [Page(s)](#graphical-user-interface) which you can use this command in
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
@@ -619,9 +620,10 @@ Shows a message explaining how to access the command summary on this user guide.
 
 ![help message](images/user-guide/helpMessage.png)
 
-<div markdown="block" class="alert alert-primary">
+<div markdown="block" class="alert alert-success">
 
-:tv: **Tip:**
+:tv: **Page(s):**
+
 [Page(s)](#graphical-user-interface) which you can use this command in
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
