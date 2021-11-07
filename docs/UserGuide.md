@@ -379,7 +379,7 @@ Examples:
 * `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
   * Second group initially
     ![result for 'second group initially'](images/user-guide/secondGroupInitially.png)
-  * Type JoinG command in Home panel
+  * Type JoinG command in [Home Page](#home-page-anchor)
       ![result for 'type JoinG command in home panel'](images/user-guide/typeJoinGCommand.png)
   * Second group after
       ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
