@@ -14,16 +14,21 @@ Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-
+Class Name
+Class Description
 
 Class UniquePersonList
 Class Person
 Class Address
 Class Email
-Class Name
 Class Phone
 Class Tag
 
+Class UniqueGroupList
+Class Group
+
+Class UniqueTaskList
+Class Task
 }
 
 Class HiddenOutside #FFFFFF
@@ -40,15 +45,27 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
+Person --> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+
+AddressBook *--> "1" UniqueGroupList
+UniqueGroupList --> "~* all" Group
+
+Group --> "1" UniqueTaskList
+Group --> "1" UniquePersonList
+Group --> Name
+Group --> Description
+UniqueTaskList --> "~* all" Task
+Task --> Description
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
+ModelManager -->"~* filtered" Group
+
 @enduml
