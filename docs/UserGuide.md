@@ -52,10 +52,10 @@ This is a warning.
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
 1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/user-guide/Ui.png)
 
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
-   ![Ui](images/macError.png)
+   ![Ui](images/user-guide/macError.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -77,11 +77,11 @@ This is a warning.
 
 <a name="home-page-anchor"></a>
 * **Home Page**: The home page where the lists of persons and groups are displayed.<br>
-  <br>![Home Page](images/HomePanel.png)
+  <br>![Home Page](images/user-guide/HomePanel.png)
 
 <a name="group-info-page-anchor"></a>
 * **Group Information Page**: The group information page where the lists of group members and tasks are displayed.<br>
- <br>![[Group Information Page](#group-info-page-anchor)](images/GroupInformationPanel.png)
+ <br>![[Group Information Page](#group-info-page-anchor)](images/user-guide/GroupInformationPanel.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -132,7 +132,9 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`<br>
+  <br>
+  ![result for 'add john doe'](images/user-guide/addJohnDoeResult.png)
 
 #### Listing all persons : `list`
 
@@ -168,8 +170,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * You can remove a person's address by typing `a/` without specifying any address after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 7 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 7th person to be `91234567` and `johndoe@example.com` respectively.<br>
+    <br>
+    ![result for 'edit john doe'](images/user-guide/editJohnDoeResult.png)
 
 #### Locating persons by name: `find`
 
@@ -194,7 +198,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   <br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/user-guide/findAlexDavidResult.png)
 
 #### Deleting a person : `delete`
 
@@ -231,8 +235,11 @@ Creates a group in ThunderCat with an optional description. A description for th
 Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
 
 Examples:  
-* `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
 * `addG n/Family` adds a group with the name "Family" with the default description.
+* `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".<br>
+  <br>
+  ![result for 'add group CS2103'](images/user-guide/addGroupCS2103.png)
+
 
 #### Viewing all groups: `groups`
 
@@ -264,7 +271,11 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
+* `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
+  * Before
+    ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)
+  * After
+    ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
 
 #### Locating groups by name: `findG`
 
@@ -290,7 +301,7 @@ Examples:
 * `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`
   
 
-  ![result for 'find CS2103T Mates'](images/findG_CS2103T_Mates_Result.png)
+  ![result for 'find CS2103T Mates'](images/user-guide/findG_CS2103T_Mates_Result.png)
 
 #### Deleting a group : `deleteG`
 
@@ -331,6 +342,12 @@ Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
 
 Examples:
 * `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
+  * Second group initially
+    ![result for 'second group initially'](images/user-guide/secondGroupInitially.png)
+  * Type JoinG command in Home panel
+      ![result for 'type JoinG command in home panel'](images/user-guide/typeJoinGCommand.png)
+  * Second group after
+      ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
 
 #### Listing all group mates and tasks in a group: `group`
 
@@ -350,6 +367,10 @@ Format: `group GROUP_INDEX`
 
 Example:
 * `group 1` shows the information of the group at index 1 of the displayed group list.
+  * Before
+    ![result for 'before show 1st group'](images/user-guide/beforeShow1stGroup.png)
+  * After
+    ![result for 'after show 1st group'](images/user-guide/afterShow1stGroup.png)
 
 #### Remove a person from the current group: `remove`
 
@@ -390,7 +411,9 @@ The task's name can only be displayed up to first 70 characters.
 Format: `addT d/TASK_DESCRIPTION`
 
 Example:
-* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `Not done` by default.
+* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `Not done` by default.<br>
+  <br>
+  ![result for 'add task Prepare pitch'](images/user-guide/addTaskPreparePitch.png)
 
 #### Deleting a task from the current group: `deleteT`
 
@@ -430,6 +453,10 @@ Format: `done TASK_INDEX`
 
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
+  * Before
+    ![result for 'before mark 2nd task done'](images/user-guide/beforeMark2ndTaskDone.png)
+  * After
+      ![result for 'after mark 2nd task done'](images/user-guide/afterMark2ndTaskDone.png)
 
 ### General:
 
@@ -483,7 +510,7 @@ Format: `clear`
 
 Shows a message explaining how to access the user guide.
 
-![help message](images/helpMessage.png)
+![help message](images/user-guide/helpMessage.png)
 
 <div markdown="block" class="alert alert-primary">
 
