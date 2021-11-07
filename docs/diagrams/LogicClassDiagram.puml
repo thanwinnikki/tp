@@ -6,11 +6,10 @@ skinparam classBackgroundColor LOGIC_COLOR
 
 package Logic {
 
-Class AddressBookParser
-Class XYZCommand
 Class CommandResult
-Class "{abstract}\nCommand" as Command
-
+Class AddressBookParser
+Interface Command <<Interface>>
+Interface ApplicationState <<Interface>>
 
 Interface Logic <<Interface>>
 Class LogicManager
@@ -28,19 +27,23 @@ HiddenOutside ..> Logic
 
 LogicManager .right.|> Logic
 LogicManager -right->"1" AddressBookParser
-AddressBookParser ..> XYZCommand : creates >
+LogicManager --> "currentApplicationState 1" ApplicationState
 
-XYZCommand -up-|> Command
-LogicManager .left.> Command : executes >
+AddressBookParser ..> Command : creates >
+AddressBookParser ..> ApplicationState
+
+Command ..> ApplicationState : checks >
+LogicManager ..> Command : executes >
 
 LogicManager --> Model
 LogicManager --> Storage
 Storage --[hidden] Model
 Command .[hidden]up.> Storage
-Command .right.> Model
-note right of XYZCommand: XYZCommand = AddCommand, \nFindCommand, etc
+Command .right.> Model : modifies >
 
 Logic ..> CommandResult
-LogicManager .down.> CommandResult
+LogicManager .left.> CommandResult
 Command .up.> CommandResult : produces >
+
+CommandResult --> "1 nextApplicationState" ApplicationState
 @enduml

@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "Command classes" as CommandClasses {
+
+Interface Command <<Interface>>
+Interface StateDependentCommand <<Interface>>
+Interface UndoableCommand <<Interface>>
+Class XYZStateDependentCommand
+Class XYZUndoableCommand
+Class XYZUndoableStateDependentCommand
+}
+
+package Model {
+}
+
+Interface ApplicationState <<Interface>>
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Command
+
+Command ..> Model : modifies >
+
+StateDependentCommand -up-|> Command
+StateDependentCommand ..> ApplicationState : checks >
+
+UndoableCommand -up-|> Command
+UndoableCommand ..> Model : undoes modification >
+
+XYZStateDependentCommand .up.|> StateDependentCommand
+note bottom of XYZStateDependentCommand: XYZStateDependentCommand = \nFindCommand, FindGroupCommand, etc
+
+XYZUndoableCommand .up.|> UndoableCommand
+note bottom of XYZUndoableCommand: XYZUndoableCommand = \nHelpCommand, ClearCommand, etc
+
+XYZUndoableStateDependentCommand .up.|> StateDependentCommand
+XYZUndoableStateDependentCommand .up.|> UndoableCommand
+note bottom of XYZUndoableStateDependentCommand: XYZUndoableStateDependentCommand = \nAddCommand, EditGroupCommand, etc
+@enduml
