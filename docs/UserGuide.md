@@ -6,9 +6,9 @@ title: User Guide
 
 ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to those groups. 
 
-ThunderCat **also** acts as a tool for Year 2 Computing Students to build up their confidence in using a **Command Line Interface** (CLI) to navigate applications and manipulating **JSON files** - a popular data file format widely used in Computing.
+ThunderCat **also** acts as a tool for Year 2 Computing Students to build up their confidence in using a **Command Line Interface** ([CLI](#cli-glossary)) to navigate applications and manipulating **[JSON](#json) files** - a popular data file format widely used in Computing.
 
-ThunderCat **does not** act as a messaging application. This application is optimized for you to use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+ThunderCat **does not** act as a messaging application. This application is optimized for you to use via a **Command Line Interface** ([CLI](#cli-glossary)) while still having the benefits of a Graphical User Interface ([GUI](#gui-glossary)). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
 ___
 <a name="table-of-contents"></a>
@@ -23,7 +23,7 @@ ___
 
 Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have 
 a basic level of technical knowledge of [CLI](#cli-glossary) and [JSON](#json), as well as terms like 'parameters', 'boolean' and 'array'. This guide also serves its purpose to 
-help you improve on and get used to CLI and JSON usages. This user guide also provides some elaboration 
+help you improve on and get used to [CLI](#cli-glossary) and [JSON](#json) usages. This user guide also provides some elaboration 
 on certain technical terms that you likely may not be familiar with especially since you are a student. 
 The definitions for some of these terms can be found in the [glossary](#glossary).
 
@@ -699,7 +699,7 @@ In each person entry, these are the required attributes:
 * `"address"` is a string that refers to the person's saved address.
 
 There are also some optional attributes:
-* `"tagged"` is a JSON array that contains strings that each refer to a tag the person is assigned.
+* `"tagged"` is a [JSON](#json) array that contains strings that each refer to a tag the person is assigned.
 * `"id"` is a string which is used by group entries to refer to the person with the ID as a group mate.
   * Each ID is made of two _[hexadecimal](#hexadecimal)_ numbers separated by a hyphen `[hex]-[hex]`.
   * Each ID must be unique among all person entries.
@@ -734,17 +734,17 @@ If you are not familiar with _[hexadecimal](#hexadecimal)_ numbers, it suffices 
 }
 ```
 
-The `groups` JSON array consists of entries of each saved group and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+The `groups` [JSON](#json) array consists of entries of each saved group and its details structured as a JSON object. The order the entries appear in the [JSON](#json) array determines the order the entries will appear in ThunderCat.
 
 In each group entry, this is the required attribute:
 * `"name"` is a string that refers to the group's saved name.
 
 These are the optional attributes:
 * `"description"` is a string that refers to the group's saved description.
-* `"groupMateIds"` is a JSON array containing the IDs of the person entries of the group mates in the group.
+* `"groupMateIds"` is a [JSON](#json) array containing the IDs of the person entries of the group mates in the group.
   * The ID of each group mate must correspond to the ID in the group mate's person entry.
   * The group mate IDs must be unique within a group entry.
-* `"tasks"` is a JSON array containing the entries of each saved task of a group and its details structured as a JSON object.
+* `"tasks"` is a [JSON](#json) array containing the entries of each saved task of a group and its details structured as a [JSON](#json) object.
 
 ```json
 {
@@ -766,7 +766,7 @@ These are the optional attributes:
 }
 ```
 
-The `tasks` JSON array consists of the corresponding group's entries of each saved task and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+The `tasks` [JSON](#json) array consists of the corresponding group's entries of each saved task and its details structured as a [JSON](#json) object. The order the entries appear in the [JSON](#json) array determines the order the entries will appear in ThunderCat.
 
 In each task entry, these are the required attributes:
 * `"description"` is a string that refers to the task's saved description.
