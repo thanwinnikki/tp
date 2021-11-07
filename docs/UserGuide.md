@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** ([CLI](#cli-glossary)) while still having the benefits of a Graphical User Interface ([GUI](#gui-glossary)). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
 ___
 <a name="table-of-contents"></a>
@@ -15,7 +15,7 @@ ___
 
 ## About The Guide
 
-Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of [CLI](#cli-glossary) and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to [CLI](#cli-glossary) and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
 
 ### Navigation
 
@@ -51,7 +51,7 @@ This is a warning.
 
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The [GUI](#gui-glossary) as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
@@ -736,3 +736,9 @@ In each task entry, these are the required attributes:
 
 <a name="hexadecimal"></a>
 * **Hexadecimal**: Hexadecimal describes a base-16 number system. That is, it describes a numbering system containing 16 sequential numbers as base units (including 0) before adding a new position for the next number.
+
+<a name="cli-glossary"></a>
+* **CLI**: CLI stands for command line interface. Through the CLI, users interact with a system or application by typing in text (commands). The command is typed on a specific line following a visual prompt from the computer.
+
+<a name="gui-glossary"></a>
+* **GUI**: GUI stands for graphical user interface. The graphical user interface is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation.
