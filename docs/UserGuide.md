@@ -75,6 +75,8 @@ This is a warning.
    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Graphical User Interface
