@@ -7,12 +7,16 @@ skinparam classBackgroundColor UI_COLOR
 package UI <<Rectangle>>{
 Interface Ui <<Interface>>
 Class "{abstract}\nUiPart" as UiPart
+Class "{abstract}\nListable" as Listable
+Class "{abstract}\nCard" as Card
 Class UiManager
 Class MainWindow
 Class HelpWindow
 Class ResultDisplay
-Class PersonListPanel
+Class ListPanel
 Class PersonCard
+Class GroupCard
+Class TaskCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -32,26 +36,33 @@ UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
 MainWindow *-down->  "1" CommandBox
 MainWindow *-down-> "1" ResultDisplay
-MainWindow *-down-> "1" PersonListPanel
+MainWindow *-down-> "1" ListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
-PersonListPanel -down-> "*" PersonCard
+ListPanel -down-> "*" Listable
+Listable ..> Card
+PersonCard -up-|> Card
+GroupCard -up-|> Card
+TaskCard -up-|> Card
 
 MainWindow -left-|> UiPart
 
 ResultDisplay --|> UiPart
 CommandBox --|> UiPart
-PersonListPanel --|> UiPart
-PersonCard --|> UiPart
+ListPanel --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+Card --|> UiPart
 
+Listable ..> Model
 PersonCard ..> Model
+GroupCard ..> Model
+TaskCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ListPanel -[hidden]left- HelpWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter

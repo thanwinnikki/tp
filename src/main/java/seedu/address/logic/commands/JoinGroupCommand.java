@@ -13,7 +13,6 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.person.IsGroupMemberPredicate;
 import seedu.address.model.person.Person;
 
 /** Adds a person to a group in the address book.
@@ -31,6 +30,7 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
             + "Example: " + COMMAND_WORD + " p/1 g/2";
 
     public static final String MESSAGE_SUCCESS = "Person(s) added to group : %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     public static final String MESSAGE_INVALID_GROUP_INDEX = "Please enter a valid group number";
     public static final String MESSAGE_INVALID_PERSON_INDEX = "Please enter all valid person indexes";
     public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS =
@@ -76,6 +76,10 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
                 .map(x -> lastShownPersonList.get(x.getZeroBased()))
                 .collect(Collectors.toSet());
 
+        if (groupToChange.hasGroupMates(personSet)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
         groupAddedTo = groupToChange;
         addedGroupMates = personSet;
 
@@ -90,7 +94,6 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
             assert groupAddedTo.hasGroupMate(groupMate) : "The group mate must be in the group to undo the addition.";
             groupAddedTo.removeGroupMate(groupMate);
         });
-        model.updateFilteredPersonList(new IsGroupMemberPredicate(groupAddedTo));
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupAddedTo))
                 .displayGroupInformation(groupAddedTo)
                 .build();

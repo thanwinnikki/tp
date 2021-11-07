@@ -13,9 +13,9 @@ ___
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Usage
+## About The Guide
 
-If you are a user of ThunderCat and you would like to get to know how to use ThunderCat, then this user guide is for you. Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge. However, the user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still only a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
 
 ### Navigation
 
@@ -51,11 +51,11 @@ This is a warning.
 
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/user-guide/Ui.png)
 
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
-   ![Ui](images/macError.png)
+   ![Ui](images/user-guide/macError.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -71,6 +71,17 @@ This is a warning.
    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+--------------------------------------------------------------------------------------------------------------------
+
+## Graphical User Interface
+
+<a name="home-page-anchor"></a>
+* **Home Page**: The home page where the lists of persons and groups are displayed.<br>
+  <br>![Home Page](images/user-guide/HomePanel.png)
+
+<a name="group-info-page-anchor"></a>
+* **Group Information Page**: The group information page where the lists of group members and tasks are displayed.<br>
+ <br>![[Group Information Page](#group-info-page-anchor)](images/user-guide/GroupInformationPanel.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -100,27 +111,42 @@ This is a warning.
 
 </div>
 
-### Viewing help : `help`
+### Command Overview
 
-Shows a message explaining how to access the help page.
+Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information Page](#group-info-page-anchor)
+--------|---------|---------|---------|---------
+**Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark:
+**Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
+**Delete person** | `delete INDEX` | `delete 3` | :white_check_mark:
+**Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: |
+**Find person** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
+**List all persons** | `list` | | :white_check_mark: | :white_check_mark:
+**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
+**Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
+**Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
+**Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
+**Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
+**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark:
+**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
+**Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
+**Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
+**Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
+**Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
+**Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
+**Help** | `help`| | :white_check_mark: | :white_check_mark:
 
-![help message](images/helpMessage.png)
-
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
-</div>
-
-Format: `help`
-
-### Adding a person: `add`
+### Persons
+#### Adding a person: `add`
 
 Adds a person to ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="block" class="alert alert-primary">
+
+:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in
+* [Home Page](#home-page-anchor)
+
 </div>
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
@@ -130,55 +156,32 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`<br>
+  <br>
+  ![result for 'add john doe'](images/user-guide/addJohnDoeResult.png)
 
-### Creating a group : `addG`
-
-Creates a group in ThunderCat with an optional description. A description for the group is optional.
-
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-</div>
-
-Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
-
-Examples:  
-* `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".
-* `addG n/Family` adds a group with the name "Family" with the default description.
-
-### Viewing all groups: `groups`
-
-Shows a list of all groups in ThunderCat.
-
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
-</div>
-
-Format: `groups`
-
-### Listing all persons : `list`
+#### Listing all persons : `list`
 
 Shows a list of all persons in ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `list`
 
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing person in ThunderCat.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-* Group Information Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -191,34 +194,19 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * You can remove a person's address by typing `a/` without specifying any address after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 7 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 7th person to be `91234567` and `johndoe@example.com` respectively.<br>
+    <br>
+    ![result for 'edit john doe'](images/user-guide/editJohnDoeResult.png)
 
-### Editing a group: `editG`
-
-Edits an existing group in ThunderCat.
-
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
-</div>
-
-Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
-
-* The group with the specified `GROUP_INDEX` will be edited.
-* The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example:
-* `editG 1 n/ES2660 d/Communications Mod` edits the name, and the description of the 1st group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
-
-### Locating persons by name: `find`
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -234,15 +222,16 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   <br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/user-guide/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+#### Deleting a person : `delete`
 
 Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `delete INDEX`
@@ -255,13 +244,72 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Locating groups by name: `findG`
+### Groups
+#### Creating a group : `addG`
+
+Creates a group in ThunderCat with an optional description. A description for the group is optional.
+
+<div markdown="block" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+</div>
+
+Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
+
+Examples:  
+* `addG n/Family` adds a group with the name "Family" with the default description.
+* `addG n/CS2103 d/Project group Y2S1` adds a group with the name "CS2103" with the description "Project group Y2S1".<br>
+  <br>
+  ![result for 'add group CS2103'](images/user-guide/addGroupCS2103.png)
+
+
+#### Viewing all groups: `groups`
+
+Shows a list of all groups in ThunderCat.
+
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+</div>
+
+Format: `groups`
+
+#### Editing a group: `editG`
+
+Edits an existing group in ThunderCat.
+
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+</div>
+
+Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
+
+* The group with the specified `GROUP_INDEX` will be edited.
+* The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Description can be empty if group was created without one but once set, description should never be empty.
+
+Example:
+* `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
+  * Before
+    ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)
+  * After
+    ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
+
+#### Locating groups by name: `findG`
 
 Find groups whose names contain any of the given keywords.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `findG KEYWORD [MORE_KEYWORDS]`
@@ -278,15 +326,16 @@ Examples:
 * `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`
   
 
-  ![result for 'find CS2103T Mates'](images/findG_CS2103T_Mates_Result.png)
+  ![result for 'find CS2103T Mates'](images/user-guide/findG_CS2103T_Mates_Result.png)
 
-### Deleting a group : `deleteG`
+#### Deleting a group : `deleteG`
 
 Deletes the specified group from the displayed group list.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `deleteG GROUP_INDEX`
@@ -298,13 +347,14 @@ Format: `deleteG GROUP_INDEX`
 Examples:
 * `deleteG 2` deletes the 2nd group in ThunderCat.
 
-### Adding multiple people to a group : `joinG`
+#### Adding multiple people to a group : `joinG`
 
 Adds multiple specified people to a specified group.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
@@ -317,14 +367,21 @@ Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
 
 Examples:
 * `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
+  * Second group initially
+    ![result for 'second group initially'](images/user-guide/secondGroupInitially.png)
+  * Type JoinG command in Home panel
+      ![result for 'type JoinG command in home panel'](images/user-guide/typeJoinGCommand.png)
+  * Second group after
+      ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
 
-### Listing all group mates and tasks in a group: `group`
+#### Listing all group mates and tasks in a group: `group`
 
 Lists out all the group mates and tasks in the specified group.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
 </div>
 
 Format: `group GROUP_INDEX`
@@ -335,14 +392,19 @@ Format: `group GROUP_INDEX`
 
 Example:
 * `group 1` shows the information of the group at index 1 of the displayed group list.
+  * Before
+    ![result for 'before show 1st group'](images/user-guide/beforeShow1stGroup.png)
+  * After
+    ![result for 'after show 1st group'](images/user-guide/afterShow1stGroup.png)
 
-### Remove a person from the current group: `remove`
+#### Remove a person from the current group: `remove`
 
 Removes the specified person from the group that ThunderCat is displaying.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 :bulb: Not to be confused with the delete command.
@@ -356,27 +418,36 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2` removes the 2nd person in the displayed person list from the group.
 
-### Adding a task to the current group: `addT`
+### Tasks
+#### Adding a task to the current group: `addT`
 
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+The task's name can only be displayed up to first 70 characters.
 </div>
 
 Format: `addT d/TASK_DESCRIPTION`
 
 Example:
-* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `Not done` by default.
+* `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `Not done` by default.<br>
+  <br>
+  ![result for 'add task Prepare pitch'](images/user-guide/addTaskPreparePitch.png)
 
-### Deleting a task from the current group: `deleteT`
+#### Deleting a task from the current group: `deleteT`
 
 Deletes the specified task from the group that ThunderCat is displaying.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `deleteT TASK_INDEX`
@@ -388,13 +459,15 @@ Format: `deleteT TASK_INDEX`
 Example:
 * `deleteT 1` deletes the 1st task in the displayed task list.
 
-### Marking a task as done: `done`
+#### Marking a task as done: `done`
 
 Marks the specified task in the group as done.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Group Information Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Group Information Page](#group-info-page-anchor)
+
 </div>
 
 Format: `done TASK_INDEX`
@@ -405,15 +478,23 @@ Format: `done TASK_INDEX`
 
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
+  * Before
+    ![result for 'before mark 2nd task done'](images/user-guide/beforeMark2ndTaskDone.png)
+  * After
+      ![result for 'after mark 2nd task done'](images/user-guide/afterMark2ndTaskDone.png)
 
-### Undoing an undoable command : `undo`
+### General:
+
+#### Undoing an undoable command : `undo`
 
 Undoes an undoable command.
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-Panels which you can use this command in.
-* Home panel
-* Group Information Panel
+<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+
+[Page(s)](#graphical-user-interface) which you can use this command in.
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+
 </div>
 
 Format: `undo`
@@ -432,9 +513,17 @@ Format: `undo`
   * [`done`](#marking-a-task-as-done-done)
   * [`remove`](#remove-a-person-from-the-current-group-remove)
 
-### Clearing all entries : `clear`
+#### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
+
+<div markdown="block" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#graphical-user-interface) which you can use this command in
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+</div>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 If done accidentally, you can use the undo command to undo the clear!
@@ -442,12 +531,31 @@ If done accidentally, you can use the undo command to undo the clear!
 
 Format: `clear`
 
-### Exiting the program : `exit`
+#### Viewing help : `help`
+
+Shows a message explaining how to access the user guide.
+
+![help message](images/user-guide/helpMessage.png)
+
+<div markdown="block" class="alert alert-primary">
+
+:tv: **Tip:**
+[Page(s)](#graphical-user-interface) which you can use this command in
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+</div>
+
+Format: `help`
+
+#### Exiting the program : `exit`
 
 Exits ThunderCat.
 
 Format: `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Data Storage
 ### Saving the data
 
 The data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -464,9 +572,14 @@ Use [`clear`](#clearing-all-entries--clear) to easily and quickly remove the sam
 
 If the data file has an invalid format, such as after editing the file wrongly, then the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 
-### Editing the data file
 
-The data is saved as a JSON file called `records.json` located in `[JAR file location]/data`. Advanced users are welcome to update data directly by editing that data file.
+
+### Editing the data file
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+This piece of information is meant for more advanced users.
+</div>
+
+The data is saved as a [JSON](#json) file called `records.json` located in `[JAR file location]/data`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
@@ -474,11 +587,7 @@ If any of the changes you make to the data file makes it have an invalid format,
 
 #### Structure of the data file
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-The following is more suitable for more advanced users.
-</div>
-
-The data file consists of a JSON object containing a `persons` JSON array and a `groups` JSON array:
+The data file consists of a [JSON](#json) object containing a `persons` [JSON](#json) array and a `groups` [JSON](#json) array:
 
 ```json
 {
@@ -491,7 +600,7 @@ The data file consists of a JSON object containing a `persons` JSON array and a 
 }
 ```
 
-The `persons` JSON array consists of entries of each saved person and their details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+The `persons` [JSON](#json) array consists of entries of each saved person and their details structured as a [JSON](#json) object. The order the entries appear in the [JSON](#json) array determines the order the entries will appear in ThunderCat.
 
 In each person entry, these are the required attributes:
 * `"name"` is a string that refers to the person's saved name.
@@ -502,13 +611,14 @@ In each person entry, these are the required attributes:
 There are also some optional attributes:
 * `"tagged"` is a JSON array that contains strings that each refer to a tag the person is assigned.
 * `"id"` is a string which is used by group entries to refer to the person with the ID as a group mate.
-  * Each ID is made of two _hexadecimal_ numbers separated by a hyphen `[hex]-[hex]`.
+  * Each ID is made of two _[hexadecimal](#hexadecimal)_ numbers separated by a hyphen `[hex]-[hex]`.
   * Each ID must be unique among all person entries.
   * The value of the ID does not matter, so it can have any value, so long as each ID is **unique** among all person entries.
-  * If a person belongs to a group, then the person must have an ID and this ID must also appear in that group's `groupMateIds` JSON array.
+  * If a person belongs to a group, then the person must have an ID and this ID must also appear in that group's `groupMateIds` [JSON](#json) array.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you are not familiar with _hexadecimal_ numbers, it suffices to use the usual decimal numbers (so using only the digits from 0 to 9).
+
+If you are not familiar with _[hexadecimal](#hexadecimal)_ numbers, it suffices to use the usual decimal numbers (so using only the digits from 0 to 9).
 </div>
 
 ```json
@@ -602,40 +712,14 @@ In each task entry, these are the required attributes:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action | Format | Examples | Home Panel | Group Information Panel
---------|---------|---------|---------|---------
-**Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark:
-**Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
-**Delete person** | `delete INDEX` | `delete 3` | :white_check_mark: 
-**Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: | 
-**Find person** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
-**List all persons** | `list` | | :white_check_mark: | :white_check_mark:
-**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
-**Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
-**Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
-**Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark: 
-**Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
-**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark: 
-**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: | 
-**Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
-**Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
-**Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
-**Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
-**Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
-**Help** | `help`| | :white_check_mark: | :white_check_mark:
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Glossary
 
-* **Home Panel**: The home page where the lists of persons and groups are displayed.<br>
-<br>![Home Panel](images/HomePanel.png)
+* **[Home Page](#home-page-anchor)**: The home page where the lists of persons and groups are displayed.<br>
 
+* **[Group Information Page](#group-info-page-anchor)**: The group information page where the lists of group members and tasks are displayed.<br>
 
-* **Group Information Panel**: The group information page where the lists of group members and tasks are displayed.<br>
-<br>![Group Information Panel](images/GroupInformationPanel.png)
-
-
+<a name="json"></a>
 * **JSON**: JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of attribute–value pairs and arrays (or other serializable values).
+
+<a name="hexadecimal"></a>
+* **Hexadecimal**: Hexadecimal describes a base-16 number system. That is, it describes a numbering system containing 16 sequential numbers as base units (including 0) before adding a new position for the next number.

@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -195,6 +196,21 @@ public class EditCommandTest {
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Person editedPerson = new PersonBuilder()
+                .withAddress(PersonBuilder.DEFAULT_ADDRESS)
+                .build();
+        Person uneditedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
+        UndoableCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
+        String expectedMessage = String.format(EditCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, uneditedPerson);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .goToHome()
+                .build();
+        assertUndoSuccess(editCommand, model, expectedUndoResult);
     }
 
     @Test

@@ -106,7 +106,14 @@ public interface Model {
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<? super Person> predicate);
+
+    /**
+     * Returns the current predicate used to filter the filtered person list.
+     *
+     * @return The current predicate used to filter the filtered person list.
+     */
+    Predicate<? super Person> getFilteredPersonListPredicate();
 
     //=========== Group =============================================================
 
@@ -123,7 +130,14 @@ public interface Model {
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredGroupList(Predicate<Group> predicate);
+    void updateFilteredGroupList(Predicate<? super Group> predicate);
+
+    /**
+     * Returns the current predicate used to filter the filtered group list.
+     *
+     * @return The current predicate used to filter the filtered group list.
+     */
+    Predicate<? super Group> getFilteredGroupListPredicate();
 
     /**
      * Adds the person objects in the set to the specified group.

@@ -2,15 +2,20 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DONALD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CAROL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DONALD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CAROL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONALD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CAROL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DONALD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COVFEFE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_WIFE;
@@ -62,6 +67,8 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_CAROL)
             // intentional lack of saved physical address
             .withTags(VALID_TAG_WIFE).build();
+    public static final Person DONALD = new PersonBuilder().withName(VALID_NAME_DONALD).withPhone(VALID_PHONE_DONALD)
+            .withEmail(VALID_EMAIL_DONALD).withAddress(VALID_ADDRESS_DONALD).withTags(VALID_TAG_COVFEFE).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

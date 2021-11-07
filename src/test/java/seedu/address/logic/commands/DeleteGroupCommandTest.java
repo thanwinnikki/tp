@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
 import static seedu.address.logic.commands.DeleteGroupCommand.MESSAGE_DELETE_GROUP_SUCCESS;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
@@ -79,6 +80,17 @@ public class DeleteGroupCommandTest {
         DeleteGroupCommand deleteGroupCommand = new DeleteGroupCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Group groupToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
+        UndoableCommand deleteGroupCommand = new DeleteGroupCommand(INDEX_FIRST);
+        String expectedMessage = String.format(DeleteGroupCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, groupToDelete);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .goToHome()
+                .build();
+        assertUndoSuccess(deleteGroupCommand, model, expectedUndoResult);
     }
 
     @Test

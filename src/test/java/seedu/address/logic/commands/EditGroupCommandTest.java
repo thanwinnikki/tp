@@ -9,7 +9,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
+import static seedu.address.testutil.TypicalGroups.CS2103T_GROUP_BUILDER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
@@ -145,6 +147,18 @@ public class EditGroupCommandTest {
                 new EditGroupDescriptorBuilder().withName(VALID_NAME_TENNIS).build());
 
         assertCommandFailure(editGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Group editedGroup = CS2103T_GROUP_BUILDER.build();
+        EditGroupCommand.EditGroupDescriptor descriptor = new EditGroupDescriptorBuilder(editedGroup).build();
+        UndoableCommand editGroupCommand = new EditGroupCommand(INDEX_FIRST, descriptor);
+        String expectedMessage = String.format(EditGroupCommand.MESSAGE_TEMPLATE_UNDO_SUCCESS, editedGroup);
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .goToHome()
+                .build();
+        assertUndoSuccess(editGroupCommand, model, expectedUndoResult);
     }
 
     @Test

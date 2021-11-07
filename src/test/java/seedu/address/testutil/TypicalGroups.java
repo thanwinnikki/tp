@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CSM
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FAMILY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FRIENDS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_SPORTS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_QUIDDITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_SWIMMING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_TENNIS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
@@ -12,7 +13,9 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.CAROL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.DONALD;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
@@ -63,11 +66,13 @@ public class TypicalGroups {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final GroupBuilder TENNIS = new GroupBuilder().withName(VALID_NAME_TENNIS)
-            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB).withTasks(TASK_F_BUILDER.build());
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(AMY, BOB, CAROL, DONALD)
+            .withTasks(TASK_F_BUILDER.build(), TASK_G_BUILDER.build());
     public static final GroupBuilder SWIMMING = new GroupBuilder().withName(VALID_NAME_SWIMMING)
-            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(BOB, AMY);
+            .withDescription(VALID_DESCRIPTION_SPORTS).withMembers(DONALD, BOB);
     public static final GroupBuilder VOLLEYBALL = new GroupBuilder().withName(VALID_NAME_VOLLEYBALL)
             .withDescription(VALID_DESCRIPTION_SPORTS);
+    public static final GroupBuilder QUIDDITCH = new GroupBuilder().withName(VALID_NAME_QUIDDITCH);
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

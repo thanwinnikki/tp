@@ -157,9 +157,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredPersonList(Predicate<? super Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public Predicate<? super Person> getFilteredPersonListPredicate() {
+        return filteredPersons.getPredicate();
     }
 
     //=========== Group =====================================================================================
@@ -182,9 +187,14 @@ public class ModelManager implements Model {
     //=========== Filtered Group List Accessors =============================================================
 
     @Override
-    public void updateFilteredGroupList(Predicate<Group> predicate) {
+    public void updateFilteredGroupList(Predicate<? super Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
+    }
+
+    @Override
+    public Predicate<? super Group> getFilteredGroupListPredicate() {
+        return filteredGroups.getPredicate();
     }
 
     @Override

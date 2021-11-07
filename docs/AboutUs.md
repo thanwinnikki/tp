@@ -11,7 +11,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Nikki Than Win
 
-<img src="images/thanwinnikki.png" width="200px">
+<img src="images/team/thanwinnikki.png" width="200px">
 
 [[github](http://github.com/thanwinikki)]
 [[portfolio](team/thanwinnikki.md)]
@@ -21,7 +21,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Won Ye Ji
 
-<img alt="Ye Ji's photo" src="images/wonyeji.png" width="200px">
+<img alt="Ye Ji's photo" src="images/team/wonyeji.png" width="200px">
 
 [[github](https://github.com/wonyeji)]
 [[portfolio](team/wonyeji.md)]
@@ -31,7 +31,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Nguyen Thuan Hung
 
-<img src="images/hungkhoaitay.png" width="200px">
+<img src="images/team/hungkhoaitay.png" width="200px">
 
 [[Github](https://github.com/hungkhoaitay)][[portfolio](team/hungkhoaitay.md)]
 
@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Wang Hong Yong
 
-<img src="images/asherhy.png" width="200px">
+<img src="images/team/asherhy.png" width="200px">
 
 [[github](http://github.com/asherhy)]
 [[portfolio](team/asherhy.md)]
@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jay Aljelo Saez Ting
 
-<img alt="Jay's Photo" src="images/jayasting98.png" width="200px">
+<img alt="Jay's Photo" src="images/team/jayasting98.png" width="200px">
 
 [[github](https://github.com/jayasting98)]
 [[portfolio](team/jayasting98.md)]

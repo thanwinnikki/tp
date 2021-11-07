@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -18,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.common.Description;
 import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -44,6 +46,8 @@ public class EditGroupCommand implements UndoableCommand, StateDependentCommand 
 
     private Group groupBeforeEdit;
     private Group groupAfterEdit;
+    private Predicate<? super Person> personPredicate;
+    private Predicate<? super Group> groupPredicate;
 
     /**
      * @param index of the group in the filtered group list to edit
@@ -60,6 +64,9 @@ public class EditGroupCommand implements UndoableCommand, StateDependentCommand 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        personPredicate = model.getFilteredPersonListPredicate();
+        groupPredicate = model.getFilteredGroupListPredicate();
+
         List<Group> lastShownList = model.getFilteredGroupList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -86,7 +93,14 @@ public class EditGroupCommand implements UndoableCommand, StateDependentCommand 
     public CommandResult undo(Model model) throws CommandException {
         assert model.hasGroup(groupAfterEdit) : "The edited group must be in the records to undo its edit.";
         model.setGroup(groupAfterEdit, groupBeforeEdit);
-        model.updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        if (personPredicate == null) {
+            personPredicate = Model.PREDICATE_SHOW_ALL_PERSONS;
+        }
+        model.updateFilteredPersonList(personPredicate);
+        if (groupPredicate == null) {
+            groupPredicate = Model.PREDICATE_SHOW_ALL_GROUPS;
+        }
+        model.updateFilteredGroupList(groupPredicate);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, groupBeforeEdit))
                 .goToHome()
                 .build();

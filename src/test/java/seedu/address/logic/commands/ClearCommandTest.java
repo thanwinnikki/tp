@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertUndoSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,17 @@ public class ClearCommandTest {
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void undo_validPrecondition_successfulUndo() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        UndoableCommand clearCommand = new ClearCommand();
+        String expectedMessage = ClearCommand.MESSAGE_UNDO_SUCCESS;
+        CommandResult expectedUndoResult = new CommandResult.Builder(expectedMessage)
+                .goToHome()
+                .build();
+        assertUndoSuccess(clearCommand, model, expectedUndoResult);
     }
 
 }
