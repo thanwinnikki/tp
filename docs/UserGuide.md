@@ -347,10 +347,10 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
 Example:
 * `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
-
-  Before             |  After
-  :-------------------------:|:-------------------------:
-  ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)  |  ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
+  * Before
+    ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)
+  * After
+    ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
 
 [To table of contents](#table-of-contents)
 
@@ -452,11 +452,11 @@ Format: `group GROUP_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `group 1` shows the information of the group at index 1 of the displayed group list.
-  * Before
+* `group 1` shows the information of the group at index 1 of the displayed group list.<br>
+<br>
+  <span style="font-size:29px"><center><b>Before</b></center></span>
     ![result for 'before show 1st group'](images/user-guide/beforeShow1stGroup.png)
-  * After
-  * After
+  <span style="font-size:29px"><center><b>After</b></center></span>
     ![result for 'after show 1st group'](images/user-guide/afterShow1stGroup.png)
 
 [To table of contents](#table-of-contents)
