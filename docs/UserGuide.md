@@ -121,7 +121,7 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: |
 **Find person** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
 **List all persons** | `list` | | :white_check_mark: | :white_check_mark:
-**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
+**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG n/CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
 **Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
 **Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
 **Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
@@ -132,6 +132,7 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
 **Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
 **Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
+**Undo a command** | `undo` | | | :white_check_mark: | :white_check_mark:
 **Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
 **Help** | `help`| | :white_check_mark: | :white_check_mark:
 
@@ -149,11 +150,12 @@ Adds a person to ThunderCat.
 
 </div>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`<br>
@@ -162,13 +164,17 @@ Examples:
 
 #### Listing all persons : `list`
 
-Shows a list of all persons in ThunderCat.
+Shows a list of all persons in ThunderCat. Returns you to the [Home Page](#home-page-anchor).
 
 <div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Does not reset your displayed group list after a `findG` command! Use the `groups` command for that.
 </div>
 
 Format: `list`
@@ -201,7 +207,7 @@ Examples:
 
 #### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords in ThunderCat.
 
 <div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
@@ -267,13 +273,17 @@ Examples:
 
 #### Viewing all groups: `groups`
 
-Shows a list of all groups in ThunderCat.
+Shows a list of all groups in ThunderCat. Returns you to the [Home Page.](#home-page-anchor)
 
 <div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Does not reset your displayed persons list after a `find` command! Use the `list` command for that.
 </div>
 
 Format: `groups`
@@ -304,7 +314,7 @@ Example:
 
 #### Locating groups by name: `findG`
 
-Find groups whose names contain any of the given keywords.
+Find groups whose names contain any of the given keywords in ThunderCat.
 
 <div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
@@ -330,7 +340,7 @@ Examples:
 
 #### Deleting a group : `deleteG`
 
-Deletes the specified group from the displayed group list.
+Deletes the specified group from ThunderCat.
 
 <div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
@@ -349,7 +359,7 @@ Examples:
 
 #### Adding multiple people to a group : `joinG`
 
-Adds multiple specified people to a specified group.
+Adds multiple specified people to a specified group in ThunderCat.
 
 <div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
@@ -376,7 +386,7 @@ Examples:
 
 #### Listing all group mates and tasks in a group: `group`
 
-Lists out all the group mates and tasks in the specified group.
+Lists out all the group mates and tasks in the specified group in ThunderCat.
 
 <div markdown="block" class="alert alert-primary">:tv: **Tip:**
 
@@ -395,6 +405,7 @@ Example:
   * Before
     ![result for 'before show 1st group'](images/user-guide/beforeShow1stGroup.png)
   * After
+  * After
     ![result for 'after show 1st group'](images/user-guide/afterShow1stGroup.png)
 
 #### Remove a person from the current group: `remove`
@@ -407,7 +418,9 @@ Removes the specified person from the group that ThunderCat is displaying.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
-:bulb: Not to be confused with the delete command.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Not to be confused with the `delete` command.
+</div>
 
 Format: `remove PERSON_INDEX`
 
