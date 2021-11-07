@@ -3,7 +3,13 @@ layout: page
 title: User Guide
 ---
 
-ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an 
+address book for contacts with *added support for group projects*. You can manage contacts, organise 
+them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as 
+a messaging application, rather just a task management and contact management application specifically 
+for group projects. The application is optimized for use via a **Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat 
+can get your project groups' management tasks done faster than traditional GUI apps.
 
 ___
 <a name="table-of-contents"></a>
@@ -16,7 +22,7 @@ ___
 ## About The Guide
 
 Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have 
-a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to 
+a basic level of technical knowledge of CLI and [JSON](#json), as well as terms like 'parameters', 'boolean' and 'array'. This guide also serves its purpose to 
 help you improve on and get used to CLI and JSON usages. This user guide also provides some elaboration 
 on certain technical terms that you likely may not be familiar with especially since you are a student. 
 The definitions for some of these terms can be found in the [glossary](#glossary).
@@ -61,23 +67,23 @@ This is a warning.
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
    ![Ui](images/user-guide/macError.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and enter to execute it. e.g. typing **`help`** and entering will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all persons.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a person named `John Doe` to the application's records.
 
-   * **`delete`**`3` : Deletes the 3rd person shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd person shown in the displayed list.
 
-   * **`clear`** : Deletes all persons.
+   * **`clear`** : Deletes all data in ThunderCat.
 
    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 --------------------------------------------------------------------------------------------------------------------
 
-## Graphical User Interface
+## Graphical User Interface (GUI)
 
 <a name="home-page-anchor"></a>
 * **Home Page**: The home page where the lists of persons and groups are displayed.<br>
@@ -110,7 +116,7 @@ This is a warning.
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
