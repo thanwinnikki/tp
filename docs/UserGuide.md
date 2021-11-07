@@ -47,17 +47,17 @@ This is a warning.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `ThunderCat.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-3/tp/releases).
+1. Download the latest `ThunderCat.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-3/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for the application.
+1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-4. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
-![Ui](images/user-guide/macError.png)
+1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
+   ![Ui](images/user-guide/macError.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all persons.
@@ -70,7 +70,7 @@ This is a warning.
 
    * **`exit`** : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Graphical User Interface
@@ -306,11 +306,11 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 * Description can be empty if group was created without one but once set, description should never be empty.
 
 Example:
-* `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.<br>
+* `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
 
-Before             |  After
-:-------------------------:|:-------------------------:
-![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)  |  ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
+  Before             |  After
+  :-------------------------:|:-------------------------:
+  ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)  |  ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
 
 #### Locating groups by name: `findG`
 
