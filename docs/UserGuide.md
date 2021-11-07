@@ -429,7 +429,6 @@ Examples:
   <span style="font-size:27px"><center><b>Second group initially</b></center></span>
     ![result for 'second group initially'](images/user-guide/secondGroupInitially.png)
   <span style="font-size:27px"><center><b>Type JoinG command in [Home Page](#home-page-anchor)</b></center></span>
-
       ![result for 'type JoinG command in home panel'](images/user-guide/typeJoinGCommand.png)
   <span style="font-size:27px"><center><b>Second group after</b></center></span>
       ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
