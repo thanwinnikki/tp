@@ -14,9 +14,7 @@ Class MainWindow
 Class HelpWindow
 Class ResultDisplay
 Class ListPanel
-Class PersonCard
-Class GroupCard
-Class TaskCard
+Class XYZCard
 Class StatusBarFooter
 Class CommandBox
 }
@@ -41,10 +39,8 @@ MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
 
 ListPanel -down-> "*" Listable
-Listable ..> Card
-PersonCard -up-|> Card
-GroupCard -up-|> Card
-TaskCard -up-|> Card
+Listable ..>XYZCard: creates >
+XYZCard -right-|> Card
 
 MainWindow -left-|> UiPart
 
@@ -56,9 +52,7 @@ HelpWindow --|> UiPart
 Card --|> UiPart
 
 Listable ..> Model
-PersonCard ..> Model
-GroupCard ..> Model
-TaskCard ..> Model
+XYZCard ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

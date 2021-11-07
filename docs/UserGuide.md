@@ -3,7 +3,12 @@ layout: page
 title: User Guide
 ---
 
-ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+
+ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to those groups. 
+
+ThunderCat **also** acts as a tool for Year 2 Computing Students to build up their confidence in using a **Command Line Interface** ([CLI](#cli-glossary)) to navigate applications and manipulating **[JSON](#json) files** - a popular data file format widely used in Computing.
+
+ThunderCat **does not** act as a messaging application. This application is optimized for you to use via a **Command Line Interface** ([CLI](#cli-glossary)) while still having the benefits of a Graphical User Interface ([GUI](#gui-glossary)). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
 ___
 <a name="table-of-contents"></a>
@@ -15,11 +20,15 @@ ___
 
 ## About The Guide
 
-Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have 
+a basic level of technical knowledge of [CLI](#cli-glossary) and [JSON](#json), as well as terms like 'parameters', 'boolean' and 'array'. This guide also serves its purpose to 
+help you improve on and get used to [CLI](#cli-glossary) and [JSON](#json) usages. This user guide also provides some elaboration 
+on certain technical terms that you likely may not be familiar with especially since you are a student. 
+The definitions for some of these terms can be found in the [glossary](#glossary).
 
 ### Navigation
 
-Use the [table of contents](#table-of-contents) to navigate the user guide easily. There will also be links in some sections linking to other relevant sections within this user guide or to other websites which provide useful information.
+Use the [table of contents](#table-of-contents) to navigate this user guide easily. There will also be links in some sections linking to other relevant sections within this user guide or to other websites which provide useful information.
 
 ### Formatting
 
@@ -29,8 +38,8 @@ There are blocks that have coloured backgrounds and have icons. The content of t
 This is a tip.
 </div>
 
-<div markdown="span" class="alert alert-primary">:tv: **Tip:**
-This is the screen(s) you can use the commands in.
+<div markdown="span" class="alert alert-success">:tv: **Page(s):**
+Lists the screen(s) you can use the commands in.
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source: **[HEADING]:**
@@ -40,6 +49,8 @@ This provides further information.
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This is a warning.
 </div>
+
+[To table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,29 +62,33 @@ This is a warning.
 
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/user-guide/Ui.png)
+1. Double-click the file to start the app. The [GUI](#gui-glossary) as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
    ![Ui](images/user-guide/macError.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and enter to execute it. e.g. typing **`help`** and entering will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all persons.
 
    * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a person named `John Doe` to the application's records.
 
-   * **`delete`**`3` : Deletes the 3rd person shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd person shown in the displayed list.
 
-   * **`clear`** : Deletes all persons.
+   * **`clear`** : Deletes all data in ThunderCat.
 
    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+[To table of contents](#table-of-contents)
+
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Graphical User Interface
+## Graphical User Interface (GUI)
 
 <a name="home-page-anchor"></a>
 * **Home Page**: The home page where the lists of persons and groups are displayed.<br>
@@ -82,6 +97,8 @@ This is a warning.
 <a name="group-info-page-anchor"></a>
 * **Group Information Page**: The group information page where the lists of group members and tasks are displayed.<br>
  <br>![[Group Information Page](#group-info-page-anchor)](images/user-guide/GroupInformationPanel.png)
+
+[To table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -106,10 +123,12 @@ This is a warning.
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+[To table of contents](#table-of-contents)
 
 ### Command Overview
 
@@ -121,19 +140,22 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: |
 **Find person** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
 **List all persons** | `list` | | :white_check_mark: | :white_check_mark:
-**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
+**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG n/CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
 **Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
 **Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
 **Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
 **Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
-**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark:
-**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
+**Delete Group** | `deleteG GROUP_INDEX` | `deleteG 2` | :white_check_mark:
+**Join Group** | `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
 **Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
 **Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
 **Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
+**Undo a command** | `undo`  | | :white_check_mark: | :white_check_mark:
 **Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
 **Help** | `help`| | :white_check_mark: | :white_check_mark:
+
+[To table of contents](#table-of-contents)
 
 ### Persons
 #### Adding a person: `add`
@@ -149,35 +171,44 @@ Adds a person to ThunderCat.
 
 </div>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
-
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
+
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
+
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, Block 123, #01-01`<br>
   <br>
   ![result for 'add john doe'](images/user-guide/addJohnDoeResult.png)
 
+[To table of contents](#table-of-contents)
+
 #### Listing all persons : `list`
 
-Shows a list of all persons in ThunderCat.
+Shows a list of all persons in ThunderCat. Returns you to the [Home Page](#home-page-anchor).
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Does not reset your displayed group list after a `findG` command! Use the `groups` command for that.
+</div>
+
 Format: `list`
+
+[To table of contents](#table-of-contents)
 
 #### Editing a person : `edit`
 
 Edits an existing person in ThunderCat.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -199,11 +230,13 @@ Examples:
     <br>
     ![result for 'edit john doe'](images/user-guide/editJohnDoeResult.png)
 
+[To table of contents](#table-of-contents)
+
 #### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names contain any of the given keywords in ThunderCat.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -224,14 +257,20 @@ Examples:
   <br>
   ![result for 'find alex david'](images/user-guide/findAlexDavidResult.png)
 
+[To table of contents](#table-of-contents)
+
 #### Deleting a person : `delete`
 
 Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one INDEX to delete while using this command.
 </div>
 
 Format: `delete INDEX`
@@ -243,6 +282,8 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+[To table of contents](#table-of-contents)
 
 ### Groups
 #### Creating a group : `addG`
@@ -264,25 +305,32 @@ Examples:
   <br>
   ![result for 'add group CS2103'](images/user-guide/addGroupCS2103.png)
 
+[To table of contents](#table-of-contents)
 
 #### Viewing all groups: `groups`
 
-Shows a list of all groups in ThunderCat.
+Shows a list of all groups in ThunderCat. Returns you to the [Home Page.](#home-page-anchor)
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Does not reset your displayed persons list after a `find` command! Use the `list` command for that.
+</div>
+
 Format: `groups`
+
+[To table of contents](#table-of-contents)
 
 #### Editing a group: `editG`
 
 Edits an existing group in ThunderCat.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -297,16 +345,18 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
 Example:
 * `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
-  * Before
+  <span style="font-size:27px"><center><b>Before</b></center></span>
     ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)
-  * After
+  <span style="font-size:27px"><center><b>After</b></center></span>
     ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
+
+[To table of contents](#table-of-contents)
 
 #### Locating groups by name: `findG`
 
-Find groups whose names contain any of the given keywords.
+Find groups whose names contain any of the given keywords in ThunderCat.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -324,18 +374,23 @@ Format: `findG KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findG CS2103T` returns `CS2103T Mates` and `CS2103T Tutors`
 * `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`
-  
 
   ![result for 'find CS2103T Mates'](images/user-guide/findG_CS2103T_Mates_Result.png)
 
+[To table of contents](#table-of-contents)
+
 #### Deleting a group : `deleteG`
 
-Deletes the specified group from the displayed group list.
+Deletes the specified group from ThunderCat.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one INDEX to delete while using this command.
 </div>
 
 Format: `deleteG GROUP_INDEX`
@@ -347,11 +402,13 @@ Format: `deleteG GROUP_INDEX`
 Examples:
 * `deleteG 2` deletes the 2nd group in ThunderCat.
 
+[To table of contents](#table-of-contents)
+
 #### Adding multiple people to a group : `joinG`
 
-Adds multiple specified people to a specified group.
+Adds multiple specified people to a specified group in ThunderCat.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -367,18 +424,20 @@ Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
 
 Examples:
 * `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
-  * Second group initially
+  <span style="font-size:27px"><center><b>Second group initially</b></center></span>
     ![result for 'second group initially'](images/user-guide/secondGroupInitially.png)
-  * Type JoinG command in Home panel
+  <span style="font-size:27px"><center><b>Type JoinG command in [Home Page](#home-page-anchor)</b></center></span>
       ![result for 'type JoinG command in home panel'](images/user-guide/typeJoinGCommand.png)
-  * Second group after
+  <span style="font-size:27px"><center><b>Second group after</b></center></span>
       ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
+
+[To table of contents](#table-of-contents)
 
 #### Listing all group mates and tasks in a group: `group`
 
-Lists out all the group mates and tasks in the specified group.
+Lists out all the group mates and tasks in the specified group in ThunderCat.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -391,23 +450,28 @@ Format: `group GROUP_INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `group 1` shows the information of the group at index 1 of the displayed group list.
-  * Before
+* `group 1` shows the information of the group at index 1 of the displayed group list.<br>
+<br>
+  <span style="font-size:27px"><center><b>Before</b></center></span>
     ![result for 'before show 1st group'](images/user-guide/beforeShow1stGroup.png)
-  * After
+  <span style="font-size:27px"><center><b>After</b></center></span>
     ![result for 'after show 1st group'](images/user-guide/afterShow1stGroup.png)
+
+[To table of contents](#table-of-contents)
 
 #### Remove a person from the current group: `remove`
 
 Removes the specified person from the group that ThunderCat is displaying.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
 </div>
 
-:bulb: Not to be confused with the delete command.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Not to be confused with the `delete` command.
+</div>
 
 Format: `remove PERSON_INDEX`
 
@@ -418,12 +482,14 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2` removes the 2nd person in the displayed person list from the group.
 
+[To table of contents](#table-of-contents)
+
 ### Tasks
 #### Adding a task to the current group: `addT`
 
 Adds a task to the group that ThunderCat is displaying. By default, the task is marked `Not done`.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
@@ -440,14 +506,20 @@ Example:
   <br>
   ![result for 'add task Prepare pitch'](images/user-guide/addTaskPreparePitch.png)
 
+[To table of contents](#table-of-contents)
+
 #### Deleting a task from the current group: `deleteT`
 
 Deletes the specified task from the group that ThunderCat is displaying.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one TASK_INDEX to delete while using this command.
 </div>
 
 Format: `deleteT TASK_INDEX`
@@ -459,11 +531,13 @@ Format: `deleteT TASK_INDEX`
 Example:
 * `deleteT 1` deletes the 1st task in the displayed task list.
 
+[To table of contents](#table-of-contents)
+
 #### Marking a task as done: `done`
 
 Marks the specified task in the group as done.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
@@ -478,10 +552,12 @@ Format: `done TASK_INDEX`
 
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
-  * Before
+  <span style="font-size:27px"><center><b>Before</b></center></span>
     ![result for 'before mark 2nd task done'](images/user-guide/beforeMark2ndTaskDone.png)
-  * After
+  <span style="font-size:27px"><center><b>After</b></center></span>
       ![result for 'after mark 2nd task done'](images/user-guide/afterMark2ndTaskDone.png)
+
+[To table of contents](#table-of-contents)
 
 ### General:
 
@@ -489,7 +565,7 @@ Example:
 
 Undoes an undoable command.
 
-<div markdown="block" class="alert alert-primary">:tv: **Tip:**
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
@@ -513,6 +589,8 @@ Format: `undo`
   * [`done`](#marking-a-task-as-done-done)
   * [`remove`](#remove-a-person-from-the-current-group-remove)
 
+[To table of contents](#table-of-contents)
+
 #### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
@@ -531,9 +609,11 @@ If done accidentally, you can use the undo command to undo the clear!
 
 Format: `clear`
 
+[To table of contents](#table-of-contents)
+
 #### Viewing help : `help`
 
-Shows a message explaining how to access the user guide.
+Shows a message explaining how to access the command summary on this user guide.
 
 ![help message](images/user-guide/helpMessage.png)
 
@@ -547,11 +627,15 @@ Shows a message explaining how to access the user guide.
 
 Format: `help`
 
+[To table of contents](#table-of-contents)
+
 #### Exiting the program : `exit`
 
 Exits ThunderCat.
 
 Format: `exit`
+
+[To table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -559,6 +643,8 @@ Format: `exit`
 ### Saving the data
 
 The data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[To table of contents](#table-of-contents)
 
 ### Loading the data
 
@@ -572,7 +658,7 @@ Use [`clear`](#clearing-all-entries--clear) to easily and quickly remove the sam
 
 If the data file has an invalid format, such as after editing the file wrongly, then the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 
-
+[To table of contents](#table-of-contents)
 
 ### Editing the data file
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -584,6 +670,8 @@ The data is saved as a [JSON](#json) file called `records.json` located in `[JAR
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 </div>
+
+[To table of contents](#table-of-contents)
 
 #### Structure of the data file
 
@@ -609,7 +697,7 @@ In each person entry, these are the required attributes:
 * `"address"` is a string that refers to the person's saved address.
 
 There are also some optional attributes:
-* `"tagged"` is a JSON array that contains strings that each refer to a tag the person is assigned.
+* `"tagged"` is a [JSON](#json) array that contains strings that each refer to a tag the person is assigned.
 * `"id"` is a string which is used by group entries to refer to the person with the ID as a group mate.
   * Each ID is made of two _[hexadecimal](#hexadecimal)_ numbers separated by a hyphen `[hex]-[hex]`.
   * Each ID must be unique among all person entries.
@@ -644,17 +732,17 @@ If you are not familiar with _[hexadecimal](#hexadecimal)_ numbers, it suffices 
 }
 ```
 
-The `groups` JSON array consists of entries of each saved group and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+The `groups` [JSON](#json) array consists of entries of each saved group and its details structured as a JSON object. The order the entries appear in the [JSON](#json) array determines the order the entries will appear in ThunderCat.
 
 In each group entry, this is the required attribute:
 * `"name"` is a string that refers to the group's saved name.
 
 These are the optional attributes:
 * `"description"` is a string that refers to the group's saved description.
-* `"groupMateIds"` is a JSON array containing the IDs of the person entries of the group mates in the group.
+* `"groupMateIds"` is a [JSON](#json) array containing the IDs of the person entries of the group mates in the group.
   * The ID of each group mate must correspond to the ID in the group mate's person entry.
   * The group mate IDs must be unique within a group entry.
-* `"tasks"` is a JSON array containing the entries of each saved task of a group and its details structured as a JSON object.
+* `"tasks"` is a [JSON](#json) array containing the entries of each saved task of a group and its details structured as a [JSON](#json) object.
 
 ```json
 {
@@ -676,7 +764,7 @@ These are the optional attributes:
 }
 ```
 
-The `tasks` JSON array consists of the corresponding group's entries of each saved task and its details structured as a JSON object. The order the entries appear in the JSON array determines the order the entries will appear in ThunderCat.
+The `tasks` [JSON](#json) array consists of the corresponding group's entries of each saved task and its details structured as a [JSON](#json) object. The order the entries appear in the [JSON](#json) array determines the order the entries will appear in ThunderCat.
 
 In each task entry, these are the required attributes:
 * `"description"` is a string that refers to the task's saved description.
@@ -703,12 +791,16 @@ In each task entry, these are the required attributes:
 }
 ```
 
+[To table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data from the home folder of the application in your original computer.
+
+[To table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -723,3 +815,11 @@ In each task entry, these are the required attributes:
 
 <a name="hexadecimal"></a>
 * **Hexadecimal**: Hexadecimal describes a base-16 number system. That is, it describes a numbering system containing 16 sequential numbers as base units (including 0) before adding a new position for the next number.
+
+<a name="cli-glossary"></a>
+* **CLI**: CLI stands for command line interface. Through the CLI, users interact with a system or application by typing in text (commands). The command is typed on a specific line following a visual prompt from the computer.
+
+<a name="gui-glossary"></a>
+* **GUI**: GUI stands for graphical user interface. The graphical user interface is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation.
+
+[To table of contents](#table-of-contents)
