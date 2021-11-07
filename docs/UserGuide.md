@@ -3,7 +3,11 @@ layout: page
 title: User Guide
 ---
 
-ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to those groups. 
+
+ThunderCat **also** acts as a tool for Year 2 Computing Students to build up their confidence in using a **Command Line Interface** (CLI) to navigate applications and manipulating **JSON files** - a popular data file format widely used in Computing.
+
+ThunderCat **does not** act as a messaging application. This application is optimized for you to use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
 ___
 <a name="table-of-contents"></a>
@@ -126,7 +130,7 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
 **Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
 **Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
-**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark:
+**Delete Group** | `deleteG GROUP_INDEX` | `deleteG 2` | :white_check_mark:
 **Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
 **Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
@@ -240,6 +244,10 @@ Deletes the specified person from ThunderCat (also removes the person from all g
 * [Home Page](#home-page-anchor)
 </div>
 
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one INDEX to delete while using this command.
+</div>
+
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX` and removes it from all related groups automatically.
@@ -346,6 +354,10 @@ Deletes the specified group from ThunderCat.
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one INDEX to delete while using this command.
 </div>
 
 Format: `deleteG GROUP_INDEX`
@@ -461,6 +473,10 @@ Deletes the specified task from the group that ThunderCat is displaying.
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one TASK_INDEX to delete while using this command.
 </div>
 
 Format: `deleteT TASK_INDEX`
