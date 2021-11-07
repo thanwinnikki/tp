@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":JoinGroupCommandParser" as JoinGCommandParser LOGIC_COLOR
+participant "j:JoinGroupCommand" as JoinGroupCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute("joinG p/1 g/1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("joinG p/1 g/1")
+activate AddressBookParser
+
+create JoinGCommandParser
+AddressBookParser -> JoinGCommandParser
+activate JoinGCommandParser
+
+JoinGCommandParser --> AddressBookParser
+deactivate JoinGCommandParser
+
+AddressBookParser --> JoinGCommandParser : parse("p/1 g/1")
+activate JoinGCommandParser
+
+create JoinGroupCommand
+JoinGCommandParser -> JoinGroupCommand
+activate JoinGroupCommand
+
+JoinGroupCommand -> JoinGCommandParser : j
+deactivate JoinGroupCommand
+
+JoinGCommandParser -> AddressBookParser : j
+destroy JoinGCommandParser
+
+AddressBookParser --> LogicManager : j
+deactivate AddressBookParser
+
+LogicManager -> LogicManager : checkIfCommandCanRunInApplicationState(c)
+activate LogicManager
+LogicManager --> LogicManager
+deactivate LogicManager
+
+LogicManager -> JoinGroupCommand : execute()
+activate JoinGroupCommand
+
+ref over JoinGroupCommand, Model
+Add person to group
+end ref
+
+create CommandResult
+JoinGroupCommand --> CommandResult
+activate CommandResult
+CommandResult --> JoinGroupCommand : r
+deactivate CommandResult
+
+JoinGroupCommand --> LogicManager : r
+deactivate JoinGroupCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

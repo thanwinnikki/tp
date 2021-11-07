@@ -293,10 +293,10 @@ The edit group mechanism is facilitated by `EditGroupCommand`, `EditGroupCommand
 
 1. User enters the `editG GROUP_INDEX n/NEW_NAME` command, and the user input is taken into `LogicManager#execute(String commandText)`.
 2. `LogicManager` calls the `AddressBookParser#parseCommand(String userInput, ApplicationState currentApplicationState)` method which parses the user input along with the current application state.
-3. `EditGroupParser#parse(String args)` retrieves the group index from the arguments parsed then creates the EditGroupDescriptor object.
+3. `EditGroupCommandParser#parse(String args)` retrieves the group index from the arguments parsed then creates the EditGroupDescriptor object.
 4. A new `EditGroupCommand` object will be created with the parameters extracted from EditGroupDescriptor and group index.
 5. `LogicManager#execute(String commandText)` checks if this command object is able to run in the current application state. This operation is exposed in the LogicManager class as `LogicManager#checkIfCommandCanRunInApplicationState(Command command)`.
-6. If the command is able to run, the EditGroupCommand then interacts with the Model class to edit the data. This operation is exposed in the Task class as `Model#setGroup()`.
+6. If the command is able to run, the EditGroupCommand then interacts with the Model class to edit the data. This operation is exposed in the Model class as `Model#setGroup()`.
    **Note**: The UniquePersonList and UniqueTaskList from the group to be edited will also be copied over to the new group object created by the EditGroupCommand.
 7. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
 
@@ -313,7 +313,29 @@ The following steps describe the execution of the EditGroupCommand.
 
 ### Adding Persons to Group Command
 
+The add person to group mechanism is facilitated by `JoinGroupCommand` and `JoinGroupCommandParser`. This command allows forming of an association between two main data types in ThunderCat, Groups and Persons.
+
 #### Implementation
+![JoinGroupCommand Sequence Diagram](images/JoinGroupSequenceDiagram.png)
+
+1. User enters the `joinG p/1 g/1` command, and the user input is taken into `LogicManager#execute(String commandText)`.
+2. `LogicManager` calls the `AddressBookParser#parseCommand(String userInput, ApplicationState currentApplicationState)` method which parses the user input along with the current application state.
+3. `JoinGroupCommandParser#parse(String args)` retrieves the group index and person index from the arguments parsed.
+4. A new `JoinGroupCommand` object will be created with person index and group index.
+5. `LogicManager#execute(String commandText)` checks if this command object is able to run in the current application state. This operation is exposed in the LogicManager class as `LogicManager#checkIfCommandCanRunInApplicationState(Command command)`.
+6. If the command is able to run, the JoinGroupCommand then interacts with the Model class to edit the data. This operation is exposed in the Model class as `Model#addToGroup()`.
+   **Note**: If the person has already been added to the group, an error message will be displayed.
+7. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
+
+Any error present in the User Input will throw exceptions and this is shown in the following activity diagram.
+
+![JoinGroupCommand Activity Diagram](images/JoinGroupActivityDiagram.png)
+
+1. JoinGroupCommandParser throws an exception if command format is invalid (negative/missing index, missing group prefix)
+2. JoinGroupCommand throws an exception if the Index does not exist in the student list. It also throws an exception if the person has already been added to the current group. The workflow for throwing these exceptions is similar to the first two and is not shown in the activity diagram below.
+
+The interaction between the Logic and Model classes are shown in the following sequence diagram:
+![JoinGroupCommand Ref Sequence Diagram](images/JoinGroupRefSequenceDiagram.png)
 
 
 --------------------------------------------------------------------------------------------------------------------

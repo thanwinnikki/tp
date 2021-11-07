@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User executes ""joinG"" command;
+
+if () then ([valid format])
+    :Parse the ""joinG""
+    command and arguments;
+
+    : Parser converts user input to
+     valid ""PersonIndex"" and ""GroupIndex"";
+
+    :Search for person based
+    on the specified PersonIndex;
+
+    if () then ([index within bounds])
+
+    :Search for group based
+    on the specified GroupIndex;
+
+    if () then ([index within bounds])
+
+    :Update group with persons;
+
+    :Show success status message;
+
+    else ([else])
+
+    :Show invalid group index
+     error message to user;
+
+    endif
+
+    else ([else])
+
+    :Show invalid index
+    error message to user;
+
+endif
+else ([else])
+
+    :Show command format
+     error message to user;
+
+endif
+
+
+stop
+
+@enduml
