@@ -94,15 +94,15 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-How the `Logic` component works:
+How the `Logic` component works when executing a command:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 2. The `AddressBookParser` class may then call other `Parser` classes to parse specific commands.
-3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`).
-4. The `Command` object is checked if it can be executed in the current `AppState`.
-5. If it cannot be executed, then a `CommandException` is thrown and the `Command` object is not executed. Otherwise, if it can run in the current `AppState`, then the `Command` object is executed by the `LogicManager`.
+3. This results in a `Command` object (more precisely, an object of one of the classes that implement it e.g., `AddCommand`).
+4. The `Command` object is checked if it can be executed in the current `ApplicationState`.
+5. If it cannot be executed, then a `CommandException` is thrown and the `Command` object is not executed. Otherwise, if it can run in the current `ApplicationState`, then the `Command` object is executed by the `LogicManager`.
 6. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-7. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
-8. The current `AppState` is updated using the details from the `CommandResult`.
+7. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+8. The current `ApplicationState` is updated using the details from the `CommandResult`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -111,13 +111,33 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
+#### Parser classes
+
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<img src="images/ParserClassDiagram.png" width="600"/>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* While parsing, the `AddressBookParser` may use information from the `ApplicationState` such as what type of state it is or what data it is storing. Stored data can include things like [`Group` objects](#model-component).
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+#### Command classes
+
+There are different `Command` sub-types:
+* Any implementation of `UndoableCommand` can be undone. After they execute and modify the contents of `Model`, they can undo these modifications.
+* Any implementation of `StateDependentCommand` can check what `ApplicationState` the application is currently in and allow itself to be executed if the command can run in that `ApplicationState`, or instead block execution.
+
+<img src="images/CommandClassDiagram.png" width="600"/>
+
+#### Application state classes
+
+In order to keep track of when the application is on the Home Page or the Group Information Page, the application keeps track of what state it is currently in or what state it will be in after a `Command` is executed. The `ApplicationState` interface is used for this purpose. There are different `ApplicationState` sub-types:
+* The `HomeState` refers to the state the application is in when it is showing the Home Page.
+* The `StoredDataApplicationState` is an `ApplicationState` sub-type that can store data to be used by the components of the application.
+* The `GroupInformationState` refers to the state the application is in when it is showing the Group Information Page. It stores the `Group` object representing the group that is being displayed in the Group Information Page. This `Group` object can be used by `Command` implementations to perform operations on the object or by the `Ui` component for displaying the group's details.
+
+<img src="images/ApplicationStateClassDiagram.png" width="600"/>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)

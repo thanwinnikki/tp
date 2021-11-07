@@ -1,0 +1,30 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package "Application state classes" as ApplicationStateClasses {
+
+Interface ApplicationState <<Interface>>
+Class ApplicationStateType <<Enumeration>>
+Class HomeState
+Class "{abstract}\nStoredDataApplicationState" as StoredDataApplicationState
+Class GroupInformationState
+}
+
+package Model {
+
+Class Group MODEL_COLOR
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside .left.> ApplicationState
+
+ApplicationState .left.> ApplicationStateType : described by >
+
+HomeState .up.|> ApplicationState
+StoredDataApplicationState .up.|> ApplicationState
+GroupInformationState -up-|> StoredDataApplicationState
+GroupInformationState -right-> "1" Group
+@enduml
