@@ -52,7 +52,7 @@ This is a warning.
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
 1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/user-guide/Ui.png)
+   ![Ui](images/Ui.png)
 
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
    ![Ui](images/user-guide/macError.png)
