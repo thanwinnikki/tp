@@ -46,6 +46,8 @@ This provides further information.
 This is a warning.
 </div>
 
+[To table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -77,6 +79,8 @@ This is a warning.
 
 1. Refer to the [Features](#features) below for details of each command.
 
+[To table of contents](#table-of-contents)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -89,6 +93,8 @@ This is a warning.
 <a name="group-info-page-anchor"></a>
 * **Group Information Page**: The group information page where the lists of group members and tasks are displayed.<br>
  <br>![[Group Information Page](#group-info-page-anchor)](images/user-guide/GroupInformationPanel.png)
+
+[To table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,6 +124,8 @@ This is a warning.
 
 </div>
 
+[To table of contents](#table-of-contents)
+
 ### Command Overview
 
 Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information Page](#group-info-page-anchor)
@@ -142,6 +150,8 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Undo a command** | `undo` | | | :white_check_mark: | :white_check_mark:
 **Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
 **Help** | `help`| | :white_check_mark: | :white_check_mark:
+
+[To table of contents](#table-of-contents)
 
 ### Persons
 #### Adding a person: `add`
@@ -169,6 +179,8 @@ Examples:
   <br>
   ![result for 'add john doe'](images/user-guide/addJohnDoeResult.png)
 
+[To table of contents](#table-of-contents)
+
 #### Listing all persons : `list`
 
 Shows a list of all persons in ThunderCat. Returns you to the [Home Page](#home-page-anchor).
@@ -185,6 +197,8 @@ Does not reset your displayed group list after a `findG` command! Use the `group
 </div>
 
 Format: `list`
+
+[To table of contents](#table-of-contents)
 
 #### Editing a person : `edit`
 
@@ -212,6 +226,8 @@ Examples:
     <br>
     ![result for 'edit john doe'](images/user-guide/editJohnDoeResult.png)
 
+[To table of contents](#table-of-contents)
+
 #### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords in ThunderCat.
@@ -237,6 +253,8 @@ Examples:
   <br>
   ![result for 'find alex david'](images/user-guide/findAlexDavidResult.png)
 
+[To table of contents](#table-of-contents)
+
 #### Deleting a person : `delete`
 
 Deletes the specified person from ThunderCat (also removes the person from all groups that includes this person).
@@ -261,6 +279,8 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ThunderCat.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+[To table of contents](#table-of-contents)
+
 ### Groups
 #### Creating a group : `addG`
 
@@ -281,6 +301,7 @@ Examples:
   <br>
   ![result for 'add group CS2103'](images/user-guide/addGroupCS2103.png)
 
+[To table of contents](#table-of-contents)
 
 #### Viewing all groups: `groups`
 
@@ -298,6 +319,8 @@ Does not reset your displayed persons list after a `find` command! Use the `list
 </div>
 
 Format: `groups`
+
+[To table of contents](#table-of-contents)
 
 #### Editing a group: `editG`
 
@@ -323,6 +346,8 @@ Example:
   :-------------------------:|:-------------------------:
   ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)  |  ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
 
+[To table of contents](#table-of-contents)
+
 #### Locating groups by name: `findG`
 
 Find groups whose names contain any of the given keywords in ThunderCat.
@@ -345,9 +370,10 @@ Format: `findG KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findG CS2103T` returns `CS2103T Mates` and `CS2103T Tutors`
 * `findG CS2103T Mates` returns `CS2103T Project Mates`, `Lectures CS2103T`
-  
 
   ![result for 'find CS2103T Mates'](images/user-guide/findG_CS2103T_Mates_Result.png)
+
+[To table of contents](#table-of-contents)
 
 #### Deleting a group : `deleteG`
 
@@ -371,6 +397,8 @@ Format: `deleteG GROUP_INDEX`
 
 Examples:
 * `deleteG 2` deletes the 2nd group in ThunderCat.
+
+[To table of contents](#table-of-contents)
 
 #### Adding multiple people to a group : `joinG`
 
@@ -399,6 +427,8 @@ Examples:
   * Second group after
       ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
 
+[To table of contents](#table-of-contents)
+
 #### Listing all group mates and tasks in a group: `group`
 
 Lists out all the group mates and tasks in the specified group in ThunderCat.
@@ -423,6 +453,8 @@ Example:
   * After
     ![result for 'after show 1st group'](images/user-guide/afterShow1stGroup.png)
 
+[To table of contents](#table-of-contents)
+
 #### Remove a person from the current group: `remove`
 
 Removes the specified person from the group that ThunderCat is displaying.
@@ -446,6 +478,8 @@ Format: `remove PERSON_INDEX`
 Example:
 * `remove 2` removes the 2nd person in the displayed person list from the group.
 
+[To table of contents](#table-of-contents)
+
 ### Tasks
 #### Adding a task to the current group: `addT`
 
@@ -467,6 +501,8 @@ Example:
 * `addT d/Prepare pitch` adds a task with the description "Prepare pitch" to the group and is marked `Not done` by default.<br>
   <br>
   ![result for 'add task Prepare pitch'](images/user-guide/addTaskPreparePitch.png)
+
+[To table of contents](#table-of-contents)
 
 #### Deleting a task from the current group: `deleteT`
 
@@ -491,6 +527,8 @@ Format: `deleteT TASK_INDEX`
 Example:
 * `deleteT 1` deletes the 1st task in the displayed task list.
 
+[To table of contents](#table-of-contents)
+
 #### Marking a task as done: `done`
 
 Marks the specified task in the group as done.
@@ -514,6 +552,8 @@ Example:
     ![result for 'before mark 2nd task done'](images/user-guide/beforeMark2ndTaskDone.png)
   * After
       ![result for 'after mark 2nd task done'](images/user-guide/afterMark2ndTaskDone.png)
+
+[To table of contents](#table-of-contents)
 
 ### General:
 
@@ -545,6 +585,8 @@ Format: `undo`
   * [`done`](#marking-a-task-as-done-done)
   * [`remove`](#remove-a-person-from-the-current-group-remove)
 
+[To table of contents](#table-of-contents)
+
 #### Clearing all entries : `clear`
 
 Clears all entries from ThunderCat.
@@ -563,6 +605,8 @@ If done accidentally, you can use the undo command to undo the clear!
 
 Format: `clear`
 
+[To table of contents](#table-of-contents)
+
 #### Viewing help : `help`
 
 Shows a message explaining how to access the user guide.
@@ -579,11 +623,15 @@ Shows a message explaining how to access the user guide.
 
 Format: `help`
 
+[To table of contents](#table-of-contents)
+
 #### Exiting the program : `exit`
 
 Exits ThunderCat.
 
 Format: `exit`
+
+[To table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -591,6 +639,8 @@ Format: `exit`
 ### Saving the data
 
 The data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[To table of contents](#table-of-contents)
 
 ### Loading the data
 
@@ -604,7 +654,7 @@ Use [`clear`](#clearing-all-entries--clear) to easily and quickly remove the sam
 
 If the data file has an invalid format, such as after editing the file wrongly, then the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 
-
+[To table of contents](#table-of-contents)
 
 ### Editing the data file
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -616,6 +666,8 @@ The data is saved as a [JSON](#json) file called `records.json` located in `[JAR
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If any of the changes you make to the data file makes it have an invalid format, the application will discard all the data and start with an empty data file on the next run. This is **irreversible**.
 </div>
+
+[To table of contents](#table-of-contents)
 
 #### Structure of the data file
 
@@ -735,12 +787,16 @@ In each task entry, these are the required attributes:
 }
 ```
 
+[To table of contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data from the home folder of the application in your original computer.
+
+[To table of contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -761,3 +817,5 @@ In each task entry, these are the required attributes:
 
 <a name="gui-glossary"></a>
 * **GUI**: GUI stands for graphical user interface. The graphical user interface is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation.
+
+[To table of contents](#table-of-contents)
