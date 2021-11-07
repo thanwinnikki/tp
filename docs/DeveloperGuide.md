@@ -128,6 +128,15 @@ There are different `Command` sub-types:
 
 <img src="images/CommandClassDiagram.png" width="600"/>
 
+#### Application state classes
+
+In order to keep track of when the application is on the Home Page or the Group Information Page, the application keeps track of what state it is currently in or what state it will be in after a `Command` is executed. The `ApplicationState` interface is used for this purpose. There are different `ApplicationState` sub-types:
+* The `HomeState` refers to the state the application is in when it is showing the Home Page.
+* The `StoredDataApplicationState` is an `ApplicationState` sub-type that can store data to be used by the components of the application.
+* The `GroupInformationState` refers to the state the application is in when it is showing the Group Information Page. It stores the `Group` object representing the group that is being displayed in the Group Information Page. This `Group` object can be used by `Command` implementations to perform operations on the object or by the `Ui` component for displaying the group's details.
+
+<img src="images/ApplicationStateClassDiagram.png" width="600"/>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
