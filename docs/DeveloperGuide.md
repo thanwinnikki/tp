@@ -283,6 +283,34 @@ Overall, the `MainWindow.fxml` uses `VBox` (Vertical Box) layout to stores compo
 
 Application `ScenceBuilder` makes it easier to implement the feature by the running time visualization and list of possible components
 
+### Edit Group Command
+
+The mark-as-done mechanism is facilitated by `EditGroupCommand`, `EditGroupCommandParser` and `EditGroupDescriptor`. This command allows users edit data of the selected group.
+
+#### Implementation
+
+![EditGroupCommand Sequence Diagram](images/EditGroupCommandSequenceDiagram.png)
+
+1. User enters the `editG GROUP_INDEX n/NEW_NAME` command, and the user input is taken into `LogicManager#execute(String commandText)`.
+2. `LogicManager` calls the `AddressBookParser#parseCommand(String userInput, ApplicationState currentApplicationState)` method which parses the user input along with the current application state.
+3. `EditGroupParser#parse(String args)` retrieves the group index from the arguments parsed then creates the EditGroupDescriptor object.
+4. A new `EditGroupCommand` object will be created with the parameters extracted from EditGroupDescriptor and group index.
+5. `LogicManager#execute(String commandText)` checks if this command object is able to run in the current application state. This operation is exposed in the LogicManager class as `LogicManager#checkIfCommandCanRunInApplicationState(Command command)`.
+6. If the command is able to run, the EditGroupCommand then interacts with the Model class to edit the data. This operation is exposed in the Task class as `Model#setGroup()`.
+   **Note**: The UniquePersonList and UniqueTaskList from the group to be edited will also be copied over to the new group object created by the EditGroupCommand.
+7. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
+
+The implementations of the other `Edit` command which can be used to edit persons data, is similar to the EditGroupCommand in the way the Logic component behaves. A sequence diagram of EditGroupCommand is provided below for better visualisation.
+
+![EditGroupCommand Ref Sequence Diagram](images/EditGroupCommandRefSequenceDiagram.png)
+
+The following steps describe the execution of the EditGroupCommand.
+
+1. EditGroupCommand uses the provided Index and EditGroupDescriptor to create the updated Group object.
+2. EditGroupCommand calls the setGroup method of the Model class to replace the previous Group object with the newly updated one.
+3. Model calls the setGroup function of the AddressBook to update the Group data of the AddressBook.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
