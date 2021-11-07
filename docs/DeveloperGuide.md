@@ -330,8 +330,10 @@ The following steps describe the execution of the EditGroupCommand.
 **Target user profile**:
 
 * Year 2 Computer Science Student
-* Taking the mods CS2103T, CS2101 and ES2660
+* Taking the modules CS2103T, CS2101 and ES2660
 * Has a need to manage and organise a significant number of contacts of group mates
+* Has a need to manage different tasks related to different groups
+* Wants some practical experience using CLI and manipulating JSON files  
 * Prefer desktop apps over other types
 * Can type fast
 * Prefers typing to mouse interactions to navigate applications
