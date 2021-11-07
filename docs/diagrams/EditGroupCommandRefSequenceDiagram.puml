@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+mainframe **sd**  Edit group
+box Logic LOGIC_COLOR_T1
+participant "c:EditGroupCommand" as EditGroupCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "editedGroup:Group" as Group MODEL_COLOR
+participant ":Model" as Model MODEL_COLOR
+participant ":AddressBook" as Ab MODEL_COLOR
+end box
+
+activate EditGroupCommand
+
+EditGroupCommand -> EditGroupCommand : createEditedGroup(groupToEdit, d)
+activate EditGroupCommand
+
+create Group
+EditGroupCommand -> Group
+activate Group
+
+Group --> EditGroupCommand : editedGroup
+deactivate Group
+
+EditGroupCommand --> EditGroupCommand : editedGroup
+deactivate EditGroupCommand
+
+EditGroupCommand -> Model : setGroup(groupToEdit, editedGroup)
+activate Model
+
+Model -> Ab : setGroup(groupToEdit, editedGroup)
+activate Ab
+
+Ab --> Model
+deactivate Ab
+
+Model --> EditGroupCommand
+deactivate Model
+
+@enduml
