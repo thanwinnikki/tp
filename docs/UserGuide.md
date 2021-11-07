@@ -3,7 +3,12 @@ layout: page
 title: User Guide
 ---
 
-ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+
+ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to those groups. 
+
+ThunderCat **also** acts as a tool for Year 2 Computing Students to build up their confidence in using a **Command Line Interface** (CLI) to navigate applications and manipulating **JSON files** - a popular data file format widely used in Computing.
+
+ThunderCat **does not** act as a messaging application. This application is optimized for you to use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
 ___
 <a name="table-of-contents"></a>
@@ -15,7 +20,7 @@ ___
 
 ## About The Guide
 
-Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of CLI and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to CLI and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
+Given that ThunderCat is designed for Year 2 Computing students, this user guide assumes that you have a basic level of technical knowledge of [CLI](#cli-glossary) and [JSON](#json). This guide also serves its purpose to guide you to improve and get used to [CLI](#cli-glossary) and JSON usages. The user guide also provides some elaboration on certain technical terms that you likely may not be familiar with especially since you are probably still a student. The definitions for some of these terms can be found in the [glossary](#glossary).
 
 ### Navigation
 
@@ -51,7 +56,7 @@ This is a warning.
 
 1. Copy the file to the folder you want to use as the _home folder_ for the application.
 
-1. Double-click the file to start the app. The GUI as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The [GUI](#gui-glossary) as shown by the example below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. For Mac Users encountering this issue, follow this [guide](https://support.apple.com/en-sg/guide/mac-help/mh40616/mac) to launch the application.<br>
@@ -71,6 +76,8 @@ This is a warning.
    * **`exit`** : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Graphical User Interface
@@ -126,7 +133,7 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
 **Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
 **Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
-**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark:
+**Delete Group** | `deleteG GROUP_INDEX` | `deleteG 2` | :white_check_mark:
 **Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
 **Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
@@ -240,6 +247,10 @@ Deletes the specified person from ThunderCat (also removes the person from all g
 * [Home Page](#home-page-anchor)
 </div>
 
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one INDEX to delete while using this command.
+</div>
+
 Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX` and removes it from all related groups automatically.
@@ -307,10 +318,10 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
 Example:
 * `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
-  * Before
-    ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)
-  * After
-    ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
+
+  Before             |  After
+  :-------------------------:|:-------------------------:
+  ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)  |  ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
 
 #### Locating groups by name: `findG`
 
@@ -346,6 +357,10 @@ Deletes the specified group from ThunderCat.
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one INDEX to delete while using this command.
 </div>
 
 Format: `deleteG GROUP_INDEX`
@@ -461,6 +476,10 @@ Deletes the specified task from the group that ThunderCat is displaying.
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Group Information Page](#group-info-page-anchor)
+</div>
+
+<div markdown="block" class="alert alert-primary">:bulb: **Tip:**
+You can only indicate one TASK_INDEX to delete while using this command.
 </div>
 
 Format: `deleteT TASK_INDEX`
@@ -736,3 +755,9 @@ In each task entry, these are the required attributes:
 
 <a name="hexadecimal"></a>
 * **Hexadecimal**: Hexadecimal describes a base-16 number system. That is, it describes a numbering system containing 16 sequential numbers as base units (including 0) before adding a new position for the next number.
+
+<a name="cli-glossary"></a>
+* **CLI**: CLI stands for command line interface. Through the CLI, users interact with a system or application by typing in text (commands). The command is typed on a specific line following a visual prompt from the computer.
+
+<a name="gui-glossary"></a>
+* **GUI**: GUI stands for graphical user interface. The graphical user interface is a form of user interface that allows users to interact with electronic devices through graphical icons and audio indicator such as primary notation, instead of text-based user interfaces, typed command labels or text navigation.
