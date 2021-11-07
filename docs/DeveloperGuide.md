@@ -152,7 +152,7 @@ The `Model` component,
   * all `Group` objects (which are contained in a `UniqueGroupList` object). 
   * all `Task` objects (which are contained in a `UniqueTaskList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* Works similarly for the `Group` objects.
+* works similarly for the `Group` objects.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 * UniqueTaskList is stored inside every group
@@ -285,7 +285,7 @@ Application `ScenceBuilder` makes it easier to implement the feature by the runn
 
 ### Edit Group Command
 
-The mark-as-done mechanism is facilitated by `EditGroupCommand`, `EditGroupCommandParser` and `EditGroupDescriptor`. This command allows users edit data of the selected group.
+The edit group mechanism is facilitated by `EditGroupCommand`, `EditGroupCommandParser` and `EditGroupDescriptor`. This command allows users edit data of the selected group.
 
 #### Implementation
 
@@ -309,6 +309,11 @@ The following steps describe the execution of the EditGroupCommand.
 1. EditGroupCommand uses the provided Index and EditGroupDescriptor to create the updated Group object.
 2. EditGroupCommand calls the setGroup method of the Model class to replace the previous Group object with the newly updated one.
 3. Model calls the setGroup function of the AddressBook to update the Group data of the AddressBook.
+
+
+### Adding Persons to Group Command
+
+#### Implementation
 
 
 --------------------------------------------------------------------------------------------------------------------
