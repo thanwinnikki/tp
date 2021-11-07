@@ -9,30 +9,47 @@ start
 
 
 if () then ([input format is valid])
-    :Parses the ""marka"" command, separate
-    student index(es) and week prefix args;
+    :MarkAsDoneCommandParser retrieves
+    task index from the user input
+    and the group specified by the
+    current app state;
 
-    while () is ([else])
+    :LogicManager checks if the command is
+    able to run in the current app state;
 
-    :Checks student's attendance
-    status for given week;
+    if () then ([command can be run in current app state])
 
-    if () then ([present for given week])
-    :Marks student as absent for the given week;
+    :MarkAsDoneCommand checks
+    if task index is valid;
+
+    if () then ([task index is valid])
+    :MarkAsDoneCommand checks
+    if task is already marked as ""done"";
+
+    if () then ([task is not done])
+        :Marks task as ""done"";
 
     else ([else])
-    :Marks student as present for the given week;
+    :Throws CommandException;
+    :Ui catches CommandException;
 
     endif
 
-    endwhile ([reached the end of the list])
+    else ([else])
+    :Throws CommandException;
+        :Ui catches CommandException;
 
-    :Displays all matching students to user;
-    :Show success status message;
+    endif
+
+    else ([else])
+    :Throws CommandException;
+    :Ui catches CommandException;
+
+    endif
 
 else ([else])
-
-    :Throw ParseException;
+    :Throws ParseException;
+    :Ui catches ParseException;
 
 endif
 :UI displays the result to the User;

@@ -185,7 +185,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Mark As Done Command (Task)
+### Mark As Done Command (Task) 
 
 The mark-as-done mechanism is facilitated by `MarkAsDoneCommand` and `MarkAsDoneCommandParser`. This command allows users to mark a task in a group as `done`.
 
@@ -197,15 +197,30 @@ Given below is an example usage scenario and how the `done` mechanism behaves at
 2. `LogicManager` calls `AddressBookParser#parseCommand(String userInput, ApplicationState currentApplicationState)` which parses the user input along with the current application state.
 3. `MarkAsDoneCommandParser#parse(String args)` retrieves the task index from the arguments parsed, as well as the group specified by the current application state.
 4. A new `MarkAsDoneCommand` object will be created with the task index and the group.
-    5. `LogicManager#execute(String commandText)` checks if this command object is able to run in the current application state. This operation is exposed in the `LogicManager` class as `LogicManager#checkIfCommandCanRunInApplicationState(Command command)`.
-6. If the command is able to run, the task index will be checked if it is a valid index (Ie if the task index is within the bounds of the indices of the task list). If it is not valid, an error message will be displayed.
+5. `LogicManager#execute(String commandText)` checks if this command object is able to run in the current application state. This operation is exposed in the `LogicManager` class as `LogicManager#checkIfCommandCanRunInApplicationState(Command command)`.
+6. If the command is able to run, `MarkAsDoneCommand#execute(Model model)` will check if the task index  is a valid index (Ie if the task index is within the bounds of the indices of the task list). If it is not valid, an error message will be displayed.
 7. If the task index is valid, the task's done status is retrieved and marked as done. This operation is exposed in the Task class as `Task#setDoneTask()`. 
- **Note**: If the task has already been marked as done, an error message will be displayed.
+
+    * **Note**: If the task has already been marked as done, an error message will be displayed.
 8. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
 
 The following activity diagram shows the workflow of a typical MarkAsDoneCommand:
 
 ![MarkAsDoneCommandActivityDiagram](images/MarkAsDoneCommandActivityDiagram.png)
+
+#### Design Considerations
+Aspect: How `done` executes:
+
+* Alternative 1: If the task is already marked as done, `done` command simply toggles the `done` status to `not done`.
+    * Cons: May mark a done task as `not done` if User accidentally calls the command twice.
+    * Pros: Allows User to toggle between `done` and `not done` if they realise that a task was previously accidentally marked as done.
+    
+
+* Alternative 2 (current implementation): If the task is already marked as done, display error message.
+    * Pros: Simple and more intuitive for the user, prevents user from accidentally entering duplicate `done` commands.
+    * Cons: No option to reverse the `done` status of a task if task has been accidentally marked as `done`. However, if User realises their mistake immediately after entering the command, our `undo` command can help undo this.
+
+
 
 ### \[Proposed\] Undo/redo feature
 
