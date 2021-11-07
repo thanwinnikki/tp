@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User executes ""add task"" command;
+:LogicManager takes in the user input;
+:AddressBookParser parses the user input with the current app state;
+
+
+if () then ([input format is valid])
+    :AddTaskCommandParser retrieves
+    task description from the user input
+    and the group specified by the
+    current app state;
+
+    :LogicManager checks if the command is
+    able to run in the current app state;
+
+    if () then ([command can be run in current app state])
+
+    :AddTaskCommand checks
+    if the task already exists in the
+    tasklist of the group;
+
+    if () then ([duplicate task])
+    :Throws CommandException;
+        :Ui catches CommandException;
+
+    else ([else])
+    :Adds task to the tasklist of the group;
+
+    endif
+
+    else ([else])
+    :Throws CommandException;
+    :Ui catches CommandException;
+
+    endif
+
+else ([else])
+    :Throws ParseException;
+    :Ui catches ParseException;
+
+endif
+:UI displays the result to the User;
+
+stop
+
+@enduml

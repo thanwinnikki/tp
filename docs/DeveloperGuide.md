@@ -220,6 +220,30 @@ Aspect: How `done` executes:
     * Pros: Simple and more intuitive for the user, prevents user from accidentally entering duplicate `done` commands.
     * Cons: No option to reverse the `done` status of a task if task has been accidentally marked as `done`. However, if User realises their mistake immediately after entering the command, our `undo` command can help undo this.
 
+### Add Task Command
+
+The add-task mechanism is facilitated by `AddTaskCommand` and `AddTaskCommandParser`. This command allows users to add a task into the tasklist of a group.
+
+#### Implementation
+
+Given below is an example usage scenario and how the `addT` mechanism behaves at each step.
+
+1. User enters the `addT d/TASK_DESCRIPTION` command, and the user input is taken into `LogicManager#execute(String commandText)`.
+2. `LogicManager` calls `AddressBookParser#parseCommand(String userInput, ApplicationState currentApplicationState)` which parses the user input along with the current application state.
+3. `AddTaskCommandParser#parse(String args)` retrieves the task description from the arguments parsed, as well as the group specified by the current application state.
+4. A new `AddTaskCommand` object will be created with the group and a new `Task` object created with the task description.
+5. `LogicManager#execute(String commandText)` checks if this command object is able to run in the current application state. This operation is exposed in the `LogicManager` class as `LogicManager#checkIfCommandCanRunInApplicationState(Command command)`.
+6. If the command is able to run, `AddTaskCommand#execute(Model model)` will check if a task with the same description already exists in the tasklist of the group. If such task already exists, an error message indicating duplicate tasks entered will be displayed.
+7. If the task is not a duplicate task, it is added to the tasklist of the group successfully. This operation is exposed in the UniqueTaskList class as `UniqueTaskList#add(Task toAdd)`.
+8. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
+   
+The following sequence diagram shows how the `addT` operation works:
+
+![AddTaskCommandSequenceDiagram](images/AddTaskCommandSequenceDiagram.png)
+   
+The following activity diagram shows the workflow of a typical AddTaskCommand:
+
+![AddTaskCommandActivityDiagram](images/AddTaskCommandActivityDiagram.png)
 
 
 ### \[Proposed\] Undo/redo feature
