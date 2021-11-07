@@ -148,7 +148,7 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
 **Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
 **Delete Group** | `deleteG GROUP_INDEX` | `deleteG 2` | :white_check_mark:
-**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
+**Join Group** | `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
 **Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
 **Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
