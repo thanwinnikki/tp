@@ -183,6 +183,28 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Mark As Done Command (Task)
+
+The mark-as-done mechanism is facilitated by `MarkAsDoneCommand` and `MarkAsDoneCommandParser`. This command allows users to mark a task in a group as `done`.
+
+#### Implementation
+
+Given below is an example usage scenario and how the `done` mechanism behaves at each step.
+
+1. User enters the `done INDEX` command, and the user input is taken into `LogicManager#execute(String commandText)`.
+2. `LogicManager` calls `AddressBookParser#parseCommand(String userInput, ApplicationState currentApplicationState)` which parses the user input along with the current application state.
+3. `MarkAsDoneCommandParser#parse(String args)` retrieves the task index from the arguments parsed, as well as the group specified by the current application state.
+4. A new `MarkAsDoneCommand` object will be created with the task index and the group.
+    5. `LogicManager#execute(String commandText)` checks if this command object is able to run in the current application state. This operation is exposed in the `LogicManager` class as `LogicManager#checkIfCommandCanRunInApplicationState(Command command)`.
+6. If the command is able to run, the task index will be checked if it is a valid index (Ie if the task index is within the bounds of the indices of the task list). If it is not valid, an error message will be displayed.
+7. If the task index is valid, the task's done status is retrieved and marked as done. This operation is exposed in the Task class as `Task#setDoneTask()`. 
+ **Note**: If the task has already been marked as done, an error message will be displayed.
+8. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
+
+The following activity diagram shows the workflow of a typical MarkAsDoneCommand:
+
+![MarkAsDoneCommandActivityDiagram](images/MarkAsDoneCommandActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+:User executes ""mark as done"" command;
+:LogicManager takes in the user input;
+:AddressBookParser parses the user input with the current app state;
+
+
+if () then ([input format is valid])
+    :Parses the ""marka"" command, separate
+    student index(es) and week prefix args;
+
+    while () is ([else])
+
+    :Checks student's attendance
+    status for given week;
+
+    if () then ([present for given week])
+    :Marks student as absent for the given week;
+
+    else ([else])
+    :Marks student as present for the given week;
+
+    endif
+
+    endwhile ([reached the end of the list])
+
+    :Displays all matching students to user;
+    :Show success status message;
+
+else ([else])
+
+    :Throw ParseException;
+
+endif
+:UI displays the result to the User;
+
+stop
+
+@enduml
