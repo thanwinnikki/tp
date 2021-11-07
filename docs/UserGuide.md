@@ -111,6 +111,30 @@ This is a warning.
 
 </div>
 
+### Command Overview
+
+Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information Page](#group-info-page-anchor)
+--------|---------|---------|---------|---------
+**Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark:
+**Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
+**Delete person** | `delete INDEX` | `delete 3` | :white_check_mark:
+**Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: |
+**Find person** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
+**List all persons** | `list` | | :white_check_mark: | :white_check_mark:
+**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
+**Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
+**Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
+**Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
+**Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
+**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark:
+**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
+**Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
+**Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
+**Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
+**Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
+**Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
+**Help** | `help`| | :white_check_mark: | :white_check_mark:
+
 ### Persons
 #### Adding a person: `add`
 
@@ -269,6 +293,7 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 * The group with the specified `GROUP_INDEX` will be edited.
 * The `GROUP_INDEX` refers to the index number shown in the last displayed group list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* Description can be empty if group was created without one but once set, description should never be empty.
 
 Example:
 * `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
@@ -684,32 +709,6 @@ In each task entry, these are the required attributes:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data from the home folder of the application in your original computer.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information Page](#group-info-page-anchor)
---------|---------|---------|---------|---------
-**Add person** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` | `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` | :white_check_mark:
-**Clear all** | `clear` | | :white_check_mark: | :white_check_mark:
-**Delete person** | `delete INDEX` | `delete 3` | :white_check_mark: 
-**Edit person** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`|`edit 2 n/James Lee e/jameslee@example.com` | :white_check_mark: | 
-**Find person** | `find KEYWORD [MORE_KEYWORDS]` | `find James Jake` | :white_check_mark: |
-**List all persons** | `list` | | :white_check_mark: | :white_check_mark:
-**Create Group** | `addG n/GROUP_NAME [d/DESCRIPTION]` | `addG CS2103 d/Project Group` | :white_check_mark: | :white_check_mark:
-**Show all Groups** | `groups` | | :white_check_mark: | :white_check_mark:
-**Show Group information** | `group GROUP_INDEX` | `group 2` | :white_check_mark:
-**Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark: 
-**Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
-**Delete Group** | `deleteG g/GROUP_INDEX` | `deleteG g/2` | :white_check_mark: 
-**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: | 
-**Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
-**Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
-**Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
-**Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
-**Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
-**Help** | `help`| | :white_check_mark: | :white_check_mark:
 
 --------------------------------------------------------------------------------------------------------------------
 
