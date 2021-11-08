@@ -33,6 +33,13 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the features `delete` and `destroy`
+        * Added documentation for the features `remove` [\#83](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/83)
+        * Added documentation for the features `editG` [\#184](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/184)
+        * Added Command Summary [\#198](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/198)
+        * Added Anchors, Edited Glossary, Cosmetic tweaks and changes to the About section [\#321](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/321) [\#322](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/322) [\#325](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/325)
+        * Updated Glossary [\#349](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/349)
     * Developer Guide:
-        * Added the user stories of this application.
+        * Added the user stories of this application [\#40](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/40).
+        * Added Use case for `group` feature [\#149](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/149)
+        * Updated Model section and added Feature `EditGroupCommand` under implementations [\#342](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/342)
+        * Added Feature `JoinGroupCommand` under implementations with sequence and activity diagrams [\#363](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/363) [\#384](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/384)
