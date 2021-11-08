@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant "uc:UndoCommand" as UndoCommand LOGIC_COLOR
+participant "b:CommandResult.Builder" as CommandResult.Builder LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+[-> UndoCommand : execute(model)
+activate UndoCommand
+
+create CommandResult.Builder
+UndoCommand -> CommandResult.Builder
+activate CommandResult.Builder
+
+CommandResult.Builder --> UndoCommand
+deactivate CommandResult.Builder
+
+UndoCommand -> CommandResult.Builder : goCauseUndo()
+activate CommandResult.Builder
+
+CommandResult.Builder --> UndoCommand
+deactivate CommandResult.Builder
+
+UndoCommand -> CommandResult.Builder : set other parameters
+activate CommandResult.Builder
+
+CommandResult.Builder --> UndoCommand
+deactivate CommandResult.Builder
+
+UndoCommand -> CommandResult.Builder : build()
+activate CommandResult.Builder
+
+create CommandResult
+CommandResult.Builder -> CommandResult
+activate CommandResult
+
+CommandResult --> CommandResult.Builder
+deactivate
+
+CommandResult.Builder --> UndoCommand : cr
+deactivate CommandResult.Builder
+CommandResult.Builder -[hidden]-> UndoCommand : result
+destroy CommandResult.Builder
+
+[<-- UndoCommand : cr
+deactivate UndoCommand
+[<-[hidden]- UndoCommand
+destroy UndoCommand
+@enduml
