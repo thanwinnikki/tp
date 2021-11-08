@@ -9,6 +9,7 @@ package "Command classes" as CommandClasses {
 Interface Command <<Interface>>
 Interface StateDependentCommand <<Interface>>
 Interface UndoableCommand <<Interface>>
+Class XYZCommand
 Class XYZStateDependentCommand
 Class XYZUndoableCommand
 Class XYZUndoableStateDependentCommand
@@ -29,6 +30,9 @@ StateDependentCommand ..> ApplicationState : checks >
 
 UndoableCommand -up-|> Command
 UndoableCommand ..> Model : undoes modification >
+
+XYZCommand .left.|> Command
+note right of XYZCommand: XYZCommand = \nClearCommand, \nExitCommand, etc
 
 XYZStateDependentCommand .up.|> StateDependentCommand
 note bottom of XYZStateDependentCommand: XYZStateDependentCommand = \nFindCommand, FindGroupCommand, etc

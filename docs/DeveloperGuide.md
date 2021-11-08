@@ -128,7 +128,7 @@ There are different `Command` sub-types:
 * Any implementation of `UndoableCommand` can be undone. After they execute and modify the contents of `Model`, they can undo these modifications.
 * Any implementation of `StateDependentCommand` can check what `ApplicationState` the application is currently in and allow itself to be executed if the command can run in that `ApplicationState`, or instead block execution.
 
-<img src="images/CommandClassDiagram.png" width="600"/>
+![Class diagram of command classes](images/CommandClassDiagram.png)
 
 #### Application state classes
 
