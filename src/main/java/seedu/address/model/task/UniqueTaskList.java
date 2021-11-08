@@ -29,8 +29,12 @@ public class UniqueTaskList implements Iterable<Task> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent Task as the given argument.
+     * Checks if the task list contains the specified task.
+     *
+     * @param toCheck Specified task to check whether it exists in the task list.
+     * @return Returns true if list contains an equivalent task as the given argument and false otherwise.
      */
+
     public boolean contains(Task toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameTask);
@@ -51,8 +55,10 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a Task to the list.
-     * The Task must not already exist in the list.
+     * Adds a task to the list.
+     * The task must not already exist in the list.
+     *
+     * @param toAdd Task to add to the task list.
      */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
@@ -66,6 +72,9 @@ public class UniqueTaskList implements Iterable<Task> {
      * Replaces the Task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the list.
      * The Task identity of {@code editedTask} must not be the same as another existing Task in the list.
+     *
+     * @param target The target task you are trying to replace.
+     * @param editedTask The task you are trying to replace with.
      */
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -83,8 +92,10 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Removes the equivalent Task from the list.
-     * The Task must exist in the list.
+     * Removes the equivalent task from the list.
+     * The task must exist in the list.
+     *
+     * @param toRemove The task to remove.
      */
     public void remove(Task toRemove) {
         requireNonNull(toRemove);
@@ -93,6 +104,12 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Replaces the current task list with {@code replacement} task list.
+     * The new task list must not be null.
+     *
+     * @param replacement The replacement task list.
+     */
     public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -101,6 +118,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Replaces the contents of this list with {@code tasks}.
      * {@code tasks} must not contain duplicate tasks.
+     *
+     * @param tasks The list of tasks to replace the current list with.
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
@@ -112,7 +131,9 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     * Returns the list of tasks as an unmodifiable {@code ObservableList}.
+     *
+     * @return ObservableList containing the tasks in the task list.
      */
     public ObservableList<Task> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
@@ -136,7 +157,10 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns true if {@code tasks} contains only unique tasks.
+     * Checks if the tasks in the {@code List} of tasks are the same.
+     *
+     * @param tasks {@code List} of tasks to be checked.
+     * @return Returns true if the tasks are unique and false otherwise.
      */
     private boolean tasksAreUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {

@@ -123,7 +123,7 @@ public interface Model {
      */
     void deleteGroup(Group target);
 
-    /** Returns an unmodifiable view of the filtered Group list */
+    /** Returns an unmodifiable view of the filtered group list */
     ObservableList<Group> getFilteredGroupList();
 
     /**

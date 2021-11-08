@@ -14,7 +14,7 @@ public class Task {
     private boolean done = false;
 
     /**
-     * description must be present and not null.
+     * Description must be present and not null.
      */
     public Task(Description description) {
         requireNonNull(description);
