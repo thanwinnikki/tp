@@ -180,14 +180,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public ListPanel getListPanelLeft() {
-        return listPanelLeft;
-    }
-
-    public ListPanel getListPanelRight() {
-        return listPanelRight;
-    }
-
     /**
      * Executes the command and returns the result.
      *
