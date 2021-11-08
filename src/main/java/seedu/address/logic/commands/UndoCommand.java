@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 /**
  * Undoes the previous undoable command that modified the records.
  */
-public class UndoCommand extends AlwaysRunnableCommand {
+public class UndoCommand implements Command {
 
     public static final String COMMAND_WORD = "undo";
 

@@ -10,7 +10,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 /**
  * Clears the address book.
  */
-public class ClearCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class ClearCommand implements UndoableCommand {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "ThunderCat has been cleared!";
