@@ -17,6 +17,11 @@ public class HelpCommand implements Command {
 
     private final ApplicationState currentApplicationState;
 
+    /**
+     * Creates a HelpCommand to display the help message.
+     *
+     * @param currentApplicationState
+     */
     public HelpCommand(ApplicationState currentApplicationState) {
         this.currentApplicationState = currentApplicationState;
     }

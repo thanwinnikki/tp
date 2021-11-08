@@ -64,6 +64,8 @@ public class EditCommand implements UndoableCommand, StateDependentCommand {
     private Predicate<? super Group> groupPredicate;
 
     /**
+     * Creates an EditCommand to edit the specified {@code Person}.
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -123,6 +125,9 @@ public class EditCommand implements UndoableCommand, StateDependentCommand {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
+     *
+     * @param personToEdit, target person to edit.
+     * @param editPersonDescriptor, the descriptor that contains the changed fields.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -182,6 +187,8 @@ public class EditCommand implements UndoableCommand, StateDependentCommand {
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
+         *
+         * @param toCopy the descriptor containing all the changed fields.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);

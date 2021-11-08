@@ -38,6 +38,7 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
 
     /**
      * Constructor for RemoveCommand
+     *
      * @param targetIndex of the person in the filtered list to be removed
      * @param group is the group where person will be removed from
      */

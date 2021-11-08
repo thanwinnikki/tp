@@ -28,6 +28,11 @@ public class GroupCommand implements StateDependentCommand {
 
     private final Index index;
 
+    /**
+     * Creates a GroupCommand which shows the details of the specified {@code Group}
+     *
+     * @param index of the group's information to be displayed.
+     */
     public GroupCommand(Index index) {
         this.index = index;
     }

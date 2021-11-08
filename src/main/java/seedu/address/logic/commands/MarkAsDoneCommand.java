@@ -31,6 +31,7 @@ public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand
 
     /**
      * Constructor for MarkAsDoneCommand
+     *
      * @param targetIndex of the task in the filtered list to be marked as done
      * @param group is the group where the task will be marked as done
      */

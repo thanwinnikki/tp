@@ -49,6 +49,8 @@ public class AddCommand implements UndoableCommand, StateDependentCommand {
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
+     *
+     * @param person to be added to the address book.
      */
     public AddCommand(Person person) {
         requireNonNull(person);
