@@ -100,8 +100,12 @@ public class LogicManager implements Logic {
     }
 
     private void checkIfCommandCanRunInApplicationState(Command command) throws CommandException {
-        boolean isAbleToRunInApplicationState = !(command instanceof StateDependentCommand)
-                || ((StateDependentCommand) command).isAbleToRunInApplicationState(currentApplicationState);
+        if (!(command instanceof StateDependentCommand)) {
+            return;
+        }
+        StateDependentCommand stateDependentCommand = (StateDependentCommand) command;
+        boolean isAbleToRunInApplicationState = stateDependentCommand
+                .isAbleToRunInApplicationState(currentApplicationState);
         if (!isAbleToRunInApplicationState) {
             throw new CommandException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
         }

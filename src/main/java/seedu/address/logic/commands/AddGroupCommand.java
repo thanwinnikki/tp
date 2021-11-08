@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
-public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
+public class AddGroupCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "addG";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";

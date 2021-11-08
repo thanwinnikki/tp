@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 /**
  * Lists all groups in the address book to the user.
  */
-public class GroupsCommand extends AlwaysRunnableCommand {
+public class GroupsCommand implements Command {
 
     public static final String COMMAND_WORD = "groups";
 
