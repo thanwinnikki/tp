@@ -245,86 +245,44 @@ The following activity diagram shows the workflow of a typical AddTaskCommand:
 
 ![AddTaskCommandActivityDiagram](images/AddTaskCommandActivityDiagram.png)
 
+### Undo feature
 
-### \[Proposed\] Undo/redo feature
+#### Implementation
 
-#### Proposed Implementation
+The execution of the `undo` command is enabled by the `CommandResult` and the `LogicManager` classes, which then leads to the execution of the `undo` method in the appropriate `UndoableCommand`.
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The `undo` command is first started when the `execute` method of the `LogicManager` object `l` is called. `l` calls the `parseCommand` method of the `AddressBookParser` object `p` which creates and returns an `UndoCommand` object `u`. Then `l` calls the `execute` method of `u`, which returns to `l` a `CommandResult` object `cr` which has its `isGoingToCauseUndo` boolean variable set to `true`. After that, `l` calls its own `undoIfMustUndo` method to actually cause any undoable modifications carried out by an `UndoableCommand` object `uc` to be undone. The `undoIfMustUndo` method returns the `CommandResult` object `ur` which is the result of undoing the undoable modifications. Finally, `ur` is returned by the `execute` method of `l`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+![Undo command overall sequence diagram](images/UndoSequenceDiagram.png)
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+`cr` is constructed by first creating a `CommandResult.Builder` object `b`, because `CommandResult` uses the builder software engineering pattern. The `goCauseUndo` method of `b` is called in order to set `isGoingToCauseUndo` to `true` for `cr` when it is eventually constructed. Then the `build` method of `b` is called to finally construct `cr`, which is returned to `u`. Then the `execute` method of `u` returns `cr` to `l`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+![Undo command result sequence diagram](images/UndoCommandResultBuilderSequenceDiagram.png)
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+When the `undoIfMustUndo` method of `l` is called, `l` first checks if `cr` has `isGoingToCauseUndo` set to `true`. `l` also checks if the `Stack<UndoableCommand>` object `s`, which is a stack of `UndoableCommand` objects, is empty. If `isGoingToCauseUndo` is `false`, then there is no need to undo anything at all. Alternatively, if `s` is empty, then there is no `UndoableCommand` object that can be undone. In either case or if both occur, then `undoIfMustUndo` just returns `cr` immediately because there is no need to undo. Otherwise, if `isGoingToCauseUndo` is `true` and `s` is not empty, then there is an `UndoableCommand` object `uc` that can be undone, and it must be undone. This is carried out by calling the `undo` method of `uc`, which returns a `CommandResult` object `ur` which is the result of undoing the undoable modifications previously carried out by `uc`. `ur` is then returned by the `undoIfMustUndo` method.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![Method undoIfMustUndo sequence diagram](images/UndoIfMustUndoSequenceDiagram.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+An example of an `UndoableCommand` is `AddCommand`, which adds a person to the records. Calling the `undo` method of an `AddCommand` object `ac` causes the previously added `Person` object `person` to be deleted. `ac` does this by calling the `deletePerson` method of the `Model` instance `m` to delete `person`.
 
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
+![Undo add command sequence diagram](images/UndoAddSequenceDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How undo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1:** Saves the entire address book.
+  * Pros:
+    * Easy to implement.
+  * Cons:
+    * May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+* **Alternative 2 (current choice):** Individual command knows how to undo by itself.
+  * Pros:
+    * Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Execution is different for each command so specific execution can be fine-tuned for each individual command.
+  * Cons:
+    * We must ensure that the implementation of each individual command are correct.
 
 ### \[Proposed\] Data archiving
 

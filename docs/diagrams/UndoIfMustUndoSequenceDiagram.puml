@@ -1,0 +1,46 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant "l:LogicManager" as LogicManager LOGIC_COLOR
+participant "cr:CommandResult" as CommandResult LOGIC_COLOR
+participant "s:Stack<UndoableCommand>" as Stack LOGIC_COLOR
+participant "uc:UndoableCommand" as UndoableCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : undoIfMustUndo(cr)
+activate LogicManager
+
+LogicManager -> CommandResult : isGoingToCauseUndo()
+activate CommandResult
+
+CommandResult --> LogicManager : isGoingToCauseUndo
+deactivate CommandResult
+
+LogicManager -> Stack : empty()
+activate Stack
+
+Stack --> LogicManager
+deactivate Stack
+
+opt isGoingToCauseUndo is false or stack is empty
+
+[<-- LogicManager : cr
+
+end
+
+LogicManager -> Stack : pop()
+activate Stack
+
+Stack --> LogicManager : uc
+deactivate Stack
+
+LogicManager -> UndoableCommand : undo(m)
+activate UndoableCommand
+
+UndoableCommand --> LogicManager : ur
+deactivate UndoableCommand
+
+[<-- LogicManager : ur
+deactivate LogicManager
+@enduml
