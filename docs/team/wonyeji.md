@@ -41,6 +41,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added value proposition [\#34](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/34)
     * Added use cases [\#187](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/187)
+    * Added implementation for MarkAsDoneCommand and AddTaskCommands [\#362](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/362)
 
 
 * **Community**:
