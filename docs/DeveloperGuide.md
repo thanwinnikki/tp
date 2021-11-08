@@ -185,9 +185,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Undo feature
 
-#### Proposed Implementation
+#### Implementation
+
+The execution of the `undo` command is enabled by the `CommandResult` and the `LogicManager` classes, which then leads to the execution of the `undo` method in the appropriate `UndoableCommand`.
+
+The `undo` command is first started when the `execute` method of the `LogicManager` object `l` is called. `l` calls the `parseCommand` method of the `AddressBookParser` object `p` which creates and returns an `UndoCommand` object `u`. Then `l` calls the `execute` method of `u`, which returns to `l` a `CommandResult` object `cr` which has its `isGoingToCauseUndo` boolean variable set to `true`. After that, `l` calls its own `undoIfMustUndo` method to actually cause any undoable modifications carried out by an `UndoableCommand` object `uc` to be undone. The `undoIfMustUndo` method returns the `CommandResult` object `ur` which is the result of undoing the undoable modifications. Finally, `ur` is returned by the `execute` method of `l`.
+
+![Undo command overall sequence diagram](images/UndoSequenceDiagram.png)
+
+`cr` is constructed by first creating a `CommandResult.Builder` object `b`, because `CommandResult` uses the builder software engineering pattern. The `goCauseUndo` method of `b` is called in order to set `isGoingToCauseUndo` to `true` for `cr` when it is eventually constructed. Then the `build` method of `b` is called to finally construct `cr`, which is returned to `u`. Then the `execute` method of `u` returns `cr` to `l`.
+
+![Undo command result sequence diagram](images/UndoCommandResultBuilderSequenceDiagram.png)
+
+When the `undoIfMustUndo` method of `l` is called, `l` first checks if `cr` has `isGoingToCauseUndo` set to `true`. `l` also checks if the `Stack<UndoableCommand>` object `s`, which is a stack of `UndoableCommand` objects, is empty. If `isGoingToCauseUndo` is `false`, then there is no need to undo anything at all. Alternatively, if `s` is empty, then there is no `UndoableCommand` object that can be undone. In either case or if both occur, then `undoIfMustUndo` just returns `cr` immediately because there is no need to undo. Otherwise, if `isGoingToCauseUndo` is `true` and `s` is not empty, then there is an `UndoableCommand` object `uc` that can be undone, and it must be undone. This is carried out by calling the `undo` method of `uc`, which returns a `CommandResult` object `ur` which is the result of undoing the undoable modifications previously carried out by `uc`. `ur` is then returned by the `undoIfMustUndo` method.
+
+![Method undoIfMustUndo sequence diagram](images/UndoIfMustUndoSequenceDiagram.png)
+
+An example of an `UndoableCommand` is `AddCommand`, which adds a person to the records. Calling the `undo` method of an `AddCommand` object `ac` causes the previously added `Person` object `person` to be deleted. `ac` does this by calling the `deletePerson` method of the `Model` instance `m` to delete `person`.
+
+![Undo add command sequence diagram](images/UndoAddSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1:** Saves the entire address book.
+    * Pros:
+      * Easy to implement.
+    * Cons:
+      * May have performance issues in terms of memory usage.
+
+* **Alternative 2 (current choice):** Individual command knows how to undo/redo by itself.
+    * Pros:
+      * Will use less memory (e.g. for `delete`, just save the person being deleted).
+      * Execution is different for each command so specific execution can be fine-tuned for each individual command.
+    * Cons:
+      * We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
