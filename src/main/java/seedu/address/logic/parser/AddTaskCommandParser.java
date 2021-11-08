@@ -12,7 +12,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 
 /**
- * Parses input arguments and creates a new AddTaskCommand object
+ * Parses input arguments and creates a new AddTaskCommand object.
  */
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
@@ -48,6 +48,9 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap ArgumentMultimap of all the stored prefixes' value.
+     * @param prefixes ALl prefixes that are supposed to be checked against the argumentMultiMap.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

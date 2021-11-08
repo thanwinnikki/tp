@@ -11,10 +11,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.JoinGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new JoinGroupCommand object.
+ */
 public class JoinGroupCommandParser implements Parser<JoinGroupCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddGroupCommand
+     * Parses the given {@code String} of arguments in the context of the JoinGroupCommand
      * and returns an AddGroupCommand object for execution.
      *
      * @param args Arguments of the user input to be parsed by JoinGroupCommandParser.
@@ -39,6 +42,9 @@ public class JoinGroupCommandParser implements Parser<JoinGroupCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap ArgumentMultimap of all the stored prefixes' value.
+     * @param prefixes ALl prefixes that are supposed to be checked against the argumentMultiMap.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

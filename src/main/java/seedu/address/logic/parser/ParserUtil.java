@@ -26,6 +26,8 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
+     * @param oneBasedIndex String representation of the oneBasedIndex.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -40,6 +42,7 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param name Value of name in String.
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static Name parseName(String name) throws ParseException {
@@ -55,6 +58,7 @@ public class ParserUtil {
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param phone Value of phone in String.
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
@@ -70,6 +74,7 @@ public class ParserUtil {
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param address Value of address in String.
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
@@ -88,6 +93,7 @@ public class ParserUtil {
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param email Value of email in String.
      * @throws ParseException if the given {@code email} is invalid.
      */
     public static Email parseEmail(String email) throws ParseException {
@@ -102,6 +108,9 @@ public class ParserUtil {
     /**
      * Parses a {@code String description} into a {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param description Value of task description in String.
+     * @throws ParseException if the given {@code description} is invalid.
      */
     public static Description parseTaskDescription(String description) throws ParseException {
         requireNonNull(description);
@@ -116,6 +125,7 @@ public class ParserUtil {
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param tag Value of tag in String.
      * @throws ParseException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) throws ParseException {
@@ -129,6 +139,9 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     *
+     * @param tags Collection of tags to be parsed.
+     * @throws ParseException If the tags do not conform the expected format.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
@@ -144,6 +157,7 @@ public class ParserUtil {
      * Parses a {@code String description} into an {@code Description}.
      * Leading and trailing whitespaces will be trimmed.
      *
+     * @param description Value of description in String.
      * @throws ParseException if the given {@code description} is invalid.
      */
     public static Description parseDescription(String description) throws ParseException {
@@ -157,6 +171,9 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> indexes} into a {@code Set<Index>}.
+     *
+     * @param indexes Collection of Indexes to be parsed.
+     * @throws ParseException If the indexes do not conform the expected format.
      */
     public static Set<Index> parseIndexes(Collection<String> indexes) throws ParseException {
         requireNonNull(indexes);

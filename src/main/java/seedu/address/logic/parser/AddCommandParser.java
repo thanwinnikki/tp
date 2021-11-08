@@ -81,7 +81,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      *
-     * @param argumentMultimap ArgumentMultimap of all the stored prefix's value.
+     * @param argumentMultimap ArgumentMultimap of all the stored prefixes' value.
      * @param prefixes ALl prefixes that are supposed to be checked against the argumentMultiMap.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 
 /**
- * Parses input arguments and creates a new MarkAsDoneCommand object
+ * Parses input arguments and creates a new MarkAsDoneCommand object.
  */
 public class MarkAsDoneCommandParser implements Parser<MarkAsDoneCommand> {
 

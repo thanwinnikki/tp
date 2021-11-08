@@ -7,7 +7,7 @@ import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new GroupCommand object
+ * Parses input arguments and creates a new GroupCommand object.
  */
 public class GroupCommandParser implements Parser<GroupCommand> {
 
