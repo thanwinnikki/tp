@@ -14,7 +14,9 @@ public class GroupCommandParser implements Parser<GroupCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the GroupCommand
      * and returns a GroupCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args Arguments of the user input to be parsed by GroupCommandParser.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public GroupCommand parse(String args) throws ParseException {
         try {

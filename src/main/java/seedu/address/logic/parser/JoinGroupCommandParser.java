@@ -17,7 +17,8 @@ public class JoinGroupCommandParser implements Parser<JoinGroupCommand> {
      * Parses the given {@code String} of arguments in the context of the AddGroupCommand
      * and returns an AddGroupCommand object for execution.
      *
-     * @throws ParseException if  the user does not conform to the expected format
+     * @param args Arguments of the user input to be parsed by JoinGroupCommandParser.
+     * @throws ParseException if  the user does not conform to the expected format.
      */
     @Override
     public JoinGroupCommand parse(String args) throws ParseException {

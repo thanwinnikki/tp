@@ -28,7 +28,9 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args Arguments of the user input to be parsed by AddCommandParser.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -59,6 +61,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(person);
     }
 
+    /**
+     * Adds address to person if it is not empty.
+     * {@code ArgumentMultimap}.
+     *
+     * @param personBuilder Builder for person to build person object.
+     * @param possibleAddress Optional containing string of address.
+     * @throws ParseException If the possible address does not conform the expected format.
+     */
     private static void addAddressIfNotEmpty(Person.Builder personBuilder, Optional<String> possibleAddress)
             throws ParseException {
         Address address = ParserUtil.parseAddress(possibleAddress.get());
@@ -70,6 +80,9 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap ArgumentMultimap of all the stored prefix's value.
+     * @param prefixes ALl prefixes that are supposed to be checked against the argumentMultiMap.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
