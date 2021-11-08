@@ -9,6 +9,11 @@ import java.util.Set;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents the ID reference to any object saved in storage.
+ * This can be used to refer to objects stored at another location within the file instead of writing its details
+ * multiple times.
+ */
 public class Id implements Comparable<Id> {
 
     public static final String MESSAGE_MALFORMED_ID = "This ID is malformed.";

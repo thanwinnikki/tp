@@ -22,6 +22,9 @@ public class StorageManager implements Storage {
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     *
+     * @param addressBookStorage The stored address book.
+     * @param userPrefsStorage The stored user preferences.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         super();

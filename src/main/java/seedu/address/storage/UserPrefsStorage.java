@@ -15,21 +15,26 @@ public interface UserPrefsStorage {
 
     /**
      * Returns the file path of the UserPrefs data file.
+     *
+     * @return The path of the file.
      */
     Path getUserPrefsFilePath();
 
     /**
      * Returns UserPrefs data from storage.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
+     * @return An {@code Optional} object that contains the stored storage representation.
+     * @throws DataConversionException If the data in storage is not in the expected format.
+     * @throws IOException If there was any problem when reading from the storage.
      */
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link seedu.address.model.ReadOnlyUserPrefs} to the storage.
-     * @param userPrefs cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     *
+     * @param userPrefs The equivalent {@code ReadOnlyUserPrefs} to this storage representation.
+     * @throws IOException If there was any problem writing to the file.
      */
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 

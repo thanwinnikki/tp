@@ -20,6 +20,9 @@ class JsonAdaptedTask {
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
+     *
+     * @param description The description of the task.
+     * @param isDone Whether the task is done.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("description") String description, @JsonProperty("isDone") boolean isDone) {
@@ -29,6 +32,8 @@ class JsonAdaptedTask {
 
     /**
      * Converts a given {@code Task} into this class for Jackson use.
+     *
+     * @param source The equivalent {@code Task} object.
      */
     public JsonAdaptedTask(Task source) {
         description = source.getDescription().toString();
@@ -38,6 +43,7 @@ class JsonAdaptedTask {
     /**
      * Converts this Jackson-friendly adapted task object into the model's {@code Task} object.
      *
+     * @return The equivalent {@code Task} to this storage representation.
      * @throws IllegalValueException If there were any data constraints violated in the adapted task.
      */
     public Task toModelType() throws IllegalValueException {
