@@ -218,7 +218,7 @@ Aspect: How `done` executes:
 
 * Alternative 2 (current implementation): If the task is already marked as done, display error message.
     * Pros: Simple and more intuitive for the user, prevents user from accidentally entering duplicate `done` commands.
-    * Cons: No option to reverse the `done` status of a task if task has been accidentally marked as `done`. However, if User realises their mistake immediately after entering the command, our `undo` command can help undo this.
+    * Cons: No option to reverse the `done` status of a task if task has been accidentally marked as `done`. To rectify this, we have added an `undo` command to prevent such situation.
 
 ### Add Task Command
 
