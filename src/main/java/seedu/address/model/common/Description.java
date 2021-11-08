@@ -3,6 +3,10 @@ package seedu.address.model.common;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Description in the address book.
+ * Guarantees: is valid as declared in {@link #isValidDescription(String)}
+ */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values, and it should not be blank";
 
@@ -15,7 +19,7 @@ public class Description {
     public final String value;
 
     /**
-     * Constructs an {@code Description}.
+     * Constructs a {@code Description}.
      *
      * @param description A valid Description.
      */
