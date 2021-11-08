@@ -49,6 +49,10 @@ destroy EditGroupCommandParser
 AddressBookParser --> LogicManager : c
 deactivate AddressBookParser
 LogicManager -> LogicManager : checkIfCommandCanRunInApplicationState(c)
+activate LogicManager
+LogicManager --> LogicManager
+deactivate LogicManager
+
 LogicManager -> EditGroupCommand : execute()
 activate EditGroupCommand
 
