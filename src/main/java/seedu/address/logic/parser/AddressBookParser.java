@@ -27,6 +27,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAsDoneCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.GroupInformationState;
@@ -36,6 +37,8 @@ import seedu.address.model.group.Group;
  * Parses user input.
  */
 public class AddressBookParser {
+
+    private static final String MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE = "This command cannot be run here.";
 
     /**
      * Used for initial separation of command word and args.
@@ -48,7 +51,7 @@ public class AddressBookParser {
      * @param userInput Full user input string.
      * @param currentApplicationState The current application state.
      * @return The command based on the user input.
-     * @throws ParseException If the user input does not conform the expected format.
+     * @throws ParseException If the user input does not conform the expected format or the application state is wrong.
      */
     public Command parseCommand(String userInput, ApplicationState currentApplicationState) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -100,6 +103,9 @@ public class AddressBookParser {
             return new HelpCommand(currentApplicationState);
 
         case RemoveCommand.COMMAND_WORD:
+            if (!(currentApplicationState instanceof GroupInformationState)) {
+                throw new ParseException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
+            }
             groupInformationState = (GroupInformationState) currentApplicationState;
             group = groupInformationState.getStoredData();
             return new RemoveCommandParser(group).parse(arguments);
@@ -108,16 +114,25 @@ public class AddressBookParser {
             return new JoinGroupCommandParser().parse(arguments);
 
         case DeleteTaskCommand.COMMAND_WORD:
+            if (!(currentApplicationState instanceof GroupInformationState)) {
+                throw new ParseException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
+            }
             groupInformationState = (GroupInformationState) currentApplicationState;
             group = groupInformationState.getStoredData();
             return new DeleteTaskCommandParser(group).parse(arguments);
 
         case AddTaskCommand.COMMAND_WORD:
+            if (!(currentApplicationState instanceof GroupInformationState)) {
+                throw new ParseException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
+            }
             groupInformationState = (GroupInformationState) currentApplicationState;
             group = groupInformationState.getStoredData();
             return new AddTaskCommandParser(group).parse(arguments);
 
         case MarkAsDoneCommand.COMMAND_WORD:
+            if (!(currentApplicationState instanceof GroupInformationState)) {
+                throw new ParseException(MESSAGE_COMMAND_EXECUTION_IN_INVALID_APP_STATE);
+            }
             groupInformationState = (GroupInformationState) currentApplicationState;
             group = groupInformationState.getStoredData();
             return new MarkAsDoneCommandParser(group).parse(arguments);
