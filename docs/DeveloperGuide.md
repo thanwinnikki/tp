@@ -75,7 +75,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -288,15 +288,15 @@ An example of an `UndoableCommand` is `AddCommand`, which adds a person to the r
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Add Panel to the UI
+### Add Panel to the UI
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed adding Panel mechanism is facilitated by `MainWindow.fxml`. It extends the `MainWindow` with one more panel, making it easier to render `Group` list and `Task` list at the same time.
 
 Overall, the `MainWindow.fxml` uses `VBox` (Vertical Box) layout to stores components (e.g. `CommandBox`, `ResultDisplay`). The key point to implement the extension is using `HBox` (Horizontal Box) layout. Panels insides the layout is ordered horizontally, making two parallel display panels at the same time.
 
-#### Proposed Toolkit
+#### Toolkit
 
 ![UndoRedoState5](images/AddPanelToolkit_SenceBuilder.png)
 
