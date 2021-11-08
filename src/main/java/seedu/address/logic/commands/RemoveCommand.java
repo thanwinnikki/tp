@@ -49,15 +49,12 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert groupToRemoveFrom != null : "Group object should not be null";
+
         List<Person> lastShownPersonList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= groupToRemoveFrom.getPersons().asUnmodifiableObservableList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-
-        if (groupToRemoveFrom == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
 
         Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());

@@ -2,6 +2,9 @@ package seedu.address.logic.state;
 
 import java.util.Objects;
 
+/**
+ * ApplicationState of the Home page.
+ */
 public class HomeState implements ApplicationState {
 
     private static final ApplicationStateType APPLICATION_STATE_TYPE = ApplicationStateType.HOME;

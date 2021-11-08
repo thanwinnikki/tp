@@ -12,12 +12,17 @@ import seedu.address.model.common.Description;
 import seedu.address.model.common.Name;
 import seedu.address.model.group.Group;
 
+/**
+ * Parses input arguments and creates a new AddGroupCommand object.
+ */
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the GroupCommand
      * and returns an GroupCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @param args Arguments of the user input to be parsed by AddGroupCommand.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public AddGroupCommand parse(String args) throws ParseException {
         Group group;
@@ -44,6 +49,9 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
+     *
+     * @param argumentMultimap ArgumentMultimap of all the stored prefixes' value.
+     * @param prefixes ALl prefixes that are supposed to be checked against the argumentMultiMap.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

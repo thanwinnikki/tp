@@ -2,10 +2,18 @@ package seedu.address.logic.state;
 
 import seedu.address.model.group.Group;
 
+/**
+ * ApplicationState of the Group Information page.
+ */
 public class GroupInformationState extends StoredDataApplicationState<Group> {
 
     private static final ApplicationStateType APPLICATION_STATE_TYPE = ApplicationStateType.GROUP_INFORMATION;
 
+    /**
+     * Constructor for GroupInformationState.
+     *
+     * @param dataToStore Data to be stored.
+     */
     public GroupInformationState(Group dataToStore) {
         super(dataToStore);
     }
