@@ -148,12 +148,12 @@ Action | Format | Examples | [Home Page](#home-page-anchor) | [Group Information
 **Edit Group** | `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]` | `editG 2 n/CS2103T d/New project group for Y2S1` | :white_check_mark:
 **Find Group** | `findG KEYWORD [MORE_KEYWORDS]` | | :white_check_mark:
 **Delete Group** | `deleteG GROUP_INDEX` | `deleteG 2` | :white_check_mark:
-**Join Group** | `joinG p/PERSON_INDEX_1, p/PERSON_INDEX_2, …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
+**Join Group** | `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX` | `joinG p/1 p/2 g/2` | :white_check_mark: |
 **Remove person from Group** | `remove PERSON_INDEX` | `remove 2` | | :white_check_mark:
 **Add task to group** | `addT d/DESCRIPTION` | `addT d/read book` | | :white_check_mark:
 **Mark task as done** | `done TASK_INDEX` | `done 3`  | | :white_check_mark:
 **Delete task in group** | `deleteT TASK_INDEX` | `deleteT 1`  | | :white_check_mark:
-**Undo a command** | `undo` | | | :white_check_mark: | :white_check_mark:
+**Undo a command** | `undo`  | | :white_check_mark: | :white_check_mark:
 **Exit application** | `exit` | | :white_check_mark: | :white_check_mark:
 **Help** | `help`| | :white_check_mark: | :white_check_mark:
 
@@ -347,9 +347,9 @@ Format: `editG GROUP_INDEX [n/NAME] [d/DESCRIPTION]`
 
 Example:
 * `editG 3 n/ES2660 d/Communications Mod` edits the name, and the description of the 3rd group in the displayed group list to be "ES2660" and "Communication Mod" respectively.
-  * Before
+  <span style="font-size:24px"><center><b>Before</b></center></span>
     ![result for 'before edit 3rd group'](images/user-guide/beforeEdit3rdGroup.png)
-  * After
+  <span style="font-size:24px"><center><b>After</b></center></span>
     ![result for 'after edit 3rd group'](images/user-guide/afterEdit3rdGroup.png)
 
 [To table of contents](#table-of-contents)
@@ -426,11 +426,11 @@ Format: `joinG p/PERSON_INDEX_1 p/PERSON_INDEX_2 …​ g/GROUP_INDEX`
 
 Examples:
 * `joinG p/1 p/2 p/3 g/2` adds persons indexed 1, 2, 3 in the displayed person list to group 2 in the displayed group list.
-  * Second group initially
+  <span style="font-size:24px"><center><b>Second group initially</b></center></span>
     ![result for 'second group initially'](images/user-guide/secondGroupInitially.png)
-  * Type JoinG command in [Home Page](#home-page-anchor)
+  <span style="font-size:24px"><center><b>Type JoinG command in <a href="#home-page-anchor">Home page</a></b></center></span>
       ![result for 'type JoinG command in home panel'](images/user-guide/typeJoinGCommand.png)
-  * Second group after
+  <span style="font-size:24px"><center><b>Second group after</b></center></span>
       ![result for 'second group after'](images/user-guide/secondGroupAfterJoinGCommand.png)
 
 [To table of contents](#table-of-contents)
@@ -454,9 +454,9 @@ Format: `group GROUP_INDEX`
 Example:
 * `group 1` shows the information of the group at index 1 of the displayed group list.<br>
 <br>
-  <span style="font-size:29px"><center><b>Before</b></center></span>
+  <span style="font-size:24px"><center><b>Before</b></center></span>
     ![result for 'before show 1st group'](images/user-guide/beforeShow1stGroup.png)
-  <span style="font-size:29px"><center><b>After</b></center></span>
+  <span style="font-size:24px"><center><b>After</b></center></span>
     ![result for 'after show 1st group'](images/user-guide/afterShow1stGroup.png)
 
 [To table of contents](#table-of-contents)
@@ -554,9 +554,9 @@ Format: `done TASK_INDEX`
 
 Example:
 * `done 2` marks the 2nd task in the displayed task list as done.
-  * Before
+  <span style="font-size:24px"><center><b>Before</b></center></span>
     ![result for 'before mark 2nd task done'](images/user-guide/beforeMark2ndTaskDone.png)
-  * After
+  <span style="font-size:24px"><center><b>After</b></center></span>
       ![result for 'after mark 2nd task done'](images/user-guide/afterMark2ndTaskDone.png)
 
 [To table of contents](#table-of-contents)
