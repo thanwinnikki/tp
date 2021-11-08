@@ -33,8 +33,4 @@ public class TypicalTasks {
 
     private TypicalTasks() {} // prevents instantiation
 
-    public static List<TaskBuilder> getTypicalTaskBuilders() {
-        return new ArrayList<>(Arrays.asList(TASK_A_BUILDER, TASK_B_BUILDER, TASK_C_BUILDER,
-                TASK_D_BUILDER, TASK_E_BUILDER));
-    }
 }
