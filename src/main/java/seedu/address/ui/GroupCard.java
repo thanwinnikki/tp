@@ -21,7 +21,7 @@ public class GroupCard extends Card {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Group group;
+    private final Group group;
 
     @FXML
     private HBox cardPane;
@@ -34,6 +34,9 @@ public class GroupCard extends Card {
 
     /**
      * Creates a {@code GroupCard} with the given {@code Group} and index to display.
+     *
+     * @param group The group to be displayed.
+     * @param displayedIndex The index of the card in the list panel.
      */
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);

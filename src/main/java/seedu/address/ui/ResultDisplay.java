@@ -21,7 +21,9 @@ public class ResultDisplay extends UiPart<Region> {
     }
 
     /**
-     * Displays a  {@code feedbackToUser} to the result box.
+     * Displays a {@code feedbackToUser} to the result box.
+     *
+     * @param feedbackToUser The feedback to be displayed.
      */
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);

@@ -23,6 +23,8 @@ public class CommandBox extends UiPart<Region> {
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
+     *
+     * @param commandExecutor The given {@code CommandExecutor}.
      */
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
@@ -77,7 +79,8 @@ public class CommandBox extends UiPart<Region> {
         /**
          * Executes the command and returns the result.
          *
-         * @see seedu.address.logic.Logic#execute(String)
+         * @param commandText The raw text version of the command.
+         * @return The result of the command.
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
