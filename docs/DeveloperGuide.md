@@ -277,7 +277,7 @@ The proposed adding Panel mechanism is facilitated by `MainWindow.fxml`. It exte
 
 Overall, the `MainWindow.fxml` uses `VBox` (Vertical Box) layout to stores components (e.g. `CommandBox`, `ResultDisplay`). The key point to implement the extension is using `HBox` (Horizontal Box) layout. Panels insides the layout is ordered horizontally, making two parallel display panels at the same time.
 
-#### Proposed Toolkit
+#### Toolkit
 
 ![UndoRedoState5](images/AddPanelToolkit_SenceBuilder.png)
 
