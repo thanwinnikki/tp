@@ -9,50 +9,48 @@ start
 
 
 if () then ([input format is valid])
-    :MarkAsDoneCommandParser retrieves
-    task index from the user input
-    and the group specified by the
-    current app state;
+    :Task index is retrieved from
+    the user input and the group specified
+    by the current app state;
 
     :LogicManager checks if the command is
     able to run in the current app state;
 
     if () then ([command can be run in current app state])
 
-    :MarkAsDoneCommand checks
-    if task index is valid;
+    :Check if task index is valid;
 
     if () then ([task index is valid])
-    :MarkAsDoneCommand checks
-    if task is already marked as ""done"";
+    :Check if task is already marked as ""done"";
 
     if () then ([task is not done])
-        :Marks task as ""done"";
+        :Mark task as ""done"";
 
     else ([else])
-    :Throws CommandException;
-    :Ui catches CommandException;
+    :Show error message
+    indicating task already
+    marked as done;
 
     endif
 
     else ([else])
-    :Throws CommandException;
-        :Ui catches CommandException;
+    :Show error message indicating
+    invalid task index;
 
     endif
 
     else ([else])
-    :Throws CommandException;
-    :Ui catches CommandException;
+    :Show error message indicating
+    command cannot be run in
+    current app state;
 
     endif
 
 else ([else])
-    :Throws ParseException;
-    :Ui catches ParseException;
+    :Show error message indicating
+    invalid input format;
 
 endif
-:UI displays the result to the User;
 
 stop
 

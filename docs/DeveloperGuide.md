@@ -236,10 +236,11 @@ Given below is an example usage scenario and how the `addT` mechanism behaves at
 6. If the command is able to run, `AddTaskCommand#execute(Model model)` will check if a task with the same description already exists in the tasklist of the group. If such task already exists, an error message indicating duplicate tasks entered will be displayed.
 7. If the task is not a duplicate task, it is added to the tasklist of the group successfully. This operation is exposed in the UniqueTaskList class as `UniqueTaskList#add(Task toAdd)`.
 8. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
-   
-The following sequence diagram shows how the `addT` operation works:
+
+The following sequence diagram illustrates how the `addT` operation works, assuming no exception is thrown:
 
 ![AddTaskCommandSequenceDiagram](images/AddTaskCommandSequenceDiagram.png)
+
    
 The following activity diagram shows the workflow of a typical AddTaskCommand:
 
