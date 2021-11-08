@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.List;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -52,13 +50,12 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
         requireNonNull(model);
         assert groupToRemoveFrom != null : "Group object should not be null";
 
-        List<Person> lastShownPersonList = model.getFilteredPersonList();
-
         if (targetIndex.getZeroBased() >= groupToRemoveFrom.getPersons().asUnmodifiableObservableList().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToRemove = lastShownPersonList.get(targetIndex.getZeroBased());
+        Person personToRemove = groupToRemoveFrom
+                .getPersons().asUnmodifiableObservableList().get(targetIndex.getZeroBased());
         personRemoved = personToRemove;
 
         Group group = groupToRemoveFrom;
