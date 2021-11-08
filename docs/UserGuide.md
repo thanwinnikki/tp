@@ -212,7 +212,6 @@ Edits an existing person in ThunderCat.
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
-* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
@@ -294,6 +293,7 @@ Creates a group in ThunderCat with an optional description. A description for th
 
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
 </div>
 
 Format: `addG n/GROUP_NAME [d/DESCRIPTION]`
@@ -633,7 +633,14 @@ Format: `help`
 #### Exiting the program : `exit`
 
 Exits ThunderCat.
+<div markdown="block" class="alert alert-success">
 
+:tv: **Page(s):**
+
+[Page(s)](#graphical-user-interface) which you can use this command in
+* [Home Page](#home-page-anchor)
+* [Group Information Page](#group-info-page-anchor)
+</div>
 Format: `exit`
 
 [To table of contents](#table-of-contents)
