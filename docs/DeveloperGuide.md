@@ -3,11 +3,15 @@ layout: page
 title: Developer Guide
 ---
 
-Welcome to the ThunderCat Developer Guide. ThunderCat is a desktop app designed for Year 2 Computing Students and 
+Welcome to the **ThunderCat Developer Guide**.
+
+**ThunderCat** is a desktop app designed for Year 2 Computing Students and 
 acts as an address book for contacts with added support for group projects. 
 Users can manage contacts, organise them into project groups and manage their tasks according to those groups. 
-This guide contains detailed information on the architecture, implementation and design decisions for ThunderCat, and has been designed 
-for our intended audience of software testers and developers who are interested in the inner workings of ThunderCat.
+
+
+This guide contains detailed information on the architecture, implementation and design decisions for ThunderCat. This guide has been designed 
+for our intended audience of software testers and developers who are interested in the inner workings of ThunderCat, or those who seek alter and extend the app for their own use.
 
 --------------------------------------------------------------------------------------------------------------------
 
