@@ -45,6 +45,12 @@ destroy DeleteCommandParser
 AddressBookParser --> LogicManager : d
 deactivate AddressBookParser
 
+LogicManager -> LogicManager : checkIfCommandCanRunInApplicationState(d)
+activate LogicManager
+
+LogicManager --> LogicManager
+deactivate LogicManager
+
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
