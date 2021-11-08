@@ -10,12 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values, and it should not be blank";
 
-    /*
+    /**
      * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
+    /** String representation of the description. */
     public final String value;
 
     /**
