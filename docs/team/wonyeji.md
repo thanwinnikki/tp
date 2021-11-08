@@ -62,7 +62,7 @@ Given below are my contributions to the project.
 
 * **Team Tasks**:
   * Ideated group and product name 'ThunderCat'
-  * Updating user/developer docs: use cases, value proposition, introduction
+  * Updating user/developer docs: use cases, glossary, value proposition, introduction
   * PRs reviewed (with non-trivial review comments): [\#193](https://github.com/AY2122S1-CS2103T-W17-3/tp/pull/193)
   
 
