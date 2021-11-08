@@ -31,7 +31,7 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
-    * Managed releases `v1.1`, `v1.2`, `v.1,3` 3 major releases on GitHub.
+    * Managed releases `v1.1`, `v1.2`, `v.1,3`, `v.1,4` 4 major releases on GitHub.
     * Reviewed pull requests
     
 
