@@ -36,12 +36,13 @@ public class GroupCommand implements StateDependentCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Group> lastShownList = model.getFilteredGroupList();
+        // If group index is out of bounds of the group list
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
-        Group group = lastShownList.get(index.getZeroBased());
+        Group groupToDisplay = lastShownList.get(index.getZeroBased());
         return new CommandResult.Builder(MESSAGE_SUCCESS)
-                .displayGroupInformation(group)
+                .displayGroupInformation(groupToDisplay)
                 .build();
     }
 
