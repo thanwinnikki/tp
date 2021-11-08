@@ -27,7 +27,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAsDoneCommand;
 import seedu.address.logic.commands.RemoveCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.GroupInformationState;
