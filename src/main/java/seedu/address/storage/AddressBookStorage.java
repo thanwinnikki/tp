@@ -14,31 +14,45 @@ public interface AddressBookStorage {
 
     /**
      * Returns the file path of the data file.
+     *
+     * @return The file path of the data file.
      */
     Path getAddressBookFilePath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem when reading from the storage.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
+     * @return An {@code Optional} object that may contain the {@code AddressBook}
+     * @throws DataConversionException If the data in storage is not in the expected format.
+     * @throws IOException If there was any problem when reading from the storage.
      */
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns {@code Optional.empty()} if storage file is not found.
+     *
+     * @param filePath The path of the data file.
+     * @throws DataConversionException If the data in storage is not in the expected format.
+     * @throws IOException If there was any problem when reading from the storage.
      */
     Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
-     * @throws IOException if there was any problem writing to the file.
+     *
+     * @param addressBook The {@link ReadOnlyAddressBook}. Cannot be null.
+     * @throws IOException If there was any problems writing to the file.
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * Saves the given {@link ReadOnlyAddressBook} to the storage.
+     *
+     * @param addressBook The {@link ReadOnlyAddressBook}. Cannot be null.
+     * @param filePath The path of the file to save to.
+     * @throws IOException If there was any problems writing to the file.
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 

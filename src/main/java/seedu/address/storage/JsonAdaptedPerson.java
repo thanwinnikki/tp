@@ -149,9 +149,6 @@ public class JsonAdaptedPerson {
         }
     }
 
-    /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
-     */
     private JsonAdaptedPerson(String name, String phone, String email, String address, String id,
                 List<JsonAdaptedTag> tagged) {
         this.name = name;
@@ -174,25 +171,37 @@ public class JsonAdaptedPerson {
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @return The equivalent {@code Person} to this storage representation.
+     * @throws IllegalValueException If there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
+        final Name modelName = createName();
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
-        }
-        final Phone modelPhone = new Phone(phone);
+        final Phone modelPhone = createPhone();
 
+        final Email modelEmail = createEmail();
+
+        Person.Builder modelBuilder = new Person.Builder(modelName, modelPhone, modelEmail);
+
+        storeAddressIfExists(modelBuilder);
+
+        storeTagsIfExists(modelBuilder);
+
+        return modelBuilder.build();
+    }
+
+    private void storeTagsIfExists(Person.Builder modelBuilder) throws IllegalValueException {
+        if (tagged == null) {
+            return;
+        }
+        final Set<Tag> modelTags = new HashSet<>();
+        for (JsonAdaptedTag tag : tagged) {
+            modelTags.add(tag.toModelType());
+        }
+        modelBuilder.withTags(modelTags);
+    }
+
+    private Email createEmail() throws IllegalValueException {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
@@ -200,21 +209,29 @@ public class JsonAdaptedPerson {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
+        return modelEmail;
+    }
 
-        Person.Builder modelBuilder = new Person.Builder(modelName, modelPhone, modelEmail);
-
-        storeAddressIfExists(modelBuilder);
-
-        if (tagged != null) {
-            final Set<Tag> modelTags = new HashSet<>();
-            for (JsonAdaptedTag tag : tagged) {
-                modelTags.add(tag.toModelType());
-            }
-            modelBuilder.withTags(modelTags);
+    private Phone createPhone() throws IllegalValueException {
+        if (phone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
+        if (!Phone.isValidPhone(phone)) {
+            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        final Phone modelPhone = new Phone(phone);
+        return modelPhone;
+    }
 
-        return modelBuilder
-                .build();
+    private Name createName() throws IllegalValueException {
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        final Name modelName = new Name(name);
+        return modelName;
     }
 
     private void storeAddressIfExists(Person.Builder modelBuilder) throws IllegalValueException {

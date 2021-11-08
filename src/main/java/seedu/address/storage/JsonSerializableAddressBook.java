@@ -32,6 +32,9 @@ class JsonSerializableAddressBook {
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     *
+     * @param persons The list of persons.
+     * @param groups The list of groups.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
@@ -43,7 +46,7 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source The equivalent {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         Map<Person, Id> groupMateToIdMap = createGroupMateToIdMap(source);
@@ -62,7 +65,8 @@ class JsonSerializableAddressBook {
     /**
      * Converts this address book into the model's {@code AddressBook} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated.
+     * @return The equivalent {@code AddressBook} to this storage representation.
+     * @throws IllegalValueException If there were any data constraints violated.
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
