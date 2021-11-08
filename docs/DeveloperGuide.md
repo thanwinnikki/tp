@@ -419,16 +419,18 @@ The following steps describes the execution of the `joinG` command:
 * Taking the modules CS2103T, CS2101 and ES2660
 * Has a need to manage and organise a significant number of contacts of group mates
 * Has a need to manage different tasks related to different groups
-* Wants some practical experience using CLI and manipulating JSON files  
+* Wants to gain practical experience using CLI and manipulating JSON files  
 * Prefer desktop apps over other types
 * Can type fast
 * Prefers typing to mouse interactions to navigate applications
 * Is reasonably comfortable using CLI apps
 * Has other applications to message group mates
 
-**Value proposition**: Thunder Cats is able to manage contacts faster than a typical mouse/GUI driven app.
-It centralises all information the user needs about a person and even allows users
-to group multiple contacts.
+**Value proposition**: 
+
+Thunder Cats is able to manage contacts faster than a typical mouse/GUI driven app.It centralises all information the user needs about a person and even allows users to group multiple contacts.
+
+ThunderCat provides a practical way for users to gain confidence using a CLI to navigate an application and manipulate JSON files.
 
 ### User stories
 
@@ -439,11 +441,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user  | have a fast and easy way to input multiple contact details of a group mate | save time when I’m doing work |
 | `* * *`  | user  | input the details of my group mates in a simple command |save time when I input the information|
 | `* * *`  | user  | delete a contact which will remove them from all groups within my address book in case there is a change of groupings | - |
+| `* * *`  | user  | directly change details in the address book from the JSON file | gain confidence in using JSON files |
 | `* * *`  | user  | only have a few basic commands to use my address book. | - |
-| `* * *`  | user  | delete contacts out of my address book | I can remove them when there is a change in group members |
+| `* * *`  | user  | use a CLI to control the application | gain confidence in using commands to navigate an application |
+| `* * *`  | user  | delete contacts out of my address book | remove them when there is a change in group members |
 | `* * *`  | user  | create groups | locate the bulk of people in groups easily |
 | `* * *`  | user  | list all groups | have a overview of all the groups |
-| `* * *`  | user  | delete a group | I can remove them once they are not needed anymore |
+| `* * *`  | user  | delete a group | remove them once they are not needed anymore |
 | `* * `  | user  | easily access the contacts of my group mates, for centralising all the contact details | I can access them when I need them on my laptop |
 | `* * `  | user  | input shared links of project groups (tele chat, msteams grp etc)| have all documents/information of my group on 1 place and don’t have to spend a long time to find these details/documents |
 | `* * `  | user  | access my group mates’ contacts with a hyperlink | single tap to copy to clipboard. |
@@ -474,9 +478,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*  `  | student doing group projects  | reassign tasks to indicate somebody else is doing them now| - |
 
 
-
-*{More to be added}*
-
 ### Use cases
 
 (For all use cases below, the **System** is the `ThunderCat AddressBook` and the **Actor** is the `user`, unless specified otherwise)
@@ -487,8 +488,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User enters help command into the terminal or clicks “help” button.
 2. ThunderCat opens the instruction page for the user. <br>
    Use case ends.
+   
+**Use case: UC02 - Add a new person without the optional address and tags**
 
-**Use case: UC02 - Add a new Group**
+**MSS**
+1. User enters the person's name, phone number and email to be added into the terminal.
+2. ThunderCat announces that the person has been successfully added.
+    <br>Use case ends.
+   
+**Extensions**
+* 1a.  ThunderCat detects an error in the entered command format.
+    * 1a1. ThunderCat requests for the correct command format, and gives examples
+    * 1a2. User enters a new command.
+      <br>Steps 1a1-1a2 are repeated until the command format entered are correct.
+      <br>Use case resumes from step 2.
+* 1b. ThunderCat detects that the person already exists in the application.
+    * 1b1. ThunderCat announces that the person already exists.
+    * 1b2. Use case restarts from step 1.
+
+**Use case: UC03 - Edit an existing person's phone number**
+
+**MSS**
+1. User enters the phone number replacing the current contact's phone number into the terminal.
+2. ThunderCat announces that the person's phone number has been successfully edited.
+   <br>Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command format (UC02 -extension 1a).
+
+**Use case: UC04 - Delete a Person**
+
+**MSS**
+1. User enters the displayed person index to delete into the terminal.
+2. ThunderCat announces that the person has been successfully deleted.
+   <br>Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC02 - extension 1a).
+
+**Use case: UC05 - Add a new Group**
 
 **MSS**
 1. User enters the group name and description to be added into the terminal.
@@ -496,16 +534,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    <br>Use case ends.
 
 **Extensions**
-* 1a. ThunderCat detects an error in the entered command.
-    * 1a1. ThunderCat requests for the correct command, and gives examples.
-    * 1a2. User enters a new command.
-      <br>Steps 1a1-1a2 are repeated until the commands entered are correct.
-      <br>Use case resumes from step 2.
+* 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
 * 1b. ThunderCat detects that the group already exists in the application.
     * 1b1. ThunderCat announces that the group already exists.
     * 1b2. Use case restarts from step 1.
-   
-**Use case: UC03 - Add a Person to a Group**
+
+**Use case: UC06 - Edit an existing group's description**
+
+**MSS**
+1. User enters the description replacing the current group's description into the terminal.
+2. ThunderCat announces that the group's description has been successfully edited.
+   <br>Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command format (UC02 -extension 1a).
+
+**Use case: UC07 - Delete a Group**
+
+**MSS**
+1. User enters the displayed group index to delete into the terminal.
+2. ThunderCat announces that the group has been successfully deleted.
+   <br>Use case ends.
+
+**Extensions**
+* 1a. ThunderCat detects an error in the entered command (UC02 - extension 1a).
+
+**Use case: UC08 - Add a Person to a Group**
 
 **MSS**
 1. User enters the adding command into the terminal.
@@ -514,43 +568,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 * 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
-* 1b. ThunderCat detects that the person is already in the group.
-    * 1b1. ThunderCat announces that the person is already in the group.
-    * 1b2. Use case restarts from step 1.
+* 1b. ThunderCat detects that a person specified is already in the group.
+    * 1b1. ThunderCat announces that the person is already in the group and the person index is not valid.
+    * 1b2. ThunderCat requests for a valid person indexes to be input.
+      <br>Steps 1b1-1b2 are repeated until all person indexes input are valid.
+      <br>Use case resumes from step 2.
 
-**Use case: UC04 - Remove a Person from a Group**
+**Use case: UC09 - Remove a Person from a Group**
 
 **MSS**
 1. User navigates to the group which the user want to remove person from.
-2. User enters the removing command into the terminal.
+2. User enters the displayed index of the person they want to remove into the terminal.
 3. ThunderCat announces that the person has been successfully removed from the group.
    <br>Use case ends.
 
 **Extensions**
 * 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
 * 1b. ThunderCat is unable to find the group with the given index.
-    * 1b1. ThunderCat announces that the group cannot be found.
-    * 1b2. Use case restarts from step 1.
-* 2b. ThunderCat is unable to find the person index to be removed from the group.
-  * 2b1. ThunderCat announces that the person cannot be found.
-  * 2b2. Use case restarts from step 1.
+    * 1b1. ThunderCat requests for a valid group index and gives examples
+    * 1b2. User enters a new command with a valid group index.
+      <br>Steps 1b1-1b2 are repeated until the group index entered is valid.
+      <br>Use case resumes from step 2.    
+* 2a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
+* 2b. ThunderCat is unable to find the person with the given index.
+    * 2b1. ThunderCat requests for a valid person index and gives examples
+    * 2b2. User enters a new command with a valid person index.
+      <br>Steps 2b1-2b2 are repeated until the person index entered is valid.
+      <br>Use case resumes from step 3.
+      
     
-**Use case: UC05 - Delete a Person**
-
-**MSS**
-1. User enters the deleting command into the terminal.
-2. ThunderCat makes a warning about the person that will be deleted, and all groups that the person is in.
-3. User confirms the deletion.
-4. ThunderCat announces that the person has been successfully deleted.
-   <br>Use case ends.
-
-**Extensions**
-* 1a. ThunderCat detects an error in the entered command (UC02 - extension 1a).
-* 2a. User cancels the request.
-  * 2a1. User choose not to delete the contact.
-  * 2a2. ThunderCat announces that the deleting process has been canceled.
-    
-**Use case: UC06 - Add a Task to a Group**
+**Use case: UC10 - Add a Task to a Group**
 
 **MSS**
 1. User navigates to the group which the user want to add tasks to.
@@ -560,12 +607,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
 **Extensions**
 * 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a). 
-* 1b. ThunderCat is unable to find the group with the given index (UC04 -extension 1b).
+* 1b. ThunderCat is unable to find the group with the given index (UC09 -extension 1b).
 * 2b. ThunderCat detects that the task already exists in the group.
-  * 2b1. ThunderCat announces that the task already exists.
+  * 2b1. ThunderCat announces that the task already exists.  
   * 2b2. Use case resumes from step 2 again.
     
-**Use case: UC07 - Mark a Task as Done**
+**Use case: UC11 - Mark a Task as Done**
 
 **MSS**
 1. User navigates to the group in which the user wants to mark task as done in.
@@ -575,9 +622,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    
 **Extensions**
 * 1a. ThunderCat detects an error in the entered command (UC02 -extension 1a).
-* 1b. ThunderCat is unable to find the group with the given index (UC04 -extension 1b).
+* 1b. ThunderCat is unable to find the group with the given index (UC09 -extension 1b).
 * 2b. ThunderCat detects that the task has already been marked as done.
     * 2b1. ThunderCat announces that the task has already been marked as done.
+    * 2b2. Use case resumes from step 2 again.
+    
+**Use ase: UC12 - Undo after accidental clear command**
+
+**MSS**
+1. User clears the ThunderCat application and all its stored data.
+2. User undoes the action.
+3. ThunderCat announces that the task has been successfully undone.
+    <br>Use case ends.
 
 ### Non-Functional Requirements
 
@@ -603,7 +659,6 @@ able to accomplish most of the tasks faster using commands than using the mouse.
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -631,29 +686,98 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
+
+1. Adding a person while in the home page with all contacts being shown.
+
+    1. Prerequisites:
+    * List all persons using the `list` command. This will navigate you to the home page.
+    * An exisiting contact with these details: <br>
+      Name: John Doe, Phone: 98765432, Email: johnd@example.com
+    
+    2. Test case: `add n/Johnny Simpson p/85432617 e/johnnyS@example.com a/311, Clementi Ave 2, #02-25`<br>
+    Expected: The contact with the corresponding details are added to the displayed person list. Details of the added person is displayed in the result box.<br>
+    
+    3. Test case: `add n/John Doe p/98765432 e/johnd@example.com` <br>
+    Expected: No person is added. Error details is shown in the result box. Error message of "Person already exists in the address book" is shown in the result box. Displayed person list remains the same.
+       
+    4. Test case: `add n/Kenny` <br>
+    Expected: No person is added. Error details is shown in the result box. Error message of "Invalid command format!" is shown. Followed by an example of how the correct command input format should be. Displayed person list remains the same.
+       
+    5. Other incorrect delete commadns to try: `add p/55`, `add d/hello` (where the command format is not as specified in the user guide) <br>
+    Expected: Similar to previous test case result(Test case iv).4
+    
+    
 
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while in the home page with all contacts being shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: 
+    * List all persons using the `list` command. This will navigate you to the home page.
+    * Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the displayed person list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. Error message of "Invalid command format!" is shown. Followed by an example of how the correct command input format should be. Displayed person list remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+      
+2. Deleting a person after filtering the displayed person list by searching for name.
 
-1. _{ more test cases …​ }_
+    1. Prerequisites:
+    * List all persons using the `list` command. This will navigate you to the home page.
+    * Multiple persons already present in the list.
+    * Add a contact using the `add` command. Specifically `add n/John Doe p/98765432 e/johnd@example.com`.
+    * Ensure that "John Doe" does not have a displayed index of 1 when using the `list` command.
+    * Use the `find` command and make sure "John Doe" now has the displayed index of 1.
+    
+    2. Test case: `delete 1`
+       Expected: First contact is deleted from the displayed person list. Details of the deleted contact shown in the status message. "John Doe" is deleted from the address book. 
+    
+    2. Test case 
+    
 
-### Saving data
+### Adding a person to a group 
 
-1. Dealing with missing/corrupted data files
+1. Adding a person to a group while in the home page with all contacts being shown.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Prerequisites:
+    * List all persons using the `list` command. This will navigate you to the home page.
+    * 3 contacts present.
+    * 3 groups present.
 
-1. _{ more test cases …​ }_
+    2. Test case: `joinG p/1 p/2 g/1`<br>
+       Expected: The first and second person in the displayed person list are added to the first group in the displayed group list. Details of the group which had people added to it, is displayed in the result box .<br>
+
+    3. Test case: `joinG g/1` <br>
+       Expected: No person is added to the first group. Error details is shown in the result box. Error message of "Invalid command format!" is shown in the result box.
+
+    4. Test case: `joinG p/1` <br>
+       Expected: Expected: Similar to previous test case result( Test case 1(iii) ).
+
+    5. Other incorrect delete commands to try: `joinG p/52 g/1`, `joinG p/1 g/55`, `joinG p/0 g/0` (where the command format is not as specified in the user guide. The indexes provided are out of bounds of the indexes displayed in the application.) <br>
+       Expected: Similar to previous test case result( Test case 1(iii) ).
+       
+2. Adding a person to a group while in the home page without any contacts present.
+
+    1. Prerequisites:
+    * 0 contacts present.
+    * 1 group present.
+    
+    2. Test case: `joinG p/1 g/1`
+        Expected: Similar to previous test case result ( Test case 1(iii) ).
+       
+3. Adding a person to a group while in the home page without any group present.
+
+    1. Prerequisites:
+    * 1 contact present.
+    * 0 group present.
+    
+    2. Test case: `joinG p/1 g/1`
+        Expected: Similar to previous test case result ( Test case 1(iii) ).
+      
+       
