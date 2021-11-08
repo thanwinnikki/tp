@@ -94,6 +94,7 @@ public class Group {
 
     /**
      * Adds a person to the group.
+     *
      * @param person Person to be added to the group.
      */
     public void add(Person person) {
@@ -113,7 +114,7 @@ public class Group {
      * Checks whether the group has the given group mate.
      *
      * @param groupMate The group mate.
-     * @return Whether the group mate is in the group.
+     * @return Returns true if the group mate is in the group and false otherwise.
      */
     public boolean hasGroupMate(Person groupMate) {
         return persons.contains(groupMate);
@@ -123,7 +124,7 @@ public class Group {
      * Checks whether the group has the given set of group mates.
      *
      * @param groupMates The group mates.
-     * @return Whether the set of group mates is in the group.
+     * @return Returns true if the set of group mates is in the group and false otherwise.
      */
     public boolean hasGroupMates(Set<Person> groupMates) {
         return groupMates.stream().anyMatch(groupMate -> this.hasGroupMate(groupMate));
@@ -131,6 +132,7 @@ public class Group {
 
     /**
      * Adds a task to the group.
+     *
      * @param task Task to be added to the group.
      */
     public void addTask(Task task) {
@@ -139,6 +141,8 @@ public class Group {
 
     /**
      * Deletes a {@code Task} from the group.
+     *
+     * @param task Task to be deleted from the group.
      */
     public void deleteTask(Task task) {
         tasks.remove(task);
@@ -148,7 +152,7 @@ public class Group {
      * Checks whether the group has the given task.
      *
      * @param task The task.
-     * @return Whether the group has the given task.
+     * @return Returns true if the group has the given task and false otherwise.
      */
     public boolean hasTask(Task task) {
         return tasks.contains(task);
@@ -176,7 +180,7 @@ public class Group {
      * Only checks if 2 groups have the same name or are the same group.
      *
      * @param otherGroup Other group to compare.
-     * @return Returns true if both groups have the same name or are the same group;
+     * @return Returns true if both groups have the same name or are the same group and false otherwise.
      */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {
@@ -192,7 +196,7 @@ public class Group {
      * This checks if all instance attributes are equal.
      *
      * @param other Other object to compare.
-     * @return Return true if both groups have equal instance attributes.
+     * @return Return true if both groups have equal instance attributes and false otherwise.
      */
     @Override
     public boolean equals(Object other) {
