@@ -32,7 +32,6 @@ public interface AddressBookStorage {
     /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
      * Returns {@code Optional.empty()} if storage file is not found.
-     * @see #getAddressBookFilePath()
      *
      * @param filePath The path of the data file.
      * @throws DataConversionException If the data in storage is not in the expected format.
