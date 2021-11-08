@@ -19,11 +19,11 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
     public static final String COMMAND_WORD = "addT";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the group. "
+            + "Note that the task's description can only be displayed up to the first 70 characters.\n"
             + "Parameters: "
             + PREFIX_DESCRIPTION + "TASK_DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DESCRIPTION + "Read book"
-            + "Notes that the task's name can only be displayed up to first 70 characters";
+            + PREFIX_DESCRIPTION + "Read book";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the group";
