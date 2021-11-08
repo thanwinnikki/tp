@@ -34,7 +34,7 @@ public class DeleteTaskCommandTest {
         Group groupToDeleteFrom = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
         Task taskToDelete = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased())
                 .getTasks().getTask(INDEX_FIRST.getZeroBased());
-        int initialSizeOfTaskList = groupToDeleteFrom.getTasks().size();
+        int initialSizeOfTaskList = groupToDeleteFrom.getTasks().getSize();
 
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(INDEX_FIRST, groupToDeleteFrom);
 
@@ -48,14 +48,14 @@ public class DeleteTaskCommandTest {
 
         assertCommandSuccess(deleteTaskCommand, model, expectedCommandResult, expectedModel);
 
-        int currentSizeOfTaskList = groupToDeleteFrom.getTasks().size();
+        int currentSizeOfTaskList = groupToDeleteFrom.getTasks().getSize();
         // ensures that the group's task list size decreases
         assertEquals(initialSizeOfTaskList - 1, currentSizeOfTaskList);
     }
 
     @Test
     public void execute_invalidTaskIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(getFirstGroup(model).getTasks().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(getFirstGroup(model).getTasks().getSize() + 1);
         Group groupToDeleteFrom = model.getFilteredGroupList().get(INDEX_FIRST.getZeroBased());
 
         DeleteTaskCommand deleteTaskCommand = new DeleteTaskCommand(outOfBoundIndex, groupToDeleteFrom);

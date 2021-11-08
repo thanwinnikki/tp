@@ -60,7 +60,7 @@ public class MarkAsDoneCommandTest {
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         Group group = getFirstGroup(model);
 
-        Index outOfBoundIndex = Index.fromOneBased(group.getTasks().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(group.getTasks().getSize() + 1);
 
         MarkAsDoneCommand markAsDoneCommand = new MarkAsDoneCommand(outOfBoundIndex, group);
 

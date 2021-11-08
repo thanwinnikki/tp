@@ -45,7 +45,7 @@ public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand
         assert taskGroup != null : "Group object should not be null";
         UniqueTaskList tasks = taskGroup.getTasks();
 
-        if (targetIndex.getZeroBased() >= tasks.size()) {
+        if (targetIndex.getZeroBased() >= tasks.getSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
