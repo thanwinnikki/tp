@@ -43,7 +43,6 @@ public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         assert taskGroup != null : "Group object should not be null";
-        // Get task list of group to mark task as done in
         UniqueTaskList tasks = taskGroup.getTasks();
 
         // If task index is out of bounds of the task list
