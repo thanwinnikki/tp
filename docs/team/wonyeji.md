@@ -13,8 +13,11 @@ User Interface (GUI).
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to list all groups in ThunderCat.
+  * What it does: Allows the User to view all groups.
 * **New Feature**: Added the ability to list all group members and tasks in a group.
+  * What it does: Allows the User to view group information of each group.
 * **New Feature**: Added the ability to add a new task to a group.
+  * What it does: Allows the User to 
 * **New Feature**: Added the ability to mark a task in a group as done.
   * What it does: 
     * Allows the User to mark a task in a group as done. 
@@ -25,6 +28,9 @@ Given below are my contributions to the project.
 * **Enhancements implemented**:
   * Added Task-related exception classes 
   * Added UniqueTaskList class that enforces uniqueness between its elements to support Task-related commands in ThunderCat.
+    * What it does: This feature allows each group to have their own task list.
+    * Highlights: This enhancement affected numerous existing commands. Implementing this enhancement was challenging as it required changes to the Group model which led to numerous changes to other classes that used the Group model. 
+      Test cases and data also had to be updated accordingly.
   * Added Task-related classes in test such as TypicalTasks, TaskBuilder and TaskUtil classes to support testing for Task-related features.
   * Added Group-related exception classes
   * Added Group-related class TypicalGroups to support testing for Group-related features.
