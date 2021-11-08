@@ -9,8 +9,8 @@ end box
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":AddressBook" as Ab MODEL_COLOR
-participant ":Group" as Group MODEL_COLOR
-participant ":UniquePersonList" as Upl MODEL_COLOR
+participant "groupToChange:Group" as Group MODEL_COLOR
+participant "persons:UniquePersonList" as Upl MODEL_COLOR
 end box
 
 activate JoinGroupCommand
@@ -24,14 +24,20 @@ activate Model
 
 
 
-Model --> Ab : addToGroup(target, persons)
+Model --> Ab : addToGroup(groupToChange, persons)
 activate Ab
 
+loop for all person in persons
 Ab --> Group : add(person)
 activate Group
+
 Group --> Upl : add(person)
 activate Upl
-deactivate Upl
 deactivate Group
+deactivate Upl
+
+end
+
+
 deactivate Ab
 @enduml

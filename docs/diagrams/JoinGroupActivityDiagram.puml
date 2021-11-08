@@ -10,10 +10,10 @@ if () then ([valid format])
     command and arguments;
 
     : Parser converts user input to
-     valid ""PersonIndex"" and ""GroupIndex"";
+     valid ""PersonIndexes"" and ""GroupIndex"";
 
-    :Search for person based
-    on the specified PersonIndex;
+    :Search for persons based
+    on the specified PersonIndexes;
 
     if () then ([index within bounds])
 
@@ -22,7 +22,7 @@ if () then ([valid format])
 
     if () then ([index within bounds])
 
-    :Update group with persons;
+    :Add all selected persons to the group;
 
     :Show success status message;
 
