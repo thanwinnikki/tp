@@ -104,7 +104,7 @@ How the `Logic` component works when executing a command:
 7. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 8. The current `ApplicationState` is updated using the details from the `CommandResult`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call, assuming the application is in a state where it can execute the `delete` command.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
