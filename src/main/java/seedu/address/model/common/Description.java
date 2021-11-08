@@ -32,6 +32,9 @@ public class Description {
 
     /**
      * Returns true if a given string is a valid description and false otherwise.
+     *
+     * @param test String to be tested.
+     * @return Returns true if a given string is a valid description and false otherwise.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);

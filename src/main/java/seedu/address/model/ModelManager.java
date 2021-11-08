@@ -28,6 +28,9 @@ public class ModelManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook Address book to be used.
+     * @param userPrefs User Preferences to be used.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();

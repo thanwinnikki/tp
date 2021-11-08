@@ -15,7 +15,7 @@ import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Represents a Group in the address book.
- * Guarantees: Details are present and not null. persons is not validated todo
+ * Guarantees: Identity fields are present and not null, present field values are validated, immutable.
  */
 public class Group {
 
@@ -28,7 +28,13 @@ public class Group {
     private final UniqueTaskList tasks;
 
     /**
-     * Name, Description, persons and tasks must be present and not null.
+     * Constructs a Group object.
+     * Name, persons and tasks must be present and not null.
+     *
+     * @param name Name of the group.
+     * @param description Description of the group.
+     * @param persons List of persons belonging to the group.
+     * @param tasks List of tasks belonging to the group.
      */
     public Group(Name name, Description description, UniquePersonList persons, UniqueTaskList tasks) {
         requireAllNonNull(name, persons, tasks);
@@ -39,7 +45,11 @@ public class Group {
     }
 
     /**
-     * Name and Description must be present and not null.
+     * Constructs a Group object.
+     * Name and description must be present and not null.
+     *
+     * @param name Name of the group.
+     * @param description Description of the group.
      */
     public Group(Name name, Description description) {
         requireAllNonNull(name, description);
@@ -50,7 +60,10 @@ public class Group {
     }
 
     /**
+     * Constructs a Group object.
      * Name must be present and not null.
+     *
+     * @param name Name of the group.
      */
     public Group(Name name) {
         requireAllNonNull(name);
@@ -140,7 +153,7 @@ public class Group {
     }
 
     /**
-     * Deletes a {@code Task} from the group.
+     * Deletes a task from the group.
      *
      * @param task Task to be deleted from the group.
      */
@@ -192,12 +205,6 @@ public class Group {
         return same;
     }
 
-    /**
-     * This checks if all instance attributes are equal.
-     *
-     * @param other Other object to compare.
-     * @return Return true if both groups have equal instance attributes and false otherwise.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

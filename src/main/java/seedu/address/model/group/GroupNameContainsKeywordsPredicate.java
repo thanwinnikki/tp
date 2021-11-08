@@ -11,6 +11,11 @@ import seedu.address.commons.util.StringUtil;
 public class GroupNameContainsKeywordsPredicate implements Predicate<Group> {
     private final List<String> keywords;
 
+    /**
+     * Constructs a GroupNameContainsKeywordsPredicate object.
+     *
+     * @param keywords Keywords to compare group names to.
+     */
     public GroupNameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }

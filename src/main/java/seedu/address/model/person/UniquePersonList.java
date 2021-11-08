@@ -142,7 +142,7 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Checks if the persons in the {@code List} of persons are the same.
+     * Checks if the persons in the {@code List} of persons are unique.
      *
      * @param persons {@code List} of persons to be checked.
      * @return Returns true if the persons are unique and false otherwise.
