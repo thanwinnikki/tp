@@ -290,9 +290,8 @@ Examples:
 
 Creates a group in ThunderCat with an optional description. A description for the group is optional.
 
-<div markdown="block" class="alert alert-success">
+<div markdown="block" class="alert alert-success">:tv: **Page(s):**
 
-:tv: **Page(s):**
 [Page(s)](#graphical-user-interface) which you can use this command in.
 * [Home Page](#home-page-anchor)
 </div>
