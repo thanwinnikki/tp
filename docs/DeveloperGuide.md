@@ -325,7 +325,7 @@ Application Scence Builder makes it easier to imagine and implement the feature 
 
 #### Implementation
 
-The Rounded-corners UI mechanism is facilitated by [DarkTheme.css](https://github.com/AY2122S1-CS2103T-W17-3/tp/blob/master/src/main/resources/view/DarkTheme.css). By making the rounded-corners UI, the user's experience with the application can be enhanced significantly.
+The Rounded-corners UI mechanism is facilitated by [`DarkTheme.css`](https://github.com/AY2122S1-CS2103T-W17-3/tp/blob/master/src/main/resources/view/DarkTheme.css). By making the rounded-corners UI, the user's experience with the application can be enhanced significantly.
 
 Overall, `.css` files specialized for theme of the application. All the components like background color, font size and shape can be manipulated by this file. By refer to this [online instruction](https://www.w3schools.com/css/css3_borders.asp) and implement in the needed UI components in the theme file, those components' corners can be make as rounded as prefer.
 
