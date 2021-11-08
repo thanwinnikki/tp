@@ -32,10 +32,10 @@ end
 LogicManager -> Stack : pop()
 activate Stack
 
-Stack --> LogicManager : undoableCommand
+Stack --> LogicManager : uc
 deactivate Stack
 
-LogicManager -> UndoableCommand : undo(model)
+LogicManager -> UndoableCommand : undo(m)
 activate UndoableCommand
 
 UndoableCommand --> LogicManager : ur

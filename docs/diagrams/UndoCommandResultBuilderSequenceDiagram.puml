@@ -7,7 +7,7 @@ participant "b:CommandResult.Builder" as CommandResult.Builder LOGIC_COLOR
 participant "cr:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
-[-> UndoCommand : execute(model)
+[-> UndoCommand : execute(m)
 activate UndoCommand
 
 create CommandResult.Builder
