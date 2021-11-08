@@ -3,7 +3,7 @@
 [![Java CI](https://github.com/AY2122S1-CS2103T-W17-3/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-W17-3/tp/actions/workflows/gradle.yml)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W17-3/tp/branch/master/graph/badge.svg?token=D02WJBAOUP)](https://codecov.io/gh/AY2122S1-CS2103T-W17-3/tp)
 
-ThunderCat (TC) is a **desktop app designed for Year 2 Computing Students.** The application acts as an address book for contacts with *added support for group projects*. You can manage contacts, organise them into project groups and manage your tasks according to the groups. ThunderCat **does not** act as a messaging application, rather just a task management and contact management application specifically for group projects. The application is optimized for use via a **Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
+ThunderCat (TC) is a desktop app designed for Year 2 Computing Students. You can manage contacts, organise them into project groups and manage your tasks according to the groups. The application is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ThunderCat can get your project groups' management tasks done faster than traditional GUI apps.
 
 ![Ui](docs/images/Ui.png)
 
