@@ -39,6 +39,9 @@ public class LogicManager implements Logic {
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     *
+     * @param model Model of the application.
+     * @param storage Storage where retrievable data is stored.
      */
     public LogicManager(Model model, Storage storage) {
         this.model = model;
@@ -99,6 +102,12 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
+    /**
+     * Checks if command can be run in current application state.
+     *
+     * @param command Command that is attempted to run in this state.
+     * @throws CommandException If an error occurs during command execution.
+     */
     private void checkIfCommandCanRunInApplicationState(Command command) throws CommandException {
         boolean isAbleToRunInApplicationState = !(command instanceof StateDependentCommand)
                 || ((StateDependentCommand) command).isAbleToRunInApplicationState(currentApplicationState);
@@ -107,10 +116,21 @@ public class LogicManager implements Logic {
         }
     }
 
+    /**
+     * Set ApplicationState to the next applicationState
+     *
+     * @param commandResult CommandResult from parsing user input.
+     */
     private void processCommandResult(CommandResult commandResult) {
         currentApplicationState = commandResult.getNextApplicationState();
     }
 
+    /**
+     * Run sequence to undo if undo is activated.
+     *
+     * @param commandResult CommandResult from parsing user input.
+     * @throws CommandException If an error occurs during command execution.
+     */
     private CommandResult undoIfMustUndo(CommandResult commandResult) throws CommandException {
         boolean mustUndo = commandResult.isGoingToCauseUndo();
         boolean canUndo = !undoableCommandStack.empty();
@@ -123,6 +143,11 @@ public class LogicManager implements Logic {
         return undoResult;
     }
 
+    /**
+     * Run sequence to undo if undo is activated.
+     *
+     * @param command Command to be added to the undoable stack if undoable.
+     */
     private void addToUndoableCommandStackIfUndoable(Command command) {
         if (command instanceof UndoableCommand) {
             undoableCommandStack.push((UndoableCommand) command);
