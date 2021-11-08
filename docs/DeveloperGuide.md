@@ -2,6 +2,19 @@
 layout: page
 title: Developer Guide
 ---
+
+Welcome to the **ThunderCat Developer Guide**.
+
+**ThunderCat** is a desktop app designed for Year 2 Computing Students and 
+acts as an address book for contacts with added support for group projects. 
+Users can manage contacts, organise them into project groups and manage their tasks according to those groups. 
+
+
+This guide contains detailed information on the architecture, implementation and design decisions for ThunderCat. This guide has been designed 
+for our intended audience of software testers and developers who are interested in the inner workings of ThunderCat, or those who seek alter and extend the app for their own use.
+
+--------------------------------------------------------------------------------------------------------------------
+
 * Table of Contents
 {:toc}
 
@@ -236,14 +249,16 @@ Given below is an example usage scenario and how the `addT` mechanism behaves at
 6. If the command is able to run, `AddTaskCommand#execute(Model model)` will check if a task with the same description already exists in the tasklist of the group. If such task already exists, an error message indicating duplicate tasks entered will be displayed.
 7. If the task is not a duplicate task, it is added to the tasklist of the group successfully. This operation is exposed in the UniqueTaskList class as `UniqueTaskList#add(Task toAdd)`.
 8. The `CommandResult` of the execution will then be retrieved, and the display will change to show the result of the execution.
-   
-The following sequence diagram shows how the `addT` operation works:
+
+The following sequence diagram illustrates how the `addT` operation works, assuming no exception is thrown:
 
 ![AddTaskCommandSequenceDiagram](images/AddTaskCommandSequenceDiagram.png)
+
    
 The following activity diagram shows the workflow of a typical AddTaskCommand:
 
 ![AddTaskCommandActivityDiagram](images/AddTaskCommandActivityDiagram.png)
+
 
 ### Undo feature
 
