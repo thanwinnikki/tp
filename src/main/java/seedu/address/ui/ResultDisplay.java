@@ -20,6 +20,9 @@ public class ResultDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Displays a  {@code feedbackToUser} to the result box.
+     */
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);
