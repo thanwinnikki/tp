@@ -47,7 +47,7 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
         requireNonNull(model);
         assert groupToAddTo != null : "Group object should not be null";
         UniqueTaskList tasks = groupToAddTo.getTasks();
-        
+
         // If task already exists in the task list
         if (tasks.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
