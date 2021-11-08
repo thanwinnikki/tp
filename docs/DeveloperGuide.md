@@ -292,15 +292,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Implementation
 
-The proposed adding Panel mechanism is facilitated by `MainWindow.fxml`. It extends the `MainWindow` with one more panel, making it easier to render `Group` list and `Task` list at the same time.
+The adding Panel mechanism is facilitated by [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W17-3/tp/blob/master/src/main/resources/view/MainWindow.fxml). It extends the `MainWindow` with one more main panel, making it easier to render `Group` list and `Task` list at the same time.
 
-Overall, the `MainWindow.fxml` uses `VBox` (Vertical Box) layout to stores components (e.g. `CommandBox`, `ResultDisplay`). The key point to implement the extension is using `HBox` (Horizontal Box) layout. Panels insides the layout is ordered horizontally, making two parallel display panels at the same time.
+Overall, `.fxml` files uses different kind of containers to organize the structure of the file. The main window of the application, which is `MainWindow.fxml`, uses `VBox` (Vertical Box), `Stack Panel`, and other layouts to components (e.g. `CommandBox`, `ResultDisplay`).
+
+Therefore, the key point to implement the extension is using `HBox` (Horizontal Box) layout. Panels insides the layout is ordered horizontally, making two parallel display panels at the same time. To add a framework of the additional panel inside `MainWindow.fxml`, simply just add one more `listPanelPlaceholder` to the `HBox`, manipulated by class `MainWindow.java`. The final step is resizing the parent components in order to fit the additional panel nicely.
 
 #### Toolkit
 
 ![UndoRedoState5](images/AddPanelToolkit_SenceBuilder.png)
 
-Application `ScenceBuilder` makes it easier to implement the feature by the running time visualization and list of possible components
+Scene Builder is written as a JavaFX application, supported on Windows, Mac OS X and Linux. It is the perfect example of a full-fledge JavaFX desktop application. Scene Builder is packaged as a self-contained application, which means it comes bundled with its own private copy of the JRE.
+
+Application Scence Builder makes it easier to imagine and implement the feature by the running time visualization and list of possible components.
+
+### Rounded-corners UI
+
+#### Implementation
+
+The Rounded-corners UI mechanism is facilitated by [DarkTheme.css](https://github.com/AY2122S1-CS2103T-W17-3/tp/blob/master/src/main/resources/view/DarkTheme.css). By making the rounded-corners UI, the user's experience with the application can be enhanced significantly.
+
+Overall, `.css` files specialized for theme of the application. All the components like background color, font size and shape can be manipulated by this file. By refer to this [online instruction](https://www.w3schools.com/css/css3_borders.asp) and implement in the needed UI components in the theme file, those components' corners can be make as rounded as prefer.
 
 ### Edit Group Command
 
