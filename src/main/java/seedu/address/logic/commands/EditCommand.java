@@ -126,8 +126,8 @@ public class EditCommand implements UndoableCommand, StateDependentCommand {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      *
-     * @param personToEdit, target person to edit.
-     * @param editPersonDescriptor, the descriptor that contains the changed fields.
+     * @param personToEdit target person to edit.
+     * @param editPersonDescriptor the descriptor that contains the changed fields.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
