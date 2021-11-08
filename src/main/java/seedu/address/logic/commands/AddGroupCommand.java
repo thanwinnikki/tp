@@ -36,6 +36,8 @@ public class AddGroupCommand implements UndoableCommand {
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Group}
+     *
+     * @param group to be added to the address book.
      */
     public AddGroupCommand(Group group) {
         requireNonNull(group);

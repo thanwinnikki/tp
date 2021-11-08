@@ -23,6 +23,10 @@ public class FindCommand implements StateDependentCommand {
 
     private final PersonNameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindCommand to find a matching {@Person}
+     * @param predicate of persons who contain the matching keywords to a search.
+     */
     public FindCommand(PersonNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }

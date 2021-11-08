@@ -38,6 +38,11 @@ public class DeleteCommand implements UndoableCommand, StateDependentCommand {
     private Predicate<? super Person> personPredicate;
     private Predicate<? super Group> groupPredicate;
 
+    /**
+     * Creates a DeleteCommand to delete the specified {@code Person}
+     *
+     * @param targetIndex of the person to be deleted from the address book.
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

@@ -23,6 +23,10 @@ public class FindGroupCommand implements StateDependentCommand {
 
     private final GroupNameContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindGroupCommand to find a matching {@Group}
+     * @param predicate of groups who contain the matching keywords to a search.
+     */
     public FindGroupCommand(GroupNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }

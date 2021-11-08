@@ -37,7 +37,8 @@ public class DeleteTaskCommand implements UndoableCommand, StateDependentCommand
     private final Group group;
 
     /**
-     * Constructor for DeleteTaskCommand
+     * Creates a DeleteTaskCommand to delete a {@code Task}
+     *
      * @param targetIndex of the person in the filtered list to be removed
      * @param group is the group where task will be deleted from
      */

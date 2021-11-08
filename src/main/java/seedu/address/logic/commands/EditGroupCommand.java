@@ -50,6 +50,8 @@ public class EditGroupCommand implements UndoableCommand, StateDependentCommand 
     private Predicate<? super Group> groupPredicate;
 
     /**
+     * Creates an EditGroupCommand to edit the specified {@code Group}
+     *
      * @param index of the group in the filtered group list to edit
      * @param editGroupDescriptor details to edit the group with
      */

@@ -36,6 +36,9 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
 
     /**
      * Creates an AddTaskCommand to add the specified {@code Task}
+     *
+     * @param task to be added to the {@Group}
+     * @param group for the {@code Task} to be added to.
      */
     public AddTaskCommand(Task task, Group group) {
         requireNonNull(task);

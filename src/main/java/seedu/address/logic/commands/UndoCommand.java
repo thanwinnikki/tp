@@ -15,6 +15,11 @@ public class UndoCommand implements Command {
 
     private final ApplicationState currentApplicationState;
 
+    /**
+     * Creates a UndoCommand to undo a previous action.
+     *
+     * @param currentApplicationState
+     */
     public UndoCommand(ApplicationState currentApplicationState) {
         this.currentApplicationState = currentApplicationState;
     }

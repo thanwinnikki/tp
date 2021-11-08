@@ -44,6 +44,7 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
 
     /**
      * Creates an AddGroupCommand to add the specified {@code Person} objects to the specified {@code Group}.
+     *
      * @param groupIndex
      * @param personIndexes
      */

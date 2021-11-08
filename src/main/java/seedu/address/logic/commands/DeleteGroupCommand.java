@@ -38,6 +38,11 @@ public class DeleteGroupCommand implements UndoableCommand, StateDependentComman
     private Predicate<? super Person> personPredicate;
     private Predicate<? super Group> groupPredicate;
 
+    /**
+     * Creates a DeleteGroupCommand to delete the specified {@code Group}
+     *
+     * @param targetIndex of the target group to be deleted.
+     */
     public DeleteGroupCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
