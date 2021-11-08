@@ -398,6 +398,19 @@ Any error present in the User Input will throw exceptions and this is shown in t
 The interaction between the Logic and Model classes are shown in the following sequence diagram:
 ![JoinGroupCommand Ref Sequence Diagram](images/JoinGroupRefSequenceDiagram.png)
 
+The following steps describes the execution of the `joinG` command:
+1. JoinGroupCommand uses the provided set of person indexes and Group index to obtain both a reference to all the persons (using set of person Index) and the Group (using Group Index). 
+2. `JoinGroupCommand` then uses these references to call the `addToGroup` method of the `Model` CLass which in turn calls the `addToGroup` method of the `AddressBook` CLass.
+3. `persons` is obtained from `personSet` and it will be looped through until every single person in persons has been added into the `UniquePersonList` of the `groupToChange`.
+
+#### Design considerations:
+* Current Implementation: Have `UniquePersonList` that stores `person` inside each `Group`
+  * Pros: Relatively Easy to implement. Relevant information of person inside Group can be easily accessed. Smaller JSON file size due to smaller volume of information being referenced to, lesser coupling due to only a unidirectional association.
+  * Cons: Implementing `Delete` to delete a person from contact list is slightly more complicated as they would have to search through the groups to remove this person. No information of reference between a person and a group as person contact does not store information of which group they belong in.
+
+* Alternative: Have the `person` save a reference to the groups they are in using either groupName or groupId and have the groups they are in save a reference to them.
+  * Pros: Able to display each person's every group they have joined. Also able to display all the persons that joined a particular Group.
+  * Cons: Bigger JSON file size due to larger amount of information being referenced to. Increased in coupling between the Person and Group classes due to bidirectional association.
 
 --------------------------------------------------------------------------------------------------------------------
 
