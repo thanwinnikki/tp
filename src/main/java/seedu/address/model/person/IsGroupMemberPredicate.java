@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import seedu.address.model.group.Group;
 
 /**
- * Tests that a {@code Person} is in the given group.
+ * Tests if a {@code Person} is in the given group.
  */
 public class IsGroupMemberPredicate implements Predicate<Person> {
     private final Group group;
