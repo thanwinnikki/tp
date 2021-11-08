@@ -14,10 +14,16 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to list all groups in ThunderCat.
   * What it does: Allows the User to view all groups.
+  * Justification: This feature is essential for User to be able to view all their groups in one display.
+  
 * **New Feature**: Added the ability to list all group members and tasks in a group.
   * What it does: Allows the User to view group information of each group.
+  * Justification: This feature is essential for User to be able to access the list of tasks and group mates in groups they have created.
+  
 * **New Feature**: Added the ability to add a new task to a group.
-  * What it does: Allows the User to 
+  * What it does: Allows the User to add a new task to a group's task list.
+  * Justification: This feature adds functionality to ThunderCat as a task management tool, and not simply an address book of persons and groups.
+  
 * **New Feature**: Added the ability to mark a task in a group as done.
   * What it does: 
     * Allows the User to mark a task in a group as done. 
