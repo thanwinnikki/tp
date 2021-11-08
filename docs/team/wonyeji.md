@@ -19,8 +19,10 @@ Given below are my contributions to the project.
 
 
 * **Enhancements implemented**:
-  * Added task-related exception classes and a unique tasklist class that enforces uniqueness between its elements to support task-related commands in ThunderCat.
-  
+  * Added Task-related exception classes and a UniqueTaskList class that enforces uniqueness between its elements to support Task-related commands in ThunderCat.
+  * Added Group-related exception classes
+  * Added Task-related classes in test such as TypicalTasks, TaskBuilder and TaskUtil classes to support testing for Task-related features.
+  * Added Group-related class TypicalGroups to support testing for Group-related features.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=wonyeji&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
