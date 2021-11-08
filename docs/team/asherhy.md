@@ -9,6 +9,7 @@ Thunder Cats is an application to manage computing students group projects and t
 
 Given below are my contributions to the project.
 
+**Added Features**
 * **New Feature**: Added the ability to `add` a new `Group` to ThunderCat.
     * What it does: allows the user to `add` a new `Group` to ThunderCat specifying its name and description.
     * Justification: A key feature in the application in order access the `Group Information` page and use other core commands related to groups and tasks.
@@ -23,13 +24,13 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to `edit` a `group` details.
     * What it does: allows the user edit the `Name` and the `Description` of the selected group.
     * Justification: As `Description` is set to be optional, this command not only serves its purpose to edit group details but also add `Description` to groups should they choose to leave it empty the first time.
-
+    
 
 * **Code contributed**:
   [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=asherhy&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
 * **Project management**:
-    * Managed releases `v1.1` 1 releases on GitHub
+    * Managed releases `v1.1`, `v1.2`, `v.1,3` 3 major releases on GitHub.
 
 * **Documentation**:
     * User Guide:
