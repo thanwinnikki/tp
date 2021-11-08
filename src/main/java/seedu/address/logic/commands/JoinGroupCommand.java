@@ -30,7 +30,7 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
             + "Example: " + COMMAND_WORD + " p/1 g/2";
 
     public static final String MESSAGE_SUCCESS = "Person(s) added to group : %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON_IN_GROUP = "This person already exists in the group";
     public static final String MESSAGE_INVALID_GROUP_INDEX = "Please enter a valid group number";
     public static final String MESSAGE_INVALID_PERSON_INDEX = "Please enter all valid person indexes";
     public static final String MESSAGE_TEMPLATE_UNDO_SUCCESS =
@@ -77,7 +77,7 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
                 .collect(Collectors.toSet());
 
         if (groupToChange.hasGroupMates(personSet)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON_IN_GROUP);
         }
 
         groupAddedTo = groupToChange;
