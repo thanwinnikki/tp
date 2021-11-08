@@ -21,6 +21,8 @@ public interface Model {
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
+     *
+     * @param userPrefs User preferences which data is retrieved from.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
 
@@ -36,74 +38,112 @@ public interface Model {
 
     /**
      * Sets the user prefs' GUI settings.
+     *
+     * @param guiSettings GUI settings to be set.
      */
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
      * Returns the user prefs' address book file path.
+     *
+     * @return Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
 
     /**
      * Sets the user prefs' address book file path.
+     *
+     * @param addressBookFilePath Address book file path to be set.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
+     *
+     * @param addressBook Address book to be set.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook.
+     *
+     * @return Returns the AddressBook.
+     * */
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the address book and false otherwise.
+     *
+     * @param person Person to be checked with.
+     * @return Returns true if a person with the same identity as {@code person} exists in the address book
+     * and false otherwise.
      */
     boolean hasPerson(Person person);
 
     /**
-     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     * Returns true if a group with the same identity as {@code group} exists in the address book and false otherwise.
+     *
+     * @param group Group to be checked with.
+     * @return Returns true if a group with the same identity as {@code group} exists in the address book
+     * and false otherwise.
      */
     boolean hasGroup(Group group);
 
     /**
      * Deletes the given person.
      * The person must exist in the address book.
+     *
+     * @param target Person to delete.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
+     *
+     * @param person Person to add.
      */
     void addPerson(Person person);
 
     /**
      * Adds the given group.
      * {@code group} must not already exist in the address book.
+     *
+     * @param group Group to add.
      */
     void addGroup(Group group);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the person {@code target} in the address book with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     *
+     * @param target The target person you are trying to replace.
+     * @param editedPerson The person you are trying to replace with.
      */
     void setPerson(Person target, Person editedPerson);
 
     /**
-     * Replaces the given group {@code target} with {@code editedGroup}.
+     * Replaces the group {@code target} in the address book with {@code editedGroup}.
      * {@code target} must exist in the address book.
      * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
+     *
+     * @param target The target group you are trying to replace.
+     * @param editedGroup The group you are trying to replace with.
      */
     void setGroup(Group target, Group editedGroup);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list.
+     *
+     * @return Returns an unmodifiable view of the filtered person list.
+     * */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
+     * @param predicate Predicate to be used as filter.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<? super Person> predicate);
@@ -120,14 +160,22 @@ public interface Model {
     /**
      * Deletes the given group.
      * The group must exist in the address book.
+     *
+     * @param target Group to be deleted.
      */
     void deleteGroup(Group target);
 
-    /** Returns an unmodifiable view of the filtered Group list */
+    /**
+     * Returns an unmodifiable view of the filtered group list.
+     *
+     * @return Returns an unmodifiable view of the filtered group list.
+     * */
     ObservableList<Group> getFilteredGroupList();
 
     /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     *
+     * @param predicate Predicate to be used as filter.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<? super Group> predicate);
@@ -142,6 +190,7 @@ public interface Model {
     /**
      * Adds the person objects in the set to the specified group.
      * The group must exist in the address book.
+     *
      * @param target
      */
     void addToGroup(Group target, Set<Person> persons);

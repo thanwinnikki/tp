@@ -28,6 +28,9 @@ public class ModelManager implements Model {
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
+     *
+     * @param addressBook Address book to be used.
+     * @param userPrefs User Preferences to be used.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -174,11 +177,6 @@ public class ModelManager implements Model {
         addressBook.removeGroup(target);
     }
 
-    /**
-     * Adds the set of person objects to a specified group in the address book.
-     * @param target
-     * @param persons
-     */
     @Override
     public void addToGroup(Group target, Set<Person> persons) {
         addressBook.addToGroup(target, persons);

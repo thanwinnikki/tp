@@ -27,7 +27,10 @@ public class Phone {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid phone number and false otherwise.
+     *
+     * @param test String to be tested.
+     * @return Returns true if a given string is a valid phone number and false otherwise.
      */
     public static boolean isValidPhone(String test) {
         return test.matches(VALIDATION_REGEX);

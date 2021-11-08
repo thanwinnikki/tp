@@ -15,7 +15,7 @@ public class Address {
 
     public static final Address EMPTY_ADDRESS = new Address();
 
-    /*
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
@@ -34,12 +34,18 @@ public class Address {
         value = address;
     }
 
+    /**
+     * Constructs an {@code Address}.
+     */
     private Address() {
         value = "";
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid address and false otherwise.
+     *
+     * @param test String to be tested.
+     * @return Returns true if a given string is a valid address and false otherwise.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(VALIDATION_REGEX);

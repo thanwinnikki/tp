@@ -12,12 +12,13 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS =
             "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
-    /*
-     * The first character of the address must not be a whitespace,
+    /**
+     * The first character of the name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
+    /** String representation of the name */
     public final String fullName;
 
     /**
@@ -32,7 +33,10 @@ public class Name {
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a given string is a valid name and false otherwise.
+     *
+     * @param test String to be tested.
+     * @return Returns true if a given string is a valid name and false otherwise.
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);

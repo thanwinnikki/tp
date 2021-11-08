@@ -83,7 +83,14 @@ public class Person {
     }
 
     /**
+     * Constructs a Person object.
      * Identity fields must be present and not null.
+     *
+     * @param name Name of the person.
+     * @param phone Phone number of the person.
+     * @param email Email address of the person.
+     * @param address Address of the person.
+     * @param tags Tags of the person.
      */
     private Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email);
@@ -121,14 +128,19 @@ public class Person {
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
+     *
+     * @return Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Only checks if 2 persons have the same name or are the same person.
+     *
+     * @param otherPerson Other person to compare.
+     * @return Returns true if both persons have the same name or are the same person and false otherwise.
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
@@ -139,10 +151,6 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

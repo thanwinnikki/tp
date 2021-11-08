@@ -15,7 +15,7 @@ import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Represents a Group in the address book.
- * Guarantees: Details are present and not null. persons is not validated todo
+ * Guarantees: Identity fields are present and not null, present field values are validated, immutable.
  */
 public class Group {
 
@@ -28,7 +28,13 @@ public class Group {
     private final UniqueTaskList tasks;
 
     /**
-     * Name, Description, persons and tasks must be present and not null.
+     * Constructs a Group object.
+     * Name, persons and tasks must be present and not null.
+     *
+     * @param name Name of the group.
+     * @param description Description of the group.
+     * @param persons List of persons belonging to the group.
+     * @param tasks List of tasks belonging to the group.
      */
     public Group(Name name, Description description, UniquePersonList persons, UniqueTaskList tasks) {
         requireAllNonNull(name, persons, tasks);
@@ -39,7 +45,11 @@ public class Group {
     }
 
     /**
-     * Name and Description must be present and not null.
+     * Constructs a Group object.
+     * Name and description must be present and not null.
+     *
+     * @param name Name of the group.
+     * @param description Description of the group.
      */
     public Group(Name name, Description description) {
         requireAllNonNull(name, description);
@@ -50,7 +60,10 @@ public class Group {
     }
 
     /**
+     * Constructs a Group object.
      * Name must be present and not null.
+     *
+     * @param name Name of the group.
      */
     public Group(Name name) {
         requireAllNonNull(name);
@@ -94,6 +107,7 @@ public class Group {
 
     /**
      * Adds a person to the group.
+     *
      * @param person Person to be added to the group.
      */
     public void add(Person person) {
@@ -113,7 +127,7 @@ public class Group {
      * Checks whether the group has the given group mate.
      *
      * @param groupMate The group mate.
-     * @return Whether the group mate is in the group.
+     * @return Returns true if the group mate is in the group and false otherwise.
      */
     public boolean hasGroupMate(Person groupMate) {
         return persons.contains(groupMate);
@@ -123,7 +137,7 @@ public class Group {
      * Checks whether the group has the given set of group mates.
      *
      * @param groupMates The group mates.
-     * @return Whether the set of group mates is in the group.
+     * @return Returns true if the set of group mates is in the group and false otherwise.
      */
     public boolean hasGroupMates(Set<Person> groupMates) {
         return groupMates.stream().anyMatch(groupMate -> this.hasGroupMate(groupMate));
@@ -131,6 +145,7 @@ public class Group {
 
     /**
      * Adds a task to the group.
+     *
      * @param task Task to be added to the group.
      */
     public void addTask(Task task) {
@@ -138,7 +153,9 @@ public class Group {
     }
 
     /**
-     * Deletes a {@code Task} from the group.
+     * Deletes a task from the group.
+     *
+     * @param task Task to be deleted from the group.
      */
     public void deleteTask(Task task) {
         tasks.remove(task);
@@ -148,7 +165,7 @@ public class Group {
      * Checks whether the group has the given task.
      *
      * @param task The task.
-     * @return Whether the group has the given task.
+     * @return Returns true if the group has the given task and false otherwise.
      */
     public boolean hasTask(Task task) {
         return tasks.contains(task);
@@ -176,7 +193,7 @@ public class Group {
      * Only checks if 2 groups have the same name or are the same group.
      *
      * @param otherGroup Other group to compare.
-     * @return Returns true if both groups have the same name or are the same group;
+     * @return Returns true if both groups have the same name or are the same group and false otherwise.
      */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {
@@ -188,12 +205,6 @@ public class Group {
         return same;
     }
 
-    /**
-     * This checks if all instance attributes are equal.
-     *
-     * @param other Other object to compare.
-     * @return Return true if both groups have equal instance attributes.
-     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

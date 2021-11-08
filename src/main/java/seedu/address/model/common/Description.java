@@ -3,19 +3,24 @@ package seedu.address.model.common;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Description in the address book.
+ * Guarantees: is valid as declared in {@link #isValidDescription(String)}
+ */
 public class Description {
     public static final String MESSAGE_CONSTRAINTS = "Descriptions can take any values, and it should not be blank";
 
-    /*
+    /**
      * The first character of the description must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
+    /** String representation of the description. */
     public final String value;
 
     /**
-     * Constructs an {@code Description}.
+     * Constructs a {@code Description}.
      *
      * @param description A valid Description.
      */
@@ -26,7 +31,10 @@ public class Description {
     }
 
     /**
-     * Returns true if a given string is a valid description.
+     * Returns true if a given string is a valid description and false otherwise.
+     *
+     * @param test String to be tested.
+     * @return Returns true if a given string is a valid description and false otherwise.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(VALIDATION_REGEX);

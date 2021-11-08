@@ -14,7 +14,10 @@ public class Task {
     private boolean done = false;
 
     /**
-     * description must be present and not null.
+     * Constructs a Task object.
+     * Description must be present and not null.
+     *
+     * @param description Description of the task.
      */
     public Task(Description description) {
         requireNonNull(description);
@@ -38,9 +41,13 @@ public class Task {
     }
 
     /**
-     * Returns true if both {@code Task} have the same {@code description}.
+     * Returns true if both {@code Task} have the same {@code description} or are the same task.
      * Does not check whether the tasks are done or not.
      * This defines a weaker notion of equality between the two {@code Tasks}.
+     *
+     * @param otherTask Other task to compare.
+     * @return Returns true if both {@code Task} have the same {@code description} or are the
+     * same task and false otherwise.
      */
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
