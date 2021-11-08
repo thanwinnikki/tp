@@ -87,7 +87,7 @@ This is a warning.
 
 
 --------------------------------------------------------------------------------------------------------------------
-
+<a name="graphical-user-interface"></a>
 ## Graphical User Interface (GUI)
 
 <a name="home-page-anchor"></a>
