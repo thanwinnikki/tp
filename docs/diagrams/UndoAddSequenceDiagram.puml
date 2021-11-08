@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant "ac:AddCommand" as AddCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model LOGIC_COLOR
+end box
+
+[-> AddCommand : undo(m)
+activate AddCommand
+
+AddCommand -> Model : deletePerson(person)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+[<-- AddCommand : ur
+deactivate AddCommand
+@enduml
