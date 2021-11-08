@@ -30,16 +30,12 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
     public AddTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION);
-
         if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
-
         Description taskDescription = ParserUtil.parseTaskDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-
         Task task = new Task(taskDescription);
-
         return new AddTaskCommand(task, group);
     }
 

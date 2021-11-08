@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.state.ApplicationState;
 import seedu.address.logic.state.ApplicationStateType;
@@ -47,12 +46,12 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert groupToAddTo != null : "Group object should not be null";
         UniqueTaskList tasks = groupToAddTo.getTasks();
+
+        // If task already exists in the task list
         if (tasks.contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
-        }
-        if (groupToAddTo == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
         tasks.add(toAdd);
         groupAddedTo = groupToAddTo;

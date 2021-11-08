@@ -42,17 +42,16 @@ public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        assert taskGroup != null : "Group object should not be null";
         UniqueTaskList tasks = taskGroup.getTasks();
 
-        if (targetIndex.getZeroBased() >= tasks.size()) {
+        // If task index is out of bounds of the task list
+        if (targetIndex.getZeroBased() >= tasks.getSize()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        if (taskGroup == null) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-        }
-
         Task taskToMarkAsDone = tasks.getTask(targetIndex.getZeroBased());
+
+        // Task has already been marked as done
         if (taskToMarkAsDone.getDoneTask()) {
             throw new CommandException(MESSAGE_TASK_ALREADY_DONE);
         } else {

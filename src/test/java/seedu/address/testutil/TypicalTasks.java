@@ -2,10 +2,6 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_TASK_1;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
@@ -33,20 +29,4 @@ public class TypicalTasks {
 
     private TypicalTasks() {} // prevents instantiation
 
-    //    /**
-    //     * Returns an {@code AddressBook} with all the typical Tasks.
-    //     */
-    //    public static AddressBook getTypicalAddressBook() {
-    //        AddressBook ab = new AddressBook();
-    //        Group group = new Group();
-    //        for (Task task : getTypicalTasks()) {
-    //            group.addTask(task);
-    //        }
-    //        return ab;
-    //    }
-
-    public static List<TaskBuilder> getTypicalTaskBuilders() {
-        return new ArrayList<>(Arrays.asList(TASK_A_BUILDER, TASK_B_BUILDER, TASK_C_BUILDER,
-                TASK_D_BUILDER, TASK_E_BUILDER));
-    }
 }

@@ -7,7 +7,7 @@ import seedu.address.model.task.Task;
 
 public class TaskUtil {
     /**
-     * Returns an Task command string for adding the {@code Task}.
+     * Returns an addTask command string for adding the {@code Task}.
      */
     public static String getAddTaskCommand(Task task) {
         return AddTaskCommand.COMMAND_WORD + " " + getTaskDetails(task);

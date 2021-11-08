@@ -58,7 +58,7 @@ public class DeleteTaskCommand implements UndoableCommand, StateDependentCommand
         });
 
         UniqueTaskList targetTaskList = group.getTasks();
-        if (targetTaskList.size() < targetIndex.getOneBased()) {
+        if (targetTaskList.getSize() < targetIndex.getOneBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 

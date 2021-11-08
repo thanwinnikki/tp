@@ -45,7 +45,7 @@ public class UniqueTaskList implements Iterable<Task> {
      *
      * @return Returns the number of tasks in the list.
      */
-    public int size() {
+    public int getSize() {
         return internalList.size();
     }
 
@@ -128,7 +128,7 @@ public class UniqueTaskList implements Iterable<Task> {
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
-        if (!tasksAreUnique(tasks)) {
+        if (!areUniqueTasks(tasks)) {
             throw new DuplicateTaskException();
         }
 
@@ -167,7 +167,7 @@ public class UniqueTaskList implements Iterable<Task> {
      * @param tasks {@code List} of tasks to be checked.
      * @return Returns true if the tasks are unique and false otherwise.
      */
-    private boolean tasksAreUnique(List<Task> tasks) {
+    private boolean areUniqueTasks(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {
             for (int j = i + 1; j < tasks.size(); j++) {
                 if (tasks.get(i).isSameTask(tasks.get(j))) {
