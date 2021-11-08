@@ -27,6 +27,8 @@ public class UiManager implements Ui {
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
+     *
+     * @param logic The {@code Logic} instance.
      */
     public UiManager(Logic logic) {
         super();

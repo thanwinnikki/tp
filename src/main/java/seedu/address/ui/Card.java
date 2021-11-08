@@ -9,6 +9,8 @@ abstract class Card extends UiPart<Region> {
 
     /**
      * Creates a {@code Card} with the given FXML file.
+     *
+     * @param fxmlFileName The file name of the FXML file.
      */
     Card(String fxmlFileName) {
         super(fxmlFileName);
