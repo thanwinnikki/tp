@@ -14,6 +14,10 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
+/**
+ * Remove a specified person from a specified group in the address book.
+ * The person is specified by its displayed person index in the group.
+ */
 public class RemoveCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "remove";
@@ -82,6 +86,11 @@ public class RemoveCommand implements UndoableCommand, StateDependentCommand {
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state.
+     * Command can run in GROUP_INFORMATION application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

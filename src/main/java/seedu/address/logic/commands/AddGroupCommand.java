@@ -12,6 +12,10 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
+/**
+ * Adds a group to the address book.
+ * Group name is a necessary field and cannot be null. Description can be left empty.
+ */
 public class AddGroupCommand extends AlwaysRunnableCommand implements UndoableCommand {
     public static final String COMMAND_WORD = "addG";
 

@@ -32,6 +32,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
+ * The person is specified by its displayed person index.
  */
 public class EditCommand implements UndoableCommand, StateDependentCommand {
 
@@ -142,6 +143,10 @@ public class EditCommand implements UndoableCommand, StateDependentCommand {
         return personBuilder.build();
     }
 
+    /**
+     * Returns true if command can be run in current application state. Command can run in HOME application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

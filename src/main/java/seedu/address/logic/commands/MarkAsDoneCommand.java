@@ -12,6 +12,10 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
+/**
+ * Marks a specified task as done in the specified group as done.
+ * The task is specified by its displayed task index in the specified group.
+ */
 public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand {
     public static final String COMMAND_WORD = "done";
 
@@ -76,6 +80,11 @@ public class MarkAsDoneCommand implements UndoableCommand, StateDependentCommand
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state.
+     * Command can run in GROUP_INFORMATION application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

@@ -23,6 +23,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.UniqueTaskList;
 
+/**
+ * Edits a group in the address book. The group is specified using its displayed group index.
+ */
 public class EditGroupCommand implements UndoableCommand, StateDependentCommand {
     public static final String COMMAND_WORD = "editG";
 
@@ -122,6 +125,10 @@ public class EditGroupCommand implements UndoableCommand, StateDependentCommand 
         return new Group(updatedName, updatedDescription, persons, tasks);
     }
 
+    /**
+     * Returns true if command can be run in current application state. Command can run in HOME application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

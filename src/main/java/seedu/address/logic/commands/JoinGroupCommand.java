@@ -15,8 +15,10 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
-/** Adds a person to a group in the address book.
- *
+/** Add specified person(s) to a specified group in the address book.
+ * The specified person(s) are identified by their displayed person index.
+ * The specified group is identified by its displayed person index.
+ * Must add at least one person from the address book to the specified group.
  */
 public class JoinGroupCommand implements UndoableCommand, StateDependentCommand {
 
@@ -99,6 +101,10 @@ public class JoinGroupCommand implements UndoableCommand, StateDependentCommand 
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state. Command can run in HOME application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

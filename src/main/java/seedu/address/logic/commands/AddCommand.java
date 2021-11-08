@@ -17,7 +17,9 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a specified person to the address book.
+ * Name, Phone and Email are necessary fields and cannot be null. Address and Tags
+ * can be left empty.
  */
 public class AddCommand implements UndoableCommand, StateDependentCommand {
 
@@ -86,6 +88,10 @@ public class AddCommand implements UndoableCommand, StateDependentCommand {
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state. Command can run in HOME application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

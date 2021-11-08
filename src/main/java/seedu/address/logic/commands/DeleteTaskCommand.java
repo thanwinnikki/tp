@@ -14,6 +14,10 @@ import seedu.address.model.group.Group;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
+/**
+ * Deletes a task from the specified group in the address book.
+ * The task is identified using its displayed task index.
+ */
 public class DeleteTaskCommand implements UndoableCommand, StateDependentCommand {
 
     public static final String COMMAND_WORD = "deleteT";
@@ -73,13 +77,17 @@ public class DeleteTaskCommand implements UndoableCommand, StateDependentCommand
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
-        // Probably not the best to save the whole address book but this is the easiest way to undo
         model.setAddressBook(oldReadOnlyAddressBook);
         return new CommandResult.Builder(String.format(MESSAGE_TEMPLATE_UNDO_SUCCESS, deletedTask))
                 .displayGroupInformation(groupDeletedFrom)
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state.
+     * Command can run in GROUP_INFORMATION application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

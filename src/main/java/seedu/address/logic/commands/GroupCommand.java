@@ -14,6 +14,7 @@ import seedu.address.model.group.Group;
 
 /**
  * Lists all persons and tasks in the given group.
+ * The group is specified by its displayed group index.
  */
 public class GroupCommand implements StateDependentCommand {
 
@@ -45,6 +46,10 @@ public class GroupCommand implements StateDependentCommand {
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state. Command can run in HOME application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

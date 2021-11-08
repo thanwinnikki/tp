@@ -4,7 +4,7 @@ import seedu.address.logic.state.ApplicationState;
 import seedu.address.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Displays a help window that redirects users to the user guide.
  */
 public class HelpCommand extends AlwaysRunnableCommand {
 

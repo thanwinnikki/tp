@@ -13,7 +13,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to a specified group of the address book.
  */
 public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
 
@@ -70,6 +70,11 @@ public class AddTaskCommand implements UndoableCommand, StateDependentCommand {
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state.
+     * Command can run in GROUP_INFORMATION application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();

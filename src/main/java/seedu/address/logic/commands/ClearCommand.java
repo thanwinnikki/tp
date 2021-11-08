@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
- * Clears the address book.
+ * Clears all entries of the address book.
  */
 public class ClearCommand extends AlwaysRunnableCommand implements UndoableCommand {
 

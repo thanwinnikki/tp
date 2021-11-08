@@ -17,7 +17,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a group identified using it's displayed index from the address book.
  */
 public class DeleteGroupCommand implements UndoableCommand, StateDependentCommand {
 
@@ -63,7 +63,6 @@ public class DeleteGroupCommand implements UndoableCommand, StateDependentComman
 
     @Override
     public CommandResult undo(Model model) throws CommandException {
-        // Probably not the best to save the whole address book but this is the easiest way to undo
         model.setAddressBook(oldReadOnlyAddressBook);
         if (personPredicate == null) {
             personPredicate = Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -78,6 +77,10 @@ public class DeleteGroupCommand implements UndoableCommand, StateDependentComman
                 .build();
     }
 
+    /**
+     * Returns true if command can be run in current application state. Command can run in HOME application state.
+     * @param applicationState The given application state.
+     */
     @Override
     public boolean isAbleToRunInApplicationState(ApplicationState applicationState) {
         ApplicationStateType applicationStateType = applicationState.getApplicationStateType();
